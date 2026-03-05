@@ -1,0 +1,56 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+title: ADA EMPA Product Profile
+description: >-
+  Technique-specific profile for Electron Microprobe Analysis (EMPA) products.
+  Extends the base ADA product profile with constraints on valid EMPA component
+  types and empa_detail requirements.
+allOf:
+  - $ref: ../adaProduct/schema.yaml
+  - type: object
+    properties:
+      "schema:additionalType":
+        description: >-
+          Must include an EMPA product type identifier.
+        contains:
+          enum:
+            - "Electron Microprobe Analysis (EMPA) Collection"
+            - "Electron Microprobe Analysis Image (EMPA)"
+            - "Electron Microprobe Analysis Quantitative Elemental Abundances (EMPAQEA)"
+            - "Electron Microprobe Analysis (EMPA)"
+            - "Electron microprobe analysis"
+      "schema:distribution":
+        items:
+          oneOf:
+            - required:
+                - componentType
+              properties:
+                componentType:
+                  anyOf:
+                    - properties:
+                        "@type":
+                          enum:
+                            - "ada:EMPAImageMap"
+                            - "ada:EMPAImage"
+                            - "ada:EMPAQEATabular"
+                            - "ada:EMPAImageCollection"
+                            - "ada:EMPAESPCTabular"
+                            - "ada:EMPAESPCPlot"
+                    - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType
+            - required:
+                - "schema:hasPart"
+              properties:
+                "schema:hasPart":
+                  items:
+                    properties:
+                      componentType:
+                        anyOf:
+                          - properties:
+                              "@type":
+                                enum:
+                                  - "ada:EMPAImageMap"
+                                  - "ada:EMPAImage"
+                                  - "ada:EMPAQEATabular"
+                                  - "ada:EMPAImageCollection"
+                                  - "ada:EMPAESPCTabular"
+                                  - "ada:EMPAESPCPlot"
+                          - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType

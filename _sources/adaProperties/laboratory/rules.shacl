@@ -1,0 +1,33 @@
+@prefix rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh:          <http://www.w3.org/ns/shacl#> .
+@prefix xsd:         <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema:      <http://schema.org/> .
+@prefix nxs:         <http://purl.org/nexusformat/definitions/> .
+@prefix cdifd: <https://cdif.org/validation/0.1/shacl#> .
+@base <https://www.ogc.org/rules/template/> .
+
+# Validates laboratory/facility nodes typed as nxs:BaseClass/NXsource.
+# JSON schema defines @type = ["schema:Place", "nxs:BaseClass/NXsource"]
+# with schema:name, schema:identifier, schema:alternateName.
+cdifd:laboratoryShape
+    a sh:NodeShape ;
+    sh:target [
+        a sh:SPARQLTarget ;
+        sh:select """
+            PREFIX nxs: <http://purl.org/nexusformat/definitions/>
+            SELECT ?this
+            WHERE {
+                ?this a <http://purl.org/nexusformat/definitions/BaseClass/NXsource> .
+            }
+        """ ;
+    ] ;
+    sh:property [
+        sh:path schema:name ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:severity sh:Warning ;
+        sh:message "A laboratory or facility should have a name (schema:name)." ;
+    ] ;
+    sh:message "Laboratory nodes (nxs:BaseClass/NXsource) should have a name." ;
+    .

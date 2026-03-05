@@ -1,0 +1,54 @@
+@prefix rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh:          <http://www.w3.org/ns/shacl#> .
+@prefix xsd:         <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema:      <http://schema.org/> .
+@prefix ada:         <https://ada.astromat.org/metadata/> .
+@prefix cdifd: <https://cdif.org/validation/0.1/shacl#> .
+@base <https://www.ogc.org/rules/template/> .
+
+# ICPMS technique profile SHACL rules.
+# Base product validation (creator, distribution, wasGeneratedBy, etc.)
+# is inherited from adaProduct rules.shacl.
+# This shape constrains schema:additionalType to valid ICPMS values.
+# Covers HR-ICPMS, Q-ICPMS, and MC-ICPMS sub-techniques.
+
+cdifd:icpmsProductShape
+    a sh:NodeShape ;
+    sh:target [
+        a sh:SPARQLTarget ;
+        sh:select """
+            PREFIX schema: <http://schema.org/>
+            SELECT ?this
+            WHERE {
+                ?this a schema:Dataset .
+                ?this a schema:Product .
+                MINUS {
+                    ?parent a schema:Dataset .
+                    ?parent ?p ?this .
+                    FILTER (?parent != ?this)
+                    FILTER (?p != schema:about)
+                }
+            }
+        """ ;
+    ] ;
+    sh:property [
+        sh:path schema:additionalType ;
+        sh:qualifiedMinCount 1 ;
+        sh:qualifiedValueShape [
+            sh:or (
+        [sh:hasValue "High-resolution Inductively Coupled Plasma Mass Spectroscopy (HRICPMS) Processed"]
+        [sh:hasValue "High-resolution Inductively Coupled Plasma Mass Spectroscopy (HRICPMS) Raw"]
+        [sh:hasValue "Quadrupole Inductively Coupled Plasma Mass Spectrometry (QICPMS) Processed"]
+        [sh:hasValue "Quadrupole Inductively Coupled Plasma Mass Spectrometry (QICPMS) Raw"]
+        [sh:hasValue "Multi-Collector Inductively Coupled Plasma Mass Spectrometry (MCICPMS) processed"]
+        [sh:hasValue "Multi-Collector Inductively Coupled Plasma Mass Spectrometry (MCICPMS) Raw"]
+        [sh:hasValue "High-resolution inductively coupled plasma mass spectrometry"]
+        [sh:hasValue "Quadrupole Inductively Coupled Plasma Mass Spectrometry"]
+        [sh:hasValue "Multi-Collector Inductively Coupled Plasma Mass Spectrometry"]
+            )
+        ] ;
+        sh:message "ICPMS products must have at least one schema:additionalType matching a valid ICPMS type." ;
+    ] ;
+    sh:message "ICPMS technique profile: additionalType must identify a valid ICPMS product type." ;
+    .

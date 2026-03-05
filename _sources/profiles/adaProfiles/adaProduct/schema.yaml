@@ -1,0 +1,544 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://w3id.org/adaJSONLD/schema/3.0
+title: Astromat Archive Product Metadata
+description: >-
+  Schema for JSON metadata documenting products in Astromat Data Archive (ADA).
+  Each project consists of one or more data files and 0 to many supplemental files.
+  Each file MUST have an associated YAML metadata file, with the same name,
+  but '.yaml' as the file extension. Version 3.0 aligned with CDIF 2026 schema
+  for DDI-CDI variable types and CSVW tabular data properties.
+type: object
+allOf:
+  - $ref: https://usgin.github.io/metadataBuildingBlocks/_sources/cdifProperties/cdifMandatory/schema.yaml
+  - $ref: https://usgin.github.io/metadataBuildingBlocks/_sources/cdifProperties/cdifOptional/schema.yaml
+  - type: object
+    properties:
+      "@type":
+        type: array
+        items:
+          type: string
+          enum:
+            - "schema:Dataset"
+            - "schema:Product"
+      "schema:additionalType":
+        type: array
+        description: >-
+          Should have the ada product type and 'ada:DataDeliveryPackage'
+        items:
+          type: string
+        contains:
+          enum:
+            - "40Ar/39Ar Geochronology and Thermochronology (ARGT)"
+            - "Accelerator Mass Spectrometry (AMS)"
+            - "Advanced Imaging and Visualization of Astromaterials (AIVA)"
+            - "Basemap"
+            - "Differential Scanning Calorimetry (DSC)"
+            - "Electron Microprobe Analysis (EMPA) Collection"
+            - "Electron Microprobe Analysis Image (EMPA)"
+            - "Electron Microprobe Analysis Quantitative Elemental Abundances (EMPAQEA)"
+            - "Elemental Analysis-Isotope Ratio Mass Spectrometry (EA-IRMS)"
+            - "Fluorescence Microscopy (UVFM) Image"
+            - "Fourier Transform Ion Cyclotron Resonance Mass Spectrometry (FTICRMS) Cube"
+            - "Fourier Transform Ion Cyclotron Resonance Mass Spectrometry (FTICRMS) Tabular"
+            - "Gas Chromatography-Mass Spectrometry (GCMS)"
+            - "Gas Pycnometry (GPYC) Processed"
+            - "Gas Pycnometry (GPYC) Raw"
+            - "High-resolution Inductively Coupled Plasma Mass Spectroscopy (HRICPMS) Processed"
+            - "High-resolution Inductively Coupled Plasma Mass Spectroscopy (HRICPMS) Raw"
+            - "Inductively Coupled Plasma - Optical Emission Spectroscopy (ICPOES) Intermediate"
+            - "Inductively Coupled Plasma - Optical Emission Spectroscopy (ICPOES) Processed"
+            - "Inductively Coupled Plasma - Optical Emission Spectroscopy (ICPOES) Raw"
+            - "Ion Chromatography (IC)"
+            - "Laser Assisted Fluorination (LAF) Processed"
+            - "Laser Assisted Fluorination (LAF) Raw"
+            - "Liquid Chromatography - Mass Spectrometry (LCMS) Collection"
+            - "Lock-In Thermography (LIT) Collection"
+            - "Lock-In Thermography (LIT) image"
+            - "Microprobe Two-Step Laser Mass Spectrometry (L2MS)"
+            - "Multi-Collector Inductively Coupled Plasma Mass Spectrometry (MCICPMS) processed"
+            - "Multi-Collector Inductively Coupled Plasma Mass Spectrometry (MCICPMS) Raw"
+            - "Nanoscale Infrared Mapping (NanoIR) Background"
+            - "Nanoscale Infrared Mapping (NanoIR) MapCollection"
+            - "Nanoscale Infrared Mapping (NanoIR) Point Data"
+            - "Nanoscale Secondary Ion Mass Spectrometry (NanoSIMS) Image"
+            - "Nanoscale Secondary Ion Mass Spectrometry (NanoSIMS) Raw"
+            - "Nanoscale Secondary Ion Mass Spectrometry (NanoSIMS) Tabular"
+            - "Noble Gas and Nitrogen Static Mass Spectrometry (NGNSMS) Raw"
+            - "Noble Gas and Nitrogen Static Mass Spectrometry (NGNSMS) Processed"
+            - "Particle Size Frequency Distribution (PSFD)"
+            - "Quadrupole Inductively Coupled Plasma Mass Spectrometry (QICPMS) Processed"
+            - "Quadrupole Inductively Coupled Plasma Mass Spectrometry (QICPMS) Raw"
+            - "Quantitative Reflective Imaging System (QRIS)"
+            - "Raman vibrational spectroscopy"
+            - "Resonance ionization time of flight noble gas mass spectrometry (RITOFNGMS) Processed"
+            - "Resonance ionization time of flight noble gas mass spectrometry (RITOFNGMS) Spectra"
+            - "Scanning Electron Microscopy (SEM) Image"
+            - "Scanning Electron Microscopy Electron Backscatter Diffraction (SEMEBSD) Grain Image"
+            - "Scanning Electron Microscopy Energy Dispersive X-ray Spectroscopy (SEMEDS) Point Data"
+            - "Scanning Electron Microscopy Energy Dispersive X-ray Spectroscopy (SEMEDS) image"
+            - "Scanning Electron Microscopy High Resolution Cathodoluminescence (SEMHRCL) image"
+            - "Scanning Transmission Electron Microscopy (STEM) Image"
+            - "Scanning Transmission Electron Microscopy Electron Energy-loss Spectra (STEMEELS) Cube"
+            - "Scanning Transmission Electron Microscopy Electron Energy-loss Spectra (STEMEELS) Tabular"
+            - "Scanning Transmission Electron Microscopy Energy Dispersive X-ray Spectroscopy (STEMEDS) Cube"
+            - "Scanning Transmission Electron Microscopy Energy Dispersive X-ray Spectroscopy (STEMEDS) Tabular"
+            - "Scanning Transmission Electron Microscopy Energy Dispersive X-ray Spectroscopy (STEMEDS) Tomography"
+            - "Secondary Ion Mass Spectrometry (SIMS) Tabular"
+            - "Seismic Velocities and Rock Ultrasonic Elastic Constants (SVRUEC)"
+            - "Structured Light Scanning (SLS) Individual Scan Collection"
+            - "Structured Light Scanning (SLS) Shape Model"
+            - "Time-of-flight secondary ion mass spectrometry (TOFSIMS)"
+            - "Transmission Electron Microscopy (TEM) Image"
+            - "Transmission Electron Microscopy (TEM) Patterns Image"
+            - "Visible Light Microscopy (VLM) Image"
+            - "Visible, near-infrared, and mid-infrared Spectroscopy (VNMIR) Point"
+            - "X-ray Absorption Near Edge Structure Hyperspectral Image Stack (XANES)"
+            - "X-ray Computed Tomography (XCT) Image Collection"
+            - "X-ray Diffraction (XRD) Tabular"
+        minItems: 2
+      submissionType:
+        type: string
+      "schema:license":
+        description: Legal statement of conditions for use and access
+        type: array
+        minItems: 0
+        items:
+          anyOf:
+            - type: string
+            - $ref: ../../../adaProperties/creativeWork/schema.yaml
+      "schema:relatedLink":
+        type: array
+        description: Links to related resources at the product level
+        items:
+          type: object
+          properties:
+            "@type":
+              type: string
+              const: "schema:LinkRole"
+            "schema:linkRelationship":
+              type: string
+            "schema:target":
+              type: object
+              properties:
+                "@type":
+                  type: string
+                  const: "schema:EntryPoint"
+                "schema:encodingFormat":
+                  type: string
+                "schema:name":
+                  type: string
+                "schema:url":
+                  type: string
+      "schema:creativeWorkStatus":
+        type: string
+      "schema:measurementTechnique":
+        type: object
+        description: Text description of the measurement method
+        properties:
+          "@type":
+            const: "schema:DefinedTerm"
+          "schema:name":
+            type: string
+          "schema:identifier":
+            type: string
+      "prov:wasGeneratedBy":
+        type: array
+        description: Analysis events that generated this product
+        items:
+          type: object
+          properties:
+            "@type":
+              description: >-
+                Include 'schema:Action' and 'prov:Activity'
+              type: array
+              items:
+                type: string
+              allOf:
+                - contains:
+                    const: "schema:Action"
+                - contains:
+                    const: "prov:Activity"
+            "prov:used":
+              type: array
+              description: Instruments used in the analysis
+              items:
+                $ref: ../../../adaProperties/instrument/schema.yaml
+            "schema:location":
+              $ref: ../../../adaProperties/laboratory/schema.yaml
+            "schema:mainEntity":
+              type: array
+              description: Samples analyzed
+              items:
+                type: object
+                properties:
+                  "@type":
+                    const:
+                      - "schema:Thing"
+                      - "https://w3id.org/isample/vocabulary/materialsampleobjecttype/materialsample"
+                  "schema:additionalType":
+                    type: array
+                    items:
+                      type: string
+                  "schema:identifier":
+                    type: array
+                    items:
+                      type: string
+            "schema:identifier":
+              description: Identifier for the analysis event (sessionID)
+              type: string
+            "schema:startDate":
+              type: string
+          required:
+            - "prov:used"
+      "schema:variableMeasured":
+        description: >-
+          What does the dataset measure? Define the variables here at the conceptual
+          level; the physical implementation details are in the data structure.
+          Requires dual typing with schema:PropertyValue and cdi:InstanceVariable
+          per CDIF 2026.
+        type: array
+        items:
+          type: object
+          properties:
+            "@id":
+              type: string
+              description: >-
+                Identifier for this variable, used to link from physical mappings
+                in distributions.
+            "@type":
+              type: array
+              items:
+                type: string
+                enum:
+                  - "schema:PropertyValue"
+                  - "cdi:InstanceVariable"
+              minItems: 2
+            "schema:description":
+              type: string
+              minLength: 10
+            "schema:name":
+              description: The name as it typically appears in a dataset
+              type: string
+            "schema:alternateName":
+              type: array
+              items:
+                type: string
+                description: Human intelligible name for variable that conveys semantics
+            "schema:propertyID":
+              description: Ideally a resolvable URI for a property concept
+              type: array
+              items:
+                anyOf:
+                  - type: string
+                  - type: object
+                    properties:
+                      "@id":
+                        type: string
+                  - type: object
+                    properties:
+                      "@type":
+                        type: string
+                        const: "schema:DefinedTerm"
+                      "schema:name":
+                        type: string
+                      "schema:identifier":
+                        type: object
+                      "schema:inDefinedTermSet":
+                        type: string
+                      "schema:termCode":
+                        type: string
+                    required:
+                      - "@type"
+                      - "schema:name"
+            "schema:measurementTechnique":
+              anyOf:
+                - type: string
+                - type: object
+                  properties:
+                    "@id":
+                      type: string
+                - type: object
+                  properties:
+                    "@type":
+                      type: string
+                      const: "schema:DefinedTerm"
+                    "schema:name":
+                      type: string
+                  required:
+                    - "@type"
+                    - "schema:name"
+            "schema:unitText":
+              type: string
+            "schema:unitCode":
+              anyOf:
+                - type: string
+                - type: object
+                  properties:
+                    "@id":
+                      type: string
+                - type: object
+                  properties:
+                    "@type":
+                      type: string
+                      const: "schema:DefinedTerm"
+                    "schema:name":
+                      type: string
+                  required:
+                    - "@type"
+                    - "schema:name"
+            "schema:minValue":
+              type: number
+            "schema:maxValue":
+              type: number
+            "schema:url":
+              type: string
+              format: uri
+            "cdi:intendedDataType":
+              type: string
+            "cdi:role":
+              type: string
+              description: >-
+                The role of the variable: MeasureComponent, AttributeComponent,
+                DimensionComponent, IdentifierComponent.
+            "cdi:describedUnitOfMeasure":
+              type: object
+              properties:
+                "@type":
+                  type: string
+                  const: "schema:DefinedTerm"
+                "schema:name":
+                  type: string
+              required:
+                - "@type"
+                - "schema:name"
+            "cdi:simpleUnitOfMeasure":
+              type: string
+            "cdi:uses":
+              type: array
+              items:
+                anyOf:
+                  - type: string
+                  - type: object
+                    properties:
+                      "@id":
+                        type: string
+                  - type: object
+                    properties:
+                      "@type":
+                        type: string
+                        const: "schema:DefinedTerm"
+                      "schema:name":
+                        type: string
+                    required:
+                      - "@type"
+                      - "schema:name"
+          required:
+            - "@id"
+            - "@type"
+            - "schema:description"
+            - "schema:name"
+      "schema:distribution":
+        type: array
+        description: >-
+          Access options for the dataset. Each distribution item is expected to be
+          a single file or an archive containing multiple files described in hasPart.
+        items:
+          anyOf:
+            - allOf:
+                - $ref: ../../../adaProperties/files/schema.yaml
+                - type: object
+                  description: Single file distribution.
+                  properties:
+                    "@type":
+                      type: array
+                      items:
+                        type: string
+                      contains:
+                        const: "schema:DataDownload"
+                      minItems: 1
+            - allOf:
+                - $ref: ../../../adaProperties/files/schema.yaml
+                - type: object
+                  description: Archive file with parts.
+                  properties:
+                    "@type":
+                      type: array
+                      items:
+                        type: string
+                      contains:
+                        const: "schema:DataDownload"
+                      minItems: 1
+                    "schema:provider":
+                      type: array
+                      description: Party who maintains this particular distribution option.
+                      items:
+                        anyOf:
+                          - type: object
+                            properties:
+                              "@type":
+                                type: string
+                                const: "schema:Person"
+                              "schema:name":
+                                type: string
+                            required:
+                              - "@type"
+                              - "schema:name"
+                          - type: object
+                            properties:
+                              "@type":
+                                type: string
+                                const: "schema:Organization"
+                                default: "schema:Organization"
+                              "schema:name":
+                                type: string
+                            required:
+                              - "@type"
+                              - "schema:name"
+                    "schema:additionalType":
+                      type: array
+                      description: "Identify the package scheme, e.g. NASA PDS bundle, RO-CRATE, Bagit"
+                      items:
+                        type: string
+                    "schema:hasPart":
+                      type: array
+                      description: >-
+                        Array describing the files in the zip archive.
+                      items:
+                        allOf:
+                          - $ref: ../../../adaProperties/files/schema.yaml
+                          - type: object
+                            properties:
+                              "@type":
+                                type: array
+                                items:
+                                  type: string
+                                not:
+                                  contains:
+                                    const: "schema:DataDownload"
+            - type: object
+              description: >-
+                Web API distribution with file result. The API provides access
+                to data that can also be described as DataDownload file(s).
+              properties:
+                "@type":
+                  type: array
+                  items:
+                    type: string
+                    enum:
+                      - "schema:WebAPI"
+                  minItems: 1
+                "schema:name":
+                  type: string
+                "schema:description":
+                  type: string
+                "schema:serviceType":
+                  anyOf:
+                    - type: string
+                    - type: object
+                      properties:
+                        "@type":
+                          type: string
+                          const: "schema:DefinedTerm"
+                        "schema:name":
+                          type: string
+                      required:
+                        - "@type"
+                        - "schema:name"
+                "schema:documentation":
+                  oneOf:
+                    - type: string
+                    - type: object
+                      properties:
+                        "@type":
+                          type: string
+                          const: "schema:CreativeWork"
+                        "schema:name":
+                          type: string
+                        "schema:url":
+                          type: string
+                          format: uri
+                "schema:potentialAction":
+                  type: array
+                  description: Actions that can be invoked via the API.
+                  items:
+                    $ref: https://usgin.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/action/schema.yaml
+                "schema:result":
+                  description: >-
+                    The file(s) that result from invoking this API. Reuses the
+                    same single-file or archive-with-hasPart structure.
+                  oneOf:
+                    - allOf:
+                        - $ref: ../../../adaProperties/files/schema.yaml
+                        - type: object
+                          description: Single file result.
+                          properties:
+                            "@type":
+                              type: array
+                              items:
+                                type: string
+                              contains:
+                                const: "schema:DataDownload"
+                              minItems: 1
+                    - allOf:
+                        - $ref: ../../../adaProperties/files/schema.yaml
+                        - type: object
+                          description: Archive file result with parts.
+                          properties:
+                            "@type":
+                              type: array
+                              items:
+                                type: string
+                              contains:
+                                const: "schema:DataDownload"
+                              minItems: 1
+                            "schema:hasPart":
+                              type: array
+                              description: Files within the archive result.
+                              items:
+                                allOf:
+                                  - $ref: ../../../adaProperties/files/schema.yaml
+                                  - type: object
+                                    properties:
+                                      "@type":
+                                        type: array
+                                        items:
+                                          type: string
+                                        not:
+                                          contains:
+                                            const: "schema:DataDownload"
+              required:
+                - "@type"
+                - "schema:serviceType"
+                - "schema:potentialAction"
+$defs:
+  universalComponentType:
+    type: object
+    description: >-
+      Supplement/supporting component types valid across all ADA techniques.
+    properties:
+      "@type":
+        enum:
+          - "ada:analysisLocation"
+          - "ada:annotatedImage"
+          - "ada:areaOfInterest"
+          - "ada:basemap"
+          - "ada:calibrationFile"
+          - "ada:code"
+          - "ada:contextPhotography"
+          - "ada:contextVideo"
+          - "ada:inputFile"
+          - "ada:instrumentMetadata"
+          - "ada:logFile"
+          - "ada:methodDescription"
+          - "ada:other"
+          - "ada:plot"
+          - "ada:processingMethod"
+          - "ada:quickLook"
+          - "ada:report"
+          - "ada:samplePreparation"
+          - "ada:shapefile"
+          - "ada:supplementalBasemap"
+          - "ada:supplementaryImage"
+          - "ada:worldFile"
+    required:
+      - "@type"

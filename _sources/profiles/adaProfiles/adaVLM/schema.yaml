@@ -1,0 +1,46 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+title: ADA VLM Product Profile
+description: >-
+  Technique-specific profile for Visible Light Microscopy (VLM) products.
+  Extends the base ADA product profile with constraints on valid VLM component
+  types.
+allOf:
+  - $ref: ../adaProduct/schema.yaml
+  - type: object
+    properties:
+      "schema:additionalType":
+        description: >-
+          Must include a VLM product type identifier.
+        contains:
+          enum:
+            - "Visible Light Microscopy (VLM) Image"
+            - "Basemap"
+            - "Visible Light Microscopy"
+      "schema:distribution":
+        items:
+          oneOf:
+            - required:
+                - componentType
+              properties:
+                componentType:
+                  anyOf:
+                    - properties:
+                        "@type":
+                          enum:
+                            - "ada:VLMImage"
+                            - "ada:VLMImageCollection"
+                    - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType
+            - required:
+                - "schema:hasPart"
+              properties:
+                "schema:hasPart":
+                  items:
+                    properties:
+                      componentType:
+                        anyOf:
+                          - properties:
+                              "@type":
+                                enum:
+                                  - "ada:VLMImage"
+                                  - "ada:VLMImageCollection"
+                          - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType

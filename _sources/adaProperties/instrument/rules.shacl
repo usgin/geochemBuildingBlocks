@@ -1,0 +1,38 @@
+@prefix rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh:          <http://www.w3.org/ns/shacl#> .
+@prefix xsd:         <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema:      <http://schema.org/> .
+@prefix prov:        <http://www.w3.org/ns/prov#> .
+@prefix nxs:         <http://purl.org/nexusformat/definitions/> .
+@prefix cdifd: <https://cdif.org/validation/0.1/shacl#> .
+@base <https://www.ogc.org/rules/template/> .
+
+# Validates instrument nodes typed as nxs:BaseClass/NXinstrument.
+# JSON schema requires @type = ["schema:Thing", "prov:Entity", "nxs:BaseClass/NXinstrument"]
+# and defines schema:name, schema:description, schema:identifier, schema:additionalType.
+cdifd:instrumentShape
+    a sh:NodeShape ;
+    sh:target [
+        a sh:SPARQLTarget ;
+        sh:select """
+            PREFIX nxs: <http://purl.org/nexusformat/definitions/>
+            SELECT ?this
+            WHERE {
+                ?this a <http://purl.org/nexusformat/definitions/BaseClass/NXinstrument> .
+            }
+        """ ;
+    ] ;
+    sh:property [
+        sh:path rdf:type ;
+        sh:hasValue prov:Entity ;
+        sh:message "Instrument nodes must also be typed as prov:Entity." ;
+    ] ;
+    sh:property [
+        sh:path schema:name ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "An instrument should have a name (schema:name)." ;
+    ] ;
+    sh:message "Instrument nodes (nxs:BaseClass/NXinstrument) should be typed as prov:Entity and have a name." ;
+    .

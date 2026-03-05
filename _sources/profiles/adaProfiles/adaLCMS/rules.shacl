@@ -1,0 +1,46 @@
+@prefix rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh:          <http://www.w3.org/ns/shacl#> .
+@prefix xsd:         <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema:      <http://schema.org/> .
+@prefix ada:         <https://ada.astromat.org/metadata/> .
+@prefix cdifd: <https://cdif.org/validation/0.1/shacl#> .
+@base <https://www.ogc.org/rules/template/> .
+
+# LC-MS technique profile SHACL rules.
+# Base product validation (creator, distribution, wasGeneratedBy, etc.)
+# is inherited from adaProduct rules.shacl.
+# This shape constrains schema:additionalType to valid LC-MS values.
+
+cdifd:lcmsProductShape
+    a sh:NodeShape ;
+    sh:target [
+        a sh:SPARQLTarget ;
+        sh:select """
+            PREFIX schema: <http://schema.org/>
+            SELECT ?this
+            WHERE {
+                ?this a schema:Dataset .
+                ?this a schema:Product .
+                MINUS {
+                    ?parent a schema:Dataset .
+                    ?parent ?p ?this .
+                    FILTER (?parent != ?this)
+                    FILTER (?p != schema:about)
+                }
+            }
+        """ ;
+    ] ;
+    sh:property [
+        sh:path schema:additionalType ;
+        sh:qualifiedMinCount 1 ;
+        sh:qualifiedValueShape [
+            sh:or (
+        [sh:hasValue "Liquid Chromatography - Mass Spectrometry (LCMS) Collection"]
+        [sh:hasValue "Liquid chromatography-mass spectrometry"]
+            )
+        ] ;
+        sh:message "LC-MS products must have at least one schema:additionalType matching a valid LC-MS type." ;
+    ] ;
+    sh:message "LC-MS technique profile: additionalType must identify a valid LC-MS product type." ;
+    .

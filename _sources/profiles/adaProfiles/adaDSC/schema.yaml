@@ -1,0 +1,45 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+title: ADA DSC Product Profile
+description: >-
+  Technique-specific profile for Differential Scanning Calorimetry (DSC) products.
+  Extends the base ADA product profile with constraints on valid DSC component
+  types and detailDSC requirements.
+allOf:
+  - $ref: ../adaProduct/schema.yaml
+  - type: object
+    properties:
+      "schema:additionalType":
+        description: >-
+          Must include a DSC product type identifier.
+        contains:
+          enum:
+            - "Differential Scanning Calorimetry (DSC)"
+            - "Differential Scanning Calorimetry"
+      "schema:distribution":
+        items:
+          oneOf:
+            - required:
+                - componentType
+              properties:
+                componentType:
+                  anyOf:
+                    - properties:
+                        "@type":
+                          enum:
+                            - "ada:DSCHeatTabular"
+                            - "ada:DSCResultsTabular"
+                    - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType
+            - required:
+                - "schema:hasPart"
+              properties:
+                "schema:hasPart":
+                  items:
+                    properties:
+                      componentType:
+                        anyOf:
+                          - properties:
+                              "@type":
+                                enum:
+                                  - "ada:DSCHeatTabular"
+                                  - "ada:DSCResultsTabular"
+                          - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType

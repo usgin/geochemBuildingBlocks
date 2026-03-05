@@ -1,0 +1,46 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+title: ADA RI-TOF-NGMS Product Profile
+description: >-
+  Technique-specific profile for Resonance Ionization Time-of-Flight Noble Gas Mass Spectrometry (RI-TOF-NGMS) products.
+  Extends the base ADA product profile with constraints on valid RI-TOF-NGMS component
+  types.
+allOf:
+  - $ref: ../adaProduct/schema.yaml
+  - type: object
+    properties:
+      "schema:additionalType":
+        description: >-
+          Must include a RI-TOF-NGMS product type identifier.
+        contains:
+          enum:
+            - "Resonance ionization time of flight noble gas mass spectrometry (RITOFNGMS) Spectra"
+            - "Resonance ionization time of flight noble gas mass spectrometry (RITOFNGMS) Processed"
+            - "Resonance ionization time of flight noble gas mass spectrometry"
+      "schema:distribution":
+        items:
+          oneOf:
+            - required:
+                - componentType
+              properties:
+                componentType:
+                  anyOf:
+                    - properties:
+                        "@type":
+                          enum:
+                            - "ada:RITOFNGMSTabular"
+                            - "ada:RITOFNGMSCollection"
+                    - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType
+            - required:
+                - "schema:hasPart"
+              properties:
+                "schema:hasPart":
+                  items:
+                    properties:
+                      componentType:
+                        anyOf:
+                          - properties:
+                              "@type":
+                                enum:
+                                  - "ada:RITOFNGMSTabular"
+                                  - "ada:RITOFNGMSCollection"
+                          - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType

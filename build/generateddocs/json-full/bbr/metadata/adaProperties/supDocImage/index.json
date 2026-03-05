@@ -1,0 +1,44 @@
+
+
+{
+  "itemIdentifier": "ada.bbr.metadata.adaProperties.supDocImage",
+  "$schema": "metaschema.yaml",
+  "name": "Supplemental Document Image Type",
+  "abstract": "Supplemental document images including analysis locations and context photos. Defines properties: @type, componentType, numPixelsX, numPixelsY, _original_name.",
+  "status": "under-development",
+  "dateTimeAddition": "2026-02-05T00:00:00Z",
+  "itemClass": "schema",
+  "register": "cdif-building-block-register",
+  "version": "0.1",
+  "dateOfLastChange": "2026-03-05",
+  "link": "https://github.com/usgin/geochemBuildingBlocks",
+  "maturity": "draft",
+  "scope": "unstable",
+  "tags": [
+    "ada",
+    "astromat",
+    "image",
+    "supplemental"
+  ],
+  "sources": [
+    {
+      "title": "ADA Metadata Schema v3",
+      "link": "https://github.com/amds-ldeo/metadata"
+    }
+  ],
+  "shaclShapes": {},
+  "ldContext": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/supDocImage/context.jsonld",
+  "schema": {
+    "application/yaml": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/supDocImage/schema.yaml",
+    "application/json": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/supDocImage/schema.json"
+  },
+  "sourceSchema": "https://usgin.github.io/geochemBuildingBlocks/_sources/adaProperties/supDocImage/schema.yaml",
+  "sourceLdContext": "https://usgin.github.io/geochemBuildingBlocks/_sources/adaProperties/supDocImage/context.jsonld",
+  "sourceFiles": "https://usgin.github.io/geochemBuildingBlocks/_sources/adaProperties/supDocImage/",
+  "rdfData": [],
+  "validationPassed": true,
+  "description": "# Supplemental Document Image Type\n\nDescribes supplemental document images such as analysis location images, annotated products, context photography, areas of interest, instrument metadata images, supplemental basemaps, plots, quick-look images, reports, and visual images.\n",
+  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: Supplemental Document Image Type\ndescription: Supplemental document images including analysis location images, annotated\n  products, context photography, and other supplemental visual materials.\ntype: object\nproperties:\n  '@type':\n    type: array\n    items:\n      type: string\n    minItems: 2\n    allOf:\n    - contains:\n        const: ada:image\n    - contains:\n        const: schema:DigitalDocument\n    description: GeneralType for supplemental document images\n  componentType:\n    type: object\n    properties:\n      '@type':\n        enum:\n        - ada:analysisLocation\n        - ada:annotatedProduct\n        - ada:contextPhotography\n        - ada:areaOfInterest\n        - ada:instrumentMetadata\n        - ada:supplementalBasemap\n        - ada:other\n        - ada:plot\n        - ada:quickLook\n        - ada:report\n        - ada:visImage\n    required:\n    - '@type'\n  numPixelsX:\n    type: integer\n  numPixelsY:\n    type: integer\n  _original_name:\n    type: string\nrequired:\n- '@type'\n- componentType\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  ada: https://ada.astromat.org/metadata/\n",
+  "gitRepository": "https://github.com/usgin/geochemBuildingBlocks",
+  "gitPath": "_sources/adaProperties/supDocImage"
+}

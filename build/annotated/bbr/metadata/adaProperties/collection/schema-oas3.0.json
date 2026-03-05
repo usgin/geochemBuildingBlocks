@@ -1,0 +1,135 @@
+{
+  "x-defs": {
+    "ada.bbr.metadata.adaProperties.stringArray": {
+      "title": "String Array Type",
+      "description": "Simple reusable array of strings",
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "type": "string"
+      },
+      "x-schema-source": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/stringArray/schema.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    }
+  },
+  "title": "Collection Type",
+  "description": "A collection can be a set of files with identical information model and serialization/formatting, or a heterogeneous set of files that together constitute a dataset (a composite dataset).",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 2,
+      "allOf": [
+        {
+          "contains": {
+            "enum": [
+              "ada:collection"
+            ]
+          }
+        },
+        {
+          "contains": {
+            "enum": [
+              "https://schema.org/Collection"
+            ]
+          }
+        }
+      ],
+      "description": "GeneralType for collections"
+    },
+    "componentType": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string",
+          "enum": [
+            "ada:AIVAImageCollection",
+            "ada:ARGTCollection",
+            "ada:EAIRMSCollection",
+            "ada:EMPAImageCollection",
+            "ada:GCMSCollection",
+            "ada:GCGCMSCollection",
+            "ada:LCMSCollection",
+            "ada:LCMSMSCollection",
+            "ada:LIT2DDataCollection",
+            "ada:LITPolarDataCollection",
+            "ada:MCICPMSCollection",
+            "ada:NanoIRMapCollection",
+            "ada:NanoIRPointCollection",
+            "ada:NanoSIMSCollection",
+            "ada:NanoSIMSImageCollection",
+            "ada:QRISCalibratedCollection",
+            "ada:QRISRawCollection",
+            "ada:RITOFNGMSCollection",
+            "ada:SEMEDSElementalMaps",
+            "ada:SEMEDSPointDataCollection",
+            "ada:SEMImageCollection",
+            "ada:SIMSCollection",
+            "ada:TEMEDSImageCollection",
+            "ada:TOFSIMSCollection",
+            "ada:UVFMImageCollection",
+            "ada:VLMImageCollection",
+            "ada:XANESCollection",
+            "ada:XCTImageCollection"
+          ]
+        }
+      }
+    },
+    "memberTypes": {
+      "description": "List of the component types in the collection",
+      "allOf": [
+        {
+          "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/collection/schema-oas3.0.json#/x-defs/ada.bbr.metadata.adaProperties.stringArray"
+        }
+      ]
+    },
+    "nFiles": {
+      "type": "integer",
+      "description": "Number of files in the collection, including metadata files"
+    },
+    "filelist": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "fileName": {
+            "type": "string",
+            "description": "Full path to file in container object"
+          },
+          "fileNamePattern": {
+            "type": "string",
+            "description": "Pattern for collection members with differentiating suffix at '*'"
+          },
+          "componentType": {
+            "description": "The component type for the file(s)",
+            "type": "string"
+          },
+          "schema:encodingFormat": {
+            "type": "string",
+            "description": "MIME type with extension"
+          }
+        },
+        "oneOf": [
+          {
+            "required": [
+              "fileName"
+            ]
+          },
+          {
+            "required": [
+              "fileNamePattern"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "x-jsonld-prefixes": {
+    "schema": "http://schema.org/",
+    "ada": "https://ada.astromat.org/metadata/"
+  },
+  "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+}

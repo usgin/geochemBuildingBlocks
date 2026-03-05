@@ -1,0 +1,46 @@
+
+
+{
+  "itemIdentifier": "ada.bbr.metadata.adaProperties.collection",
+  "$schema": "metaschema.yaml",
+  "name": "Collection Type",
+  "abstract": "Set of related files with identical information models or composite datasets. Defines properties: @type, componentType, memberTypes, nFiles, filelist. Uses building blocks: stringArray (adaProperties).",
+  "status": "under-development",
+  "dateTimeAddition": "2026-02-05T00:00:00Z",
+  "itemClass": "schema",
+  "register": "cdif-building-block-register",
+  "version": "0.1",
+  "dateOfLastChange": "2026-03-05",
+  "link": "https://github.com/usgin/geochemBuildingBlocks",
+  "maturity": "draft",
+  "scope": "unstable",
+  "tags": [
+    "ada",
+    "astromat",
+    "collection"
+  ],
+  "sources": [
+    {
+      "title": "ADA Metadata Schema v3",
+      "link": "https://github.com/amds-ldeo/metadata"
+    }
+  ],
+  "shaclShapes": {},
+  "dependsOn": [
+    "ada.bbr.metadata.adaProperties.stringArray"
+  ],
+  "ldContext": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/collection/context.jsonld",
+  "schema": {
+    "application/yaml": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/collection/schema.yaml",
+    "application/json": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/collection/schema.json"
+  },
+  "sourceSchema": "https://usgin.github.io/geochemBuildingBlocks/_sources/adaProperties/collection/schema.yaml",
+  "sourceLdContext": "https://usgin.github.io/geochemBuildingBlocks/_sources/adaProperties/collection/context.jsonld",
+  "sourceFiles": "https://usgin.github.io/geochemBuildingBlocks/_sources/adaProperties/collection/",
+  "rdfData": [],
+  "validationPassed": true,
+  "description": "# Collection Type\n\nDescribes a collection of related files in ADA metadata. Can represent a set of files with identical information models and serialization (a collection), or a heterogeneous set of files constituting a composite dataset. Typed as `ada:collection` and `schema:Collection`.\n",
+  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: Collection Type\ndescription: A collection can be a set of files with identical information model and\n  serialization/formatting, or a heterogeneous set of files that together constitute\n  a dataset (a composite dataset).\ntype: object\nproperties:\n  '@type':\n    type: array\n    items:\n      type: string\n    minItems: 2\n    allOf:\n    - contains:\n        const: ada:collection\n    - contains:\n        const: https://schema.org/Collection\n    description: GeneralType for collections\n  componentType:\n    type: object\n    properties:\n      '@type':\n        type: string\n        enum:\n        - ada:AIVAImageCollection\n        - ada:ARGTCollection\n        - ada:EAIRMSCollection\n        - ada:EMPAImageCollection\n        - ada:GCMSCollection\n        - ada:GCGCMSCollection\n        - ada:LCMSCollection\n        - ada:LCMSMSCollection\n        - ada:LIT2DDataCollection\n        - ada:LITPolarDataCollection\n        - ada:MCICPMSCollection\n        - ada:NanoIRMapCollection\n        - ada:NanoIRPointCollection\n        - ada:NanoSIMSCollection\n        - ada:NanoSIMSImageCollection\n        - ada:QRISCalibratedCollection\n        - ada:QRISRawCollection\n        - ada:RITOFNGMSCollection\n        - ada:SEMEDSElementalMaps\n        - ada:SEMEDSPointDataCollection\n        - ada:SEMImageCollection\n        - ada:SIMSCollection\n        - ada:TEMEDSImageCollection\n        - ada:TOFSIMSCollection\n        - ada:UVFMImageCollection\n        - ada:VLMImageCollection\n        - ada:XANESCollection\n        - ada:XCTImageCollection\n  memberTypes:\n    description: List of the component types in the collection\n    $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/stringArray/schema.yaml\n  nFiles:\n    type: integer\n    description: Number of files in the collection, including metadata files\n  filelist:\n    type: array\n    items:\n      type: object\n      properties:\n        fileName:\n          type: string\n          description: Full path to file in container object\n        fileNamePattern:\n          type: string\n          description: Pattern for collection members with differentiating suffix\n            at '*'\n        componentType:\n          description: The component type for the file(s)\n          type: string\n        schema:encodingFormat:\n          type: string\n          description: MIME type with extension\n      oneOf:\n      - required:\n        - fileName\n      - required:\n        - fileNamePattern\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  ada: https://ada.astromat.org/metadata/\n",
+  "gitRepository": "https://github.com/usgin/geochemBuildingBlocks",
+  "gitPath": "_sources/adaProperties/collection"
+}

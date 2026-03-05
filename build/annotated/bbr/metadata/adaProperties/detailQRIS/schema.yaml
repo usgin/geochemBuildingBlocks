@@ -1,0 +1,30 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+title: QRIS Instrument Detail
+description: QRIS (Raman) with calibration and illumination parameters. (Extension
+  type, not in v3 source schema.)
+type: object
+properties:
+  '@type':
+    anyOf:
+    - const: ada:QRISCalibrated
+    - const: ada:QRISRaw
+  calibrationFile:
+    type: string
+  pipelineVersion:
+    type: string
+  focalLength:
+    type: integer
+  illuminationColor:
+    type: array
+    minItems: 0
+    items:
+      type: string
+  illuminationLevel:
+    type: integer
+  exposureTime:
+    type: integer
+  target:
+    type: string
+x-jsonld-prefixes:
+  schema: http://schema.org/
+  ada: https://ada.astromat.org/metadata/

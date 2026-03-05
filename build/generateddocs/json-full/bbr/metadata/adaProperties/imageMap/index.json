@@ -1,0 +1,48 @@
+
+
+{
+  "itemIdentifier": "ada.bbr.metadata.adaProperties.imageMap",
+  "$schema": "metaschema.yaml",
+  "name": "Image Map Type",
+  "abstract": "Spatially registered image map with pixel coordinates and component types. Defines properties: @type, acquisitionTime, componentType, channel1, channel2, channel3, illuminationType, imageType, numPixelsX, numPixelsY, spatialRegistration. Uses building blocks: detailEMPA (adaProperties), spatialRegistration (adaProperties).",
+  "status": "under-development",
+  "dateTimeAddition": "2026-02-05T00:00:00Z",
+  "itemClass": "schema",
+  "register": "cdif-building-block-register",
+  "version": "0.1",
+  "dateOfLastChange": "2026-03-05",
+  "link": "https://github.com/usgin/geochemBuildingBlocks",
+  "maturity": "draft",
+  "scope": "unstable",
+  "tags": [
+    "ada",
+    "astromat",
+    "image",
+    "spatial"
+  ],
+  "sources": [
+    {
+      "title": "ADA Metadata Schema v3",
+      "link": "https://github.com/amds-ldeo/metadata"
+    }
+  ],
+  "shaclShapes": {},
+  "dependsOn": [
+    "ada.bbr.metadata.adaProperties.spatialRegistration",
+    "ada.bbr.metadata.adaProperties.detailEMPA"
+  ],
+  "ldContext": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/imageMap/context.jsonld",
+  "schema": {
+    "application/yaml": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/imageMap/schema.yaml",
+    "application/json": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/imageMap/schema.json"
+  },
+  "sourceSchema": "https://usgin.github.io/geochemBuildingBlocks/_sources/adaProperties/imageMap/schema.yaml",
+  "sourceLdContext": "https://usgin.github.io/geochemBuildingBlocks/_sources/adaProperties/imageMap/context.jsonld",
+  "sourceFiles": "https://usgin.github.io/geochemBuildingBlocks/_sources/adaProperties/imageMap/",
+  "rdfData": [],
+  "validationPassed": true,
+  "description": "# Image Map Type\n\nDescribes spatially registered image maps with pixel coordinates, component type classification (including EMPA details), and spatial registration metadata. Extends the basic image type with pixel dimensions and spatial registration.\n",
+  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: Image Map Type\ndescription: Spatially registered image maps with pixel coordinates, component type\n  classification, and spatial registration metadata.\ntype: object\nproperties:\n  '@type':\n    type: array\n    items:\n      type: string\n    minItems: 2\n    allOf:\n    - contains:\n        const: ada:imageMap\n    - contains:\n        const: schema:ImageObject\n  acquisitionTime:\n    type: string\n  componentType:\n    anyOf:\n    - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailEMPA/schema.yaml\n    - type: object\n      properties:\n        '@type':\n          enum:\n          - ada:basemap\n          - ada:supplementalBasemap\n          - ada:L2MSOverviewImage\n          - ada:NanoIRMap\n          - ada:LITImage\n          - ada:UVFMImage\n          - ada:VLMImage\n          - ada:SEMEBSDGrainImageMap\n          - ada:SEMEDSElementalMap\n          - ada:SEMHRCLMap\n          - ada:SEMImageMap\n          - ada:STEMImage\n          - ada:TEMImage\n          - ada:TEMPatternsImage\n          - ada:NanoSIMSMap\n          - ada:XANESimage\n          - ada:VNMIROverviewImage\n      required:\n      - '@type'\n  channel1:\n    type: string\n  channel2:\n    type: string\n  channel3:\n    type: string\n  illuminationType:\n    type: string\n    description: Type of illumination used to create the image.\n  imageType:\n    type: string\n    description: Specifies the nature of the sample's response to the illumination.\n  numPixelsX:\n    type: integer\n  numPixelsY:\n    type: integer\n  spatialRegistration:\n    $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/spatialRegistration/schema.yaml\nrequired:\n- '@type'\n- componentType\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  ada: https://ada.astromat.org/metadata/\n",
+  "gitRepository": "https://github.com/usgin/geochemBuildingBlocks",
+  "gitPath": "_sources/adaProperties/imageMap"
+}

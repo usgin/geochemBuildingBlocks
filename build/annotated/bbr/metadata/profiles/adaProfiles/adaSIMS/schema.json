@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ADA SIMS Product Profile",
+  "description": "Technique-specific profile for Secondary Ion Mass Spectrometry (SIMS) products. Extends the base ADA product profile with constraints on valid SIMS component types.",
+  "allOf": [
+    {
+      "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaProduct/schema.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "schema:additionalType": {
+          "description": "Must include a SIMS product type identifier.",
+          "contains": {
+            "enum": [
+              "Secondary Ion Mass Spectrometry (SIMS) Tabular",
+              "Secondary ion mass spectrometry"
+            ]
+          }
+        },
+        "schema:distribution": {
+          "items": {
+            "oneOf": [
+              {
+                "required": [
+                  "componentType"
+                ],
+                "properties": {
+                  "componentType": {
+                    "anyOf": [
+                      {
+                        "properties": {
+                          "@type": {
+                            "enum": [
+                              "ada:SIMSTabular",
+                              "ada:SIMSCollection"
+                            ]
+                          }
+                        }
+                      },
+                      {
+                        "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaProduct/schema.json#/$defs/universalComponentType"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "required": [
+                  "schema:hasPart"
+                ],
+                "properties": {
+                  "schema:hasPart": {
+                    "items": {
+                      "properties": {
+                        "componentType": {
+                          "anyOf": [
+                            {
+                              "properties": {
+                                "@type": {
+                                  "enum": [
+                                    "ada:SIMSTabular",
+                                    "ada:SIMSCollection"
+                                  ]
+                                }
+                              }
+                            },
+                            {
+                              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaProduct/schema.json#/$defs/universalComponentType"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "x-jsonld-prefixes": {
+    "schema": "http://schema.org/",
+    "ada": "https://ada.astromat.org/metadata/",
+    "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
+    "csvw": "http://www.w3.org/ns/csvw#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "spdx": "http://spdx.org/rdf/terms#",
+    "nxs": "http://purl.org/nexusformat/definitions/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "geosparql": "http://www.opengis.net/ont/geosparql#"
+  }
+}

@@ -1,0 +1,83 @@
+
+
+{
+  "itemIdentifier": "ada.bbr.metadata.adaProperties.files",
+  "$schema": "metaschema.yaml",
+  "name": "Files Type",
+  "abstract": "DataDownload with checksum, size, encoding format, and file detail. Defines properties: schema:additionalType, schema:description, schema:size, resultTarget, schema:relatedLink. Uses building blocks: dataDownload (schemaorgProperties), stringArray (adaProperties), image (adaProperties), imageMap (adaProperties), tabularData (adaProperties), collection (adaProperties), dataCube (adaProperties), document (adaProperties), supDocImage (adaProperties), otherFile (adaProperties).",
+  "status": "under-development",
+  "dateTimeAddition": "2026-02-05T00:00:00Z",
+  "itemClass": "schema",
+  "register": "cdif-building-block-register",
+  "version": "0.1",
+  "dateOfLastChange": "2026-03-05",
+  "link": "https://github.com/usgin/geochemBuildingBlocks",
+  "maturity": "draft",
+  "scope": "unstable",
+  "tags": [
+    "ada",
+    "astromat",
+    "distribution"
+  ],
+  "sources": [
+    {
+      "title": "ADA Metadata Schema v3",
+      "link": "https://github.com/amds-ldeo/metadata"
+    }
+  ],
+  "shaclShapes": {
+    "ada.bbr.metadata.adaProperties.files": [
+      "https://usgin.github.io/geochemBuildingBlocks/_sources/adaProperties/files/rules.shacl"
+    ],
+    "cdif.bbr.metadata.cdifProperties.cdifTabularData": [
+      "https://usgin.github.io/metadataBuildingBlocks/_sources/cdifProperties/cdifTabularData/rules.shacl"
+    ],
+    "cdif.bbr.metadata.cdifProperties.cdifPhysicalMapping": [
+      "https://usgin.github.io/metadataBuildingBlocks/_sources/cdifProperties/cdifPhysicalMapping/rules.shacl"
+    ],
+    "cdif.bbr.metadata.cdifProperties.cdifDataCube": [
+      "https://usgin.github.io/metadataBuildingBlocks/_sources/cdifProperties/cdifDataCube/rules.shacl"
+    ],
+    "cdif.bbr.metadata.schemaorgProperties.dataDownload": [
+      "https://usgin.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/dataDownload/rules.shacl"
+    ],
+    "cdif.bbr.metadata.schemaorgProperties.person": [
+      "https://usgin.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/person/rules.shacl"
+    ],
+    "cdif.bbr.metadata.schemaorgProperties.identifier": [
+      "https://usgin.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/identifier/rules.shacl"
+    ],
+    "cdif.bbr.metadata.schemaorgProperties.organization": [
+      "https://usgin.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/organization/rules.shacl"
+    ],
+    "cdif.bbr.metadata.schemaorgProperties.definedTerm": [
+      "https://usgin.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/definedTerm/rules.shacl"
+    ]
+  },
+  "dependsOn": [
+    "ada.bbr.metadata.adaProperties.stringArray",
+    "ada.bbr.metadata.adaProperties.image",
+    "ada.bbr.metadata.adaProperties.tabularData",
+    "ada.bbr.metadata.adaProperties.otherFile",
+    "ada.bbr.metadata.adaProperties.document",
+    "ada.bbr.metadata.adaProperties.dataCube",
+    "ada.bbr.metadata.adaProperties.imageMap",
+    "ada.bbr.metadata.adaProperties.collection",
+    "ada.bbr.metadata.adaProperties.supDocImage",
+    "cdif.bbr.metadata.schemaorgProperties.dataDownload"
+  ],
+  "ldContext": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/files/context.jsonld",
+  "schema": {
+    "application/yaml": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/files/schema.yaml",
+    "application/json": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/files/schema.json"
+  },
+  "sourceSchema": "https://usgin.github.io/geochemBuildingBlocks/_sources/adaProperties/files/schema.yaml",
+  "sourceLdContext": "https://usgin.github.io/geochemBuildingBlocks/_sources/adaProperties/files/context.jsonld",
+  "sourceFiles": "https://usgin.github.io/geochemBuildingBlocks/_sources/adaProperties/files/",
+  "rdfData": [],
+  "validationPassed": true,
+  "description": "# Files Type\n\nDescribes properties for any file in an ADA product. Includes file metadata (name, description, checksum, size, encoding format), file detail classification (image, imageMap, tabularData, collection, dataCube, document, supDocImage, otherFile, or Metadata), and inter-file relationships via `schema:relatedLink`.\n",
+  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: Files Type\ndescription: Properties for any file in an ADA product distribution. GeneralType provides\n  info based on broad categories of file format (tabular, image, dataCube, document).\n  Type constraints (e.g. DataDownload) are applied at the composition level in profiles.\nallOf:\n- $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/dataDownload/schema.yaml\n- type: object\n  description: properties added for geochemical datasets\n  properties:\n    schema:additionalType:\n      type: array\n      description: other classifier for the file. ada componentTypes are specified\n        in the specific file type schema attached by $refs\n      items:\n        type: string\n    schema:description:\n      type: string\n    schema:size:\n      type: object\n      properties:\n        '@type':\n          const: schema:QuantitativeValue\n        schema:value:\n          type: integer\n        schema:unitText:\n          type: string\n          default: byte\n    resultTarget:\n      $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/stringArray/schema.yaml\n    schema:relatedLink:\n      type: array\n      description: 'Links between files in the product. Use schema:name for path to\n        target in product, or use #id JSON-LD links. Used to link metadata files in\n        bundle to the data or supplementary files they document.'\n      items:\n        type: object\n        properties:\n          '@type':\n            type: string\n            const: schema:LinkRole\n          schema:linkRelationship:\n            type: string\n          schema:target:\n            type: object\n            properties:\n              '@type':\n                type: string\n                const: schema:EntryPoint\n              schema:encodingFormat:\n                type: string\n              schema:name:\n                type: string\n              schema:url:\n                type: string\n- anyOf:\n  - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/image/schema.yaml\n  - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/imageMap/schema.yaml\n  - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/tabularData/schema.yaml\n  - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/collection/schema.yaml\n  - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/dataCube/schema.yaml\n  - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/document/schema.yaml\n  - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/supDocImage/schema.yaml\n  - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/otherFile/schema.yaml\n  - type: object\n    properties:\n      '@type':\n        const:\n        - Metadata\n    required:\n    - '@type'\n  - type: object\n    description: DataDownload distribution (archive or direct download without specific\n      file type)\n    properties:\n      '@type':\n        type: array\n        contains:\n          const: schema:DataDownload\n    required:\n    - '@type'\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  ada: https://ada.astromat.org/metadata/\n  spdx: http://spdx.org/rdf/terms#\n",
+  "gitRepository": "https://github.com/usgin/geochemBuildingBlocks",
+  "gitPath": "_sources/adaProperties/files"
+}

@@ -1,0 +1,46 @@
+
+
+{
+  "itemIdentifier": "ada.bbr.metadata.adaProperties.document",
+  "$schema": "metaschema.yaml",
+  "name": "Document Type",
+  "abstract": "Supplemental documents for calibration, methods, and analysis info. Defines properties: @type, componentType, schema:version, schema:isBasedOn. Uses building blocks: detailARGT (adaProperties).",
+  "status": "under-development",
+  "dateTimeAddition": "2026-02-05T00:00:00Z",
+  "itemClass": "schema",
+  "register": "cdif-building-block-register",
+  "version": "0.1",
+  "dateOfLastChange": "2026-03-05",
+  "link": "https://github.com/usgin/geochemBuildingBlocks",
+  "maturity": "draft",
+  "scope": "unstable",
+  "tags": [
+    "ada",
+    "astromat",
+    "document"
+  ],
+  "sources": [
+    {
+      "title": "ADA Metadata Schema v3",
+      "link": "https://github.com/amds-ldeo/metadata"
+    }
+  ],
+  "shaclShapes": {},
+  "dependsOn": [
+    "ada.bbr.metadata.adaProperties.detailARGT"
+  ],
+  "ldContext": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/document/context.jsonld",
+  "schema": {
+    "application/yaml": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/document/schema.yaml",
+    "application/json": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/document/schema.json"
+  },
+  "sourceSchema": "https://usgin.github.io/geochemBuildingBlocks/_sources/adaProperties/document/schema.yaml",
+  "sourceLdContext": "https://usgin.github.io/geochemBuildingBlocks/_sources/adaProperties/document/context.jsonld",
+  "sourceFiles": "https://usgin.github.io/geochemBuildingBlocks/_sources/adaProperties/document/",
+  "rdfData": [],
+  "validationPassed": true,
+  "description": "# Document Type\n\nDescribes supplemental documents in ADA metadata including calibration files, method descriptions, log files, processing descriptions, and other supplemental information. Typed as `ada:document` and `schema:DigitalDocument`.\n",
+  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: Document Type\ndescription: Text or PDF/A documents providing supplemental information, typically\n  related to calibration, instrument metadata details, analysis methods, or data representation.\n  Typed as ada:document and schema:DigitalDocument.\ntype: object\nproperties:\n  '@type':\n    type: array\n    items:\n      type: string\n    minItems: 2\n    allOf:\n    - contains:\n        const: ada:document\n    - contains:\n        const: schema:DigitalDocument\n  componentType:\n    description: One of the supplemental document types if applicable\n    anyOf:\n    - type: object\n      properties:\n        '@type':\n          enum:\n          - ada:calibrationFile\n          - ada:contextVideo\n          - ada:instrumentMetadata\n          - ada:logFile\n          - ada:methodDescription\n          - ada:peaks\n          - ada:plot\n          - ada:processingMethod\n          - ada:QRISCalibrationFile\n          - ada:report\n          - ada:samplePreparation\n          - ada:shapefile\n          - ada:worldFile\n    - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailARGT/schema.yaml\n  schema:version:\n    type: string\n  schema:isBasedOn:\n    description: same as ada/samis '_originalName'\n    type: string\nrequired:\n- '@type'\n- componentType\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  ada: https://ada.astromat.org/metadata/\n",
+  "gitRepository": "https://github.com/usgin/geochemBuildingBlocks",
+  "gitPath": "_sources/adaProperties/document"
+}

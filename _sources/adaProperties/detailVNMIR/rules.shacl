@@ -1,0 +1,48 @@
+@prefix rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh:          <http://www.w3.org/ns/shacl#> .
+@prefix xsd:         <http://www.w3.org/2001/XMLSchema#> .
+@prefix ada:         <https://ada.astromat.org/metadata/> .
+@prefix cdifd: <https://cdif.org/validation/0.1/shacl#> .
+@base <https://www.ogc.org/rules/template/> .
+
+# Validates VNMIR detail nodes (ada:VNMIRSpectralPoint, ada:VNMIROverviewImage, ada:VNMIRSpectralMap).
+cdifd:detailVNMIRShape
+    a sh:NodeShape ;
+    sh:target [
+        a sh:SPARQLTarget ;
+        sh:select """
+            PREFIX ada: <https://ada.astromat.org/metadata/>
+            SELECT ?this
+            WHERE {
+                { ?this a ada:VNMIRSpectralPoint . }
+                UNION
+                { ?this a ada:VNMIROverviewImage . }
+                UNION
+                { ?this a ada:VNMIRSpectralMap . }
+            }
+        """ ;
+    ] ;
+    sh:property [
+        sh:path ada:detector ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:severity sh:Warning ;
+        sh:message "VNMIR detail should specify detector." ;
+    ] ;
+    sh:property [
+        sh:path ada:numberOfScans ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:integer ;
+        sh:severity sh:Warning ;
+        sh:message "VNMIR detail should specify numberOfScans." ;
+    ] ;
+    sh:property [
+        sh:path ada:spectralResolution ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:severity sh:Warning ;
+        sh:message "VNMIR detail should specify spectralResolution." ;
+    ] ;
+    sh:message "VNMIR detail nodes should have detector, numberOfScans, and spectralResolution." ;
+    .

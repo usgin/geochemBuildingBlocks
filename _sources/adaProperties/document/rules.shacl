@@ -1,0 +1,35 @@
+@prefix rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh:          <http://www.w3.org/ns/shacl#> .
+@prefix xsd:         <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema:      <http://schema.org/> .
+@prefix ada:         <https://ada.astromat.org/metadata/> .
+@prefix cdifd: <https://cdif.org/validation/0.1/shacl#> .
+@base <https://www.ogc.org/rules/template/> .
+
+# Validates document nodes typed as ada:document and schema:DigitalDocument.
+# JSON schema requires @type and componentType.
+cdifd:documentShape
+    a sh:NodeShape ;
+    sh:target [
+        a sh:SPARQLTarget ;
+        sh:select """
+            PREFIX ada: <https://ada.astromat.org/metadata/>
+            SELECT ?this
+            WHERE {
+                ?this a ada:document .
+            }
+        """ ;
+    ] ;
+    sh:property [
+        sh:path rdf:type ;
+        sh:hasValue schema:DigitalDocument ;
+        sh:message "Document nodes must also be typed as schema:DigitalDocument." ;
+    ] ;
+    sh:property [
+        sh:path ada:componentType ;
+        sh:minCount 1 ;
+        sh:message "A document must have a componentType." ;
+    ] ;
+    sh:message "Document nodes (ada:document) should be typed as schema:DigitalDocument and have a componentType." ;
+    .

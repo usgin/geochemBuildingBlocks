@@ -1,0 +1,50 @@
+@prefix rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh:          <http://www.w3.org/ns/shacl#> .
+@prefix xsd:         <http://www.w3.org/2001/XMLSchema#> .
+@prefix ada:         <https://ada.astromat.org/metadata/> .
+@prefix cdifd: <https://cdif.org/validation/0.1/shacl#> .
+@base <https://www.ogc.org/rules/template/> .
+
+# Validates XCT detail nodes typed as ada:XCTImageCollection.
+cdifd:detailXCTShape
+    a sh:NodeShape ;
+    sh:target [
+        a sh:SPARQLTarget ;
+        sh:select """
+            PREFIX ada: <https://ada.astromat.org/metadata/>
+            SELECT ?this
+            WHERE {
+                ?this a ada:XCTImageCollection .
+            }
+        """ ;
+    ] ;
+    sh:property [
+        sh:path ada:numberOfProjections ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:integer ;
+        sh:severity sh:Warning ;
+        sh:message "XCT detail should specify numberOfProjections." ;
+    ] ;
+    sh:property [
+        sh:path ada:numberOfSlices ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:integer ;
+        sh:severity sh:Warning ;
+        sh:message "XCT detail should specify numberOfSlices." ;
+    ] ;
+    sh:property [
+        sh:path ada:xrayTubeEnergy ;
+        sh:maxCount 1 ;
+        sh:severity sh:Warning ;
+        sh:message "XCT detail should specify xrayTubeEnergy." ;
+    ] ;
+    sh:property [
+        sh:path ada:reconstructedVoxelSize ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:severity sh:Warning ;
+        sh:message "XCT detail should specify reconstructedVoxelSize." ;
+    ] ;
+    sh:message "XCT detail nodes (ada:XCTImageCollection) should have scan parameters." ;
+    .

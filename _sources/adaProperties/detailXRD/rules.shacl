@@ -1,0 +1,42 @@
+@prefix rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh:          <http://www.w3.org/ns/shacl#> .
+@prefix xsd:         <http://www.w3.org/2001/XMLSchema#> .
+@prefix ada:         <https://ada.astromat.org/metadata/> .
+@prefix cdifd: <https://cdif.org/validation/0.1/shacl#> .
+@base <https://www.ogc.org/rules/template/> .
+
+# Validates XRD detail nodes typed as ada:XRDTabular.
+cdifd:detailXRDShape
+    a sh:NodeShape ;
+    sh:target [
+        a sh:SPARQLTarget ;
+        sh:select """
+            PREFIX ada: <https://ada.astromat.org/metadata/>
+            SELECT ?this
+            WHERE {
+                ?this a ada:XRDTabular .
+            }
+        """ ;
+    ] ;
+    sh:property [
+        sh:path ada:geometry ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:severity sh:Warning ;
+        sh:message "XRD detail should specify geometry." ;
+    ] ;
+    sh:property [
+        sh:path ada:wavelength ;
+        sh:maxCount 1 ;
+        sh:severity sh:Warning ;
+        sh:message "XRD detail should specify wavelength." ;
+    ] ;
+    sh:property [
+        sh:path ada:stepSize ;
+        sh:maxCount 1 ;
+        sh:severity sh:Warning ;
+        sh:message "XRD detail should specify stepSize." ;
+    ] ;
+    sh:message "XRD detail nodes (ada:XRDTabular) should have geometry, wavelength, and stepSize." ;
+    .

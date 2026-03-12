@@ -1,0 +1,36 @@
+- title: Files Type Example
+  content: |-
+    An ADA product file with size, encoding format, and a link to its metadata sidecar.
+  prefixes:
+    schema: http://schema.org/
+    ada: https://ada.astromat.org/metadata/
+  snippets:
+    - language: json
+      code: |
+        {
+          "@type": ["ada:image", "schema:MediaObject", "schema:DataDownload"],
+          "schema:contentUrl": "https://example.org/data/ALH84001_BSE_001.tif",
+          "schema:name": "ALH84001_BSE_001.tif",
+          "schema:encodingFormat": ["image/tiff"],
+          "schema:description": "Backscattered electron image of ALH84001 thin section",
+          "schema:size": {
+            "@type": "schema:QuantitativeValue",
+            "schema:value": 4521984,
+            "schema:unitText": "byte"
+          },
+          "schema:additionalType": ["ada:BSEImage"],
+          "componentType": {
+            "@type": "ada:BSEImage"
+          },
+          "schema:relatedLink": [
+            {
+              "@type": "schema:LinkRole",
+              "schema:linkRelationship": "metadata",
+              "schema:target": {
+                "@type": "schema:EntryPoint",
+                "schema:encodingFormat": "application/json",
+                "schema:name": "ALH84001_BSE_001_metadata.json"
+              }
+            }
+          ]
+        }

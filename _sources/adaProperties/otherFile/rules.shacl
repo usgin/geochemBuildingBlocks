@@ -1,0 +1,36 @@
+@prefix rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh:          <http://www.w3.org/ns/shacl#> .
+@prefix xsd:         <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema:      <http://schema.org/> .
+@prefix ada:         <https://ada.astromat.org/metadata/> .
+@prefix cdifd: <https://cdif.org/validation/0.1/shacl#> .
+@base <https://www.ogc.org/rules/template/> .
+
+# Validates other file type nodes typed as ada:otherFileType.
+# JSON schema requires @type and componentType.
+cdifd:otherFileShape
+    a sh:NodeShape ;
+    sh:target [
+        a sh:SPARQLTarget ;
+        sh:select """
+            PREFIX ada: <https://ada.astromat.org/metadata/>
+            SELECT ?this
+            WHERE {
+                ?this a ada:otherFileType .
+            }
+        """ ;
+    ] ;
+    sh:property [
+        sh:path ada:componentType ;
+        sh:minCount 1 ;
+        sh:message "An other file type must have a componentType." ;
+    ] ;
+    sh:property [
+        sh:path schema:encodingFormat ;
+        sh:minCount 1 ;
+        sh:severity sh:Warning ;
+        sh:message "An other file type should specify its encoding format (schema:encodingFormat)." ;
+    ] ;
+    sh:message "Other file type nodes (ada:otherFileType) should have a componentType and encoding format." ;
+    .

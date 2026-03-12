@@ -1,0 +1,30 @@
+@prefix rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh:          <http://www.w3.org/ns/shacl#> .
+@prefix xsd:         <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema:      <http://schema.org/> .
+@prefix ada:         <https://ada.astromat.org/metadata/> .
+@prefix cdi:         <http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/> .
+@prefix cdifd: <https://cdif.org/validation/0.1/shacl#> .
+@base <https://www.ogc.org/rules/template/> .
+
+# Validates data cube nodes typed as ada:dataCube and cdi:StructuredDataSet.
+cdifd:dataCubeShape
+    a sh:NodeShape ;
+    sh:target [
+        a sh:SPARQLTarget ;
+        sh:select """
+            PREFIX ada: <https://ada.astromat.org/metadata/>
+            SELECT ?this
+            WHERE {
+                ?this a ada:dataCube .
+            }
+        """ ;
+    ] ;
+    sh:property [
+        sh:path rdf:type ;
+        sh:hasValue cdi:StructuredDataSet ;
+        sh:message "Data cube nodes must also be typed as cdi:StructuredDataSet." ;
+    ] ;
+    sh:message "Data cube nodes (ada:dataCube) should also be typed as cdi:StructuredDataSet." ;
+    .

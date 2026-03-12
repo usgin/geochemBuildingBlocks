@@ -1,0 +1,28 @@
+@prefix rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh:          <http://www.w3.org/ns/shacl#> .
+@prefix xsd:         <http://www.w3.org/2001/XMLSchema#> .
+@prefix ada:         <https://ada.astromat.org/metadata/> .
+@prefix cdifd: <https://cdif.org/validation/0.1/shacl#> .
+@base <https://www.ogc.org/rules/template/> .
+
+# Validates NanoIR detail nodes typed as ada:NanoIRBackground.
+cdifd:detailNanoIRShape
+    a sh:NodeShape ;
+    sh:target [
+        a sh:SPARQLTarget ;
+        sh:select """
+            PREFIX ada: <https://ada.astromat.org/metadata/>
+            SELECT ?this
+            WHERE {
+                ?this a ada:NanoIRBackground .
+            }
+        """ ;
+    ] ;
+    sh:property [
+        sh:path ada:phaseAnalyzed ;
+        sh:severity sh:Warning ;
+        sh:message "NanoIR detail should specify phaseAnalyzed." ;
+    ] ;
+    sh:message "NanoIR detail nodes (ada:NanoIRBackground) should have phaseAnalyzed." ;
+    .

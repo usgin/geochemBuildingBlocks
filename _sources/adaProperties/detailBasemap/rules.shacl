@@ -1,0 +1,42 @@
+@prefix rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh:          <http://www.w3.org/ns/shacl#> .
+@prefix xsd:         <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema:      <http://schema.org/> .
+@prefix ada:         <https://ada.astromat.org/metadata/> .
+@prefix cdifd: <https://cdif.org/validation/0.1/shacl#> .
+@base <https://www.ogc.org/rules/template/> .
+
+# Validates basemap detail nodes typed as ada:basemap and schema:Map.
+# JSON schema requires @type, pixelScaleX, pixelScaleY, pixelUnits.
+cdifd:detailBasemapShape
+    a sh:NodeShape ;
+    sh:target [
+        a sh:SPARQLTarget ;
+        sh:select """
+            PREFIX ada: <https://ada.astromat.org/metadata/>
+            SELECT ?this
+            WHERE {
+                ?this a ada:basemap .
+                ?this a <http://schema.org/Map> .
+            }
+        """ ;
+    ] ;
+    sh:property [
+        sh:path ada:pixelScaleX ;
+        sh:minCount 1 ;
+        sh:message "Basemap detail must specify pixelScaleX." ;
+    ] ;
+    sh:property [
+        sh:path ada:pixelScaleY ;
+        sh:minCount 1 ;
+        sh:message "Basemap detail must specify pixelScaleY." ;
+    ] ;
+    sh:property [
+        sh:path ada:pixelUnits ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "Basemap detail must specify pixelUnits." ;
+    ] ;
+    sh:message "Basemap detail nodes (ada:basemap + schema:Map) must have pixelScaleX, pixelScaleY, and pixelUnits." ;
+    .

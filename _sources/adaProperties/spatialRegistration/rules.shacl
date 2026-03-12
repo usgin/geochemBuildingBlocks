@@ -1,0 +1,65 @@
+@prefix rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh:          <http://www.w3.org/ns/shacl#> .
+@prefix xsd:         <http://www.w3.org/2001/XMLSchema#> .
+@prefix ada:         <https://ada.astromat.org/metadata/> .
+@prefix cdifd: <https://cdif.org/validation/0.1/shacl#> .
+@base <https://www.ogc.org/rules/template/> .
+
+# Validates spatial registration objects embedded in image maps and tabular data.
+# JSON schema requires originX, originY, pixelScaleX, pixelScaleY, pixelUnits,
+# originLocation, and coordDef.
+# spatialRegistration has no RDF @type; it is an inline object.
+# A SPARQL-based target selects nodes that carry ada:originX.
+cdifd:spatialRegistrationShape
+    a sh:NodeShape ;
+    sh:target [
+        a sh:SPARQLTarget ;
+        sh:select """
+            PREFIX ada: <https://ada.astromat.org/metadata/>
+            SELECT ?this
+            WHERE {
+                ?this ada:originX ?ox .
+            }
+        """ ;
+    ] ;
+    sh:property [
+        sh:path ada:originX ;
+        sh:minCount 1 ;
+        sh:message "Spatial registration must have an X origin (originX)." ;
+    ] ;
+    sh:property [
+        sh:path ada:originY ;
+        sh:minCount 1 ;
+        sh:message "Spatial registration must have a Y origin (originY)." ;
+    ] ;
+    sh:property [
+        sh:path ada:pixelScaleX ;
+        sh:minCount 1 ;
+        sh:message "Spatial registration must have a pixel scale X (pixelScaleX)." ;
+    ] ;
+    sh:property [
+        sh:path ada:pixelScaleY ;
+        sh:minCount 1 ;
+        sh:message "Spatial registration must have a pixel scale Y (pixelScaleY)." ;
+    ] ;
+    sh:property [
+        sh:path ada:pixelUnits ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "Spatial registration must specify pixel units (pixelUnits)." ;
+    ] ;
+    sh:property [
+        sh:path ada:originLocation ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "Spatial registration must specify origin location (originLocation)." ;
+    ] ;
+    sh:property [
+        sh:path ada:coordDef ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "Spatial registration must specify coordinate definition type (coordDef)." ;
+    ] ;
+    sh:message "Spatial registration nodes must have origin coordinates, pixel scales, units, origin location, and coordinate definition." ;
+    .

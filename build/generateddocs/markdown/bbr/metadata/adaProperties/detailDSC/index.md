@@ -13,6 +13,42 @@ Differential Scanning Calorimetry heat tabular data. Defines properties: @type, 
 
 Differential Scanning Calorimetry heat tabular data.
 
+## Examples
+
+### DSC Instrument Detail Example
+Differential Scanning Calorimetry heat flow data detail.
+#### json
+```json
+{
+  "@type": "ada:DSCHeatTabular",
+  "analysisType": "heating"
+}
+
+```
+
+#### jsonld
+```jsonld
+{
+  "@context": [
+    {
+      "ada": "https://ada.astromat.org/metadata/"
+    },
+    "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailDSC/context.jsonld"
+  ],
+  "@type": "ada:DSCHeatTabular",
+  "analysisType": "heating"
+}
+```
+
+#### ttl
+```ttl
+@prefix ada: <https://ada.astromat.org/metadata/> .
+
+[] a ada:DSCHeatTabular .
+
+
+```
+
 ## Schema
 
 ```yaml

@@ -13,6 +13,63 @@ CDI PhysicalDataSet for tabular/structured data files. Defines properties: @type
 
 Describes tabular/structured data files in ADA metadata. Typed as `cdi:PhysicalDataSet` and `ada:tabularData`. Supports DDI-CDI WideDataStructure for column layout description, spatial registration, and various analytical technique-specific component types.
 
+## Examples
+
+### Tabular Data Type Example
+A tabular data file containing MC-ICP-MS isotope ratio results.
+#### json
+```json
+{
+  "@type": ["cdi:TabularTextDataSet", "ada:tabularData"],
+  "componentType": {
+    "@type": "ada:MCICPMSTabular"
+  },
+  "cdi:isDelimited": true,
+  "xCoordCol": "X_um",
+  "yCoordCol": "Y_um",
+  "coordUnits": "micrometer"
+}
+
+```
+
+#### jsonld
+```jsonld
+{
+  "@context": [
+    {
+      "schema": "http://schema.org/",
+      "ada": "https://ada.astromat.org/metadata/",
+      "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/"
+    },
+    "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/tabularData/context.jsonld"
+  ],
+  "@type": [
+    "cdi:TabularTextDataSet",
+    "ada:tabularData"
+  ],
+  "componentType": {
+    "@type": "ada:MCICPMSTabular"
+  },
+  "cdi:isDelimited": true,
+  "xCoordCol": "X_um",
+  "yCoordCol": "Y_um",
+  "coordUnits": "micrometer"
+}
+```
+
+#### ttl
+```ttl
+@prefix ada: <https://ada.astromat.org/metadata/> .
+@prefix cdi: <http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+[] a cdi:TabularTextDataSet,
+        ada:tabularData ;
+    cdi:isDelimited true .
+
+
+```
+
 ## Schema
 
 ```yaml

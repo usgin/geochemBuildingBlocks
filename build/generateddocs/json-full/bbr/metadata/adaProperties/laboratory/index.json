@@ -10,7 +10,7 @@
   "itemClass": "schema",
   "register": "cdif-building-block-register",
   "version": "0.1",
-  "dateOfLastChange": "2026-03-09",
+  "dateOfLastChange": "2026-03-12",
   "link": "https://github.com/usgin/geochemBuildingBlocks",
   "maturity": "draft",
   "scope": "unstable",
@@ -40,7 +40,35 @@
   "sourceFiles": "https://usgin.github.io/geochemBuildingBlocks/_sources/adaProperties/laboratory/",
   "rdfData": [],
   "validationPassed": true,
+  "testOutputs": "https://github.com/usgin/geochemBuildingBlocks/blob/main/build/tests/bbr/metadata/adaProperties/laboratory/",
   "description": "# Analysis Laboratory Type\n\nDefines the laboratory or facility where analysis was performed. Combines NeXus NXsource typing with schema:Place for location semantics. Supports URI-based identifiers for facility lookup.\n",
+  "examples": [
+    {
+      "title": "Laboratory Type Example",
+      "content": "A laboratory facility described as a NeXus NXsource with schema:Place typing.",
+      "prefixes": {
+        "schema": "http://schema.org/",
+        "nxs": "http://purl.org/nexusformat/definitions/"
+      },
+      "snippets": [
+        {
+          "language": "json",
+          "code": "{\n  \"@type\": [\"schema:Place\", \"nxs:BaseClass/NXsource\"],\n  \"schema:name\": \"Lunar and Planetary Laboratory Electron Microprobe Facility\",\n  \"schema:alternateName\": \"LPL EMPA Lab\",\n  \"schema:identifier\": \"https://ror.org/03m2x1q45\"\n}\n",
+          "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/adaProperties/laboratory/example_1_1.json"
+        },
+        {
+          "language": "jsonld",
+          "code": "{\n  \"@context\": [\n    {\n      \"schema\": \"http://schema.org/\",\n      \"nxs\": \"http://purl.org/nexusformat/definitions/\"\n    },\n    \"https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/laboratory/context.jsonld\"\n  ],\n  \"@type\": [\n    \"schema:Place\",\n    \"nxs:BaseClass/NXsource\"\n  ],\n  \"schema:name\": \"Lunar and Planetary Laboratory Electron Microprobe Facility\",\n  \"schema:alternateName\": \"LPL EMPA Lab\",\n  \"schema:identifier\": \"https://ror.org/03m2x1q45\"\n}",
+          "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/adaProperties/laboratory/example_1_1.jsonld"
+        },
+        {
+          "language": "ttl",
+          "code": "@prefix schema1: <http://schema.org/> .\n\n[] a <http://purl.org/nexusformat/definitions/BaseClass/NXsource>,\n        schema1:Place ;\n    schema1:alternateName \"LPL EMPA Lab\" ;\n    schema1:identifier \"https://ror.org/03m2x1q45\" ;\n    schema1:name \"Lunar and Planetary Laboratory Electron Microprobe Facility\" .\n\n",
+          "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/adaProperties/laboratory/example_1_1.ttl"
+        }
+      ]
+    }
+  ],
   "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: Analysis Laboratory Type\ndescription: Laboratory or facility definition combining NeXus NXsource with schema:Place.\n  Used to identify the location where analysis was performed.\ntype: object\nproperties:\n  '@type':\n    const:\n    - schema:Place\n    - nxs:BaseClass/NXsource\n  schema:identifier:\n    type: string\n    format: uri\n  schema:name:\n    type: string\n  schema:alternateName:\n    type: string\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  nxs: http://purl.org/nexusformat/definitions/\n",
   "gitRepository": "https://github.com/usgin/geochemBuildingBlocks",
   "gitPath": "_sources/adaProperties/laboratory"

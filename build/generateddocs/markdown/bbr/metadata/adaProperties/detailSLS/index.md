@@ -13,6 +13,52 @@ Structured Light Scanning shape models and partial scans. Defines properties: @t
 
 Structured Light Scanning shape models and partial scans.
 
+## Examples
+
+### SLS Instrument Detail Example
+Structured Light Scanning shape model with mesh statistics.
+#### json
+```json
+{
+  "@type": "ada:SLSShapeModel",
+  "countScans": 24,
+  "facets": 524288,
+  "unitsOfMeasurement": "millimeter",
+  "version": 3,
+  "vertices": 262145,
+  "watertight": true
+}
+
+```
+
+#### jsonld
+```jsonld
+{
+  "@context": [
+    {
+      "ada": "https://ada.astromat.org/metadata/"
+    },
+    "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailSLS/context.jsonld"
+  ],
+  "@type": "ada:SLSShapeModel",
+  "countScans": 24,
+  "facets": 524288,
+  "unitsOfMeasurement": "millimeter",
+  "version": 3,
+  "vertices": 262145,
+  "watertight": true
+}
+```
+
+#### ttl
+```ttl
+@prefix ada: <https://ada.astromat.org/metadata/> .
+
+[] a ada:SLSShapeModel .
+
+
+```
+
 ## Schema
 
 ```yaml

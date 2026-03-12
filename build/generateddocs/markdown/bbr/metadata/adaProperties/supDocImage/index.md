@@ -13,6 +13,58 @@ Supplemental document images including analysis locations and context photos. De
 
 Describes supplemental document images such as analysis location images, annotated products, context photography, areas of interest, instrument metadata images, supplemental basemaps, plots, quick-look images, reports, and visual images.
 
+## Examples
+
+### Supplemental Document Image Example
+A context photography image used as supplemental documentation.
+#### json
+```json
+{
+  "@type": ["ada:image", "schema:DigitalDocument"],
+  "componentType": {
+    "@type": "ada:contextPhotography"
+  },
+  "numPixelsX": 2048,
+  "numPixelsY": 1536,
+  "_original_name": "sample_context_photo_001.jpg"
+}
+
+```
+
+#### jsonld
+```jsonld
+{
+  "@context": [
+    {
+      "schema": "http://schema.org/",
+      "ada": "https://ada.astromat.org/metadata/"
+    },
+    "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/supDocImage/context.jsonld"
+  ],
+  "@type": [
+    "ada:image",
+    "schema:DigitalDocument"
+  ],
+  "componentType": {
+    "@type": "ada:contextPhotography"
+  },
+  "numPixelsX": 2048,
+  "numPixelsY": 1536,
+  "_original_name": "sample_context_photo_001.jpg"
+}
+```
+
+#### ttl
+```ttl
+@prefix ada: <https://ada.astromat.org/metadata/> .
+@prefix schema1: <http://schema.org/> .
+
+[] a schema1:DigitalDocument,
+        ada:image .
+
+
+```
+
 ## Schema
 
 ```yaml

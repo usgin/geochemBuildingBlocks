@@ -10,7 +10,7 @@
   "itemClass": "schema",
   "register": "cdif-building-block-register",
   "version": "0.1",
-  "dateOfLastChange": "2026-03-09",
+  "dateOfLastChange": "2026-03-12",
   "link": "https://github.com/usgin/geochemBuildingBlocks",
   "maturity": "draft",
   "scope": "unstable",
@@ -25,7 +25,11 @@
       "link": "https://github.com/amds-ldeo/metadata"
     }
   ],
-  "shaclShapes": {},
+  "shaclShapes": {
+    "ada.bbr.metadata.adaProperties.spatialRegistration": [
+      "https://usgin.github.io/geochemBuildingBlocks/_sources/adaProperties/spatialRegistration/rules.shacl"
+    ]
+  },
   "ldContext": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/spatialRegistration/context.jsonld",
   "schema": {
     "application/yaml": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/spatialRegistration/schema.yaml",
@@ -35,8 +39,35 @@
   "sourceLdContext": "https://usgin.github.io/geochemBuildingBlocks/_sources/adaProperties/spatialRegistration/context.jsonld",
   "sourceFiles": "https://usgin.github.io/geochemBuildingBlocks/_sources/adaProperties/spatialRegistration/",
   "rdfData": [],
-  "validationPassed": true,
+  "validationPassed": false,
+  "testOutputs": "https://github.com/usgin/geochemBuildingBlocks/blob/main/build/tests/bbr/metadata/adaProperties/spatialRegistration/",
   "description": "# Spatial Registration Type\n\nDefines the pixel coordinate system registration for spatially registered images and maps. Includes origin coordinates (X, Y, Z), pixel scales, coordinate units, and the coordinate definition type (stage-defined or pixel-defined).\n",
+  "examples": [
+    {
+      "title": "Spatial Registration Example",
+      "content": "Pixel coordinate system registration for a spatially registered image map.",
+      "prefixes": {
+        "ada": "https://ada.astromat.org/metadata/"
+      },
+      "snippets": [
+        {
+          "language": "json",
+          "code": "{\n  \"basemap\": \"basemap_BSE_001.tif\",\n  \"originX\": 0.0,\n  \"originY\": 0.0,\n  \"originZ\": 0.0,\n  \"coordDef\": \"pixel-defined\",\n  \"coordUnits\": \"micrometer\",\n  \"pixelUnits\": \"micrometer\",\n  \"pixelScaleX\": 0.125,\n  \"pixelScaleY\": 0.125,\n  \"originLocation\": \"upperLeft\"\n}\n",
+          "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/adaProperties/spatialRegistration/example_1_1.json"
+        },
+        {
+          "language": "jsonld",
+          "code": "{\n  \"@context\": [\n    {\n      \"ada\": \"https://ada.astromat.org/metadata/\"\n    },\n    \"https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/spatialRegistration/context.jsonld\"\n  ],\n  \"basemap\": \"basemap_BSE_001.tif\",\n  \"originX\": 0.0,\n  \"originY\": 0.0,\n  \"originZ\": 0.0,\n  \"coordDef\": \"pixel-defined\",\n  \"coordUnits\": \"micrometer\",\n  \"pixelUnits\": \"micrometer\",\n  \"pixelScaleX\": 0.125,\n  \"pixelScaleY\": 0.125,\n  \"originLocation\": \"upperLeft\"\n}",
+          "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/adaProperties/spatialRegistration/example_1_1.jsonld"
+        },
+        {
+          "language": "ttl",
+          "code": "\n",
+          "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/adaProperties/spatialRegistration/example_1_1.ttl"
+        }
+      ]
+    }
+  ],
   "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: Spatial Registration Type\ndescription: Defines pixel coordinate system registration including origin coordinates,\n  pixel scales, and coordinate definition type for spatially registered images and\n  maps.\ntype: object\nproperties:\n  basemap:\n    type: string\n    description: link to appropriate basemap image map\n  originX:\n    type: number\n  originY:\n    type: number\n  originZ:\n    type: number\n  coordDef:\n    type: string\n    description: Whether coordinates are stage-defined or pixel-defined. If pixel-defined,\n      are coordinates from stage, upperleftPixel, or centerPixel.\n  coordUnits:\n    type: string\n  pixelUnits:\n    type: string\n  pixelScaleX:\n    type: number\n  pixelScaleY:\n    type: number\n  originLocation:\n    type: string\n    description: 'The location of the origin pixel of an image. Range: upperLeft,\n      upperRight, lowerLeft, lowerRight, center'\nrequired:\n- originX\n- originY\n- pixelScaleX\n- pixelScaleY\n- pixelUnits\n- originLocation\n- coordDef\nx-jsonld-prefixes:\n  ada: https://ada.astromat.org/metadata/\n",
   "gitRepository": "https://github.com/usgin/geochemBuildingBlocks",
   "gitPath": "_sources/adaProperties/spatialRegistration"

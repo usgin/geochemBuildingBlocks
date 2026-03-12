@@ -13,6 +13,49 @@ Shell type for labeled links to creative works (schema:CreativeWork). Defines pr
 
 A shell type used mostly for labeled links to other resources. Implements `schema:CreativeWork` with name, description, and URL properties. Used in ADA metadata for license references and related resource links.
 
+## Examples
+
+### Creative Work Example
+A labeled link to an external resource typed as schema:CreativeWork.
+#### json
+```json
+{
+  "@type": "schema:CreativeWork",
+  "schema:name": "Analytical Methods for Geochemistry",
+  "schema:description": "Reference document describing standard analytical procedures.",
+  "schema:url": "https://doi.org/10.1234/example-methods"
+}
+
+```
+
+#### jsonld
+```jsonld
+{
+  "@context": [
+    {
+      "schema": "http://schema.org/"
+    },
+    "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/creativeWork/context.jsonld"
+  ],
+  "@type": "schema:CreativeWork",
+  "schema:name": "Analytical Methods for Geochemistry",
+  "schema:description": "Reference document describing standard analytical procedures.",
+  "schema:url": "https://doi.org/10.1234/example-methods"
+}
+```
+
+#### ttl
+```ttl
+@prefix schema1: <http://schema.org/> .
+
+[] a schema1:CreativeWork ;
+    schema1:description "Reference document describing standard analytical procedures." ;
+    schema1:name "Analytical Methods for Geochemistry" ;
+    schema1:url "https://doi.org/10.1234/example-methods" .
+
+
+```
+
 ## Schema
 
 ```yaml

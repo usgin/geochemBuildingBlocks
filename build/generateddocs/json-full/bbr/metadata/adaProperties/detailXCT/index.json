@@ -10,7 +10,7 @@
   "itemClass": "schema",
   "register": "cdif-building-block-register",
   "version": "0.1",
-  "dateOfLastChange": "2026-03-09",
+  "dateOfLastChange": "2026-03-12",
   "link": "https://github.com/usgin/geochemBuildingBlocks",
   "maturity": "draft",
   "scope": "unstable",
@@ -26,7 +26,11 @@
       "link": "https://github.com/amds-ldeo/metadata"
     }
   ],
-  "shaclShapes": {},
+  "shaclShapes": {
+    "ada.bbr.metadata.adaProperties.detailXCT": [
+      "https://usgin.github.io/geochemBuildingBlocks/_sources/adaProperties/detailXCT/rules.shacl"
+    ]
+  },
   "ldContext": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailXCT/context.jsonld",
   "schema": {
     "application/yaml": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailXCT/schema.yaml",
@@ -37,7 +41,34 @@
   "sourceFiles": "https://usgin.github.io/geochemBuildingBlocks/_sources/adaProperties/detailXCT/",
   "rdfData": [],
   "validationPassed": true,
+  "testOutputs": "https://github.com/usgin/geochemBuildingBlocks/blob/main/build/tests/bbr/metadata/adaProperties/detailXCT/",
   "description": "# XCT Instrument Detail\n\nX-ray Computed Tomography images with detailed scan parameters. (Extension type, not in v3 source schema.)\n",
+  "examples": [
+    {
+      "title": "XCT Instrument Detail Example",
+      "content": "X-ray Computed Tomography image collection with detailed scan parameters.",
+      "prefixes": {
+        "ada": "https://ada.astromat.org/metadata/"
+      },
+      "snippets": [
+        {
+          "language": "json",
+          "code": "{\n  \"@type\": \"ada:XCTImageCollection\",\n  \"instrumentType\": \"micro-CT\",\n  \"xraySource\": \"sealed tube\",\n  \"xrayTargetMaterial\": \"tungsten\",\n  \"xrayTubeEnergy\": 120.0,\n  \"xrayTubeCurrent\": 0.1,\n  \"xrayTubePower\": 12.0,\n  \"beamFilterMaterial\": \"copper\",\n  \"beamFilterThickness\": 0.5,\n  \"sourceToDetectorDistance\": \"500 mm\",\n  \"sourceToObjectDistance\": 200.0,\n  \"detectorType\": \"flat panel\",\n  \"detectorSize\": \"2048x2048\",\n  \"detectorBinning\": \"1x1\",\n  \"numberOfProjections\": 1440,\n  \"numberOfSlices\": 2000,\n  \"numberOfFramesAveragedPerProjection\": 4,\n  \"rotationAngle\": \"360 degrees\",\n  \"rotationType\": \"step-and-shoot\",\n  \"imageExposure\": 0.5,\n  \"imageSize\": \"2048x2048\",\n  \"reconstructedVoxelSize\": \"5.0 micrometer\",\n  \"reconstructedDataFormat\": \"16-bit TIFF\",\n  \"reconstructionSoftware\": \"Nikon CT Pro 3D\"\n}\n",
+          "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/adaProperties/detailXCT/example_1_1.json"
+        },
+        {
+          "language": "jsonld",
+          "code": "{\n  \"@context\": [\n    {\n      \"ada\": \"https://ada.astromat.org/metadata/\"\n    },\n    \"https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailXCT/context.jsonld\"\n  ],\n  \"@type\": \"ada:XCTImageCollection\",\n  \"instrumentType\": \"micro-CT\",\n  \"xraySource\": \"sealed tube\",\n  \"xrayTargetMaterial\": \"tungsten\",\n  \"xrayTubeEnergy\": 120.0,\n  \"xrayTubeCurrent\": 0.1,\n  \"xrayTubePower\": 12.0,\n  \"beamFilterMaterial\": \"copper\",\n  \"beamFilterThickness\": 0.5,\n  \"sourceToDetectorDistance\": \"500 mm\",\n  \"sourceToObjectDistance\": 200.0,\n  \"detectorType\": \"flat panel\",\n  \"detectorSize\": \"2048x2048\",\n  \"detectorBinning\": \"1x1\",\n  \"numberOfProjections\": 1440,\n  \"numberOfSlices\": 2000,\n  \"numberOfFramesAveragedPerProjection\": 4,\n  \"rotationAngle\": \"360 degrees\",\n  \"rotationType\": \"step-and-shoot\",\n  \"imageExposure\": 0.5,\n  \"imageSize\": \"2048x2048\",\n  \"reconstructedVoxelSize\": \"5.0 micrometer\",\n  \"reconstructedDataFormat\": \"16-bit TIFF\",\n  \"reconstructionSoftware\": \"Nikon CT Pro 3D\"\n}",
+          "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/adaProperties/detailXCT/example_1_1.jsonld"
+        },
+        {
+          "language": "ttl",
+          "code": "@prefix ada: <https://ada.astromat.org/metadata/> .\n\n[] a ada:XCTImageCollection .\n\n",
+          "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/adaProperties/detailXCT/example_1_1.ttl"
+        }
+      ]
+    }
+  ],
   "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: XCT Instrument Detail\ndescription: X-ray Computed Tomography images with detailed scan parameters. (Extension\n  type, not in v3 source schema.)\ntype: object\nproperties:\n  '@type':\n    const: ada:XCTImageCollection\n  beamFilterMaterial:\n    type: string\n  beamFilterThickness:\n    type: number\n  dataRangeLower:\n    type: integer\n  dataRangeUpper:\n    type: integer\n  detectorGain:\n    type: string\n  detectorBinning:\n    type: string\n  detectorSize:\n    type: string\n  detectorType:\n    type: string\n  imageExposure:\n    type: number\n  imageFPS:\n    type: string\n  imageGain:\n    type: number\n  imageSize:\n    type: string\n  instrumentType:\n    type: string\n  nsiBeamHardening:\n    type: number\n  numberOfFramesAveragedPerProjection:\n    type: integer\n  numberOfProjections:\n    type: integer\n  numberOfSlices:\n    type: integer\n  pixelPitch:\n    type: string\n  reconstructedDataFormat:\n    type: string\n  reconstructedVoxelSize:\n    type: string\n  reconstructionSoftware:\n    type: string\n  rotationAngle:\n    type: string\n  rotationType:\n    type: string\n  sourceToDetectorDistance:\n    type: string\n  sourceToObjectDistance:\n    type: number\n  subPixGrid:\n    type: string\n  subPixShift:\n    type: string\n  xraySource:\n    type: string\n  xrayTargetMaterial:\n    type: string\n  xrayTubeCurrent:\n    type: number\n  xrayTubeEnergy:\n    type: number\n  xrayTubePower:\n    type: number\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  ada: https://ada.astromat.org/metadata/\n",
   "gitRepository": "https://github.com/usgin/geochemBuildingBlocks",
   "gitPath": "_sources/adaProperties/detailXCT"

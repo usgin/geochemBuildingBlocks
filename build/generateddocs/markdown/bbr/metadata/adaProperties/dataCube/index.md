@@ -13,6 +13,55 @@ CDI DimensionalDataStructure for multidimensional data. Defines properties: @typ
 
 Describes multidimensional data structures in ADA metadata. Typed as `ada:dataCube` and `cdi:DimensionalDataStructure`. Supports DimensionComponent, MeasureComponent, and AttributeComponent with value domain specifications and value mappings.
 
+## Examples
+
+### Data Cube Type Example
+A multi-dimensional data cube for SEM-EDS elemental map cube data.
+#### json
+```json
+{
+  "@type": ["ada:dataCube", "cdi:StructuredDataSet"],
+  "componentType": {
+    "@type": "ada:SEMEDSElementalMapsCube"
+  },
+  "dataComponentResource": "cube_SEMEDS_001.hdf5"
+}
+
+```
+
+#### jsonld
+```jsonld
+{
+  "@context": [
+    {
+      "schema": "http://schema.org/",
+      "ada": "https://ada.astromat.org/metadata/",
+      "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/"
+    },
+    "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/dataCube/context.jsonld"
+  ],
+  "@type": [
+    "ada:dataCube",
+    "cdi:StructuredDataSet"
+  ],
+  "componentType": {
+    "@type": "ada:SEMEDSElementalMapsCube"
+  },
+  "dataComponentResource": "cube_SEMEDS_001.hdf5"
+}
+```
+
+#### ttl
+```ttl
+@prefix ada: <https://ada.astromat.org/metadata/> .
+@prefix cdi: <http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/> .
+
+[] a cdi:StructuredDataSet,
+        ada:dataCube .
+
+
+```
+
 ## Schema
 
 ```yaml

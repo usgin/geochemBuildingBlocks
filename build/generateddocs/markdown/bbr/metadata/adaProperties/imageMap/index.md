@@ -13,6 +13,82 @@ Spatially registered image map with pixel coordinates and component types. Defin
 
 Describes spatially registered image maps with pixel coordinates, component type classification (including EMPA details), and spatial registration metadata. Extends the basic image type with pixel dimensions and spatial registration.
 
+## Examples
+
+### Image Map Type Example
+A spatially registered SEM elemental map image with pixel coordinates and spatial registration.
+#### json
+```json
+{
+  "@type": ["ada:imageMap", "schema:ImageObject"],
+  "componentType": {
+    "@type": "ada:SEMEDSElementalMap"
+  },
+  "acquisitionTime": "2024-03-15T14:35:00Z",
+  "channel1": "Fe Ka",
+  "illuminationType": "Electron beam",
+  "imageType": "X-ray intensity map",
+  "numPixelsX": 1024,
+  "numPixelsY": 768,
+  "spatialRegistration": {
+    "originX": 0.0,
+    "originY": 0.0,
+    "pixelScaleX": 0.25,
+    "pixelScaleY": 0.25,
+    "pixelUnits": "micrometer",
+    "originLocation": "upperLeft",
+    "coordDef": "pixel-defined"
+  }
+}
+
+```
+
+#### jsonld
+```jsonld
+{
+  "@context": [
+    {
+      "schema": "http://schema.org/",
+      "ada": "https://ada.astromat.org/metadata/"
+    },
+    "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/imageMap/context.jsonld"
+  ],
+  "@type": [
+    "ada:imageMap",
+    "schema:ImageObject"
+  ],
+  "componentType": {
+    "@type": "ada:SEMEDSElementalMap"
+  },
+  "acquisitionTime": "2024-03-15T14:35:00Z",
+  "channel1": "Fe Ka",
+  "illuminationType": "Electron beam",
+  "imageType": "X-ray intensity map",
+  "numPixelsX": 1024,
+  "numPixelsY": 768,
+  "spatialRegistration": {
+    "originX": 0.0,
+    "originY": 0.0,
+    "pixelScaleX": 0.25,
+    "pixelScaleY": 0.25,
+    "pixelUnits": "micrometer",
+    "originLocation": "upperLeft",
+    "coordDef": "pixel-defined"
+  }
+}
+```
+
+#### ttl
+```ttl
+@prefix ada: <https://ada.astromat.org/metadata/> .
+@prefix schema1: <http://schema.org/> .
+
+[] a schema1:ImageObject,
+        ada:imageMap .
+
+
+```
+
 ## Schema
 
 ```yaml

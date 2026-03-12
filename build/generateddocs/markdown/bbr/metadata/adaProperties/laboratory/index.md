@@ -13,6 +13,54 @@ Laboratory/facility definition combining NXsource and schema:Place. Defines prop
 
 Defines the laboratory or facility where analysis was performed. Combines NeXus NXsource typing with schema:Place for location semantics. Supports URI-based identifiers for facility lookup.
 
+## Examples
+
+### Laboratory Type Example
+A laboratory facility described as a NeXus NXsource with schema:Place typing.
+#### json
+```json
+{
+  "@type": ["schema:Place", "nxs:BaseClass/NXsource"],
+  "schema:name": "Lunar and Planetary Laboratory Electron Microprobe Facility",
+  "schema:alternateName": "LPL EMPA Lab",
+  "schema:identifier": "https://ror.org/03m2x1q45"
+}
+
+```
+
+#### jsonld
+```jsonld
+{
+  "@context": [
+    {
+      "schema": "http://schema.org/",
+      "nxs": "http://purl.org/nexusformat/definitions/"
+    },
+    "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/laboratory/context.jsonld"
+  ],
+  "@type": [
+    "schema:Place",
+    "nxs:BaseClass/NXsource"
+  ],
+  "schema:name": "Lunar and Planetary Laboratory Electron Microprobe Facility",
+  "schema:alternateName": "LPL EMPA Lab",
+  "schema:identifier": "https://ror.org/03m2x1q45"
+}
+```
+
+#### ttl
+```ttl
+@prefix schema1: <http://schema.org/> .
+
+[] a <http://purl.org/nexusformat/definitions/BaseClass/NXsource>,
+        schema1:Place ;
+    schema1:alternateName "LPL EMPA Lab" ;
+    schema1:identifier "https://ror.org/03m2x1q45" ;
+    schema1:name "Lunar and Planetary Laboratory Electron Microprobe Facility" .
+
+
+```
+
 ## Schema
 
 ```yaml

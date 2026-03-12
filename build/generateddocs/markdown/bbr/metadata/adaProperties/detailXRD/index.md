@@ -13,6 +13,50 @@ X-ray Diffraction tabular data with geometry and wavelength. Defines properties:
 
 X-ray Diffraction tabular data with geometry and wavelength.
 
+## Examples
+
+### XRD Instrument Detail Example
+X-ray Diffraction tabular data with geometry and wavelength parameters.
+#### json
+```json
+{
+  "@type": "ada:XRDTabular",
+  "geometry": "Bragg-Brentano",
+  "sampleMount": "flat plate",
+  "stepSize": 0.02,
+  "timePerStep": 1.0,
+  "wavelength": 1.5406
+}
+
+```
+
+#### jsonld
+```jsonld
+{
+  "@context": [
+    {
+      "ada": "https://ada.astromat.org/metadata/"
+    },
+    "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailXRD/context.jsonld"
+  ],
+  "@type": "ada:XRDTabular",
+  "geometry": "Bragg-Brentano",
+  "sampleMount": "flat plate",
+  "stepSize": 0.02,
+  "timePerStep": 1.0,
+  "wavelength": 1.5406
+}
+```
+
+#### ttl
+```ttl
+@prefix ada: <https://ada.astromat.org/metadata/> .
+
+[] a ada:XRDTabular .
+
+
+```
+
 ## Schema
 
 ```yaml

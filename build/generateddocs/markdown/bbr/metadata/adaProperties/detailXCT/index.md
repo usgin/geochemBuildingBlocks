@@ -13,6 +13,86 @@ X-ray Computed Tomography images with detailed scan parameters. Defines properti
 
 X-ray Computed Tomography images with detailed scan parameters. (Extension type, not in v3 source schema.)
 
+## Examples
+
+### XCT Instrument Detail Example
+X-ray Computed Tomography image collection with detailed scan parameters.
+#### json
+```json
+{
+  "@type": "ada:XCTImageCollection",
+  "instrumentType": "micro-CT",
+  "xraySource": "sealed tube",
+  "xrayTargetMaterial": "tungsten",
+  "xrayTubeEnergy": 120.0,
+  "xrayTubeCurrent": 0.1,
+  "xrayTubePower": 12.0,
+  "beamFilterMaterial": "copper",
+  "beamFilterThickness": 0.5,
+  "sourceToDetectorDistance": "500 mm",
+  "sourceToObjectDistance": 200.0,
+  "detectorType": "flat panel",
+  "detectorSize": "2048x2048",
+  "detectorBinning": "1x1",
+  "numberOfProjections": 1440,
+  "numberOfSlices": 2000,
+  "numberOfFramesAveragedPerProjection": 4,
+  "rotationAngle": "360 degrees",
+  "rotationType": "step-and-shoot",
+  "imageExposure": 0.5,
+  "imageSize": "2048x2048",
+  "reconstructedVoxelSize": "5.0 micrometer",
+  "reconstructedDataFormat": "16-bit TIFF",
+  "reconstructionSoftware": "Nikon CT Pro 3D"
+}
+
+```
+
+#### jsonld
+```jsonld
+{
+  "@context": [
+    {
+      "ada": "https://ada.astromat.org/metadata/"
+    },
+    "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailXCT/context.jsonld"
+  ],
+  "@type": "ada:XCTImageCollection",
+  "instrumentType": "micro-CT",
+  "xraySource": "sealed tube",
+  "xrayTargetMaterial": "tungsten",
+  "xrayTubeEnergy": 120.0,
+  "xrayTubeCurrent": 0.1,
+  "xrayTubePower": 12.0,
+  "beamFilterMaterial": "copper",
+  "beamFilterThickness": 0.5,
+  "sourceToDetectorDistance": "500 mm",
+  "sourceToObjectDistance": 200.0,
+  "detectorType": "flat panel",
+  "detectorSize": "2048x2048",
+  "detectorBinning": "1x1",
+  "numberOfProjections": 1440,
+  "numberOfSlices": 2000,
+  "numberOfFramesAveragedPerProjection": 4,
+  "rotationAngle": "360 degrees",
+  "rotationType": "step-and-shoot",
+  "imageExposure": 0.5,
+  "imageSize": "2048x2048",
+  "reconstructedVoxelSize": "5.0 micrometer",
+  "reconstructedDataFormat": "16-bit TIFF",
+  "reconstructionSoftware": "Nikon CT Pro 3D"
+}
+```
+
+#### ttl
+```ttl
+@prefix ada: <https://ada.astromat.org/metadata/> .
+
+[] a ada:XCTImageCollection .
+
+
+```
+
 ## Schema
 
 ```yaml

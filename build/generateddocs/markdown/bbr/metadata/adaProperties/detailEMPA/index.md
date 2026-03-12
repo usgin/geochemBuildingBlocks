@@ -13,6 +13,44 @@ Electron Microprobe Analysis instrument-specific detail properties. Defines prop
 
 Electron Microprobe Analysis with spectrometer and signal details.
 
+## Examples
+
+### EMPA Instrument Detail Example
+Electron Microprobe Analysis detail with spectrometer and signal information.
+#### json
+```json
+{
+  "@type": "ada:EMPAQEATabular",
+  "spectrometersUsed": "WDS 1-5",
+  "signalUsed": "characteristic X-rays"
+}
+
+```
+
+#### jsonld
+```jsonld
+{
+  "@context": [
+    {
+      "ada": "https://ada.astromat.org/metadata/"
+    },
+    "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailEMPA/context.jsonld"
+  ],
+  "@type": "ada:EMPAQEATabular",
+  "spectrometersUsed": "WDS 1-5",
+  "signalUsed": "characteristic X-rays"
+}
+```
+
+#### ttl
+```ttl
+@prefix ada: <https://ada.astromat.org/metadata/> .
+
+[] a ada:EMPAQEATabular .
+
+
+```
+
 ## Schema
 
 ```yaml

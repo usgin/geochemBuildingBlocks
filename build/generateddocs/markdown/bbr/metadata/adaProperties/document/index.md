@@ -13,6 +13,58 @@ Supplemental documents for calibration, methods, and analysis info. Defines prop
 
 Describes supplemental documents in ADA metadata including calibration files, method descriptions, log files, processing descriptions, and other supplemental information. Typed as `ada:document` and `schema:DigitalDocument`.
 
+## Examples
+
+### Document Type Example
+A calibration document associated with an analytical session.
+#### json
+```json
+{
+  "@type": ["ada:document", "schema:DigitalDocument"],
+  "componentType": {
+    "@type": "ada:calibrationFile"
+  },
+  "schema:version": "1.0",
+  "schema:isBasedOn": "calibration_original_20230415.pdf"
+}
+
+```
+
+#### jsonld
+```jsonld
+{
+  "@context": [
+    {
+      "schema": "http://schema.org/",
+      "ada": "https://ada.astromat.org/metadata/"
+    },
+    "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/document/context.jsonld"
+  ],
+  "@type": [
+    "ada:document",
+    "schema:DigitalDocument"
+  ],
+  "componentType": {
+    "@type": "ada:calibrationFile"
+  },
+  "schema:version": "1.0",
+  "schema:isBasedOn": "calibration_original_20230415.pdf"
+}
+```
+
+#### ttl
+```ttl
+@prefix ada: <https://ada.astromat.org/metadata/> .
+@prefix schema1: <http://schema.org/> .
+
+[] a schema1:DigitalDocument,
+        ada:document ;
+    schema1:isBasedOn "calibration_original_20230415.pdf" ;
+    schema1:version "1.0" .
+
+
+```
+
 ## Schema
 
 ```yaml

@@ -10,7 +10,7 @@
   "itemClass": "schema",
   "register": "cdif-building-block-register",
   "version": "0.1",
-  "dateOfLastChange": "2026-03-09",
+  "dateOfLastChange": "2026-03-12",
   "link": "https://github.com/usgin/geochemBuildingBlocks",
   "maturity": "draft",
   "scope": "unstable",
@@ -26,7 +26,11 @@
       "link": "https://github.com/amds-ldeo/metadata"
     }
   ],
-  "shaclShapes": {},
+  "shaclShapes": {
+    "ada.bbr.metadata.adaProperties.detailVNMIR": [
+      "https://usgin.github.io/geochemBuildingBlocks/_sources/adaProperties/detailVNMIR/rules.shacl"
+    ]
+  },
   "ldContext": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailVNMIR/context.jsonld",
   "schema": {
     "application/yaml": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailVNMIR/schema.yaml",
@@ -37,7 +41,34 @@
   "sourceFiles": "https://usgin.github.io/geochemBuildingBlocks/_sources/adaProperties/detailVNMIR/",
   "rdfData": [],
   "validationPassed": true,
+  "testOutputs": "https://github.com/usgin/geochemBuildingBlocks/blob/main/build/tests/bbr/metadata/adaProperties/detailVNMIR/",
   "description": "# VNMIR Instrument Detail\n\nVery-Near Mid-IR spectroscopy with detailed measurement parameters.\n",
+  "examples": [
+    {
+      "title": "VNMIR Instrument Detail Example",
+      "content": "Very-Near Mid-IR spectroscopy spectral point measurement with detailed parameters.",
+      "prefixes": {
+        "ada": "https://ada.astromat.org/metadata/"
+      },
+      "snippets": [
+        {
+          "language": "json",
+          "code": "{\n  \"@type\": \"ada:VNMIRSpectralPoint\",\n  \"detector\": \"MCT\",\n  \"beamsplitter\": \"KBr\",\n  \"calibrationStandards\": \"gold mirror\",\n  \"numberOfScans\": 256,\n  \"spectralRangeMin\": \"400\",\n  \"spectralRangeMax\": \"4000\",\n  \"spectralResolution\": \"4 cm-1\",\n  \"spectralSampling\": \"2 cm-1\",\n  \"spotSize\": \"100 micrometer\",\n  \"measurement\": \"reflectance\",\n  \"measurementEnvironment\": \"ambient\",\n  \"environmentalPressure\": 1013.25,\n  \"sampleHeated\": false,\n  \"sampleTemperature\": 25,\n  \"vacuumExposedSample\": false,\n  \"emissionAngle\": 0.0,\n  \"incidenceAngle\": 30.0,\n  \"phaseAngle\": 30.0,\n  \"uncertaintyNoise\": 0.002\n}\n",
+          "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/adaProperties/detailVNMIR/example_1_1.json"
+        },
+        {
+          "language": "jsonld",
+          "code": "{\n  \"@context\": [\n    {\n      \"ada\": \"https://ada.astromat.org/metadata/\"\n    },\n    \"https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailVNMIR/context.jsonld\"\n  ],\n  \"@type\": \"ada:VNMIRSpectralPoint\",\n  \"detector\": \"MCT\",\n  \"beamsplitter\": \"KBr\",\n  \"calibrationStandards\": \"gold mirror\",\n  \"numberOfScans\": 256,\n  \"spectralRangeMin\": \"400\",\n  \"spectralRangeMax\": \"4000\",\n  \"spectralResolution\": \"4 cm-1\",\n  \"spectralSampling\": \"2 cm-1\",\n  \"spotSize\": \"100 micrometer\",\n  \"measurement\": \"reflectance\",\n  \"measurementEnvironment\": \"ambient\",\n  \"environmentalPressure\": 1013.25,\n  \"sampleHeated\": false,\n  \"sampleTemperature\": 25,\n  \"vacuumExposedSample\": false,\n  \"emissionAngle\": 0.0,\n  \"incidenceAngle\": 30.0,\n  \"phaseAngle\": 30.0,\n  \"uncertaintyNoise\": 0.002\n}",
+          "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/adaProperties/detailVNMIR/example_1_1.jsonld"
+        },
+        {
+          "language": "ttl",
+          "code": "@prefix ada: <https://ada.astromat.org/metadata/> .\n\n[] a ada:VNMIRSpectralPoint .\n\n",
+          "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/adaProperties/detailVNMIR/example_1_1.ttl"
+        }
+      ]
+    }
+  ],
   "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: VNMIR Instrument Detail\ndescription: Very-Near Mid-IR spectroscopy with detailed measurement parameters\ntype: object\nproperties:\n  '@type':\n    anyOf:\n    - const: ada:VNMIRSpectralPoint\n    - const: ada:VNMIROverviewImage\n    - const: ada:VNMIRSpectralMap\n  detector:\n    type: string\n  beamsplitter:\n    type: string\n  calibrationStandards:\n    type: string\n  comments:\n    type: string\n  numberOfScans:\n    type: integer\n  eMaxFitRegionMax:\n    type: string\n  eMaxFitRegionMin:\n    type: string\n  emissionAngle:\n    type: number\n  emissivityMaximum:\n    type: string\n  environmentalPressure:\n    type: number\n  incidenceAngle:\n    type: number\n  measurement:\n    type: string\n  measurementEnvironment:\n    type: string\n  phaseAngle:\n    type: number\n  sampleHeated:\n    type: boolean\n  samplePreparation:\n    type: string\n  sampleTemperature:\n    type: integer\n  spectralRangeMax:\n    type: string\n  spectralRangeMin:\n    type: string\n  spectralResolution:\n    type: string\n  spectralSampling:\n    type: string\n  spotSize:\n    type: string\n  uncertaintyNoise:\n    type: number\n  vacuumExposedSample:\n    type: boolean\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  ada: https://ada.astromat.org/metadata/\n",
   "gitRepository": "https://github.com/usgin/geochemBuildingBlocks",
   "gitPath": "_sources/adaProperties/detailVNMIR"

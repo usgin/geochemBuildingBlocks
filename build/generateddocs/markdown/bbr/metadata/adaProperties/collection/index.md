@@ -13,6 +13,82 @@ Set of related files with identical information models or composite datasets. De
 
 Describes a collection of related files in ADA metadata. Can represent a set of files with identical information models and serialization (a collection), or a heterogeneous set of files constituting a composite dataset. Typed as `ada:collection` and `schema:Collection`.
 
+## Examples
+
+### Collection Type Example
+A collection of SEM-EDS elemental map images with file listing.
+#### json
+```json
+{
+  "@type": ["ada:collection", "https://schema.org/Collection"],
+  "componentType": {
+    "@type": "ada:SEMEDSElementalMaps"
+  },
+  "memberTypes": ["ada:SEMEDSElementalMap"],
+  "nFiles": 5,
+  "filelist": [
+    {
+      "fileName": "map_Fe_Ka.tif",
+      "componentType": "ada:SEMEDSElementalMap",
+      "schema:encodingFormat": "image/tiff"
+    },
+    {
+      "fileName": "map_Si_Ka.tif",
+      "componentType": "ada:SEMEDSElementalMap",
+      "schema:encodingFormat": "image/tiff"
+    }
+  ]
+}
+
+```
+
+#### jsonld
+```jsonld
+{
+  "@context": [
+    {
+      "schema": "http://schema.org/",
+      "ada": "https://ada.astromat.org/metadata/"
+    },
+    "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/collection/context.jsonld"
+  ],
+  "@type": [
+    "ada:collection",
+    "https://schema.org/Collection"
+  ],
+  "componentType": {
+    "@type": "ada:SEMEDSElementalMaps"
+  },
+  "memberTypes": [
+    "ada:SEMEDSElementalMap"
+  ],
+  "nFiles": 5,
+  "filelist": [
+    {
+      "fileName": "map_Fe_Ka.tif",
+      "componentType": "ada:SEMEDSElementalMap",
+      "schema:encodingFormat": "image/tiff"
+    },
+    {
+      "fileName": "map_Si_Ka.tif",
+      "componentType": "ada:SEMEDSElementalMap",
+      "schema:encodingFormat": "image/tiff"
+    }
+  ]
+}
+```
+
+#### ttl
+```ttl
+@prefix ada: <https://ada.astromat.org/metadata/> .
+@prefix schema: <https://schema.org/> .
+
+[] a ada:collection,
+        schema:Collection .
+
+
+```
+
 ## Schema
 
 ```yaml

@@ -13,6 +13,46 @@ Laser Ablation Fluorescence processed/raw data detail properties. Defines proper
 
 Laser Ablation Fluorescence processed/raw data. elementAnalyzed goes in resultTarget.
 
+## Examples
+
+### LAF Instrument Detail Example
+Laser Ablation Fluorescence processed data with element and mass details.
+#### json
+```json
+{
+  "@type": "ada:LAFProcessed",
+  "elementAnalyzed": "U",
+  "sampleMassConsumed": "0.3 mg",
+  "sampleType": "zircon grain mount"
+}
+
+```
+
+#### jsonld
+```jsonld
+{
+  "@context": [
+    {
+      "ada": "https://ada.astromat.org/metadata/"
+    },
+    "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailLAF/context.jsonld"
+  ],
+  "@type": "ada:LAFProcessed",
+  "elementAnalyzed": "U",
+  "sampleMassConsumed": "0.3 mg",
+  "sampleType": "zircon grain mount"
+}
+```
+
+#### ttl
+```ttl
+@prefix ada: <https://ada.astromat.org/metadata/> .
+
+[] a ada:LAFProcessed .
+
+
+```
+
 ## Schema
 
 ```yaml

@@ -593,6 +593,26 @@ x-defs:
     description: Building block specifies properties for minimal CDIF schama.org discovery
       record
     properties:
+      '@context':
+        type: object
+        description: JSON-LD context declaring namespace prefixes used in the metadata
+          record.
+        properties:
+          schema:
+            enum:
+            - http://schema.org/
+          dcterms:
+            enum:
+            - http://purl.org/dc/terms/
+          spdx:
+            enum:
+            - http://spdx.org/rdf/terms#
+          dcat:
+            enum:
+            - http://www.w3.org/ns/dcat#
+        required:
+        - schema
+        - dcterms
       '@id':
         type: string
         description: 'The URI for the resource should be the @id value for the root
@@ -603,16 +623,11 @@ x-defs:
           metadata information.'
       '@type':
         description: a schema.org Class that specifies the expected information content
-          for the metadata record. For CDIF, 'schema:Dataset' is required, but other
-          possible values (e.g. CreativeWork, SoftwareApplication, Product, WebAPI)
-          are sometimes included to enable the schema.org properties used to describe
-          the resource without schema.org validation errors. The array must include
-          at least one value from the known set, but can also include other strings
-          for extensibility.
+          for the metadata record. The array must include at least one schema.org
+          type value. Default is schema:Dataset.
         type: array
         items:
           type: string
-        contains:
           enum:
           - schema:CreativeWork
           - schema:SoftwareApplication
@@ -628,6 +643,9 @@ x-defs:
           - schema:MediaObject
         default: schema:Dataset
         minItems: 1
+        contains:
+          enum:
+          - schema:Dataset
       schema:name:
         type: string
         description: A descriptive name of a dataset (e.g., 'Snow depth in Northern
@@ -745,6 +763,22 @@ x-defs:
     description: Building block specifies properties for CDIF schama.org discovery
       record
     properties:
+      '@context':
+        type: object
+        description: Additional JSON-LD namespace prefixes used by optional CDIF properties.
+        properties:
+          geosparql:
+            enum:
+            - http://www.opengis.net/ont/geosparql#
+          prov:
+            enum:
+            - http://www.w3.org/ns/prov#
+          dqv:
+            enum:
+            - http://www.w3.org/ns/dqv#
+          cdi:
+            enum:
+            - http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/
       schema:description:
         type: string
         description: A short summary describing a dataset. This text will be indexed
@@ -759,17 +793,19 @@ x-defs:
           - type: string
           - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.cdifProperties.cdifOptional/$defs/DefinedTerm
       schema:sameAs:
-        description: The other identifiers for the dataset. Schema.org has three ways
-          of encoding identifiers-- a text description, a URL, or by using the schema:PropertyValue
-          field. The Science on Schema.org guidance strongly recommends using the
-          PropertyValue approach. see https://github.com/ESIPFed/science-on-schema.org   ....
-          Dataset.md#identifier.
+        description: Other identifiers for the dataset, as IRI references, literal
+          strings, or structured identifiers using schema:PropertyValue.
         type: array
-        minItems: 0
+        minItems: 1
         items:
           anyOf:
-          - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.cdifProperties.cdifOptional/$defs/Identifier
           - type: string
+          - type: object
+            properties:
+              '@id':
+                type: string
+                description: IRI for an equivalent resource or alternate identifier
+          - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.cdifProperties.cdifOptional/$defs/Identifier
       schema:version:
         description: The version number or identifier for this dataset (text or numeric).
           The values should sort from oldest to newest using an alphanumeric sort
@@ -792,20 +828,34 @@ x-defs:
           type: object
           properties:
             '@type':
-              type: string
-              enum:
-              - schema:LinkRole
+              anyOf:
+              - type: string
+                enum:
+                - schema:LinkRole
+              - type: array
+                items:
+                  type: string
+                contains:
+                  enum:
+                  - schema:LinkRole
             schema:linkRelationship:
               anyOf:
               - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.cdifProperties.cdifOptional/$defs/DefinedTerm
               - type: string
-            target:
+            schema:target:
               type: object
               properties:
                 '@type':
-                  type: string
-                  enum:
-                  - schema:EntryPoint
+                  anyOf:
+                  - type: string
+                    enum:
+                    - schema:EntryPoint
+                  - type: array
+                    items:
+                      type: string
+                    contains:
+                      enum:
+                      - schema:EntryPoint
                 schema:encodingFormat:
                   type: string
                   description: registered MIME types are expected
@@ -831,6 +881,18 @@ x-defs:
                 type: string
                 description: a reference to a publishing principles statement
           - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.cdifProperties.cdifOptional/$defs/LabeledLink
+      schema:measurementTechnique:
+        description: The technique, technology, or methodology used for measurement
+          or determination of the dataset values. Can be a string, a URI reference,
+          a DefinedTerm, or an array combining these.
+        anyOf:
+        - type: string
+        - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.cdifProperties.cdifOptional/$defs/DefinedTerm
+        - type: array
+          items:
+            anyOf:
+            - type: string
+            - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.cdifProperties.cdifOptional/$defs/DefinedTerm
       schema:keywords:
         description: Keywords are an array of strings, an array of schema:DefinedTerms,
           or some combination of these. If you have information about a controlled
@@ -860,6 +922,8 @@ x-defs:
                     type: string
                     description: a identifier for an agent defined in this metadata,
                       or externally; must be dereferenceable
+                required:
+                - '@id'
               - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.cdifProperties.cdifOptional/$defs/Person
               - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.cdifProperties.cdifOptional/$defs/Organization
       schema:contributor:
@@ -873,6 +937,8 @@ x-defs:
                 type: string
                 description: a identifier for an agent defined in this metadata, or
                   externally; must be dereferenceable
+            required:
+            - '@id'
           - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.cdifProperties.cdifOptional/$defs/Person
           - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.cdifProperties.cdifOptional/$defs/Organization
           - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.cdifProperties.cdifOptional/$defs/Contributor
@@ -885,6 +951,8 @@ x-defs:
               type: string
               description: a identifier for an agent defined in this metadata, or
                 externally; must be dereferenceable
+          required:
+          - '@id'
         - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.cdifProperties.cdifOptional/$defs/Person
         - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.cdifProperties.cdifOptional/$defs/Organization
       schema:provider:
@@ -900,6 +968,8 @@ x-defs:
                 type: string
                 description: a identifier for an agent defined in this metadata, or
                   externally; must be dereferenceable
+            required:
+            - '@id'
           - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.cdifProperties.cdifOptional/$defs/Person
           - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.cdifProperties.cdifOptional/$defs/Organization
       schema:funding:
@@ -910,7 +980,9 @@ x-defs:
         description: What does the dataset measure? (e.g., temperature, pressure)
         type: array
         items:
-          $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.cdifProperties.cdifOptional/$defs/VariableMeasured
+          anyOf:
+          - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.cdifProperties.cdifOptional/$defs/VariableMeasured
+          - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.cdifProperties.cdifOptional/$defs/StatisticalVariable
       schema:spatialCoverage:
         description: To specify location that is the subject of resource content;
           use schema.org place names, bounding box, point or optional OGC WKT gemetry.
@@ -946,28 +1018,11 @@ x-defs:
         items:
           $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.cdifProperties.cdifOptional/$defs/QualityMeasure
       schema:distribution:
-        description: Distribution with dual typing for structured or tabular data;
-          extends the CDIFMandatory distribution by requiring a CDI dataset type alongside
-          schema:DataDownload.
+        description: Distribution options for the dataset.
         type: array
         items:
           anyOf:
           - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.cdifProperties.cdifOptional/$defs/DataDownload
-          - description: Distribution with CDIF dual typing for structured or tabular
-              data
-            allOf:
-            - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.cdifProperties.cdifOptional/$defs/DataDownload
-            - type: object
-              properties:
-                '@type':
-                  type: array
-                  items:
-                    type: string
-                  contains:
-                    enum:
-                    - cdi:StructuredDataSet
-                    - cdi:TabularTextDataSet
-                  minItems: 2
           - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.cdifProperties.cdifOptional/$defs/WebAPI
     $defs:
       LabeledLink:
@@ -985,7 +1040,9 @@ x-defs:
       Funder:
         $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.funder
       VariableMeasured:
-        $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.variableMeasured
+        $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.cdifProperties.cdifVariableMeasured
+      StatisticalVariable:
+        $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.statisticalVariable
       SpatialExtent:
         $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.spatialExtent
       TemporalExtent:
@@ -1184,22 +1241,42 @@ x-defs:
       Post from schema.org (see https://schema.org/docs/actions.html, and https://github.com/schemaorg/suggestions-questions-brainstorming/issues/62) '
     properties:
       '@type':
-        type: string
         description: The type of action. Must be schema:Action or one of its subtypes.
         default: schema:Action
-        enum:
-        - schema:Action
-        - schema:AssessAction
-        - schema:ConsumeAction
-        - schema:ControlAction
-        - schema:CreateAction
-        - schema:FindAction
-        - schema:InteractAction
-        - schema:MoveAction
-        - schema:PlayAction
-        - schema:SearchAction
-        - schema:TransferAction
-        - schema:UpdateAction
+        anyOf:
+        - type: string
+          enum:
+          - schema:Action
+          - schema:AssessAction
+          - schema:ConsumeAction
+          - schema:ControlAction
+          - schema:CreateAction
+          - schema:DeleteAction
+          - schema:FindAction
+          - schema:InteractAction
+          - schema:MoveAction
+          - schema:PlayAction
+          - schema:SearchAction
+          - schema:TransferAction
+          - schema:UpdateAction
+        - type: array
+          items:
+            type: string
+          contains:
+            enum:
+            - schema:Action
+            - schema:AssessAction
+            - schema:ConsumeAction
+            - schema:ControlAction
+            - schema:CreateAction
+            - schema:DeleteAction
+            - schema:FindAction
+            - schema:InteractAction
+            - schema:MoveAction
+            - schema:PlayAction
+            - schema:SearchAction
+            - schema:TransferAction
+            - schema:UpdateAction
       schema:name:
         type: string
         description: text label for the action
@@ -1233,10 +1310,17 @@ x-defs:
           This schema doesn't handle post requests
         properties:
           '@type':
-            type: string
             default: schema:EntryPoint
-            enum:
-            - schema:EntryPoint
+            anyOf:
+            - type: string
+              enum:
+              - schema:EntryPoint
+            - type: array
+              items:
+                type: string
+              contains:
+                enum:
+                - schema:EntryPoint
           schema:description:
             type: string
           schema:urlTemplate:
@@ -1312,10 +1396,17 @@ x-defs:
             '@id':
               type: string
             '@type':
-              type: string
               default: schema:PropertyValueSpecification
-              enum:
-              - schema:PropertyValueSpecification
+              anyOf:
+              - type: string
+                enum:
+                - schema:PropertyValueSpecification
+              - type: array
+                items:
+                  type: string
+                contains:
+                  enum:
+                  - schema:PropertyValueSpecification
             schema:valueName:
               type: string
             schema:description:
@@ -1333,12 +1424,24 @@ x-defs:
         description: description of the data structure of the return object
         properties:
           '@type':
-            type: string
             default: schema:DataFeed
-            enum:
-            - schema:DataFeed
+            anyOf:
+            - type: string
+              enum:
+              - schema:DataFeed
+            - type: array
+              items:
+                type: string
+              contains:
+                enum:
+                - schema:DataFeed
           schema:description:
             type: string
+          schema:encodingFormat-input:
+            type: array
+            items:
+              type: string
+            description: MIME types accepted as input encoding formats for the action.
           schema:variableMeasured:
             type: array
             items:
@@ -1354,10 +1457,17 @@ x-defs:
     type: object
     properties:
       '@type':
-        type: string
         default: schema:CreativeWork
-        enum:
-        - schema:CreativeWork
+        anyOf:
+        - type: string
+          enum:
+          - schema:CreativeWork
+        - type: array
+          items:
+            type: string
+          contains:
+            enum:
+            - schema:CreativeWork
       schema:name:
         type: string
       schema:description:
@@ -1377,9 +1487,16 @@ x-defs:
     type: object
     properties:
       '@type':
-        type: string
-        enum:
-        - schema:PropertyValue
+        anyOf:
+        - type: string
+          enum:
+          - schema:PropertyValue
+        - type: array
+          items:
+            type: string
+          contains:
+            enum:
+            - schema:PropertyValue
       schema:propertyID:
         type: string
         description: In this context for the schema:PropertyValue, this field is an
@@ -1411,8 +1528,16 @@ x-defs:
     type: object
     properties:
       '@type':
-        enum:
-        - schema:DefinedTerm
+        anyOf:
+        - type: string
+          enum:
+          - schema:DefinedTerm
+        - type: array
+          items:
+            type: string
+          contains:
+            enum:
+            - schema:DefinedTerm
       schema:name:
         type: string
         description: text label for the term that is useful to human user
@@ -1461,6 +1586,10 @@ x-defs:
         minItems: 1
       schema:name:
         type: string
+      schema:description:
+        type: string
+        description: Description of this distribution, e.g. what format, access constraints,
+          etc.
       schema:contentUrl:
         type: string
         format: uri
@@ -1493,6 +1622,17 @@ x-defs:
             type: string
         required:
         - '@type'
+      dcterms:conformsTo:
+        description: An identifier for a standard or specification that the distribution
+          conforms to. Recommended to enable machine-actionable data access.
+        type: array
+        minItems: 1
+        items:
+          type: object
+          properties:
+            '@id':
+              type: string
+              description: uri for specification that this distribution conforms to
       schema:provider:
         type: array
         description: Party who maintains this particular distribution option for the
@@ -1506,6 +1646,8 @@ x-defs:
                 type: string
                 description: a identifier for an agent defined in this metadata, or
                   externally; must be dereferenceable
+            required:
+            - '@id'
           - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.person
           - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.organization
     required:
@@ -1551,6 +1693,7 @@ x-defs:
           for the resource description as a whole.
         oneOf:
         - type: string
+          default: not specified
         - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.webAPI/$defs/LabeledLink
       schema:documentation:
         description: a document that provides a machine-actionable description of
@@ -1571,6 +1714,7 @@ x-defs:
     required:
     - schema:serviceType
     - schema:potentialAction
+    - schema:termsOfService
     $defs:
       LabeledLink:
         $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.labeledLink
@@ -1648,10 +1792,17 @@ x-defs:
               data at https://github.com/ESIPFed/science-on-schema.org/blob/develop/guides/Dataset.md#catalog
               puts identifier here
           '@type':
-            type: string
             default: schema:DataCatalog
-            enum:
-            - schema:DataCatalog
+            anyOf:
+            - type: string
+              enum:
+              - schema:DataCatalog
+            - type: array
+              items:
+                type: string
+              contains:
+                enum:
+                - schema:DataCatalog
           schema:name:
             type: string
           schema:url:
@@ -1698,9 +1849,16 @@ x-defs:
       '@id':
         type: string
       '@type':
-        type: string
-        enum:
-        - schema:Person
+        anyOf:
+        - type: string
+          enum:
+          - schema:Person
+        - type: array
+          items:
+            type: string
+          contains:
+            enum:
+            - schema:Person
       schema:name:
         type: string
         description: string label for person that is meaningful for human users
@@ -1722,10 +1880,17 @@ x-defs:
         type: object
         properties:
           '@type':
-            type: string
             default: schema:ContactPoint
-            enum:
-            - schema:ContactPoint
+            anyOf:
+            - type: string
+              enum:
+              - schema:ContactPoint
+            - type: array
+              items:
+                type: string
+              contains:
+                enum:
+                - schema:ContactPoint
           schema:email:
             type: string
         description: restrict to email only. Schema.org allows telephone and postal
@@ -1734,7 +1899,13 @@ x-defs:
         type: array
         description: other identifiers for the person
         items:
-          type: string
+          anyOf:
+          - type: string
+          - type: object
+            properties:
+              '@id':
+                type: string
+          - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.identifier
     allOf:
     - required:
       - '@type'
@@ -1753,10 +1924,17 @@ x-defs:
       '@id':
         type: string
       '@type':
-        type: string
         default: schema:Organization
-        enum:
-        - schema:Organization
+        anyOf:
+        - type: string
+          enum:
+          - schema:Organization
+        - type: array
+          items:
+            type: string
+          contains:
+            enum:
+            - schema:Organization
       schema:additionalType:
         type: array
         items:
@@ -1791,7 +1969,13 @@ x-defs:
         type: array
         description: other identifiers for the organization
         items:
-          type: string
+          anyOf:
+          - type: string
+          - type: object
+            properties:
+              '@id':
+                type: string
+          - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.identifier
     allOf:
     - required:
       - '@type'
@@ -1813,16 +1997,30 @@ x-defs:
     type: object
     properties:
       '@type':
-        type: string
         default: schema:Role
-        enum:
-        - schema:Role
+        anyOf:
+        - type: string
+          enum:
+          - schema:Role
+        - type: array
+          items:
+            type: string
+          contains:
+            enum:
+            - schema:Role
       schema:roleName:
         anyOf:
         - type: string
         - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.definedTerm
       schema:contributor:
-        oneOf:
+        anyOf:
+        - type: object
+          properties:
+            '@id':
+              type: string
+              description: IRI reference to a Person or Organization defined elsewhere
+          required:
+          - '@id'
         - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.person
         - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.organization
     required:
@@ -1836,11 +2034,21 @@ x-defs:
     description: Funding acknowledgement properties, profile of schema.org/MonetaryGrant
     type: object
     properties:
-      '@type':
+      '@id':
         type: string
+        description: URI identifier for this funding record
+      '@type':
         default: schema:MonetaryGrant
-        enum:
-        - schema:MonetaryGrant
+        anyOf:
+        - type: string
+          enum:
+          - schema:MonetaryGrant
+        - type: array
+          items:
+            type: string
+          contains:
+            enum:
+            - schema:MonetaryGrant
       schema:identifier:
         description: identifier for a particular grant
         allOf:
@@ -1859,6 +2067,8 @@ x-defs:
               type: string
               description: a identifier for an agent defined in this metadata, or
                 externally; must be dereferenceable
+          required:
+          - '@id'
         - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.funder/$defs/Person
         - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.funder/$defs/Organization
     anyOf:
@@ -1868,8 +2078,6 @@ x-defs:
       - schema:identifier
     - required:
       - schema:name
-    - required:
-      - schema:description
     $defs:
       Person:
         $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.person
@@ -1881,34 +2089,68 @@ x-defs:
       schema: http://schema.org/
     x-schema-source: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/funder/schema.yaml
     x-schema-version: https://json-schema.org/draft/2020-12/schema
-  cdif.bbr.metadata.schemaorgProperties.variableMeasured:
-    description: CDIF schema.org implemenation of PropertyValue to use as values for
-      variableMeasured
+  cdif.bbr.metadata.cdifProperties.cdifVariableMeasured:
+    description: Extends cdif variableMeasured with properties for DDI-CDI InstanceVariable
     type: object
     properties:
       '@type':
         type: array
+        description: Must include both schema:PropertyValue and cdi:InstanceVariable.
+          Additional types may be included.
         items:
           type: string
-        contains:
-          enum:
-          - schema:PropertyValue
-        minItems: 1
-      '@id':
+        minItems: 2
+        allOf:
+        - contains:
+            enum:
+            - schema:PropertyValue
+        - contains:
+            enum:
+            - cdi:InstanceVariable
+      cdi:identifier:
         type: string
-      schema:name:
-        type: string
-        description: this is the string label that is expected to be associated with
-          the variable in the dataset serialization
-      schema:description:
-        type: string
-        default: missing
-      schema:alternateName:
+      cdi:physicalDataType:
         type: array
         items:
-          type: string
-          description: human intelligible name for variable that conveys semantics
-      schema:propertyID:
+          anyOf:
+          - type: string
+          - type: object
+            properties:
+              '@id':
+                type: string
+                description: reference to a skos concept for the data type
+          - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.cdifProperties.cdifVariableMeasured/$defs/DefinedTerm
+        description: identifier or name for the data type concept.
+      cdi:intendedDataType:
+        type: string
+        description: The intended data type for values of this variable, from DDI-CDI
+          RepresentedVariable.hasIntendedDataType. Recommended values are XML Schema
+          datatypes (e.g. https://www.w3.org/TR/xmlschema-2/#decimal).
+      cdi:role:
+        type: string
+        enum:
+        - MeasureComponent
+        - AttributeComponent
+        - DimensionComponent
+        - DescriptorComponent
+        - ReferenceValueComponent
+        description: Specifies the relation of the variable to the data structure,
+          corresponding to DDI-CDI DataStructureComponent subtypes.
+      cdi:describedUnitOfMeasure:
+        description: A structured unit of measure from a controlled vocabulary, from
+          DDI-CDI RepresentedVariable.describedUnitOfMeasure.
+        allOf:
+        - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.cdifProperties.cdifVariableMeasured/$defs/DefinedTerm
+      cdi:simpleUnitOfMeasure:
+        anyOf:
+        - type: string
+        - type: object
+          properties:
+            '@id':
+              type: string
+              description: reference to a skos concept for the data type
+        - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.cdifProperties.cdifVariableMeasured/$defs/DefinedTerm
+      cdi:uses:
         type: array
         items:
           anyOf:
@@ -1918,10 +2160,60 @@ x-defs:
               '@id':
                 type: string
                 description: reference to a skos concept for the property
-          - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.variableMeasured/$defs/DefinedTerm
-        description: identifier or name for the property concept quantified by the
-          values in this variable slot. Multiple values can specify the property at
-          different levels of granularity.
+          - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.cdifProperties.cdifVariableMeasured/$defs/DefinedTerm
+        description: Essentially the same as schema:propertyID. References to concepts
+          that this variable measures or represents.
+      cdi:name:
+        type: string
+        description: DDI-CDI Concept.name. The name of this variable in the DDI-CDI
+          model.
+      cdi:displayLabel:
+        type: string
+        description: DDI-CDI Concept.displayLabel. A human-readable label for display
+          purposes.
+    $defs:
+      DefinedTerm:
+        $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.definedTerm
+    allOf:
+    - required:
+      - '@type'
+    - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.variableMeasured
+    x-jsonld-prefixes:
+      schema: http://schema.org/
+      spdx: http://spdx.org/rdf/terms#
+      cdi: http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/
+      skos: http://www.w3.org/2004/02/skos/core#
+      xas: https://xas.org/dictionary/
+      nxs: http://purl.org/nexusformat/definitions/
+      prov: http://www.w3.org/ns/prov#
+    x-schema-source: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/cdifProperties/cdifVariableMeasured/schema.yaml
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  cdif.bbr.metadata.schemaorgProperties.statisticalVariable:
+    description: A statistical variable description using schema.org/StatisticalVariable.
+      Defines a variable that represents a statistical measure, such as median income
+      or unemployment rate.
+    type: object
+    properties:
+      '@type':
+        type: array
+        items:
+          type: string
+        contains:
+          enum:
+          - schema:StatisticalVariable
+        minItems: 1
+      '@id':
+        type: string
+      schema:name:
+        type: string
+        description: string label for the statistical variable
+      schema:description:
+        type: string
+      schema:alternateName:
+        type: array
+        items:
+          type: string
+          description: human intelligible name for variable that conveys semantics
       schema:measurementTechnique:
         anyOf:
         - type: string
@@ -1929,56 +2221,50 @@ x-defs:
           properties:
             '@id':
               type: string
-              description: reference to a skos concept for the property
-        - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.variableMeasured/$defs/DefinedTerm
-        description: A text description of the measurement method used to determine
-          values for this variable. If standard measurement protocols are defined
-          and registered, these can be identified via http URI's.
-      schema:unitText:
-        type: string
-        description: A string that identifies a unit of measurement that applies to
-          all values for this variable.
-      schema:unitCode:
+              description: reference to a skos concept
+        - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.statisticalVariable/$defs/DefinedTerm
+        description: Text description or URI identifying the measurement method.
+      schema:statType:
         anyOf:
         - type: string
         - type: object
           properties:
             '@id':
               type: string
-              description: reference to a skos concept for the property
-        - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.variableMeasured/$defs/DefinedTerm
-        description: Value is expected to be TEXT or URL. We recommend providing an
-          HTTP URI that identifies a unit of measure from a vocabulary accessible
-          on the web. The QUDT unit vocabulary provides and extensive set of registered
-          units of measure that can be used to populate the schema:unitCode property
-          to specify the units of measure used to report datavalues when that is appropriate.
-      schema:minValue:
-        type: number
-        description: ' If the value for the variable is numeric, this is the minimum
-          value that occurs in the dataset. Not useful for other value types.'
-      schema:maxValue:
-        type: number
-        description: ' If the value for the variable is numeric, this is the maximum
-          value that occurs in the dataset. Not useful for other value types.'
-      schema:url:
-        type: string
-        format: uri
-        description: Any schema:Thing can have a URL property, but because the value
-          is simply a url the relationship of the linked resource can not be expressed.
-          Usage is optional. The recommendation is that schema:url should link to
-          a web page that would be useful for a person to interpret the variable,
-          but is not intended to be machine-actionable.
+        - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.statisticalVariable/$defs/DefinedTerm
+      schema:measuredProperty:
+        type: object
+        properties:
+          '@id':
+            type: string
+            description: reference to a skos concept for the property
+          '@type':
+            anyOf:
+            - type: string
+              enum:
+              - schema:Property
+            - type: array
+              items:
+                type: string
+              contains:
+                enum:
+                - schema:Property
+          schema:name:
+            anyOf:
+            - type: string
+            - type: object
+              properties:
+                '@id':
+                  type: string
+            - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.statisticalVariable/$defs/DefinedTerm
+    required:
+    - '@type'
+    - schema:name
+    - schema:measuredProperty
     $defs:
       DefinedTerm:
         $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.definedTerm
-    allOf:
-    - required:
-      - '@type'
-      - schema:name
-      - schema:description
-    x-jsonld-prefixes:
-      schema: http://schema.org/
-    x-schema-source: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/variableMeasured/schema.yaml
+    x-schema-source: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/statisticalVariable/schema.yaml
     x-schema-version: https://json-schema.org/draft/2020-12/schema
   cdif.bbr.metadata.schemaorgProperties.spatialExtent:
     description: 'Spatial Extent description for CDIF discovery profile.  Note required
@@ -1987,10 +2273,17 @@ x-defs:
     type: object
     properties:
       '@type':
-        type: string
         default: schema:Place
-        enum:
-        - schema:Place
+        anyOf:
+        - type: string
+          enum:
+          - schema:Place
+        - type: array
+          items:
+            type: string
+          contains:
+            enum:
+            - schema:Place
       schema:name:
         description: multiple place names or DefinedTerms that have a place name and
           URI for the location
@@ -2010,14 +2303,25 @@ x-defs:
             might only index or display bounding box extents or a single point location.
           properties:
             '@type':
-              type: string
               default: schema:GeoCoordinates
-              enum:
-              - schema:GeoCoordinates
+              anyOf:
+              - type: string
+                enum:
+                - schema:GeoCoordinates
+              - type: array
+                items:
+                  type: string
+                contains:
+                  enum:
+                  - schema:GeoCoordinates
             schema:latitude:
               type: number
+              minimum: -90
+              maximum: 90
             schema:longitude:
               type: number
+              minimum: -180
+              maximum: 180
           required:
           - '@type'
           - schema:latitude
@@ -2030,10 +2334,17 @@ x-defs:
             of several such points.'
           properties:
             '@type':
-              type: string
               default: schema:GeoShape
-              enum:
-              - schema:GeoShape
+              anyOf:
+              - type: string
+                enum:
+                - schema:GeoShape
+              - type: array
+                items:
+                  type: string
+                contains:
+                  enum:
+                  - schema:GeoShape
             schema:box:
               type: string
               description: A GeoShape box defines an area on the surface of the earth
@@ -2050,10 +2361,17 @@ x-defs:
             a linear trace like a ship track or airplane flight line
           properties:
             '@type':
-              type: string
               default: schema:GeoShape
-              enum:
-              - schema:GeoShape
+              anyOf:
+              - type: string
+                enum:
+                - schema:GeoShape
+              - type: array
+                items:
+                  type: string
+                contains:
+                  enum:
+                  - schema:GeoShape
             schema:line:
               type: string
               description: 'A GeoShape box defines a curvilinear geometry as a string
@@ -2075,16 +2393,27 @@ x-defs:
           or contained within the specified bounding box.
         properties:
           '@type':
-            type: string
+            anyOf:
+            - type: string
+            - type: array
+              items:
+                type: string
             description: 'MUST be sf: (<http://www.opengis.net/ont/sf#>) SimpleFeature
               geometry type. See https://opengeospatial.github.io/ogc-geosparql/geosparql11/sf_geometries.ttl'
           geosparql:asWKT:
             type: object
             properties:
               '@type':
-                type: string
-                enum:
-                - geosparql:wktLiteral
+                anyOf:
+                - type: string
+                  enum:
+                  - geosparql:wktLiteral
+                - type: array
+                  items:
+                    type: string
+                  contains:
+                    enum:
+                    - geosparql:wktLiteral
               '@value':
                 type: string
                 description: a WKT geometry description string, e.g. 'POINT(-76 -18)'
@@ -2115,10 +2444,17 @@ x-defs:
         eras with identifier, e.g. geologic age. This is a SOSO schema.org extension
       properties:
         '@type':
-          type: string
           default: time:ProperInterval
-          enum:
-          - time:ProperInterval
+          anyOf:
+          - type: string
+            enum:
+            - time:ProperInterval
+          - type: array
+            items:
+              type: string
+            contains:
+              enum:
+              - time:ProperInterval
         schema:description:
           type: string
           description: free text description of the temporal interval
@@ -2152,10 +2488,17 @@ x-defs:
           additionalProperties: true
           description: Must exactly match the specified @context object.
         '@type':
-          type: string
           default: time:ProperInterval
-          enum:
-          - time:ProperInterval
+          anyOf:
+          - type: string
+            enum:
+            - time:ProperInterval
+          - type: array
+            items:
+              type: string
+            contains:
+              enum:
+              - time:ProperInterval
         schema:description:
           type: string
           description: free text description of the temporal interval
@@ -2163,18 +2506,32 @@ x-defs:
           type: object
           properties:
             '@type':
-              type: string
-              enum:
-              - time:Instant
+              anyOf:
+              - type: string
+                enum:
+                - time:Instant
+              - type: array
+                items:
+                  type: string
+                contains:
+                  enum:
+                  - time:Instant
             time:inTimePosition:
               $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.temporalExtent/$defs/timePosition_type
         time:hasEnd:
           type: object
           properties:
             '@type':
-              type: string
-              enum:
-              - time:Instant
+              anyOf:
+              - type: string
+                enum:
+                - time:Instant
+              - type: array
+                items:
+                  type: string
+                contains:
+                  enum:
+                  - time:Instant
             time:inTimePosition:
               $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.temporalExtent/$defs/timePosition_type
     - type: string
@@ -2185,10 +2542,17 @@ x-defs:
         type: object
         properties:
           '@type':
-            type: string
             default: time:TimePosition
-            enum:
-            - time:TimePosition
+            anyOf:
+            - type: string
+              enum:
+              - time:TimePosition
+            - type: array
+              items:
+                type: string
+              contains:
+                enum:
+                - time:TimePosition
           time:hasTRS:
             type: string
             description: identifier for a temporal reference system; default is million
@@ -2233,23 +2597,15 @@ x-defs:
   cdif.bbr.metadata.provProperties.derivedFrom:
     title: very simple links or names of data sources used to generate the described
       resource.
-    type: object
-    properties:
-      prov:wasDerivedFrom:
-        type: array
-        items:
-          anyOf:
-          - type: string
-          - type: object
-            properties:
-              '@id':
-                type: string
-                description: a resolvable reference to a representation of the software
-                  or instrument used
-          - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.provProperties.derivedFrom/$defs/LabeledLink
-    $defs:
-      LabeledLink:
-        $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.labeledLink
+    anyOf:
+    - type: string
+    - type: object
+      properties:
+        '@id':
+          type: string
+          description: a resolvable reference to a representation of the software
+            or instrument used
+    - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.labeledLink
     x-jsonld-prefixes:
       schema: http://schema.org/
       prov: http://www.w3.org/ns/prov#
@@ -2260,8 +2616,16 @@ x-defs:
     type: object
     properties:
       '@type':
-        enum:
-        - dqv:QualityMeasurement
+        anyOf:
+        - type: string
+          enum:
+          - dqv:QualityMeasurement
+        - type: array
+          items:
+            type: string
+          contains:
+            enum:
+            - dqv:QualityMeasurement
       dqv:isMeasurementOf:
         description: specify the quality measure that is reported, by name, with an
           ID ref, or as a Defined Term
@@ -2816,6 +3180,85 @@ x-defs:
       schema: http://schema.org/
       ada: https://ada.astromat.org/metadata/
     x-schema-source: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/otherFile/schema.yaml
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  cdif.bbr.metadata.schemaorgProperties.variableMeasured:
+    description: Schema.org PropertyValue-based variableMeasured. Defines properties
+      for a measured variable in a dataset, typed as schema:PropertyValue.
+    type: object
+    properties:
+      '@type':
+        type: array
+        items:
+          type: string
+        contains:
+          enum:
+          - schema:PropertyValue
+        minItems: 1
+      '@id':
+        type: string
+      schema:name:
+        type: string
+        description: string label associated with the variable in the dataset serialization
+      schema:description:
+        type: string
+        default: missing
+      schema:alternateName:
+        type: array
+        items:
+          type: string
+          description: human intelligible name for variable that conveys semantics
+      schema:measurementTechnique:
+        anyOf:
+        - type: string
+        - type: object
+          properties:
+            '@id':
+              type: string
+              description: reference to a skos concept
+        - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.variableMeasured/$defs/DefinedTerm
+        description: Text description or URI identifying the measurement method.
+      schema:propertyID:
+        type: array
+        items:
+          anyOf:
+          - type: string
+          - type: object
+            properties:
+              '@id':
+                type: string
+          - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.variableMeasured/$defs/DefinedTerm
+        description: identifier or name for the property concept
+      schema:unitText:
+        type: string
+        description: unit of measurement as text
+      schema:unitCode:
+        anyOf:
+        - type: string
+        - type: object
+          properties:
+            '@id':
+              type: string
+        - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.variableMeasured/$defs/DefinedTerm
+        description: URI or code identifying the unit of measure
+      schema:minValue:
+        type: number
+        description: minimum numeric value in the dataset
+      schema:maxValue:
+        type: number
+        description: maximum numeric value in the dataset
+      schema:url:
+        type: string
+        format: uri
+        description: link to a web page useful for interpreting the variable
+    required:
+    - '@type'
+    - schema:name
+    $defs:
+      DefinedTerm:
+        $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaVLM/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.definedTerm
+    x-jsonld-prefixes:
+      schema: http://schema.org/
+    x-schema-source: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/variableMeasured/schema.yaml
     x-schema-version: https://json-schema.org/draft/2020-12/schema
   ada.bbr.metadata.adaProperties.detailEMPA:
     title: EMPA Instrument Detail

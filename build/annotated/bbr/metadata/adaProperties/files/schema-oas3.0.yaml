@@ -18,6 +18,10 @@ x-defs:
         minItems: 1
       schema:name:
         type: string
+      schema:description:
+        type: string
+        description: Description of this distribution, e.g. what format, access constraints,
+          etc.
       schema:contentUrl:
         type: string
         format: uri
@@ -50,6 +54,17 @@ x-defs:
             type: string
         required:
         - '@type'
+      dcterms:conformsTo:
+        description: An identifier for a standard or specification that the distribution
+          conforms to. Recommended to enable machine-actionable data access.
+        type: array
+        minItems: 1
+        items:
+          type: object
+          properties:
+            '@id':
+              type: string
+              description: uri for specification that this distribution conforms to
       schema:provider:
         type: array
         description: Party who maintains this particular distribution option for the
@@ -63,6 +78,8 @@ x-defs:
                 type: string
                 description: a identifier for an agent defined in this metadata, or
                   externally; must be dereferenceable
+            required:
+            - '@id'
           - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/files/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.person
           - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/files/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.organization
     required:
@@ -606,9 +623,16 @@ x-defs:
       '@id':
         type: string
       '@type':
-        type: string
-        enum:
-        - schema:Person
+        anyOf:
+        - type: string
+          enum:
+          - schema:Person
+        - type: array
+          items:
+            type: string
+          contains:
+            enum:
+            - schema:Person
       schema:name:
         type: string
         description: string label for person that is meaningful for human users
@@ -630,10 +654,17 @@ x-defs:
         type: object
         properties:
           '@type':
-            type: string
             default: schema:ContactPoint
-            enum:
-            - schema:ContactPoint
+            anyOf:
+            - type: string
+              enum:
+              - schema:ContactPoint
+            - type: array
+              items:
+                type: string
+              contains:
+                enum:
+                - schema:ContactPoint
           schema:email:
             type: string
         description: restrict to email only. Schema.org allows telephone and postal
@@ -642,7 +673,13 @@ x-defs:
         type: array
         description: other identifiers for the person
         items:
-          type: string
+          anyOf:
+          - type: string
+          - type: object
+            properties:
+              '@id':
+                type: string
+          - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/files/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.identifier
     allOf:
     - required:
       - '@type'
@@ -661,10 +698,17 @@ x-defs:
       '@id':
         type: string
       '@type':
-        type: string
         default: schema:Organization
-        enum:
-        - schema:Organization
+        anyOf:
+        - type: string
+          enum:
+          - schema:Organization
+        - type: array
+          items:
+            type: string
+          contains:
+            enum:
+            - schema:Organization
       schema:additionalType:
         type: array
         items:
@@ -699,7 +743,13 @@ x-defs:
         type: array
         description: other identifiers for the organization
         items:
-          type: string
+          anyOf:
+          - type: string
+          - type: object
+            properties:
+              '@id':
+                type: string
+          - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/files/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.identifier
     allOf:
     - required:
       - '@type'
@@ -1232,9 +1282,16 @@ x-defs:
     type: object
     properties:
       '@type':
-        type: string
-        enum:
-        - schema:PropertyValue
+        anyOf:
+        - type: string
+          enum:
+          - schema:PropertyValue
+        - type: array
+          items:
+            type: string
+          contains:
+            enum:
+            - schema:PropertyValue
       schema:propertyID:
         type: string
         description: In this context for the schema:PropertyValue, this field is an
@@ -1266,8 +1323,16 @@ x-defs:
     type: object
     properties:
       '@type':
-        enum:
-        - schema:DefinedTerm
+        anyOf:
+        - type: string
+          enum:
+          - schema:DefinedTerm
+        - type: array
+          items:
+            type: string
+          contains:
+            enum:
+            - schema:DefinedTerm
       schema:name:
         type: string
         description: text label for the term that is useful to human user

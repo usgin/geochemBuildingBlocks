@@ -13,6 +13,55 @@ Pixel coordinate system registration for images and maps. Defines properties: ba
 
 Defines the pixel coordinate system registration for spatially registered images and maps. Includes origin coordinates (X, Y, Z), pixel scales, coordinate units, and the coordinate definition type (stage-defined or pixel-defined).
 
+## Examples
+
+### Spatial Registration Example
+Pixel coordinate system registration for a spatially registered image map.
+#### json
+```json
+{
+  "basemap": "basemap_BSE_001.tif",
+  "originX": 0.0,
+  "originY": 0.0,
+  "originZ": 0.0,
+  "coordDef": "pixel-defined",
+  "coordUnits": "micrometer",
+  "pixelUnits": "micrometer",
+  "pixelScaleX": 0.125,
+  "pixelScaleY": 0.125,
+  "originLocation": "upperLeft"
+}
+
+```
+
+#### jsonld
+```jsonld
+{
+  "@context": [
+    {
+      "ada": "https://ada.astromat.org/metadata/"
+    },
+    "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/spatialRegistration/context.jsonld"
+  ],
+  "basemap": "basemap_BSE_001.tif",
+  "originX": 0.0,
+  "originY": 0.0,
+  "originZ": 0.0,
+  "coordDef": "pixel-defined",
+  "coordUnits": "micrometer",
+  "pixelUnits": "micrometer",
+  "pixelScaleX": 0.125,
+  "pixelScaleY": 0.125,
+  "originLocation": "upperLeft"
+}
+```
+
+#### ttl
+```ttl
+
+
+```
+
 ## Schema
 
 ```yaml

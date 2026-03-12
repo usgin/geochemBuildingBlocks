@@ -2,13 +2,145 @@
   "title": "Validation report for ada.bbr.metadata.adaProperties.dataCube - Data Cube Type",
   "bblockName": "Data Cube Type",
   "bblockId": "ada.bbr.metadata.adaProperties.dataCube",
-  "generated": "2026-03-09T21:52:11.103148+00:00",
-  "result": true,
-  "items": [],
+  "generated": "2026-03-12T19:36:48.188922+00:00",
+  "result": false,
+  "items": [
+    {
+      "source": {
+        "type": "EXAMPLE",
+        "requireFail": false,
+        "filename": "build/tests/bbr/metadata/adaProperties/dataCube/example_1_1.json",
+        "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/adaProperties/dataCube/example_1_1.json",
+        "exampleIndex": 1,
+        "snippetIndex": 1,
+        "language": "application/json"
+      },
+      "result": false,
+      "sections": [
+        {
+          "name": "FILES",
+          "title": "Files",
+          "entries": [
+            {
+              "isError": false,
+              "message": "Using example_1_1.json from examples"
+            },
+            {
+              "op": "jsonld-uplift",
+              "isError": false,
+              "message": "JSON-LD context is present - uplifting"
+            },
+            {
+              "op": "jsonld-create",
+              "filename": "example_1_1.jsonld",
+              "isError": false,
+              "message": "Output JSON-LD example_1_1.jsonld created"
+            },
+            {
+              "op": "ttl-create",
+              "empty": false,
+              "filename": "example_1_1.ttl",
+              "size": 2,
+              "isError": false,
+              "message": "Output Turtle example_1_1.ttl created"
+            }
+          ]
+        },
+        {
+          "name": "JSON_SCHEMA",
+          "title": "JSON Schema",
+          "entries": [
+            {
+              "op": "validation",
+              "result": true,
+              "isError": false,
+              "message": "Validation passed"
+            }
+          ]
+        },
+        {
+          "name": "SHACL",
+          "title": "SHACL",
+          "entries": [
+            {
+              "op": "shacl-report",
+              "shaclFile": "_sources/adaProperties/dataCube/rules.shacl",
+              "graph": "@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms true .\n\n",
+              "isError": false,
+              "message": "Validation result for _sources/adaProperties/dataCube/rules.shacl:\n  Validation Report\n  Conforms: True\n  "
+            },
+            {
+              "shaclFile": "_sources/adaProperties/dataCube/rules.shacl",
+              "focusNodes": {
+                "cdifd:dataCubeShape": {
+                  "nodes": []
+                }
+              },
+              "isError": false,
+              "message": "Focus nodes for _sources/adaProperties/dataCube/rules.shacl:\n - Shape cdifd:dataCubeShape: *none*\n"
+            },
+            {
+              "op": "shacl-report",
+              "shaclFile": "https://usgin.github.io/metadataBuildingBlocks/_sources/cdifProperties/cdifDataCube/rules.shacl",
+              "graph": "@prefix cdi: <http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/> .\n@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms false ;\n    sh:result [ a sh:ValidationResult ;\n            sh:focusNode [ a cdi:StructuredDataSet,\n                        <https://ada.astromat.org/metadata/dataCube> ] ;\n            sh:resultMessage \"A StructuredDataSet should have physical mappings (cdi:hasPhysicalMapping) linking variables to their physical representation.\" ;\n            sh:resultPath cdi:hasPhysicalMapping ;\n            sh:resultSeverity sh:Warning ;\n            sh:sourceConstraintComponent sh:MinCountConstraintComponent ;\n            sh:sourceShape [ sh:message \"A StructuredDataSet should have physical mappings (cdi:hasPhysicalMapping) linking variables to their physical representation.\" ;\n                    sh:minCount 1 ;\n                    sh:path cdi:hasPhysicalMapping ;\n                    sh:severity sh:Warning ] ] .\n\n",
+              "isError": true,
+              "message": "Validation result for https://usgin.github.io/metadataBuildingBlocks/_sources/cdifProperties/cdifDataCube/rules.shacl:\n  Validation Report\n  Conforms: False\n  Results (1):\n  Validation Result in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):\n  \tSeverity: sh:Warning\n  \tSource Shape: [ sh:message Literal(\"A StructuredDataSet should have physical mappings (cdi:hasPhysicalMapping) linking variables to their physical representation.\") ; sh:minCount Literal(\"1\", datatype=xsd:integer) ; sh:path cdi:hasPhysicalMapping ; sh:severity sh:Warning ]\n  \tFocus Node: [ rdf:type ada:dataCube, cdi:StructuredDataSet ]\n  \tResult Path: cdi:hasPhysicalMapping\n  \tMessage: A StructuredDataSet should have physical mappings (cdi:hasPhysicalMapping) linking variables to their physical representation.\n  "
+            },
+            {
+              "shaclFile": "https://usgin.github.io/metadataBuildingBlocks/_sources/cdifProperties/cdifDataCube/rules.shacl",
+              "focusNodes": {
+                "cdifd:dataCubeShape": {
+                  "nodes": [
+                    "_:N5568a11298cd49ce84f59f0bebc24f6c"
+                  ]
+                }
+              },
+              "isError": false,
+              "message": "Focus nodes for https://usgin.github.io/metadataBuildingBlocks/_sources/cdifProperties/cdifDataCube/rules.shacl:\n - Shape cdifd:dataCubeShape: _:N5568a11298cd49ce84f59f0bebc24f6c\n"
+            },
+            {
+              "op": "shacl-report",
+              "shaclFile": "https://usgin.github.io/metadataBuildingBlocks/_sources/cdifProperties/cdifPhysicalMapping/rules.shacl",
+              "graph": "@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms true .\n\n",
+              "isError": false,
+              "message": "Validation result for https://usgin.github.io/metadataBuildingBlocks/_sources/cdifProperties/cdifPhysicalMapping/rules.shacl:\n  Validation Report\n  Conforms: True\n  "
+            },
+            {
+              "shaclFile": "https://usgin.github.io/metadataBuildingBlocks/_sources/cdifProperties/cdifPhysicalMapping/rules.shacl",
+              "focusNodes": {
+                "cdifd:physicalMappingShape": {
+                  "nodes": []
+                }
+              },
+              "isError": false,
+              "message": "Focus nodes for https://usgin.github.io/metadataBuildingBlocks/_sources/cdifProperties/cdifPhysicalMapping/rules.shacl:\n - Shape cdifd:physicalMappingShape: *none*\n"
+            },
+            {
+              "op": "shacl-report",
+              "shaclFile": "_sources/adaProperties/detailL2MS/rules.shacl",
+              "graph": "@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms true .\n\n",
+              "isError": false,
+              "message": "Validation result for _sources/adaProperties/detailL2MS/rules.shacl:\n  Validation Report\n  Conforms: True\n  "
+            },
+            {
+              "shaclFile": "_sources/adaProperties/detailL2MS/rules.shacl",
+              "focusNodes": {
+                "cdifd:detailL2MSShape": {
+                  "nodes": []
+                }
+              },
+              "isError": false,
+              "message": "Focus nodes for _sources/adaProperties/detailL2MS/rules.shacl:\n - Shape cdifd:detailL2MSShape: *none*\n"
+            }
+          ]
+        }
+      ]
+    }
+  ],
   "globalErrors": {},
   "counts": {
-    "total": 0,
+    "total": 1,
     "passed": 0,
-    "failed": 0
+    "failed": 1
   }
 }

@@ -10,7 +10,7 @@
   "itemClass": "schema",
   "register": "cdif-building-block-register",
   "version": "0.1",
-  "dateOfLastChange": "2026-03-09",
+  "dateOfLastChange": "2026-03-12",
   "link": "https://github.com/usgin/geochemBuildingBlocks",
   "maturity": "draft",
   "scope": "unstable",
@@ -25,7 +25,11 @@
       "link": "https://github.com/amds-ldeo/metadata"
     }
   ],
-  "shaclShapes": {},
+  "shaclShapes": {
+    "ada.bbr.metadata.adaProperties.image": [
+      "https://usgin.github.io/geochemBuildingBlocks/_sources/adaProperties/image/rules.shacl"
+    ]
+  },
   "ldContext": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/image/context.jsonld",
   "schema": {
     "application/yaml": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/image/schema.yaml",
@@ -35,8 +39,36 @@
   "sourceLdContext": "https://usgin.github.io/geochemBuildingBlocks/_sources/adaProperties/image/context.jsonld",
   "sourceFiles": "https://usgin.github.io/geochemBuildingBlocks/_sources/adaProperties/image/",
   "rdfData": [],
-  "validationPassed": true,
+  "validationPassed": false,
+  "testOutputs": "https://github.com/usgin/geochemBuildingBlocks/blob/main/build/tests/bbr/metadata/adaProperties/image/",
   "description": "# Image Type\n\nDescribes image objects in ADA metadata with acquisition details and component type classification. Typed as `ada:image` and `schema:ImageObject`. Supports various analytical image types including EMPA, SEM, TEM, STEM, and spectroscopic images.\n",
+  "examples": [
+    {
+      "title": "Image Type Example",
+      "content": "An SEM backscattered electron image with component type and acquisition details.",
+      "prefixes": {
+        "schema": "http://schema.org/",
+        "ada": "https://ada.astromat.org/metadata/"
+      },
+      "snippets": [
+        {
+          "language": "json",
+          "code": "{\n  \"@type\": [\"ada:image\", \"schema:ImageObject\"],\n  \"componentType\": {\n    \"@type\": \"ada:SEMImageCollection\"\n  },\n  \"acquisitionTime\": \"2024-03-15T14:30:00Z\",\n  \"channel1\": \"BSE\",\n  \"pixelSize\": \"0.5 micrometer\",\n  \"illuminationType\": \"Electron beam\",\n  \"imageType\": \"Backscattered electron\"\n}\n",
+          "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/adaProperties/image/example_1_1.json"
+        },
+        {
+          "language": "jsonld",
+          "code": "{\n  \"@context\": [\n    {\n      \"schema\": \"http://schema.org/\",\n      \"ada\": \"https://ada.astromat.org/metadata/\"\n    },\n    \"https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/image/context.jsonld\"\n  ],\n  \"@type\": [\n    \"ada:image\",\n    \"schema:ImageObject\"\n  ],\n  \"componentType\": {\n    \"@type\": \"ada:SEMImageCollection\"\n  },\n  \"acquisitionTime\": \"2024-03-15T14:30:00Z\",\n  \"channel1\": \"BSE\",\n  \"pixelSize\": \"0.5 micrometer\",\n  \"illuminationType\": \"Electron beam\",\n  \"imageType\": \"Backscattered electron\"\n}",
+          "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/adaProperties/image/example_1_1.jsonld"
+        },
+        {
+          "language": "ttl",
+          "code": "@prefix ada: <https://ada.astromat.org/metadata/> .\n@prefix schema1: <http://schema.org/> .\n\n[] a schema1:ImageObject,\n        ada:image .\n\n",
+          "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/adaProperties/image/example_1_1.ttl"
+        }
+      ]
+    }
+  ],
   "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: Image Type\ndescription: Image objects with acquisition details and component type classification.\n  Typed as ada:image and schema:ImageObject.\ntype: object\nproperties:\n  '@type':\n    type: array\n    items:\n      type: string\n    minItems: 2\n    allOf:\n    - contains:\n        const: ada:image\n    - contains:\n        const: schema:ImageObject\n    description: GeneralType for images\n  acquisitionTime:\n    type: string\n  componentType:\n    type: object\n    properties:\n      '@type':\n        enum:\n        - ada:AIVAImage\n        - ada:EMPAImage\n        - ada:LITImage\n        - ada:STEMImage\n        - ada:TEMImage\n        - ada:TEMPatternsImage\n        - ada:UVFMImage\n        - ada:VLMImage\n        - ada:SEMEBSDGrainImage\n        - ada:SEMEDSElementalMap\n        - ada:SEMHRCLImage\n        - ada:SEMImageCollection\n        - ada:TEMEDSImageCollection\n        - ada:NanoSIMSImage\n        - ada:XANESImageStack\n        - ada:XANESStackOverviewImage\n        - ada:XRDDiffractionPattern\n        - ada:ShapeModelImage\n    required:\n    - '@type'\n  channel1:\n    type: string\n  channel2:\n    type: string\n  channel3:\n    type: string\n  pixelSize:\n    type: string\n  illuminationType:\n    type: string\n    description: Type of illumination used to create the image. Examples include Visible\n      light, Cross-polarized visible light, ultraviolet light, Electron beam, X-ray.\n  imageType:\n    type: string\n    description: Specifies the nature of the sample's response to the illumination\n      that was detected and measured.\nrequired:\n- '@type'\n- componentType\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  ada: https://ada.astromat.org/metadata/\n",
   "gitRepository": "https://github.com/usgin/geochemBuildingBlocks",
   "gitPath": "_sources/adaProperties/image"

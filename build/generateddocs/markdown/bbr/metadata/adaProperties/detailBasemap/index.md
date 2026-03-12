@@ -13,6 +13,61 @@ Basemap images with RGB channels and pixel scaling. Defines properties: @type, s
 
 Basemap images with RGB channels and pixel scaling. (Extension type, not in v3 source schema.)
 
+## Examples
+
+### Basemap Detail Example
+A basemap image with RGB channels and pixel scaling for spatial reference.
+#### json
+```json
+{
+  "@type": ["ada:basemap", "schema:Map"],
+  "schema:description": "BSE basemap image of thin section",
+  "pixelUnits": "micrometer",
+  "pixelScaleX": 0.5,
+  "pixelScaleY": 0.5,
+  "channel1": "BSE",
+  "channel2": "",
+  "channel3": ""
+}
+
+```
+
+#### jsonld
+```jsonld
+{
+  "@context": [
+    {
+      "schema": "http://schema.org/",
+      "ada": "https://ada.astromat.org/metadata/"
+    },
+    "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailBasemap/context.jsonld"
+  ],
+  "@type": [
+    "ada:basemap",
+    "schema:Map"
+  ],
+  "schema:description": "BSE basemap image of thin section",
+  "pixelUnits": "micrometer",
+  "pixelScaleX": 0.5,
+  "pixelScaleY": 0.5,
+  "channel1": "BSE",
+  "channel2": "",
+  "channel3": ""
+}
+```
+
+#### ttl
+```ttl
+@prefix ada: <https://ada.astromat.org/metadata/> .
+@prefix schema1: <http://schema.org/> .
+
+[] a schema1:Map,
+        ada:basemap ;
+    schema1:description "BSE basemap image of thin section" .
+
+
+```
+
 ## Schema
 
 ```yaml

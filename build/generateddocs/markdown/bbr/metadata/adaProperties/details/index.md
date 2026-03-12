@@ -30,6 +30,59 @@ Umbrella schema referencing all instrument-specific detail type building blocks.
 - **detailXCT** - X-ray Computed Tomography images with detailed scan parameters
 - **detailXRD** - X-ray Diffraction tabular data with geometry and wavelength
 
+## Examples
+
+### Instrument Detail Types Example
+The details building block is an umbrella schema. See individual detail type examples
+(detailARGT, detailBasemap, detailDSC, etc.) for specific instances.
+Below is an example of a basemap detail as one representative member.
+#### json
+```json
+{
+  "@type": ["ada:basemap", "schema:Map"],
+  "schema:description": "BSE overview basemap",
+  "pixelUnits": "micrometer",
+  "pixelScaleX": 0.25,
+  "pixelScaleY": 0.25,
+  "channel1": "BSE"
+}
+
+```
+
+#### jsonld
+```jsonld
+{
+  "@context": [
+    {
+      "schema": "http://schema.org/",
+      "ada": "https://ada.astromat.org/metadata/"
+    },
+    "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/details/context.jsonld"
+  ],
+  "@type": [
+    "ada:basemap",
+    "schema:Map"
+  ],
+  "schema:description": "BSE overview basemap",
+  "pixelUnits": "micrometer",
+  "pixelScaleX": 0.25,
+  "pixelScaleY": 0.25,
+  "channel1": "BSE"
+}
+```
+
+#### ttl
+```ttl
+@prefix ada: <https://ada.astromat.org/metadata/> .
+@prefix schema1: <http://schema.org/> .
+
+[] a schema1:Map,
+        ada:basemap ;
+    schema1:description "BSE overview basemap" .
+
+
+```
+
 ## Schema
 
 ```yaml

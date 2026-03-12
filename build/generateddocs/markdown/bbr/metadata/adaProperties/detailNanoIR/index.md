@@ -13,6 +13,45 @@ Nano-IR spectroscopy collections with phase analysis. Defines properties: @type,
 
 Nano-IR spectroscopy collections with phase analysis.
 
+## Examples
+
+### NanoIR Instrument Detail Example
+Nano-IR background spectroscopy detail with phases analyzed.
+#### json
+```json
+{
+  "@type": "ada:NanoIRBackground",
+  "phaseAnalyzed": ["carbonate", "silicate"]
+}
+
+```
+
+#### jsonld
+```jsonld
+{
+  "@context": [
+    {
+      "ada": "https://ada.astromat.org/metadata/"
+    },
+    "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailNanoIR/context.jsonld"
+  ],
+  "@type": "ada:NanoIRBackground",
+  "phaseAnalyzed": [
+    "carbonate",
+    "silicate"
+  ]
+}
+```
+
+#### ttl
+```ttl
+@prefix ada: <https://ada.astromat.org/metadata/> .
+
+[] a ada:NanoIRBackground .
+
+
+```
+
 ## Schema
 
 ```yaml

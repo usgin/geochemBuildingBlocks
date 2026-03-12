@@ -13,6 +13,16 @@ Simple reusable array of strings used throughout ADA metadata. Defines type: arr
 
 A simple reusable array of strings used throughout ADA metadata for properties like `resultTarget`, `memberTypes`, `phaseAnalyzed`, and `isotopeAnalyzed`.
 
+## Examples
+
+### String Array Example
+A simple array of string values, used for multi-valued text properties such as phases analyzed or isotopes tracked.
+#### json
+```json
+["olivine", "pyroxene", "plagioclase"]
+
+```
+
 ## Schema
 
 ```yaml

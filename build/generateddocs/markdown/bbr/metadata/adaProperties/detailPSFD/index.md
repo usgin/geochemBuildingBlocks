@@ -13,6 +13,47 @@ Point Spread Function Data with image names and conditions. Defines properties: 
 
 Point Spread Function Data with image names and conditions.
 
+## Examples
+
+### PSFD Instrument Detail Example
+Point Spread Function Data detail with image names and viewing conditions.
+#### json
+```json
+{
+  "@type": "ada:PSFDTabular",
+  "imageName": ["crater_overview_001.tif", "crater_overview_002.tif"],
+  "imageViewingConditions": "nadir, 50m altitude"
+}
+
+```
+
+#### jsonld
+```jsonld
+{
+  "@context": [
+    {
+      "ada": "https://ada.astromat.org/metadata/"
+    },
+    "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailPSFD/context.jsonld"
+  ],
+  "@type": "ada:PSFDTabular",
+  "imageName": [
+    "crater_overview_001.tif",
+    "crater_overview_002.tif"
+  ],
+  "imageViewingConditions": "nadir, 50m altitude"
+}
+```
+
+#### ttl
+```ttl
+@prefix ada: <https://ada.astromat.org/metadata/> .
+
+[] a ada:PSFDTabular .
+
+
+```
+
 ## Schema
 
 ```yaml

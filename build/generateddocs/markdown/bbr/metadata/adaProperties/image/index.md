@@ -13,6 +13,62 @@ ADA image with componentType classification for analytical images. Defines prope
 
 Describes image objects in ADA metadata with acquisition details and component type classification. Typed as `ada:image` and `schema:ImageObject`. Supports various analytical image types including EMPA, SEM, TEM, STEM, and spectroscopic images.
 
+## Examples
+
+### Image Type Example
+An SEM backscattered electron image with component type and acquisition details.
+#### json
+```json
+{
+  "@type": ["ada:image", "schema:ImageObject"],
+  "componentType": {
+    "@type": "ada:SEMImageCollection"
+  },
+  "acquisitionTime": "2024-03-15T14:30:00Z",
+  "channel1": "BSE",
+  "pixelSize": "0.5 micrometer",
+  "illuminationType": "Electron beam",
+  "imageType": "Backscattered electron"
+}
+
+```
+
+#### jsonld
+```jsonld
+{
+  "@context": [
+    {
+      "schema": "http://schema.org/",
+      "ada": "https://ada.astromat.org/metadata/"
+    },
+    "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/image/context.jsonld"
+  ],
+  "@type": [
+    "ada:image",
+    "schema:ImageObject"
+  ],
+  "componentType": {
+    "@type": "ada:SEMImageCollection"
+  },
+  "acquisitionTime": "2024-03-15T14:30:00Z",
+  "channel1": "BSE",
+  "pixelSize": "0.5 micrometer",
+  "illuminationType": "Electron beam",
+  "imageType": "Backscattered electron"
+}
+```
+
+#### ttl
+```ttl
+@prefix ada: <https://ada.astromat.org/metadata/> .
+@prefix schema1: <http://schema.org/> .
+
+[] a schema1:ImageObject,
+        ada:image .
+
+
+```
+
 ## Schema
 
 ```yaml

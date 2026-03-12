@@ -13,6 +13,78 @@ Very-Near Mid-IR spectroscopy with detailed measurement parameters. Defines prop
 
 Very-Near Mid-IR spectroscopy with detailed measurement parameters.
 
+## Examples
+
+### VNMIR Instrument Detail Example
+Very-Near Mid-IR spectroscopy spectral point measurement with detailed parameters.
+#### json
+```json
+{
+  "@type": "ada:VNMIRSpectralPoint",
+  "detector": "MCT",
+  "beamsplitter": "KBr",
+  "calibrationStandards": "gold mirror",
+  "numberOfScans": 256,
+  "spectralRangeMin": "400",
+  "spectralRangeMax": "4000",
+  "spectralResolution": "4 cm-1",
+  "spectralSampling": "2 cm-1",
+  "spotSize": "100 micrometer",
+  "measurement": "reflectance",
+  "measurementEnvironment": "ambient",
+  "environmentalPressure": 1013.25,
+  "sampleHeated": false,
+  "sampleTemperature": 25,
+  "vacuumExposedSample": false,
+  "emissionAngle": 0.0,
+  "incidenceAngle": 30.0,
+  "phaseAngle": 30.0,
+  "uncertaintyNoise": 0.002
+}
+
+```
+
+#### jsonld
+```jsonld
+{
+  "@context": [
+    {
+      "ada": "https://ada.astromat.org/metadata/"
+    },
+    "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailVNMIR/context.jsonld"
+  ],
+  "@type": "ada:VNMIRSpectralPoint",
+  "detector": "MCT",
+  "beamsplitter": "KBr",
+  "calibrationStandards": "gold mirror",
+  "numberOfScans": 256,
+  "spectralRangeMin": "400",
+  "spectralRangeMax": "4000",
+  "spectralResolution": "4 cm-1",
+  "spectralSampling": "2 cm-1",
+  "spotSize": "100 micrometer",
+  "measurement": "reflectance",
+  "measurementEnvironment": "ambient",
+  "environmentalPressure": 1013.25,
+  "sampleHeated": false,
+  "sampleTemperature": 25,
+  "vacuumExposedSample": false,
+  "emissionAngle": 0.0,
+  "incidenceAngle": 30.0,
+  "phaseAngle": 30.0,
+  "uncertaintyNoise": 0.002
+}
+```
+
+#### ttl
+```ttl
+@prefix ada: <https://ada.astromat.org/metadata/> .
+
+[] a ada:VNMIRSpectralPoint .
+
+
+```
+
 ## Schema
 
 ```yaml

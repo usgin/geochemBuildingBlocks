@@ -2,13 +2,126 @@
   "title": "Validation report for ada.bbr.metadata.adaProperties.imageMap - Image Map Type",
   "bblockName": "Image Map Type",
   "bblockId": "ada.bbr.metadata.adaProperties.imageMap",
-  "generated": "2026-03-09T21:52:11.040913+00:00",
-  "result": true,
-  "items": [],
+  "generated": "2026-03-12T19:36:47.615896+00:00",
+  "result": false,
+  "items": [
+    {
+      "source": {
+        "type": "EXAMPLE",
+        "requireFail": false,
+        "filename": "build/tests/bbr/metadata/adaProperties/imageMap/example_1_1.json",
+        "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/adaProperties/imageMap/example_1_1.json",
+        "exampleIndex": 1,
+        "snippetIndex": 1,
+        "language": "application/json"
+      },
+      "result": false,
+      "sections": [
+        {
+          "name": "FILES",
+          "title": "Files",
+          "entries": [
+            {
+              "isError": false,
+              "message": "Using example_1_1.json from examples"
+            },
+            {
+              "op": "jsonld-uplift",
+              "isError": false,
+              "message": "JSON-LD context is present - uplifting"
+            },
+            {
+              "op": "jsonld-create",
+              "filename": "example_1_1.jsonld",
+              "isError": false,
+              "message": "Output JSON-LD example_1_1.jsonld created"
+            },
+            {
+              "op": "ttl-create",
+              "empty": false,
+              "filename": "example_1_1.ttl",
+              "size": 2,
+              "isError": false,
+              "message": "Output Turtle example_1_1.ttl created"
+            }
+          ]
+        },
+        {
+          "name": "JSON_SCHEMA",
+          "title": "JSON Schema",
+          "entries": [
+            {
+              "op": "validation",
+              "result": true,
+              "isError": false,
+              "message": "Validation passed"
+            }
+          ]
+        },
+        {
+          "name": "SHACL",
+          "title": "SHACL",
+          "entries": [
+            {
+              "op": "shacl-report",
+              "shaclFile": "_sources/adaProperties/imageMap/rules.shacl",
+              "graph": "@prefix ada: <https://ada.astromat.org/metadata/> .\n@prefix schema1: <http://schema.org/> .\n@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms false ;\n    sh:result [ a sh:ValidationResult ;\n            sh:focusNode [ a schema1:ImageObject,\n                        ada:imageMap ] ;\n            sh:resultMessage \"An image map must have a componentType.\" ;\n            sh:resultPath ada:componentType ;\n            sh:resultSeverity sh:Violation ;\n            sh:sourceConstraintComponent sh:MinCountConstraintComponent ;\n            sh:sourceShape [ sh:message \"An image map must have a componentType.\" ;\n                    sh:minCount 1 ;\n                    sh:path ada:componentType ] ] .\n\n",
+              "isError": true,
+              "message": "Validation result for _sources/adaProperties/imageMap/rules.shacl:\n  Validation Report\n  Conforms: False\n  Results (1):\n  Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):\n  \tSeverity: sh:Violation\n  \tSource Shape: [ sh:message Literal(\"An image map must have a componentType.\") ; sh:minCount Literal(\"1\", datatype=xsd:integer) ; sh:path ada:componentType ]\n  \tFocus Node: [ rdf:type ada:imageMap, schema1:ImageObject ]\n  \tResult Path: ada:componentType\n  \tMessage: An image map must have a componentType.\n  "
+            },
+            {
+              "shaclFile": "_sources/adaProperties/imageMap/rules.shacl",
+              "focusNodes": {
+                "cdifd:imageMapShape": {
+                  "nodes": []
+                }
+              },
+              "isError": false,
+              "message": "Focus nodes for _sources/adaProperties/imageMap/rules.shacl:\n - Shape cdifd:imageMapShape: *none*\n"
+            },
+            {
+              "op": "shacl-report",
+              "shaclFile": "_sources/adaProperties/spatialRegistration/rules.shacl",
+              "graph": "@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms true .\n\n",
+              "isError": false,
+              "message": "Validation result for _sources/adaProperties/spatialRegistration/rules.shacl:\n  Validation Report\n  Conforms: True\n  "
+            },
+            {
+              "shaclFile": "_sources/adaProperties/spatialRegistration/rules.shacl",
+              "focusNodes": {
+                "cdifd:spatialRegistrationShape": {
+                  "nodes": []
+                }
+              },
+              "isError": false,
+              "message": "Focus nodes for _sources/adaProperties/spatialRegistration/rules.shacl:\n - Shape cdifd:spatialRegistrationShape: *none*\n"
+            },
+            {
+              "op": "shacl-report",
+              "shaclFile": "_sources/adaProperties/detailEMPA/rules.shacl",
+              "graph": "@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms true .\n\n",
+              "isError": false,
+              "message": "Validation result for _sources/adaProperties/detailEMPA/rules.shacl:\n  Validation Report\n  Conforms: True\n  "
+            },
+            {
+              "shaclFile": "_sources/adaProperties/detailEMPA/rules.shacl",
+              "focusNodes": {
+                "cdifd:detailEMPAShape": {
+                  "nodes": []
+                }
+              },
+              "isError": false,
+              "message": "Focus nodes for _sources/adaProperties/detailEMPA/rules.shacl:\n - Shape cdifd:detailEMPAShape: *none*\n"
+            }
+          ]
+        }
+      ]
+    }
+  ],
   "globalErrors": {},
   "counts": {
-    "total": 0,
+    "total": 1,
     "passed": 0,
-    "failed": 0
+    "failed": 1
   }
 }

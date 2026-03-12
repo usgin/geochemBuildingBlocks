@@ -861,17 +861,45 @@
       "title": "Optional properties for CDIF Discovery metadata schema, with schema: prefixes",
       "description": "Building block specifies properties for minimal CDIF schama.org discovery record",
       "properties": {
+        "@context": {
+          "type": "object",
+          "description": "JSON-LD context declaring namespace prefixes used in the metadata record.",
+          "properties": {
+            "schema": {
+              "enum": [
+                "http://schema.org/"
+              ]
+            },
+            "dcterms": {
+              "enum": [
+                "http://purl.org/dc/terms/"
+              ]
+            },
+            "spdx": {
+              "enum": [
+                "http://spdx.org/rdf/terms#"
+              ]
+            },
+            "dcat": {
+              "enum": [
+                "http://www.w3.org/ns/dcat#"
+              ]
+            }
+          },
+          "required": [
+            "schema",
+            "dcterms"
+          ]
+        },
         "@id": {
           "type": "string",
           "description": "The URI for the resource should be the @id value for the root of the JSON instance document tree. Must be an IRI (e.g. https://doi.org/..., urn:..., or a relative URI like #localid). Note that this identifier can be interpreted to identify the resource that is the subject of this metadata record, or the JSON-LD object that is the digital object containing the metadata information."
         },
         "@type": {
-          "description": "a schema.org Class that specifies the expected information content for the metadata record. For CDIF, 'schema:Dataset' is required, but other possible values (e.g. CreativeWork, SoftwareApplication, Product, WebAPI) are sometimes included to enable the schema.org properties used to describe the resource without schema.org validation errors. The array must include at least one value from the known set, but can also include other strings for extensibility.",
+          "description": "a schema.org Class that specifies the expected information content for the metadata record. The array must include at least one schema.org type value. Default is schema:Dataset.",
           "type": "array",
           "items": {
-            "type": "string"
-          },
-          "contains": {
+            "type": "string",
             "enum": [
               "schema:CreativeWork",
               "schema:SoftwareApplication",
@@ -888,7 +916,12 @@
             ]
           },
           "default": "schema:Dataset",
-          "minItems": 1
+          "minItems": 1,
+          "contains": {
+            "enum": [
+              "schema:Dataset"
+            ]
+          }
         },
         "schema:name": {
           "type": "string",
@@ -1052,6 +1085,32 @@
       "title": "Optional properties for CDIF discovery metadata schema, with schema: prefixes",
       "description": "Building block specifies properties for CDIF schama.org discovery record",
       "properties": {
+        "@context": {
+          "type": "object",
+          "description": "Additional JSON-LD namespace prefixes used by optional CDIF properties.",
+          "properties": {
+            "geosparql": {
+              "enum": [
+                "http://www.opengis.net/ont/geosparql#"
+              ]
+            },
+            "prov": {
+              "enum": [
+                "http://www.w3.org/ns/prov#"
+              ]
+            },
+            "dqv": {
+              "enum": [
+                "http://www.w3.org/ns/dqv#"
+              ]
+            },
+            "cdi": {
+              "enum": [
+                "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/"
+              ]
+            }
+          }
+        },
         "schema:description": {
           "type": "string",
           "description": "A short summary describing a dataset. This text will be indexed by search applications, so the more information here, the better."
@@ -1072,16 +1131,25 @@
           }
         },
         "schema:sameAs": {
-          "description": "The other identifiers for the dataset. Schema.org has three ways of encoding identifiers-- a text description, a URL, or by using the schema:PropertyValue field. The Science on Schema.org guidance strongly recommends using the PropertyValue approach. see https://github.com/ESIPFed/science-on-schema.org   .... Dataset.md#identifier.",
+          "description": "Other identifiers for the dataset, as IRI references, literal strings, or structured identifiers using schema:PropertyValue.",
           "type": "array",
-          "minItems": 0,
+          "minItems": 1,
           "items": {
             "anyOf": [
               {
-                "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaXRD/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.cdifProperties.cdifOptional/$defs/Identifier"
+                "type": "string"
               },
               {
-                "type": "string"
+                "type": "object",
+                "properties": {
+                  "@id": {
+                    "type": "string",
+                    "description": "IRI for an equivalent resource or alternate identifier"
+                  }
+                }
+              },
+              {
+                "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaXRD/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.cdifProperties.cdifOptional/$defs/Identifier"
               }
             ]
           }
@@ -1112,9 +1180,24 @@
             "type": "object",
             "properties": {
               "@type": {
-                "type": "string",
-                "enum": [
-                  "schema:LinkRole"
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "enum": [
+                      "schema:LinkRole"
+                    ]
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "contains": {
+                      "enum": [
+                        "schema:LinkRole"
+                      ]
+                    }
+                  }
                 ]
               },
               "schema:linkRelationship": {
@@ -1127,13 +1210,28 @@
                   }
                 ]
               },
-              "target": {
+              "schema:target": {
                 "type": "object",
                 "properties": {
                   "@type": {
-                    "type": "string",
-                    "enum": [
-                      "schema:EntryPoint"
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "enum": [
+                          "schema:EntryPoint"
+                        ]
+                      },
+                      {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "contains": {
+                          "enum": [
+                            "schema:EntryPoint"
+                          ]
+                        }
+                      }
                     ]
                   },
                   "schema:encodingFormat": {
@@ -1176,6 +1274,30 @@
             ]
           }
         },
+        "schema:measurementTechnique": {
+          "description": "The technique, technology, or methodology used for measurement or determination of the dataset values. Can be a string, a URI reference, a DefinedTerm, or an array combining these.",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaXRD/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.cdifProperties.cdifOptional/$defs/DefinedTerm"
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaXRD/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.cdifProperties.cdifOptional/$defs/DefinedTerm"
+                  }
+                ]
+              }
+            }
+          ]
+        },
         "schema:keywords": {
           "description": "Keywords are an array of strings, an array of schema:DefinedTerms, or some combination of these. If you have information about a controlled vocabulary from which keywords come from, use schema:DefinedTerm to descibe that keyword. This allowed variability makes parsing metadata hard; recommend using DefinedTerm for all keywords if any of them are from a known vocabulary, otherwise an array of strings.",
           "type": "array",
@@ -1205,7 +1327,10 @@
                         "type": "string",
                         "description": "a identifier for an agent defined in this metadata, or externally; must be dereferenceable"
                       }
-                    }
+                    },
+                    "required": [
+                      "@id"
+                    ]
                   },
                   {
                     "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaXRD/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.cdifProperties.cdifOptional/$defs/Person"
@@ -1230,7 +1355,10 @@
                     "type": "string",
                     "description": "a identifier for an agent defined in this metadata, or externally; must be dereferenceable"
                   }
-                }
+                },
+                "required": [
+                  "@id"
+                ]
               },
               {
                 "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaXRD/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.cdifProperties.cdifOptional/$defs/Person"
@@ -1254,7 +1382,10 @@
                   "type": "string",
                   "description": "a identifier for an agent defined in this metadata, or externally; must be dereferenceable"
                 }
-              }
+              },
+              "required": [
+                "@id"
+              ]
             },
             {
               "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaXRD/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.cdifProperties.cdifOptional/$defs/Person"
@@ -1276,7 +1407,10 @@
                     "type": "string",
                     "description": "a identifier for an agent defined in this metadata, or externally; must be dereferenceable"
                   }
-                }
+                },
+                "required": [
+                  "@id"
+                ]
               },
               {
                 "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaXRD/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.cdifProperties.cdifOptional/$defs/Person"
@@ -1297,7 +1431,14 @@
           "description": "What does the dataset measure? (e.g., temperature, pressure)",
           "type": "array",
           "items": {
-            "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaXRD/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.cdifProperties.cdifOptional/$defs/VariableMeasured"
+            "anyOf": [
+              {
+                "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaXRD/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.cdifProperties.cdifOptional/$defs/VariableMeasured"
+              },
+              {
+                "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaXRD/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.cdifProperties.cdifOptional/$defs/StatisticalVariable"
+              }
+            ]
           }
         },
         "schema:spatialCoverage": {
@@ -1336,38 +1477,12 @@
           }
         },
         "schema:distribution": {
-          "description": "Distribution with dual typing for structured or tabular data; extends the CDIFMandatory distribution by requiring a CDI dataset type alongside schema:DataDownload.",
+          "description": "Distribution options for the dataset.",
           "type": "array",
           "items": {
             "anyOf": [
               {
                 "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaXRD/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.cdifProperties.cdifOptional/$defs/DataDownload"
-              },
-              {
-                "description": "Distribution with CDIF dual typing for structured or tabular data",
-                "allOf": [
-                  {
-                    "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaXRD/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.cdifProperties.cdifOptional/$defs/DataDownload"
-                  },
-                  {
-                    "type": "object",
-                    "properties": {
-                      "@type": {
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        },
-                        "contains": {
-                          "enum": [
-                            "cdi:StructuredDataSet",
-                            "cdi:TabularTextDataSet"
-                          ]
-                        },
-                        "minItems": 2
-                      }
-                    }
-                  }
-                ]
               },
               {
                 "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaXRD/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.cdifProperties.cdifOptional/$defs/WebAPI"
@@ -1399,7 +1514,10 @@
           "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaXRD/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.funder"
         },
         "VariableMeasured": {
-          "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaXRD/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.variableMeasured"
+          "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaXRD/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.cdifProperties.cdifVariableMeasured"
+        },
+        "StatisticalVariable": {
+          "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaXRD/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.statisticalVariable"
         },
         "SpatialExtent": {
           "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaXRD/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.spatialExtent"
@@ -1686,22 +1804,50 @@
       "description": "this element defines an action (operation) that can be invoked via messages using the protocol defined. In most cases this will be an http request via TCP/IP, but in desktop or LAN environments, other protocols might be used. The target property defines the endpoint and syntax for invoking the action. Result specifies the encoding format for the (possible) response(s) when the action is invoked. Object specifies the information model for the resource that is the object of the action. This approach is an adoptation of the Action Blog Post from schema.org (see https://schema.org/docs/actions.html, and https://github.com/schemaorg/suggestions-questions-brainstorming/issues/62) ",
       "properties": {
         "@type": {
-          "type": "string",
           "description": "The type of action. Must be schema:Action or one of its subtypes.",
           "default": "schema:Action",
-          "enum": [
-            "schema:Action",
-            "schema:AssessAction",
-            "schema:ConsumeAction",
-            "schema:ControlAction",
-            "schema:CreateAction",
-            "schema:FindAction",
-            "schema:InteractAction",
-            "schema:MoveAction",
-            "schema:PlayAction",
-            "schema:SearchAction",
-            "schema:TransferAction",
-            "schema:UpdateAction"
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "schema:Action",
+                "schema:AssessAction",
+                "schema:ConsumeAction",
+                "schema:ControlAction",
+                "schema:CreateAction",
+                "schema:DeleteAction",
+                "schema:FindAction",
+                "schema:InteractAction",
+                "schema:MoveAction",
+                "schema:PlayAction",
+                "schema:SearchAction",
+                "schema:TransferAction",
+                "schema:UpdateAction"
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "contains": {
+                "enum": [
+                  "schema:Action",
+                  "schema:AssessAction",
+                  "schema:ConsumeAction",
+                  "schema:ControlAction",
+                  "schema:CreateAction",
+                  "schema:DeleteAction",
+                  "schema:FindAction",
+                  "schema:InteractAction",
+                  "schema:MoveAction",
+                  "schema:PlayAction",
+                  "schema:SearchAction",
+                  "schema:TransferAction",
+                  "schema:UpdateAction"
+                ]
+              }
+            }
           ]
         },
         "schema:name": {
@@ -1751,10 +1897,25 @@
           "description": "documentation of the URL end point and syntax to invoke the service. This schema doesn't handle post requests",
           "properties": {
             "@type": {
-              "type": "string",
               "default": "schema:EntryPoint",
-              "enum": [
-                "schema:EntryPoint"
+              "anyOf": [
+                {
+                  "type": "string",
+                  "enum": [
+                    "schema:EntryPoint"
+                  ]
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "contains": {
+                    "enum": [
+                      "schema:EntryPoint"
+                    ]
+                  }
+                }
               ]
             },
             "schema:description": {
@@ -1835,10 +1996,25 @@
                 "type": "string"
               },
               "@type": {
-                "type": "string",
                 "default": "schema:PropertyValueSpecification",
-                "enum": [
-                  "schema:PropertyValueSpecification"
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "enum": [
+                      "schema:PropertyValueSpecification"
+                    ]
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "contains": {
+                      "enum": [
+                        "schema:PropertyValueSpecification"
+                      ]
+                    }
+                  }
                 ]
               },
               "schema:valueName": {
@@ -1866,14 +2042,36 @@
           "description": "description of the data structure of the return object",
           "properties": {
             "@type": {
-              "type": "string",
               "default": "schema:DataFeed",
-              "enum": [
-                "schema:DataFeed"
+              "anyOf": [
+                {
+                  "type": "string",
+                  "enum": [
+                    "schema:DataFeed"
+                  ]
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "contains": {
+                    "enum": [
+                      "schema:DataFeed"
+                    ]
+                  }
+                }
               ]
             },
             "schema:description": {
               "type": "string"
+            },
+            "schema:encodingFormat-input": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "MIME types accepted as input encoding formats for the action."
             },
             "schema:variableMeasured": {
               "type": "array",
@@ -1898,10 +2096,25 @@
       "type": "object",
       "properties": {
         "@type": {
-          "type": "string",
           "default": "schema:CreativeWork",
-          "enum": [
-            "schema:CreativeWork"
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "schema:CreativeWork"
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "contains": {
+                "enum": [
+                  "schema:CreativeWork"
+                ]
+              }
+            }
           ]
         },
         "schema:name": {
@@ -1930,9 +2143,24 @@
       "type": "object",
       "properties": {
         "@type": {
-          "type": "string",
-          "enum": [
-            "schema:PropertyValue"
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "schema:PropertyValue"
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "contains": {
+                "enum": [
+                  "schema:PropertyValue"
+                ]
+              }
+            }
           ]
         },
         "schema:propertyID": {
@@ -1981,8 +2209,24 @@
       "type": "object",
       "properties": {
         "@type": {
-          "enum": [
-            "schema:DefinedTerm"
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "schema:DefinedTerm"
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "contains": {
+                "enum": [
+                  "schema:DefinedTerm"
+                ]
+              }
+            }
           ]
         },
         "schema:name": {
@@ -2063,6 +2307,10 @@
         "schema:name": {
           "type": "string"
         },
+        "schema:description": {
+          "type": "string",
+          "description": "Description of this distribution, e.g. what format, access constraints, etc."
+        },
         "schema:contentUrl": {
           "type": "string",
           "format": "uri"
@@ -2110,6 +2358,20 @@
             "@type"
           ]
         },
+        "dcterms:conformsTo": {
+          "description": "An identifier for a standard or specification that the distribution conforms to. Recommended to enable machine-actionable data access.",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "properties": {
+              "@id": {
+                "type": "string",
+                "description": "uri for specification that this distribution conforms to"
+              }
+            }
+          }
+        },
         "schema:provider": {
           "type": "array",
           "description": "Party who maintains this particular distribution option for the dataset. Use this property if there are multiple distributions from different providers",
@@ -2122,7 +2384,10 @@
                     "type": "string",
                     "description": "a identifier for an agent defined in this metadata, or externally; must be dereferenceable"
                   }
-                }
+                },
+                "required": [
+                  "@id"
+                ]
               },
               {
                 "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaXRD/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.person"
@@ -2176,7 +2441,8 @@
           "description": "Description of access privileges required to use the API, e.g. registration, licensing, payments. Note that access constraints applying to all distributions of the resource should be specified in the access constraints for the resource description as a whole.",
           "oneOf": [
             {
-              "type": "string"
+              "type": "string",
+              "default": "not specified"
             },
             {
               "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaXRD/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.webAPI/$defs/LabeledLink"
@@ -2204,7 +2470,8 @@
       },
       "required": [
         "schema:serviceType",
-        "schema:potentialAction"
+        "schema:potentialAction",
+        "schema:termsOfService"
       ],
       "$defs": {
         "LabeledLink": {
@@ -2298,10 +2565,25 @@
               "description": "identifier for the containing catalog or repository; example data at https://github.com/ESIPFed/science-on-schema.org/blob/develop/guides/Dataset.md#catalog puts identifier here"
             },
             "@type": {
-              "type": "string",
               "default": "schema:DataCatalog",
-              "enum": [
-                "schema:DataCatalog"
+              "anyOf": [
+                {
+                  "type": "string",
+                  "enum": [
+                    "schema:DataCatalog"
+                  ]
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "contains": {
+                    "enum": [
+                      "schema:DataCatalog"
+                    ]
+                  }
+                }
               ]
             },
             "schema:name": {
@@ -2368,9 +2650,24 @@
           "type": "string"
         },
         "@type": {
-          "type": "string",
-          "enum": [
-            "schema:Person"
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "schema:Person"
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "contains": {
+                "enum": [
+                  "schema:Person"
+                ]
+              }
+            }
           ]
         },
         "schema:name": {
@@ -2407,10 +2704,25 @@
           "type": "object",
           "properties": {
             "@type": {
-              "type": "string",
               "default": "schema:ContactPoint",
-              "enum": [
-                "schema:ContactPoint"
+              "anyOf": [
+                {
+                  "type": "string",
+                  "enum": [
+                    "schema:ContactPoint"
+                  ]
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "contains": {
+                    "enum": [
+                      "schema:ContactPoint"
+                    ]
+                  }
+                }
               ]
             },
             "schema:email": {
@@ -2423,7 +2735,22 @@
           "type": "array",
           "description": "other identifiers for the person",
           "items": {
-            "type": "string"
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "@id": {
+                    "type": "string"
+                  }
+                }
+              },
+              {
+                "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaXRD/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.identifier"
+              }
+            ]
           }
         }
       },
@@ -2461,10 +2788,25 @@
           "type": "string"
         },
         "@type": {
-          "type": "string",
           "default": "schema:Organization",
-          "enum": [
-            "schema:Organization"
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "schema:Organization"
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "contains": {
+                "enum": [
+                  "schema:Organization"
+                ]
+              }
+            }
           ]
         },
         "schema:additionalType": {
@@ -2520,7 +2862,22 @@
           "type": "array",
           "description": "other identifiers for the organization",
           "items": {
-            "type": "string"
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "@id": {
+                    "type": "string"
+                  }
+                }
+              },
+              {
+                "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaXRD/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.identifier"
+              }
+            ]
           }
         }
       },
@@ -2556,10 +2913,25 @@
       "type": "object",
       "properties": {
         "@type": {
-          "type": "string",
           "default": "schema:Role",
-          "enum": [
-            "schema:Role"
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "schema:Role"
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "contains": {
+                "enum": [
+                  "schema:Role"
+                ]
+              }
+            }
           ]
         },
         "schema:roleName": {
@@ -2573,7 +2945,19 @@
           ]
         },
         "schema:contributor": {
-          "oneOf": [
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "@id": {
+                  "type": "string",
+                  "description": "IRI reference to a Person or Organization defined elsewhere"
+                }
+              },
+              "required": [
+                "@id"
+              ]
+            },
             {
               "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaXRD/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.person"
             },
@@ -2597,11 +2981,30 @@
       "description": "Funding acknowledgement properties, profile of schema.org/MonetaryGrant",
       "type": "object",
       "properties": {
-        "@type": {
+        "@id": {
           "type": "string",
+          "description": "URI identifier for this funding record"
+        },
+        "@type": {
           "default": "schema:MonetaryGrant",
-          "enum": [
-            "schema:MonetaryGrant"
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "schema:MonetaryGrant"
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "contains": {
+                "enum": [
+                  "schema:MonetaryGrant"
+                ]
+              }
+            }
           ]
         },
         "schema:identifier": {
@@ -2629,7 +3032,10 @@
                   "type": "string",
                   "description": "a identifier for an agent defined in this metadata, or externally; must be dereferenceable"
                 }
-              }
+              },
+              "required": [
+                "@id"
+              ]
             },
             {
               "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaXRD/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.funder/$defs/Person"
@@ -2655,11 +3061,6 @@
           "required": [
             "schema:name"
           ]
-        },
-        {
-          "required": [
-            "schema:description"
-          ]
         }
       ],
       "$defs": {
@@ -2679,41 +3080,103 @@
       "x-schema-source": "https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/funder/schema.yaml",
       "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
     },
-    "cdif.bbr.metadata.schemaorgProperties.variableMeasured": {
-      "description": "CDIF schema.org implemenation of PropertyValue to use as values for variableMeasured",
+    "cdif.bbr.metadata.cdifProperties.cdifVariableMeasured": {
+      "description": "Extends cdif variableMeasured with properties for DDI-CDI InstanceVariable",
       "type": "object",
       "properties": {
         "@type": {
           "type": "array",
+          "description": "Must include both schema:PropertyValue and cdi:InstanceVariable. Additional types may be included.",
           "items": {
             "type": "string"
           },
-          "contains": {
-            "enum": [
-              "schema:PropertyValue"
-            ]
-          },
-          "minItems": 1
+          "minItems": 2,
+          "allOf": [
+            {
+              "contains": {
+                "enum": [
+                  "schema:PropertyValue"
+                ]
+              }
+            },
+            {
+              "contains": {
+                "enum": [
+                  "cdi:InstanceVariable"
+                ]
+              }
+            }
+          ]
         },
-        "@id": {
+        "cdi:identifier": {
           "type": "string"
         },
-        "schema:name": {
-          "type": "string",
-          "description": "this is the string label that is expected to be associated with the variable in the dataset serialization"
-        },
-        "schema:description": {
-          "type": "string",
-          "default": "missing"
-        },
-        "schema:alternateName": {
+        "cdi:physicalDataType": {
           "type": "array",
           "items": {
-            "type": "string",
-            "description": "human intelligible name for variable that conveys semantics"
-          }
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "@id": {
+                    "type": "string",
+                    "description": "reference to a skos concept for the data type"
+                  }
+                }
+              },
+              {
+                "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaXRD/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.cdifProperties.cdifVariableMeasured/$defs/DefinedTerm"
+              }
+            ]
+          },
+          "description": "identifier or name for the data type concept."
         },
-        "schema:propertyID": {
+        "cdi:intendedDataType": {
+          "type": "string",
+          "description": "The intended data type for values of this variable, from DDI-CDI RepresentedVariable.hasIntendedDataType. Recommended values are XML Schema datatypes (e.g. https://www.w3.org/TR/xmlschema-2/#decimal)."
+        },
+        "cdi:role": {
+          "type": "string",
+          "enum": [
+            "MeasureComponent",
+            "AttributeComponent",
+            "DimensionComponent",
+            "DescriptorComponent",
+            "ReferenceValueComponent"
+          ],
+          "description": "Specifies the relation of the variable to the data structure, corresponding to DDI-CDI DataStructureComponent subtypes."
+        },
+        "cdi:describedUnitOfMeasure": {
+          "description": "A structured unit of measure from a controlled vocabulary, from DDI-CDI RepresentedVariable.describedUnitOfMeasure.",
+          "allOf": [
+            {
+              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaXRD/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.cdifProperties.cdifVariableMeasured/$defs/DefinedTerm"
+            }
+          ]
+        },
+        "cdi:simpleUnitOfMeasure": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "@id": {
+                  "type": "string",
+                  "description": "reference to a skos concept for the data type"
+                }
+              }
+            },
+            {
+              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaXRD/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.cdifProperties.cdifVariableMeasured/$defs/DefinedTerm"
+            }
+          ]
+        },
+        "cdi:uses": {
           "type": "array",
           "items": {
             "anyOf": [
@@ -2730,11 +3193,80 @@
                 }
               },
               {
-                "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaXRD/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.variableMeasured/$defs/DefinedTerm"
+                "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaXRD/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.cdifProperties.cdifVariableMeasured/$defs/DefinedTerm"
               }
             ]
           },
-          "description": "identifier or name for the property concept quantified by the values in this variable slot. Multiple values can specify the property at different levels of granularity."
+          "description": "Essentially the same as schema:propertyID. References to concepts that this variable measures or represents."
+        },
+        "cdi:name": {
+          "type": "string",
+          "description": "DDI-CDI Concept.name. The name of this variable in the DDI-CDI model."
+        },
+        "cdi:displayLabel": {
+          "type": "string",
+          "description": "DDI-CDI Concept.displayLabel. A human-readable label for display purposes."
+        }
+      },
+      "$defs": {
+        "DefinedTerm": {
+          "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaXRD/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.definedTerm"
+        }
+      },
+      "allOf": [
+        {
+          "required": [
+            "@type"
+          ]
+        },
+        {
+          "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaXRD/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.variableMeasured"
+        }
+      ],
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/",
+        "spdx": "http://spdx.org/rdf/terms#",
+        "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
+        "skos": "http://www.w3.org/2004/02/skos/core#",
+        "xas": "https://xas.org/dictionary/",
+        "nxs": "http://purl.org/nexusformat/definitions/",
+        "prov": "http://www.w3.org/ns/prov#"
+      },
+      "x-schema-source": "https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/cdifProperties/cdifVariableMeasured/schema.yaml",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "cdif.bbr.metadata.schemaorgProperties.statisticalVariable": {
+      "description": "A statistical variable description using schema.org/StatisticalVariable. Defines a variable that represents a statistical measure, such as median income or unemployment rate.",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "contains": {
+            "enum": [
+              "schema:StatisticalVariable"
+            ]
+          },
+          "minItems": 1
+        },
+        "@id": {
+          "type": "string"
+        },
+        "schema:name": {
+          "type": "string",
+          "description": "string label for the statistical variable"
+        },
+        "schema:description": {
+          "type": "string"
+        },
+        "schema:alternateName": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "human intelligible name for variable that conveys semantics"
+          }
         },
         "schema:measurementTechnique": {
           "anyOf": [
@@ -2746,21 +3278,17 @@
               "properties": {
                 "@id": {
                   "type": "string",
-                  "description": "reference to a skos concept for the property"
+                  "description": "reference to a skos concept"
                 }
               }
             },
             {
-              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaXRD/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.variableMeasured/$defs/DefinedTerm"
+              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaXRD/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.statisticalVariable/$defs/DefinedTerm"
             }
           ],
-          "description": "A text description of the measurement method used to determine values for this variable. If standard measurement protocols are defined and registered, these can be identified via http URI's."
+          "description": "Text description or URI identifying the measurement method."
         },
-        "schema:unitText": {
-          "type": "string",
-          "description": "A string that identifies a unit of measurement that applies to all values for this variable."
-        },
-        "schema:unitCode": {
+        "schema:statType": {
           "anyOf": [
             {
               "type": "string"
@@ -2769,49 +3297,75 @@
               "type": "object",
               "properties": {
                 "@id": {
-                  "type": "string",
-                  "description": "reference to a skos concept for the property"
+                  "type": "string"
                 }
               }
             },
             {
-              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaXRD/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.variableMeasured/$defs/DefinedTerm"
+              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaXRD/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.statisticalVariable/$defs/DefinedTerm"
             }
-          ],
-          "description": "Value is expected to be TEXT or URL. We recommend providing an HTTP URI that identifies a unit of measure from a vocabulary accessible on the web. The QUDT unit vocabulary provides and extensive set of registered units of measure that can be used to populate the schema:unitCode property to specify the units of measure used to report datavalues when that is appropriate."
+          ]
         },
-        "schema:minValue": {
-          "type": "number",
-          "description": " If the value for the variable is numeric, this is the minimum value that occurs in the dataset. Not useful for other value types."
-        },
-        "schema:maxValue": {
-          "type": "number",
-          "description": " If the value for the variable is numeric, this is the maximum value that occurs in the dataset. Not useful for other value types."
-        },
-        "schema:url": {
-          "type": "string",
-          "format": "uri",
-          "description": "Any schema:Thing can have a URL property, but because the value is simply a url the relationship of the linked resource can not be expressed. Usage is optional. The recommendation is that schema:url should link to a web page that would be useful for a person to interpret the variable, but is not intended to be machine-actionable."
+        "schema:measuredProperty": {
+          "type": "object",
+          "properties": {
+            "@id": {
+              "type": "string",
+              "description": "reference to a skos concept for the property"
+            },
+            "@type": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "enum": [
+                    "schema:Property"
+                  ]
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "contains": {
+                    "enum": [
+                      "schema:Property"
+                    ]
+                  }
+                }
+              ]
+            },
+            "schema:name": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "@id": {
+                      "type": "string"
+                    }
+                  }
+                },
+                {
+                  "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaXRD/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.statisticalVariable/$defs/DefinedTerm"
+                }
+              ]
+            }
+          }
         }
       },
+      "required": [
+        "@type",
+        "schema:name",
+        "schema:measuredProperty"
+      ],
       "$defs": {
         "DefinedTerm": {
           "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaXRD/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.definedTerm"
         }
       },
-      "allOf": [
-        {
-          "required": [
-            "@type",
-            "schema:name",
-            "schema:description"
-          ]
-        }
-      ],
-      "x-jsonld-prefixes": {
-        "schema": "http://schema.org/"
-      },
-      "x-schema-source": "https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/variableMeasured/schema.yaml",
+      "x-schema-source": "https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/statisticalVariable/schema.yaml",
       "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
     },
     "cdif.bbr.metadata.schemaorgProperties.spatialExtent": {
@@ -2819,10 +3373,25 @@
       "type": "object",
       "properties": {
         "@type": {
-          "type": "string",
           "default": "schema:Place",
-          "enum": [
-            "schema:Place"
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "schema:Place"
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "contains": {
+                "enum": [
+                  "schema:Place"
+                ]
+              }
+            }
           ]
         },
         "schema:name": {
@@ -2847,17 +3416,36 @@
               "description": "A point location. Point locations are recommended for data that is associated with specific sample locations, particularly if these are widely spaced such that an enclosing bounding box would be a misleading representation of the spatial location. Be aware that some client applications might only index or display bounding box extents or a single point location.",
               "properties": {
                 "@type": {
-                  "type": "string",
                   "default": "schema:GeoCoordinates",
-                  "enum": [
-                    "schema:GeoCoordinates"
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "schema:GeoCoordinates"
+                      ]
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "contains": {
+                        "enum": [
+                          "schema:GeoCoordinates"
+                        ]
+                      }
+                    }
                   ]
                 },
                 "schema:latitude": {
-                  "type": "number"
+                  "type": "number",
+                  "minimum": -90,
+                  "maximum": 90
                 },
                 "schema:longitude": {
-                  "type": "number"
+                  "type": "number",
+                  "minimum": -180,
+                  "maximum": 180
                 }
               },
               "required": [
@@ -2871,10 +3459,25 @@
               "description": "A schema:GeoShape bounding box. The geometry is described with a set of latitude/longitude pairs (in that order).The documentation for schema:GeoShape states 'Either whitespace or commas can be used to separate latitude and longitude; whitespace should be used when writing a list of several such points.'",
               "properties": {
                 "@type": {
-                  "type": "string",
                   "default": "schema:GeoShape",
-                  "enum": [
-                    "schema:GeoShape"
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "schema:GeoShape"
+                      ]
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "contains": {
+                        "enum": [
+                          "schema:GeoShape"
+                        ]
+                      }
+                    }
                   ]
                 },
                 "schema:box": {
@@ -2892,10 +3495,25 @@
               "description": "A schema:GeoShape curvilinear trace, for resource related to a linear trace like a ship track or airplane flight line",
               "properties": {
                 "@type": {
-                  "type": "string",
                   "default": "schema:GeoShape",
-                  "enum": [
-                    "schema:GeoShape"
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "schema:GeoShape"
+                      ]
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "contains": {
+                        "enum": [
+                          "schema:GeoShape"
+                        ]
+                      }
+                    }
                   ]
                 },
                 "schema:line": {
@@ -2915,16 +3533,41 @@
           "description": "Optional geographic extent using wkt geometry, see Ocean InfoHub (https://book.oceaninfohub.org/thematics/spatial/README.html#simple-geosparql-wkt). Other geometry schemes might be specified in a specific domain profile, e.g. for atmospheric, subsurface data, or local coordinate systems. NOTE that the location specified here should be the same as the schema.org point or contained within the specified bounding box.",
           "properties": {
             "@type": {
-              "type": "string",
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              ],
               "description": "MUST be sf: (<http://www.opengis.net/ont/sf#>) SimpleFeature geometry type. See https://opengeospatial.github.io/ogc-geosparql/geosparql11/sf_geometries.ttl"
             },
             "geosparql:asWKT": {
               "type": "object",
               "properties": {
                 "@type": {
-                  "type": "string",
-                  "enum": [
-                    "geosparql:wktLiteral"
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "geosparql:wktLiteral"
+                      ]
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "contains": {
+                        "enum": [
+                          "geosparql:wktLiteral"
+                        ]
+                      }
+                    }
                   ]
                 },
                 "@value": {
@@ -2964,10 +3607,25 @@
           "description": "a w3c time proper interval with bounds that are named time ordinal eras with identifier, e.g. geologic age. This is a SOSO schema.org extension",
           "properties": {
             "@type": {
-              "type": "string",
               "default": "time:ProperInterval",
-              "enum": [
-                "time:ProperInterval"
+              "anyOf": [
+                {
+                  "type": "string",
+                  "enum": [
+                    "time:ProperInterval"
+                  ]
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "contains": {
+                    "enum": [
+                      "time:ProperInterval"
+                    ]
+                  }
+                }
               ]
             },
             "schema:description": {
@@ -3014,10 +3672,25 @@
               "description": "Must exactly match the specified @context object."
             },
             "@type": {
-              "type": "string",
               "default": "time:ProperInterval",
-              "enum": [
-                "time:ProperInterval"
+              "anyOf": [
+                {
+                  "type": "string",
+                  "enum": [
+                    "time:ProperInterval"
+                  ]
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "contains": {
+                    "enum": [
+                      "time:ProperInterval"
+                    ]
+                  }
+                }
               ]
             },
             "schema:description": {
@@ -3028,9 +3701,24 @@
               "type": "object",
               "properties": {
                 "@type": {
-                  "type": "string",
-                  "enum": [
-                    "time:Instant"
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "time:Instant"
+                      ]
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "contains": {
+                        "enum": [
+                          "time:Instant"
+                        ]
+                      }
+                    }
                   ]
                 },
                 "time:inTimePosition": {
@@ -3042,9 +3730,24 @@
               "type": "object",
               "properties": {
                 "@type": {
-                  "type": "string",
-                  "enum": [
-                    "time:Instant"
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "time:Instant"
+                      ]
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "contains": {
+                        "enum": [
+                          "time:Instant"
+                        ]
+                      }
+                    }
                   ]
                 },
                 "time:inTimePosition": {
@@ -3064,10 +3767,25 @@
           "type": "object",
           "properties": {
             "@type": {
-              "type": "string",
               "default": "time:TimePosition",
-              "enum": [
-                "time:TimePosition"
+              "anyOf": [
+                {
+                  "type": "string",
+                  "enum": [
+                    "time:TimePosition"
+                  ]
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "contains": {
+                    "enum": [
+                      "time:TimePosition"
+                    ]
+                  }
+                }
               ]
             },
             "time:hasTRS": {
@@ -3133,36 +3851,23 @@
     },
     "cdif.bbr.metadata.provProperties.derivedFrom": {
       "title": "very simple links or names of data sources used to generate the described resource.",
-      "type": "object",
-      "properties": {
-        "prov:wasDerivedFrom": {
-          "type": "array",
-          "items": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "object",
-                "properties": {
-                  "@id": {
-                    "type": "string",
-                    "description": "a resolvable reference to a representation of the software or instrument used"
-                  }
-                }
-              },
-              {
-                "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaXRD/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.provProperties.derivedFrom/$defs/LabeledLink"
-              }
-            ]
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "@id": {
+              "type": "string",
+              "description": "a resolvable reference to a representation of the software or instrument used"
+            }
           }
-        }
-      },
-      "$defs": {
-        "LabeledLink": {
+        },
+        {
           "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaXRD/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.labeledLink"
         }
-      },
+      ],
       "x-jsonld-prefixes": {
         "schema": "http://schema.org/",
         "prov": "http://www.w3.org/ns/prov#"
@@ -3175,8 +3880,24 @@
       "type": "object",
       "properties": {
         "@type": {
-          "enum": [
-            "dqv:QualityMeasurement"
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "dqv:QualityMeasurement"
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "contains": {
+                "enum": [
+                  "dqv:QualityMeasurement"
+                ]
+              }
+            }
           ]
         },
         "dqv:isMeasurementOf": {
@@ -3983,6 +4704,134 @@
         "ada": "https://ada.astromat.org/metadata/"
       },
       "x-schema-source": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/otherFile/schema.yaml",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "cdif.bbr.metadata.schemaorgProperties.variableMeasured": {
+      "description": "Schema.org PropertyValue-based variableMeasured. Defines properties for a measured variable in a dataset, typed as schema:PropertyValue.",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "contains": {
+            "enum": [
+              "schema:PropertyValue"
+            ]
+          },
+          "minItems": 1
+        },
+        "@id": {
+          "type": "string"
+        },
+        "schema:name": {
+          "type": "string",
+          "description": "string label associated with the variable in the dataset serialization"
+        },
+        "schema:description": {
+          "type": "string",
+          "default": "missing"
+        },
+        "schema:alternateName": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "human intelligible name for variable that conveys semantics"
+          }
+        },
+        "schema:measurementTechnique": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "@id": {
+                  "type": "string",
+                  "description": "reference to a skos concept"
+                }
+              }
+            },
+            {
+              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaXRD/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.variableMeasured/$defs/DefinedTerm"
+            }
+          ],
+          "description": "Text description or URI identifying the measurement method."
+        },
+        "schema:propertyID": {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "@id": {
+                    "type": "string"
+                  }
+                }
+              },
+              {
+                "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaXRD/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.variableMeasured/$defs/DefinedTerm"
+              }
+            ]
+          },
+          "description": "identifier or name for the property concept"
+        },
+        "schema:unitText": {
+          "type": "string",
+          "description": "unit of measurement as text"
+        },
+        "schema:unitCode": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "@id": {
+                  "type": "string"
+                }
+              }
+            },
+            {
+              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaXRD/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.variableMeasured/$defs/DefinedTerm"
+            }
+          ],
+          "description": "URI or code identifying the unit of measure"
+        },
+        "schema:minValue": {
+          "type": "number",
+          "description": "minimum numeric value in the dataset"
+        },
+        "schema:maxValue": {
+          "type": "number",
+          "description": "maximum numeric value in the dataset"
+        },
+        "schema:url": {
+          "type": "string",
+          "format": "uri",
+          "description": "link to a web page useful for interpreting the variable"
+        }
+      },
+      "required": [
+        "@type",
+        "schema:name"
+      ],
+      "$defs": {
+        "DefinedTerm": {
+          "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaXRD/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.definedTerm"
+        }
+      },
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/"
+      },
+      "x-schema-source": "https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/variableMeasured/schema.yaml",
       "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
     },
     "ada.bbr.metadata.adaProperties.detailEMPA": {

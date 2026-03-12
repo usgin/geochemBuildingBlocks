@@ -13,6 +13,44 @@ Elemental Analysis Isotope Ratio Mass Spectrometry collection. Defines propertie
 
 Elemental Analysis Isotope Ratio Mass Spectrometry collection.
 
+## Examples
+
+### EA-IRMS Instrument Detail Example
+Elemental Analysis Isotope Ratio Mass Spectrometry collection detail.
+#### json
+```json
+{
+  "@type": "ada:EAIRMSCollection",
+  "massConsumed": "2.5 mg",
+  "elementType": "carbon"
+}
+
+```
+
+#### jsonld
+```jsonld
+{
+  "@context": [
+    {
+      "ada": "https://ada.astromat.org/metadata/"
+    },
+    "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailEAIRMS/context.jsonld"
+  ],
+  "@type": "ada:EAIRMSCollection",
+  "massConsumed": "2.5 mg",
+  "elementType": "carbon"
+}
+```
+
+#### ttl
+```ttl
+@prefix ada: <https://ada.astromat.org/metadata/> .
+
+[] a ada:EAIRMSCollection .
+
+
+```
+
 ## Schema
 
 ```yaml

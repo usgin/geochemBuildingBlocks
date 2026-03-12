@@ -13,6 +13,54 @@ Laser-2 Mass Spectrometry cube data with ionization parameters. Defines properti
 
 Laser-2 Mass Spectrometry cube data with ionization parameters.
 
+## Examples
+
+### L2MS Instrument Detail Example
+Laser-2 Mass Spectrometry cube data with ionization parameters.
+#### json
+```json
+{
+  "@type": "ada:L2MSCube",
+  "sampleName": "Murchison_CM2_grain01",
+  "ionizationTimeDelay": 500,
+  "massGate": true,
+  "photoionizationWavelength": 266,
+  "plasmaShutter": false,
+  "timeDelayUnits": "nanoseconds",
+  "wavelengthUnits": "nm"
+}
+
+```
+
+#### jsonld
+```jsonld
+{
+  "@context": [
+    {
+      "ada": "https://ada.astromat.org/metadata/"
+    },
+    "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailL2MS/context.jsonld"
+  ],
+  "@type": "ada:L2MSCube",
+  "sampleName": "Murchison_CM2_grain01",
+  "ionizationTimeDelay": 500,
+  "massGate": true,
+  "photoionizationWavelength": 266,
+  "plasmaShutter": false,
+  "timeDelayUnits": "nanoseconds",
+  "wavelengthUnits": "nm"
+}
+```
+
+#### ttl
+```ttl
+@prefix ada: <https://ada.astromat.org/metadata/> .
+
+[] a ada:L2MSCube .
+
+
+```
+
 ## Schema
 
 ```yaml

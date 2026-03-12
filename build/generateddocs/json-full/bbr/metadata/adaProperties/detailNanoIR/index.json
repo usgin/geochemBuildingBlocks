@@ -10,7 +10,7 @@
   "itemClass": "schema",
   "register": "cdif-building-block-register",
   "version": "0.1",
-  "dateOfLastChange": "2026-03-09",
+  "dateOfLastChange": "2026-03-12",
   "link": "https://github.com/usgin/geochemBuildingBlocks",
   "maturity": "draft",
   "scope": "unstable",
@@ -26,7 +26,14 @@
       "link": "https://github.com/amds-ldeo/metadata"
     }
   ],
-  "shaclShapes": {},
+  "shaclShapes": {
+    "ada.bbr.metadata.adaProperties.detailNanoIR": [
+      "https://usgin.github.io/geochemBuildingBlocks/_sources/adaProperties/detailNanoIR/rules.shacl"
+    ],
+    "ada.bbr.metadata.adaProperties.stringArray": [
+      "https://usgin.github.io/geochemBuildingBlocks/_sources/adaProperties/stringArray/rules.shacl"
+    ]
+  },
   "dependsOn": [
     "ada.bbr.metadata.adaProperties.stringArray"
   ],
@@ -40,7 +47,34 @@
   "sourceFiles": "https://usgin.github.io/geochemBuildingBlocks/_sources/adaProperties/detailNanoIR/",
   "rdfData": [],
   "validationPassed": true,
+  "testOutputs": "https://github.com/usgin/geochemBuildingBlocks/blob/main/build/tests/bbr/metadata/adaProperties/detailNanoIR/",
   "description": "# NanoIR Instrument Detail\n\nNano-IR spectroscopy collections with phase analysis.\n",
+  "examples": [
+    {
+      "title": "NanoIR Instrument Detail Example",
+      "content": "Nano-IR background spectroscopy detail with phases analyzed.",
+      "prefixes": {
+        "ada": "https://ada.astromat.org/metadata/"
+      },
+      "snippets": [
+        {
+          "language": "json",
+          "code": "{\n  \"@type\": \"ada:NanoIRBackground\",\n  \"phaseAnalyzed\": [\"carbonate\", \"silicate\"]\n}\n",
+          "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/adaProperties/detailNanoIR/example_1_1.json"
+        },
+        {
+          "language": "jsonld",
+          "code": "{\n  \"@context\": [\n    {\n      \"ada\": \"https://ada.astromat.org/metadata/\"\n    },\n    \"https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailNanoIR/context.jsonld\"\n  ],\n  \"@type\": \"ada:NanoIRBackground\",\n  \"phaseAnalyzed\": [\n    \"carbonate\",\n    \"silicate\"\n  ]\n}",
+          "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/adaProperties/detailNanoIR/example_1_1.jsonld"
+        },
+        {
+          "language": "ttl",
+          "code": "@prefix ada: <https://ada.astromat.org/metadata/> .\n\n[] a ada:NanoIRBackground .\n\n",
+          "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/adaProperties/detailNanoIR/example_1_1.ttl"
+        }
+      ]
+    }
+  ],
   "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: NanoIR Instrument Detail\ndescription: Nano-IR spectroscopy collections with phase analysis\ntype: object\nproperties:\n  '@type':\n    anyOf:\n    - const: ada:NanoIRBackground\n  phaseAnalyzed:\n    $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/stringArray/schema.yaml\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  ada: https://ada.astromat.org/metadata/\n",
   "gitRepository": "https://github.com/usgin/geochemBuildingBlocks",
   "gitPath": "_sources/adaProperties/detailNanoIR"

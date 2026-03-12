@@ -13,6 +13,55 @@ Non-standard file formats approved for ADA submission. Defines properties: @type
 
 Describes files in non-standard formats that have been approved for submission to the Astromat Archive. Supports EMSA spectral data, OBJ 3D models, STL files, XLSX workbooks, and Neptune Plus exports.
 
+## Examples
+
+### Other File Type Example
+A 3D shape model in OBJ format from structured light scanning.
+#### json
+```json
+{
+  "@type": ["ada:otherFileType"],
+  "componentType": {
+    "@type": "ada:other"
+  },
+  "schema:encodingFormat": "model/obj",
+  "formatDescription": "Wavefront OBJ 3D model file"
+}
+
+```
+
+#### jsonld
+```jsonld
+{
+  "@context": [
+    {
+      "schema": "http://schema.org/",
+      "ada": "https://ada.astromat.org/metadata/"
+    },
+    "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/otherFile/context.jsonld"
+  ],
+  "@type": [
+    "ada:otherFileType"
+  ],
+  "componentType": {
+    "@type": "ada:other"
+  },
+  "schema:encodingFormat": "model/obj",
+  "formatDescription": "Wavefront OBJ 3D model file"
+}
+```
+
+#### ttl
+```ttl
+@prefix ada: <https://ada.astromat.org/metadata/> .
+@prefix schema1: <http://schema.org/> .
+
+[] a ada:otherFileType ;
+    schema1:encodingFormat "model/obj" .
+
+
+```
+
 ## Schema
 
 ```yaml

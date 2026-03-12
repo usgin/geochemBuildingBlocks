@@ -962,6 +962,8 @@ Links to the schema:
     "nxs": "http://purl.org/nexusformat/definitions/",
     "dcterms": "http://purl.org/dc/terms/",
     "geosparql": "http://www.opengis.net/ont/geosparql#",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "xas": "https://xas.org/dictionary/",
     "time": "http://www.w3.org/2006/time#",
     "@version": 1.1
   }

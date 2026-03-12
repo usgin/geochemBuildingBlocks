@@ -10,7 +10,7 @@
   "itemClass": "schema",
   "register": "cdif-building-block-register",
   "version": "0.1",
-  "dateOfLastChange": "2026-03-09",
+  "dateOfLastChange": "2026-03-12",
   "link": "https://github.com/usgin/geochemBuildingBlocks",
   "maturity": "draft",
   "scope": "unstable",
@@ -26,7 +26,11 @@
       "link": "https://github.com/amds-ldeo/metadata"
     }
   ],
-  "shaclShapes": {},
+  "shaclShapes": {
+    "ada.bbr.metadata.adaProperties.detailL2MS": [
+      "https://usgin.github.io/geochemBuildingBlocks/_sources/adaProperties/detailL2MS/rules.shacl"
+    ]
+  },
   "ldContext": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailL2MS/context.jsonld",
   "schema": {
     "application/yaml": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailL2MS/schema.yaml",
@@ -37,7 +41,34 @@
   "sourceFiles": "https://usgin.github.io/geochemBuildingBlocks/_sources/adaProperties/detailL2MS/",
   "rdfData": [],
   "validationPassed": true,
+  "testOutputs": "https://github.com/usgin/geochemBuildingBlocks/blob/main/build/tests/bbr/metadata/adaProperties/detailL2MS/",
   "description": "# L2MS Instrument Detail\n\nLaser-2 Mass Spectrometry cube data with ionization parameters.\n",
+  "examples": [
+    {
+      "title": "L2MS Instrument Detail Example",
+      "content": "Laser-2 Mass Spectrometry cube data with ionization parameters.",
+      "prefixes": {
+        "ada": "https://ada.astromat.org/metadata/"
+      },
+      "snippets": [
+        {
+          "language": "json",
+          "code": "{\n  \"@type\": \"ada:L2MSCube\",\n  \"sampleName\": \"Murchison_CM2_grain01\",\n  \"ionizationTimeDelay\": 500,\n  \"massGate\": true,\n  \"photoionizationWavelength\": 266,\n  \"plasmaShutter\": false,\n  \"timeDelayUnits\": \"nanoseconds\",\n  \"wavelengthUnits\": \"nm\"\n}\n",
+          "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/adaProperties/detailL2MS/example_1_1.json"
+        },
+        {
+          "language": "jsonld",
+          "code": "{\n  \"@context\": [\n    {\n      \"ada\": \"https://ada.astromat.org/metadata/\"\n    },\n    \"https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailL2MS/context.jsonld\"\n  ],\n  \"@type\": \"ada:L2MSCube\",\n  \"sampleName\": \"Murchison_CM2_grain01\",\n  \"ionizationTimeDelay\": 500,\n  \"massGate\": true,\n  \"photoionizationWavelength\": 266,\n  \"plasmaShutter\": false,\n  \"timeDelayUnits\": \"nanoseconds\",\n  \"wavelengthUnits\": \"nm\"\n}",
+          "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/adaProperties/detailL2MS/example_1_1.jsonld"
+        },
+        {
+          "language": "ttl",
+          "code": "@prefix ada: <https://ada.astromat.org/metadata/> .\n\n[] a ada:L2MSCube .\n\n",
+          "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/adaProperties/detailL2MS/example_1_1.ttl"
+        }
+      ]
+    }
+  ],
   "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: L2MS Instrument Detail\ndescription: Laser-2 Mass Spectrometry cube data with ionization parameters\ntype: object\nproperties:\n  '@type':\n    const: ada:L2MSCube\n  sampleName:\n    type: string\n  ionizationTimeDelay:\n    type: integer\n  massGate:\n    type: boolean\n  photoionizationWavelength:\n    type: integer\n  plasmaShutter:\n    type: boolean\n  timeDelayUnits:\n    type: string\n  wavelengthUnits:\n    type: string\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  ada: https://ada.astromat.org/metadata/\n",
   "gitRepository": "https://github.com/usgin/geochemBuildingBlocks",
   "gitPath": "_sources/adaProperties/detailL2MS"

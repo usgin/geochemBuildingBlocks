@@ -13,6 +13,44 @@ Inductively Coupled Plasma Optical Emission Spectrometry detail properties. Defi
 
 Inductively Coupled Plasma Optical Emission Spectrometry. (Extension type, not in v3 source schema.)
 
+## Examples
+
+### ICP-OES Instrument Detail Example
+Inductively Coupled Plasma Optical Emission Spectrometry processed data detail.
+#### json
+```json
+{
+  "@type": "ada:ICPOESProcessedTabular",
+  "mass": "50.2 mg",
+  "dissolutionFactor": 100.0
+}
+
+```
+
+#### jsonld
+```jsonld
+{
+  "@context": [
+    {
+      "ada": "https://ada.astromat.org/metadata/"
+    },
+    "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailICPOES/context.jsonld"
+  ],
+  "@type": "ada:ICPOESProcessedTabular",
+  "mass": "50.2 mg",
+  "dissolutionFactor": 100.0
+}
+```
+
+#### ttl
+```ttl
+@prefix ada: <https://ada.astromat.org/metadata/> .
+
+[] a ada:ICPOESProcessedTabular .
+
+
+```
+
 ## Schema
 
 ```yaml

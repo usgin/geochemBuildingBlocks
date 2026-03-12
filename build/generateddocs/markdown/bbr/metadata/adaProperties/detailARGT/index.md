@@ -13,6 +13,44 @@ ARGT (Argon) document type with phase and isotope analysis. Defines properties: 
 
 ARGT (Argon) document type with phase and isotope analysis.
 
+## Examples
+
+### ARGT Instrument Detail Example
+Argon geochronology document detail with phase and isotope analysis type.
+#### json
+```json
+{
+  "@type": "ada:ARGTDocument",
+  "phaseAnalyzed": "sanidine",
+  "isotopeType": "40Ar/39Ar"
+}
+
+```
+
+#### jsonld
+```jsonld
+{
+  "@context": [
+    {
+      "ada": "https://ada.astromat.org/metadata/"
+    },
+    "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailARGT/context.jsonld"
+  ],
+  "@type": "ada:ARGTDocument",
+  "phaseAnalyzed": "sanidine",
+  "isotopeType": "40Ar/39Ar"
+}
+```
+
+#### ttl
+```ttl
+@prefix ada: <https://ada.astromat.org/metadata/> .
+
+[] a ada:ARGTDocument .
+
+
+```
+
 ## Schema
 
 ```yaml

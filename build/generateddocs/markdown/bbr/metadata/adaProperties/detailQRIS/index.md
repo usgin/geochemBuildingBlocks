@@ -13,6 +13,56 @@ QRIS (Raman) with calibration and illumination parameters. Defines properties: @
 
 QRIS (Raman) with calibration and illumination parameters. (Extension type, not in v3 source schema.)
 
+## Examples
+
+### QRIS Instrument Detail Example
+QRIS (Raman spectroscopy) calibrated data with illumination and calibration details.
+#### json
+```json
+{
+  "@type": "ada:QRISCalibrated",
+  "calibrationFile": "calibration_neon_20240301.csv",
+  "pipelineVersion": "2.1.0",
+  "focalLength": 300,
+  "illuminationColor": ["532nm green"],
+  "illuminationLevel": 50,
+  "exposureTime": 10,
+  "target": "olivine grain"
+}
+
+```
+
+#### jsonld
+```jsonld
+{
+  "@context": [
+    {
+      "ada": "https://ada.astromat.org/metadata/"
+    },
+    "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailQRIS/context.jsonld"
+  ],
+  "@type": "ada:QRISCalibrated",
+  "calibrationFile": "calibration_neon_20240301.csv",
+  "pipelineVersion": "2.1.0",
+  "focalLength": 300,
+  "illuminationColor": [
+    "532nm green"
+  ],
+  "illuminationLevel": 50,
+  "exposureTime": 10,
+  "target": "olivine grain"
+}
+```
+
+#### ttl
+```ttl
+@prefix ada: <https://ada.astromat.org/metadata/> .
+
+[] a ada:QRISCalibrated .
+
+
+```
+
 ## Schema
 
 ```yaml

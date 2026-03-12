@@ -13,6 +13,52 @@ Nano Secondary Ion Mass Spectrometry with isotope tracking. Defines properties: 
 
 Nano Secondary Ion Mass Spectrometry with isotope tracking.
 
+## Examples
+
+### NanoSIMS Instrument Detail Example
+NanoSIMS detail with isotope and phase tracking for presolar grain analysis.
+#### json
+```json
+{
+  "@type": "ada:NanoSIMSTabular",
+  "phaseAnalyzed": ["presolar SiC", "presolar graphite"],
+  "isotopeAnalyzed": ["12C", "13C", "28Si", "29Si"]
+}
+
+```
+
+#### jsonld
+```jsonld
+{
+  "@context": [
+    {
+      "ada": "https://ada.astromat.org/metadata/"
+    },
+    "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailNanoSIMS/context.jsonld"
+  ],
+  "@type": "ada:NanoSIMSTabular",
+  "phaseAnalyzed": [
+    "presolar SiC",
+    "presolar graphite"
+  ],
+  "isotopeAnalyzed": [
+    "12C",
+    "13C",
+    "28Si",
+    "29Si"
+  ]
+}
+```
+
+#### ttl
+```ttl
+@prefix ada: <https://ada.astromat.org/metadata/> .
+
+[] a ada:NanoSIMSTabular .
+
+
+```
+
 ## Schema
 
 ```yaml

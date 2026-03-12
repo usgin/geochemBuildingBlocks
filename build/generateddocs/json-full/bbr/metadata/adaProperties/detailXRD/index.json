@@ -10,7 +10,7 @@
   "itemClass": "schema",
   "register": "cdif-building-block-register",
   "version": "0.1",
-  "dateOfLastChange": "2026-03-09",
+  "dateOfLastChange": "2026-03-12",
   "link": "https://github.com/usgin/geochemBuildingBlocks",
   "maturity": "draft",
   "scope": "unstable",
@@ -26,7 +26,11 @@
       "link": "https://github.com/amds-ldeo/metadata"
     }
   ],
-  "shaclShapes": {},
+  "shaclShapes": {
+    "ada.bbr.metadata.adaProperties.detailXRD": [
+      "https://usgin.github.io/geochemBuildingBlocks/_sources/adaProperties/detailXRD/rules.shacl"
+    ]
+  },
   "ldContext": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailXRD/context.jsonld",
   "schema": {
     "application/yaml": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailXRD/schema.yaml",
@@ -37,7 +41,34 @@
   "sourceFiles": "https://usgin.github.io/geochemBuildingBlocks/_sources/adaProperties/detailXRD/",
   "rdfData": [],
   "validationPassed": true,
+  "testOutputs": "https://github.com/usgin/geochemBuildingBlocks/blob/main/build/tests/bbr/metadata/adaProperties/detailXRD/",
   "description": "# XRD Instrument Detail\n\nX-ray Diffraction tabular data with geometry and wavelength.\n",
+  "examples": [
+    {
+      "title": "XRD Instrument Detail Example",
+      "content": "X-ray Diffraction tabular data with geometry and wavelength parameters.",
+      "prefixes": {
+        "ada": "https://ada.astromat.org/metadata/"
+      },
+      "snippets": [
+        {
+          "language": "json",
+          "code": "{\n  \"@type\": \"ada:XRDTabular\",\n  \"geometry\": \"Bragg-Brentano\",\n  \"sampleMount\": \"flat plate\",\n  \"stepSize\": 0.02,\n  \"timePerStep\": 1.0,\n  \"wavelength\": 1.5406\n}\n",
+          "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/adaProperties/detailXRD/example_1_1.json"
+        },
+        {
+          "language": "jsonld",
+          "code": "{\n  \"@context\": [\n    {\n      \"ada\": \"https://ada.astromat.org/metadata/\"\n    },\n    \"https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailXRD/context.jsonld\"\n  ],\n  \"@type\": \"ada:XRDTabular\",\n  \"geometry\": \"Bragg-Brentano\",\n  \"sampleMount\": \"flat plate\",\n  \"stepSize\": 0.02,\n  \"timePerStep\": 1.0,\n  \"wavelength\": 1.5406\n}",
+          "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/adaProperties/detailXRD/example_1_1.jsonld"
+        },
+        {
+          "language": "ttl",
+          "code": "@prefix ada: <https://ada.astromat.org/metadata/> .\n\n[] a ada:XRDTabular .\n\n",
+          "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/adaProperties/detailXRD/example_1_1.ttl"
+        }
+      ]
+    }
+  ],
   "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: XRD Instrument Detail\ndescription: X-ray Diffraction tabular data with geometry and wavelength\ntype: object\nproperties:\n  '@type':\n    const: ada:XRDTabular\n  geometry:\n    type: string\n  sampleMount:\n    type: string\n  stepSize:\n    type: number\n  timePerStep:\n    type: number\n  wavelength:\n    type: number\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  ada: https://ada.astromat.org/metadata/\n",
   "gitRepository": "https://github.com/usgin/geochemBuildingBlocks",
   "gitPath": "_sources/adaProperties/detailXRD"

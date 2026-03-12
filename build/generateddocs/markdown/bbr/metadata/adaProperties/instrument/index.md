@@ -13,6 +13,63 @@ Analytical instrument definition combining NXinstrument and prov:Entity. Defines
 
 Defines analytical instruments used in analysis events. Combines the NeXus NXinstrument base class with PROV-O Entity typing. Supports GCMD instrument identifiers via `schema:additionalType`.
 
+## Examples
+
+### Instrument Type Example
+An analytical instrument described as a NeXus NXinstrument with PROV-O Entity typing.
+#### json
+```json
+{
+  "@type": ["schema:Thing", "prov:Entity", "nxs:BaseClass/NXinstrument"],
+  "schema:name": "JEOL JXA-8530F Electron Microprobe",
+  "schema:description": "Field-emission electron probe microanalyzer with 5 wavelength-dispersive spectrometers",
+  "schema:identifier": "https://www.wikidata.org/wiki/Q116917974",
+  "schema:additionalType": ["https://gcmd.earthdata.nasa.gov/kms/concept/76a947a3-4529-4fb7-87a7-f4b3a0a0de48"]
+}
+
+```
+
+#### jsonld
+```jsonld
+{
+  "@context": [
+    {
+      "schema": "http://schema.org/",
+      "prov": "http://www.w3.org/ns/prov#",
+      "nxs": "http://purl.org/nexusformat/definitions/"
+    },
+    "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/instrument/context.jsonld"
+  ],
+  "@type": [
+    "schema:Thing",
+    "prov:Entity",
+    "nxs:BaseClass/NXinstrument"
+  ],
+  "schema:name": "JEOL JXA-8530F Electron Microprobe",
+  "schema:description": "Field-emission electron probe microanalyzer with 5 wavelength-dispersive spectrometers",
+  "schema:identifier": "https://www.wikidata.org/wiki/Q116917974",
+  "schema:additionalType": [
+    "https://gcmd.earthdata.nasa.gov/kms/concept/76a947a3-4529-4fb7-87a7-f4b3a0a0de48"
+  ]
+}
+```
+
+#### ttl
+```ttl
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix schema1: <http://schema.org/> .
+
+[] a <http://purl.org/nexusformat/definitions/BaseClass/NXinstrument>,
+        schema1:Thing,
+        prov:Entity ;
+    schema1:additionalType "https://gcmd.earthdata.nasa.gov/kms/concept/76a947a3-4529-4fb7-87a7-f4b3a0a0de48" ;
+    schema1:description "Field-emission electron probe microanalyzer with 5 wavelength-dispersive spectrometers" ;
+    schema1:identifier "https://www.wikidata.org/wiki/Q116917974" ;
+    schema1:name "JEOL JXA-8530F Electron Microprobe" .
+
+
+```
+
 ## Schema
 
 ```yaml

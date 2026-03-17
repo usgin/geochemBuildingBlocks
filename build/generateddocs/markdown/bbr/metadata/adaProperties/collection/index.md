@@ -21,20 +21,20 @@ A collection of SEM-EDS elemental map images with file listing.
 ```json
 {
   "@type": ["ada:collection", "https://schema.org/Collection"],
-  "componentType": {
+  "ada:componentType": {
     "@type": "ada:SEMEDSElementalMaps"
   },
-  "memberTypes": ["ada:SEMEDSElementalMap"],
-  "nFiles": 5,
-  "filelist": [
+  "ada:memberTypes": ["ada:SEMEDSElementalMap"],
+  "ada:nFiles": 5,
+  "ada:filelist": [
     {
-      "fileName": "map_Fe_Ka.tif",
-      "componentType": "ada:SEMEDSElementalMap",
+      "ada:fileName": "map_Fe_Ka.tif",
+      "ada:componentType": "ada:SEMEDSElementalMap",
       "schema:encodingFormat": "image/tiff"
     },
     {
-      "fileName": "map_Si_Ka.tif",
-      "componentType": "ada:SEMEDSElementalMap",
+      "ada:fileName": "map_Si_Ka.tif",
+      "ada:componentType": "ada:SEMEDSElementalMap",
       "schema:encodingFormat": "image/tiff"
     }
   ]
@@ -56,22 +56,22 @@ A collection of SEM-EDS elemental map images with file listing.
     "ada:collection",
     "https://schema.org/Collection"
   ],
-  "componentType": {
+  "ada:componentType": {
     "@type": "ada:SEMEDSElementalMaps"
   },
-  "memberTypes": [
+  "ada:memberTypes": [
     "ada:SEMEDSElementalMap"
   ],
-  "nFiles": 5,
-  "filelist": [
+  "ada:nFiles": 5,
+  "ada:filelist": [
     {
-      "fileName": "map_Fe_Ka.tif",
-      "componentType": "ada:SEMEDSElementalMap",
+      "ada:fileName": "map_Fe_Ka.tif",
+      "ada:componentType": "ada:SEMEDSElementalMap",
       "schema:encodingFormat": "image/tiff"
     },
     {
-      "fileName": "map_Si_Ka.tif",
-      "componentType": "ada:SEMEDSElementalMap",
+      "ada:fileName": "map_Si_Ka.tif",
+      "ada:componentType": "ada:SEMEDSElementalMap",
       "schema:encodingFormat": "image/tiff"
     }
   ]
@@ -82,9 +82,20 @@ A collection of SEM-EDS elemental map images with file listing.
 ```ttl
 @prefix ada: <https://ada.astromat.org/metadata/> .
 @prefix schema: <https://schema.org/> .
+@prefix schema1: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 [] a ada:collection,
-        schema:Collection .
+        schema:Collection ;
+    ada:componentType [ a ada:SEMEDSElementalMaps ] ;
+    ada:filelist [ schema1:encodingFormat "image/tiff" ;
+            ada:componentType "ada:SEMEDSElementalMap" ;
+            ada:fileName "map_Si_Ka.tif" ],
+        [ schema1:encodingFormat "image/tiff" ;
+            ada:componentType "ada:SEMEDSElementalMap" ;
+            ada:fileName "map_Fe_Ka.tif" ] ;
+    ada:memberTypes "ada:SEMEDSElementalMap" ;
+    ada:nFiles 5 .
 
 
 ```
@@ -110,7 +121,7 @@ properties:
     - contains:
         const: https://schema.org/Collection
     description: GeneralType for collections
-  componentType:
+  ada:componentType:
     type: object
     properties:
       '@type':
@@ -144,25 +155,25 @@ properties:
         - ada:VLMImageCollection
         - ada:XANESCollection
         - ada:XCTImageCollection
-  memberTypes:
+  ada:memberTypes:
     description: List of the component types in the collection
     $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/stringArray/schema.yaml
-  nFiles:
+  ada:nFiles:
     type: integer
     description: Number of files in the collection, including metadata files
-  filelist:
+  ada:filelist:
     type: array
     items:
       type: object
       properties:
-        fileName:
+        ada:fileName:
           type: string
           description: Full path to file in container object
-        fileNamePattern:
+        ada:fileNamePattern:
           type: string
           description: Pattern for collection members with differentiating suffix
             at '*'
-        componentType:
+        ada:componentType:
           description: The component type for the file(s)
           type: string
         schema:encodingFormat:
@@ -170,9 +181,9 @@ properties:
           description: MIME type with extension
       oneOf:
       - required:
-        - fileName
+        - ada:fileName
       - required:
-        - fileNamePattern
+        - ada:fileNamePattern
 x-jsonld-prefixes:
   schema: http://schema.org/
   ada: https://ada.astromat.org/metadata/

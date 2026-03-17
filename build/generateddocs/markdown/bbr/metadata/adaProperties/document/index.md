@@ -21,7 +21,7 @@ A calibration document associated with an analytical session.
 ```json
 {
   "@type": ["ada:document", "schema:DigitalDocument"],
-  "componentType": {
+  "ada:componentType": {
     "@type": "ada:calibrationFile"
   },
   "schema:version": "1.0",
@@ -44,7 +44,7 @@ A calibration document associated with an analytical session.
     "ada:document",
     "schema:DigitalDocument"
   ],
-  "componentType": {
+  "ada:componentType": {
     "@type": "ada:calibrationFile"
   },
   "schema:version": "1.0",
@@ -60,7 +60,8 @@ A calibration document associated with an analytical session.
 [] a schema1:DigitalDocument,
         ada:document ;
     schema1:isBasedOn "calibration_original_20230415.pdf" ;
-    schema1:version "1.0" .
+    schema1:version "1.0" ;
+    ada:componentType [ a ada:calibrationFile ] .
 
 
 ```
@@ -85,7 +86,7 @@ properties:
         const: ada:document
     - contains:
         const: schema:DigitalDocument
-  componentType:
+  ada:componentType:
     description: One of the supplemental document types if applicable
     anyOf:
     - type: object
@@ -113,7 +114,7 @@ properties:
     type: string
 required:
 - '@type'
-- componentType
+- ada:componentType
 x-jsonld-prefixes:
   schema: http://schema.org/
   ada: https://ada.astromat.org/metadata/

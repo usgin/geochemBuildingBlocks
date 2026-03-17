@@ -10,7 +10,7 @@
   "itemClass": "schema",
   "register": "cdif-building-block-register",
   "version": "0.1",
-  "dateOfLastChange": "2026-03-16",
+  "dateOfLastChange": "2026-03-17",
   "link": "https://github.com/usgin/geochemBuildingBlocks",
   "maturity": "draft",
   "scope": "unstable",
@@ -54,23 +54,23 @@
       "snippets": [
         {
           "language": "json",
-          "code": "{\n  \"@type\": \"ada:QRISCalibrated\",\n  \"calibrationFile\": \"calibration_neon_20240301.csv\",\n  \"pipelineVersion\": \"2.1.0\",\n  \"focalLength\": 300,\n  \"illuminationColor\": [\"532nm green\"],\n  \"illuminationLevel\": 50,\n  \"exposureTime\": 10,\n  \"target\": \"olivine grain\"\n}\n",
+          "code": "{\n  \"@type\": \"ada:QRISCalibrated\",\n  \"ada:calibrationFile\": \"calibration_neon_20240301.csv\",\n  \"ada:pipelineVersion\": \"2.1.0\",\n  \"ada:focalLength\": 300,\n  \"ada:illuminationColor\": [\"532nm green\"],\n  \"ada:illuminationLevel\": 50,\n  \"ada:exposureTime\": 10,\n  \"ada:target\": \"olivine grain\"\n}\n",
           "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/adaProperties/detailQRIS/example_1_1.json"
         },
         {
           "language": "jsonld",
-          "code": "{\n  \"@context\": [\n    {\n      \"ada\": \"https://ada.astromat.org/metadata/\"\n    },\n    \"https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailQRIS/context.jsonld\"\n  ],\n  \"@type\": \"ada:QRISCalibrated\",\n  \"calibrationFile\": \"calibration_neon_20240301.csv\",\n  \"pipelineVersion\": \"2.1.0\",\n  \"focalLength\": 300,\n  \"illuminationColor\": [\n    \"532nm green\"\n  ],\n  \"illuminationLevel\": 50,\n  \"exposureTime\": 10,\n  \"target\": \"olivine grain\"\n}",
+          "code": "{\n  \"@context\": [\n    {\n      \"ada\": \"https://ada.astromat.org/metadata/\"\n    },\n    \"https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailQRIS/context.jsonld\"\n  ],\n  \"@type\": \"ada:QRISCalibrated\",\n  \"ada:calibrationFile\": \"calibration_neon_20240301.csv\",\n  \"ada:pipelineVersion\": \"2.1.0\",\n  \"ada:focalLength\": 300,\n  \"ada:illuminationColor\": [\n    \"532nm green\"\n  ],\n  \"ada:illuminationLevel\": 50,\n  \"ada:exposureTime\": 10,\n  \"ada:target\": \"olivine grain\"\n}",
           "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/adaProperties/detailQRIS/example_1_1.jsonld"
         },
         {
           "language": "ttl",
-          "code": "@prefix ada: <https://ada.astromat.org/metadata/> .\n\n[] a ada:QRISCalibrated .\n\n",
+          "code": "@prefix ada: <https://ada.astromat.org/metadata/> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a ada:QRISCalibrated ;\n    ada:calibrationFile \"calibration_neon_20240301.csv\" ;\n    ada:exposureTime 10 ;\n    ada:focalLength 300 ;\n    ada:illuminationColor \"532nm green\" ;\n    ada:illuminationLevel 50 ;\n    ada:pipelineVersion \"2.1.0\" ;\n    ada:target \"olivine grain\" .\n\n",
           "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/adaProperties/detailQRIS/example_1_1.ttl"
         }
       ]
     }
   ],
-  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: QRIS Instrument Detail\ndescription: QRIS (Raman) with calibration and illumination parameters. (Extension\n  type, not in v3 source schema.)\ntype: object\nproperties:\n  '@type':\n    anyOf:\n    - const: ada:QRISCalibrated\n    - const: ada:QRISRaw\n  calibrationFile:\n    type: string\n  pipelineVersion:\n    type: string\n  focalLength:\n    type: integer\n  illuminationColor:\n    type: array\n    minItems: 0\n    items:\n      type: string\n  illuminationLevel:\n    type: integer\n  exposureTime:\n    type: integer\n  target:\n    type: string\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  ada: https://ada.astromat.org/metadata/\n",
+  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: QRIS Instrument Detail\ndescription: QRIS (Raman) with calibration and illumination parameters. (Extension\n  type, not in v3 source schema.)\ntype: object\nproperties:\n  '@type':\n    anyOf:\n    - const: ada:QRISCalibrated\n    - const: ada:QRISRaw\n  ada:calibrationFile:\n    type: string\n  ada:pipelineVersion:\n    type: string\n  ada:focalLength:\n    type: integer\n  ada:illuminationColor:\n    type: array\n    minItems: 0\n    items:\n      type: string\n  ada:illuminationLevel:\n    type: integer\n  ada:exposureTime:\n    type: integer\n  ada:target:\n    type: string\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  ada: https://ada.astromat.org/metadata/\n",
   "gitRepository": "https://github.com/usgin/geochemBuildingBlocks",
   "gitPath": "_sources/adaProperties/detailQRIS"
 }

@@ -21,11 +21,11 @@ A 3D shape model in OBJ format from structured light scanning.
 ```json
 {
   "@type": ["ada:otherFileType"],
-  "componentType": {
+  "ada:componentType": {
     "@type": "ada:other"
   },
   "schema:encodingFormat": "model/obj",
-  "formatDescription": "Wavefront OBJ 3D model file"
+  "ada:formatDescription": "Wavefront OBJ 3D model file"
 }
 
 ```
@@ -43,11 +43,11 @@ A 3D shape model in OBJ format from structured light scanning.
   "@type": [
     "ada:otherFileType"
   ],
-  "componentType": {
+  "ada:componentType": {
     "@type": "ada:other"
   },
   "schema:encodingFormat": "model/obj",
-  "formatDescription": "Wavefront OBJ 3D model file"
+  "ada:formatDescription": "Wavefront OBJ 3D model file"
 }
 ```
 
@@ -57,7 +57,9 @@ A 3D shape model in OBJ format from structured light scanning.
 @prefix schema1: <http://schema.org/> .
 
 [] a ada:otherFileType ;
-    schema1:encodingFormat "model/obj" .
+    schema1:encodingFormat "model/obj" ;
+    ada:componentType [ a ada:other ] ;
+    ada:formatDescription "Wavefront OBJ 3D model file" .
 
 
 ```
@@ -78,7 +80,7 @@ properties:
     minItems: 1
     contains:
       const: ada:otherFileType
-  componentType:
+  ada:componentType:
     anyOf:
     - type: object
       properties:
@@ -99,13 +101,13 @@ properties:
     - model/stl
     - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
     - application/octet-stream
-  formatDescription:
+  ada:formatDescription:
     type: string
     description: Free text explanation of file format, or a link to a publicly accessible
       specification for the format.
 required:
 - '@type'
-- componentType
+- ada:componentType
 x-jsonld-prefixes:
   schema: http://schema.org/
   ada: https://ada.astromat.org/metadata/

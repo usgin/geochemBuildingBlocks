@@ -21,13 +21,13 @@ A tabular data file containing MC-ICP-MS isotope ratio results.
 ```json
 {
   "@type": ["cdi:TabularTextDataSet", "ada:tabularData"],
-  "componentType": {
+  "ada:componentType": {
     "@type": "ada:MCICPMSTabular"
   },
   "cdi:isDelimited": true,
-  "xCoordCol": "X_um",
-  "yCoordCol": "Y_um",
-  "coordUnits": "micrometer"
+  "ada:xCoordCol": "X_um",
+  "ada:yCoordCol": "Y_um",
+  "ada:coordUnits": "micrometer"
 }
 
 ```
@@ -47,13 +47,13 @@ A tabular data file containing MC-ICP-MS isotope ratio results.
     "cdi:TabularTextDataSet",
     "ada:tabularData"
   ],
-  "componentType": {
+  "ada:componentType": {
     "@type": "ada:MCICPMSTabular"
   },
   "cdi:isDelimited": true,
-  "xCoordCol": "X_um",
-  "yCoordCol": "Y_um",
-  "coordUnits": "micrometer"
+  "ada:xCoordCol": "X_um",
+  "ada:yCoordCol": "Y_um",
+  "ada:coordUnits": "micrometer"
 }
 ```
 
@@ -65,7 +65,11 @@ A tabular data file containing MC-ICP-MS isotope ratio results.
 
 [] a cdi:TabularTextDataSet,
         ada:tabularData ;
-    cdi:isDelimited true .
+    cdi:isDelimited true ;
+    ada:componentType [ a ada:MCICPMSTabular ] ;
+    ada:coordUnits "micrometer" ;
+    ada:xCoordCol "X_um" ;
+    ada:yCoordCol "Y_um" .
 
 
 ```
@@ -90,7 +94,7 @@ allOf:
           const: cdi:TabularTextDataSet
       - contains:
           const: ada:tabularData
-    componentType:
+    ada:componentType:
       anyOf:
       - type: object
         properties:
@@ -135,21 +139,21 @@ allOf:
       - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailPSFD/schema.yaml
       - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailVNMIR/schema.yaml
       - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailXRD/schema.yaml
-    xCoordCol:
+    ada:xCoordCol:
       description: The column names are redundant, they are lists in the hasPhysicalMapping
         array. Include here for convenience.
       type: string
-    yCoordCol:
+    ada:yCoordCol:
       type: string
-    zCoordCol:
+    ada:zCoordCol:
       type: string
-    coordUnits:
+    ada:coordUnits:
       type: string
-    spatialRegistration:
+    ada:spatialRegistration:
       $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/spatialRegistration/schema.yaml
   required:
   - '@type'
-  - componentType
+  - ada:componentType
 - $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/cdifProperties/cdifTabularData/schema.yaml
 x-jsonld-prefixes:
   schema: http://schema.org/

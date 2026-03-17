@@ -21,11 +21,11 @@ A context photography image used as supplemental documentation.
 ```json
 {
   "@type": ["ada:image", "schema:DigitalDocument"],
-  "componentType": {
+  "ada:componentType": {
     "@type": "ada:contextPhotography"
   },
-  "numPixelsX": 2048,
-  "numPixelsY": 1536,
+  "ada:numPixelsX": 2048,
+  "ada:numPixelsY": 1536,
   "_original_name": "sample_context_photo_001.jpg"
 }
 
@@ -45,11 +45,11 @@ A context photography image used as supplemental documentation.
     "ada:image",
     "schema:DigitalDocument"
   ],
-  "componentType": {
+  "ada:componentType": {
     "@type": "ada:contextPhotography"
   },
-  "numPixelsX": 2048,
-  "numPixelsY": 1536,
+  "ada:numPixelsX": 2048,
+  "ada:numPixelsY": 1536,
   "_original_name": "sample_context_photo_001.jpg"
 }
 ```
@@ -58,9 +58,13 @@ A context photography image used as supplemental documentation.
 ```ttl
 @prefix ada: <https://ada.astromat.org/metadata/> .
 @prefix schema1: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 [] a schema1:DigitalDocument,
-        ada:image .
+        ada:image ;
+    ada:componentType [ a ada:contextPhotography ] ;
+    ada:numPixelsX 2048 ;
+    ada:numPixelsY 1536 .
 
 
 ```
@@ -85,7 +89,7 @@ properties:
     - contains:
         const: schema:DigitalDocument
     description: GeneralType for supplemental document images
-  componentType:
+  ada:componentType:
     type: object
     properties:
       '@type':
@@ -103,15 +107,15 @@ properties:
         - ada:visImage
     required:
     - '@type'
-  numPixelsX:
+  ada:numPixelsX:
     type: integer
-  numPixelsY:
+  ada:numPixelsY:
     type: integer
   _original_name:
     type: string
 required:
 - '@type'
-- componentType
+- ada:componentType
 x-jsonld-prefixes:
   schema: http://schema.org/
   ada: https://ada.astromat.org/metadata/

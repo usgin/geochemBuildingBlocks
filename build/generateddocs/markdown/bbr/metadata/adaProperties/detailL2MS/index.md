@@ -21,13 +21,13 @@ Laser-2 Mass Spectrometry cube data with ionization parameters.
 ```json
 {
   "@type": "ada:L2MSCube",
-  "sampleName": "Murchison_CM2_grain01",
-  "ionizationTimeDelay": 500,
-  "massGate": true,
-  "photoionizationWavelength": 266,
-  "plasmaShutter": false,
-  "timeDelayUnits": "nanoseconds",
-  "wavelengthUnits": "nm"
+  "ada:sampleName": "Murchison_CM2_grain01",
+  "ada:ionizationTimeDelay": 500,
+  "ada:massGate": true,
+  "ada:photoionizationWavelength": 266,
+  "ada:plasmaShutter": false,
+  "ada:timeDelayUnits": "nanoseconds",
+  "ada:wavelengthUnits": "nm"
 }
 
 ```
@@ -42,21 +42,29 @@ Laser-2 Mass Spectrometry cube data with ionization parameters.
     "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailL2MS/context.jsonld"
   ],
   "@type": "ada:L2MSCube",
-  "sampleName": "Murchison_CM2_grain01",
-  "ionizationTimeDelay": 500,
-  "massGate": true,
-  "photoionizationWavelength": 266,
-  "plasmaShutter": false,
-  "timeDelayUnits": "nanoseconds",
-  "wavelengthUnits": "nm"
+  "ada:sampleName": "Murchison_CM2_grain01",
+  "ada:ionizationTimeDelay": 500,
+  "ada:massGate": true,
+  "ada:photoionizationWavelength": 266,
+  "ada:plasmaShutter": false,
+  "ada:timeDelayUnits": "nanoseconds",
+  "ada:wavelengthUnits": "nm"
 }
 ```
 
 #### ttl
 ```ttl
 @prefix ada: <https://ada.astromat.org/metadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-[] a ada:L2MSCube .
+[] a ada:L2MSCube ;
+    ada:ionizationTimeDelay 500 ;
+    ada:massGate true ;
+    ada:photoionizationWavelength 266 ;
+    ada:plasmaShutter false ;
+    ada:sampleName "Murchison_CM2_grain01" ;
+    ada:timeDelayUnits "nanoseconds" ;
+    ada:wavelengthUnits "nm" .
 
 
 ```
@@ -71,19 +79,19 @@ type: object
 properties:
   '@type':
     const: ada:L2MSCube
-  sampleName:
+  ada:sampleName:
     type: string
-  ionizationTimeDelay:
+  ada:ionizationTimeDelay:
     type: integer
-  massGate:
+  ada:massGate:
     type: boolean
-  photoionizationWavelength:
+  ada:photoionizationWavelength:
     type: integer
-  plasmaShutter:
+  ada:plasmaShutter:
     type: boolean
-  timeDelayUnits:
+  ada:timeDelayUnits:
     type: string
-  wavelengthUnits:
+  ada:wavelengthUnits:
     type: string
 x-jsonld-prefixes:
   schema: http://schema.org/

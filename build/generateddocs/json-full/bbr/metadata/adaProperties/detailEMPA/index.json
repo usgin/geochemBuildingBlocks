@@ -10,7 +10,7 @@
   "itemClass": "schema",
   "register": "cdif-building-block-register",
   "version": "0.1",
-  "dateOfLastChange": "2026-03-16",
+  "dateOfLastChange": "2026-03-17",
   "link": "https://github.com/usgin/geochemBuildingBlocks",
   "maturity": "draft",
   "scope": "unstable",
@@ -54,23 +54,23 @@
       "snippets": [
         {
           "language": "json",
-          "code": "{\n  \"@type\": \"ada:EMPAQEATabular\",\n  \"spectrometersUsed\": \"WDS 1-5\",\n  \"signalUsed\": \"characteristic X-rays\"\n}\n",
+          "code": "{\n  \"@type\": \"ada:EMPAQEATabular\",\n  \"ada:spectrometersUsed\": \"WDS 1-5\",\n  \"ada:signalUsed\": \"characteristic X-rays\"\n}\n",
           "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/adaProperties/detailEMPA/example_1_1.json"
         },
         {
           "language": "jsonld",
-          "code": "{\n  \"@context\": [\n    {\n      \"ada\": \"https://ada.astromat.org/metadata/\"\n    },\n    \"https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailEMPA/context.jsonld\"\n  ],\n  \"@type\": \"ada:EMPAQEATabular\",\n  \"spectrometersUsed\": \"WDS 1-5\",\n  \"signalUsed\": \"characteristic X-rays\"\n}",
+          "code": "{\n  \"@context\": [\n    {\n      \"ada\": \"https://ada.astromat.org/metadata/\"\n    },\n    \"https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailEMPA/context.jsonld\"\n  ],\n  \"@type\": \"ada:EMPAQEATabular\",\n  \"ada:spectrometersUsed\": \"WDS 1-5\",\n  \"ada:signalUsed\": \"characteristic X-rays\"\n}",
           "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/adaProperties/detailEMPA/example_1_1.jsonld"
         },
         {
           "language": "ttl",
-          "code": "@prefix ada: <https://ada.astromat.org/metadata/> .\n\n[] a ada:EMPAQEATabular .\n\n",
+          "code": "@prefix ada: <https://ada.astromat.org/metadata/> .\n\n[] a ada:EMPAQEATabular ;\n    ada:signalUsed \"characteristic X-rays\" ;\n    ada:spectrometersUsed \"WDS 1-5\" .\n\n",
           "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/adaProperties/detailEMPA/example_1_1.ttl"
         }
       ]
     }
   ],
-  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: EMPA Instrument Detail\ndescription: Electron Microprobe Analysis with spectrometer and signal details.\ntype: object\nproperties:\n  '@type':\n    anyOf:\n    - const: ada:EMPAImage\n    - const: ada:EMPAQEATabular\n    - const: ada:EMPAImageCollection\n  spectrometersUsed:\n    type: string\n    description: Spectrometers used in analysis\n  signalUsed:\n    type: string\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  ada: https://ada.astromat.org/metadata/\n",
+  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: EMPA Instrument Detail\ndescription: Electron Microprobe Analysis with spectrometer and signal details.\ntype: object\nproperties:\n  '@type':\n    anyOf:\n    - const: ada:EMPAImage\n    - const: ada:EMPAQEATabular\n    - const: ada:EMPAImageCollection\n  ada:spectrometersUsed:\n    type: string\n    description: Spectrometers used in analysis\n  ada:signalUsed:\n    type: string\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  ada: https://ada.astromat.org/metadata/\n",
   "gitRepository": "https://github.com/usgin/geochemBuildingBlocks",
   "gitPath": "_sources/adaProperties/detailEMPA"
 }

@@ -10,7 +10,7 @@
   "itemClass": "schema",
   "register": "cdif-building-block-register",
   "version": "0.1",
-  "dateOfLastChange": "2026-03-16",
+  "dateOfLastChange": "2026-03-17",
   "link": "https://github.com/usgin/geochemBuildingBlocks",
   "maturity": "draft",
   "scope": "unstable",
@@ -40,7 +40,7 @@
   "resolvedSchemaProperties": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/spatialRegistration/resolvedProperties.json",
   "sourceFiles": "https://usgin.github.io/geochemBuildingBlocks/_sources/adaProperties/spatialRegistration/",
   "rdfData": [],
-  "validationPassed": false,
+  "validationPassed": true,
   "testOutputs": "https://github.com/usgin/geochemBuildingBlocks/blob/main/build/tests/bbr/metadata/adaProperties/spatialRegistration/",
   "description": "# Spatial Registration Type\n\nDefines the pixel coordinate system registration for spatially registered images and maps. Includes origin coordinates (X, Y, Z), pixel scales, coordinate units, and the coordinate definition type (stage-defined or pixel-defined).\n",
   "examples": [
@@ -53,23 +53,23 @@
       "snippets": [
         {
           "language": "json",
-          "code": "{\n  \"basemap\": \"basemap_BSE_001.tif\",\n  \"originX\": 0.0,\n  \"originY\": 0.0,\n  \"originZ\": 0.0,\n  \"coordDef\": \"pixel-defined\",\n  \"coordUnits\": \"micrometer\",\n  \"pixelUnits\": \"micrometer\",\n  \"pixelScaleX\": 0.125,\n  \"pixelScaleY\": 0.125,\n  \"originLocation\": \"upperLeft\"\n}\n",
+          "code": "{\n  \"ada:basemap\": \"basemap_BSE_001.tif\",\n  \"ada:originX\": 0.0,\n  \"ada:originY\": 0.0,\n  \"ada:originZ\": 0.0,\n  \"ada:coordDef\": \"pixel-defined\",\n  \"ada:coordUnits\": \"micrometer\",\n  \"ada:pixelUnits\": \"micrometer\",\n  \"ada:pixelScaleX\": 0.125,\n  \"ada:pixelScaleY\": 0.125,\n  \"ada:originLocation\": \"upperLeft\"\n}\n",
           "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/adaProperties/spatialRegistration/example_1_1.json"
         },
         {
           "language": "jsonld",
-          "code": "{\n  \"@context\": [\n    {\n      \"ada\": \"https://ada.astromat.org/metadata/\"\n    },\n    \"https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/spatialRegistration/context.jsonld\"\n  ],\n  \"basemap\": \"basemap_BSE_001.tif\",\n  \"originX\": 0.0,\n  \"originY\": 0.0,\n  \"originZ\": 0.0,\n  \"coordDef\": \"pixel-defined\",\n  \"coordUnits\": \"micrometer\",\n  \"pixelUnits\": \"micrometer\",\n  \"pixelScaleX\": 0.125,\n  \"pixelScaleY\": 0.125,\n  \"originLocation\": \"upperLeft\"\n}",
+          "code": "{\n  \"@context\": [\n    {\n      \"ada\": \"https://ada.astromat.org/metadata/\"\n    },\n    \"https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/spatialRegistration/context.jsonld\"\n  ],\n  \"ada:basemap\": \"basemap_BSE_001.tif\",\n  \"ada:originX\": 0.0,\n  \"ada:originY\": 0.0,\n  \"ada:originZ\": 0.0,\n  \"ada:coordDef\": \"pixel-defined\",\n  \"ada:coordUnits\": \"micrometer\",\n  \"ada:pixelUnits\": \"micrometer\",\n  \"ada:pixelScaleX\": 0.125,\n  \"ada:pixelScaleY\": 0.125,\n  \"ada:originLocation\": \"upperLeft\"\n}",
           "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/adaProperties/spatialRegistration/example_1_1.jsonld"
         },
         {
           "language": "ttl",
-          "code": "\n",
+          "code": "@prefix ada: <https://ada.astromat.org/metadata/> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] ada:basemap \"basemap_BSE_001.tif\" ;\n    ada:coordDef \"pixel-defined\" ;\n    ada:coordUnits \"micrometer\" ;\n    ada:originLocation \"upperLeft\" ;\n    ada:originX 0e+00 ;\n    ada:originY 0e+00 ;\n    ada:originZ 0e+00 ;\n    ada:pixelScaleX 1.25e-01 ;\n    ada:pixelScaleY 1.25e-01 ;\n    ada:pixelUnits \"micrometer\" .\n\n",
           "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/adaProperties/spatialRegistration/example_1_1.ttl"
         }
       ]
     }
   ],
-  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: Spatial Registration Type\ndescription: Defines pixel coordinate system registration including origin coordinates,\n  pixel scales, and coordinate definition type for spatially registered images and\n  maps.\ntype: object\nproperties:\n  basemap:\n    type: string\n    description: link to appropriate basemap image map\n  originX:\n    type: number\n  originY:\n    type: number\n  originZ:\n    type: number\n  coordDef:\n    type: string\n    description: Whether coordinates are stage-defined or pixel-defined. If pixel-defined,\n      are coordinates from stage, upperleftPixel, or centerPixel.\n  coordUnits:\n    type: string\n  pixelUnits:\n    type: string\n  pixelScaleX:\n    type: number\n  pixelScaleY:\n    type: number\n  originLocation:\n    type: string\n    description: 'The location of the origin pixel of an image. Range: upperLeft,\n      upperRight, lowerLeft, lowerRight, center'\nrequired:\n- originX\n- originY\n- pixelScaleX\n- pixelScaleY\n- pixelUnits\n- originLocation\n- coordDef\nx-jsonld-prefixes:\n  ada: https://ada.astromat.org/metadata/\n",
+  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: Spatial Registration Type\ndescription: Defines pixel coordinate system registration including origin coordinates,\n  pixel scales, and coordinate definition type for spatially registered images and\n  maps.\ntype: object\nproperties:\n  ada:basemap:\n    type: string\n    description: link to appropriate basemap image map\n  ada:originX:\n    type: number\n  ada:originY:\n    type: number\n  ada:originZ:\n    type: number\n  ada:coordDef:\n    type: string\n    description: Whether coordinates are stage-defined or pixel-defined. If pixel-defined,\n      are coordinates from stage, upperleftPixel, or centerPixel.\n  ada:coordUnits:\n    type: string\n  ada:pixelUnits:\n    type: string\n  ada:pixelScaleX:\n    type: number\n  ada:pixelScaleY:\n    type: number\n  ada:originLocation:\n    type: string\n    description: 'The location of the origin pixel of an image. Range: upperLeft,\n      upperRight, lowerLeft, lowerRight, center'\nrequired:\n- ada:originX\n- ada:originY\n- ada:pixelScaleX\n- ada:pixelScaleY\n- ada:pixelUnits\n- ada:originLocation\n- ada:coordDef\nx-jsonld-prefixes:\n  ada: https://ada.astromat.org/metadata/\n",
   "gitRepository": "https://github.com/usgin/geochemBuildingBlocks",
   "gitPath": "_sources/adaProperties/spatialRegistration"
 }

@@ -21,8 +21,8 @@ NanoSIMS detail with isotope and phase tracking for presolar grain analysis.
 ```json
 {
   "@type": "ada:NanoSIMSTabular",
-  "phaseAnalyzed": ["presolar SiC", "presolar graphite"],
-  "isotopeAnalyzed": ["12C", "13C", "28Si", "29Si"]
+  "ada:phaseAnalyzed": ["presolar SiC", "presolar graphite"],
+  "ada:isotopeAnalyzed": ["12C", "13C", "28Si", "29Si"]
 }
 
 ```
@@ -37,11 +37,11 @@ NanoSIMS detail with isotope and phase tracking for presolar grain analysis.
     "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailNanoSIMS/context.jsonld"
   ],
   "@type": "ada:NanoSIMSTabular",
-  "phaseAnalyzed": [
+  "ada:phaseAnalyzed": [
     "presolar SiC",
     "presolar graphite"
   ],
-  "isotopeAnalyzed": [
+  "ada:isotopeAnalyzed": [
     "12C",
     "13C",
     "28Si",
@@ -54,7 +54,13 @@ NanoSIMS detail with isotope and phase tracking for presolar grain analysis.
 ```ttl
 @prefix ada: <https://ada.astromat.org/metadata/> .
 
-[] a ada:NanoSIMSTabular .
+[] a ada:NanoSIMSTabular ;
+    ada:isotopeAnalyzed "12C",
+        "13C",
+        "28Si",
+        "29Si" ;
+    ada:phaseAnalyzed "presolar SiC",
+        "presolar graphite" .
 
 
 ```
@@ -74,9 +80,9 @@ properties:
     - ada:NanoSIMSImageCollection
     - ada:NanoSIMSTabular
     - ada:NanoSIMSMap
-  phaseAnalyzed:
+  ada:phaseAnalyzed:
     $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/stringArray/schema.yaml
-  isotopeAnalyzed:
+  ada:isotopeAnalyzed:
     $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/stringArray/schema.yaml
 x-jsonld-prefixes:
   schema: http://schema.org/

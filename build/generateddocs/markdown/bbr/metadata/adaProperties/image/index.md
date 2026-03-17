@@ -21,14 +21,14 @@ An SEM backscattered electron image with component type and acquisition details.
 ```json
 {
   "@type": ["ada:image", "schema:ImageObject"],
-  "componentType": {
+  "ada:componentType": {
     "@type": "ada:SEMImageCollection"
   },
-  "acquisitionTime": "2024-03-15T14:30:00Z",
-  "channel1": "BSE",
-  "pixelSize": "0.5 micrometer",
-  "illuminationType": "Electron beam",
-  "imageType": "Backscattered electron"
+  "ada:acquisitionTime": "2024-03-15T14:30:00Z",
+  "ada:channel1": "BSE",
+  "ada:pixelSize": "0.5 micrometer",
+  "ada:illuminationType": "Electron beam",
+  "ada:imageType": "Backscattered electron"
 }
 
 ```
@@ -47,14 +47,14 @@ An SEM backscattered electron image with component type and acquisition details.
     "ada:image",
     "schema:ImageObject"
   ],
-  "componentType": {
+  "ada:componentType": {
     "@type": "ada:SEMImageCollection"
   },
-  "acquisitionTime": "2024-03-15T14:30:00Z",
-  "channel1": "BSE",
-  "pixelSize": "0.5 micrometer",
-  "illuminationType": "Electron beam",
-  "imageType": "Backscattered electron"
+  "ada:acquisitionTime": "2024-03-15T14:30:00Z",
+  "ada:channel1": "BSE",
+  "ada:pixelSize": "0.5 micrometer",
+  "ada:illuminationType": "Electron beam",
+  "ada:imageType": "Backscattered electron"
 }
 ```
 
@@ -64,7 +64,13 @@ An SEM backscattered electron image with component type and acquisition details.
 @prefix schema1: <http://schema.org/> .
 
 [] a schema1:ImageObject,
-        ada:image .
+        ada:image ;
+    ada:acquisitionTime "2024-03-15T14:30:00Z" ;
+    ada:channel1 "BSE" ;
+    ada:componentType [ a ada:SEMImageCollection ] ;
+    ada:illuminationType "Electron beam" ;
+    ada:imageType "Backscattered electron" ;
+    ada:pixelSize "0.5 micrometer" .
 
 
 ```
@@ -89,9 +95,9 @@ properties:
     - contains:
         const: schema:ImageObject
     description: GeneralType for images
-  acquisitionTime:
+  ada:acquisitionTime:
     type: string
-  componentType:
+  ada:componentType:
     type: object
     properties:
       '@type':
@@ -116,25 +122,25 @@ properties:
         - ada:ShapeModelImage
     required:
     - '@type'
-  channel1:
+  ada:channel1:
     type: string
-  channel2:
+  ada:channel2:
     type: string
-  channel3:
+  ada:channel3:
     type: string
-  pixelSize:
+  ada:pixelSize:
     type: string
-  illuminationType:
+  ada:illuminationType:
     type: string
     description: Type of illumination used to create the image. Examples include Visible
       light, Cross-polarized visible light, ultraviolet light, Electron beam, X-ray.
-  imageType:
+  ada:imageType:
     type: string
     description: Specifies the nature of the sample's response to the illumination
       that was detected and measured.
 required:
 - '@type'
-- componentType
+- ada:componentType
 x-jsonld-prefixes:
   schema: http://schema.org/
   ada: https://ada.astromat.org/metadata/

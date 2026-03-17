@@ -21,13 +21,13 @@ QRIS (Raman spectroscopy) calibrated data with illumination and calibration deta
 ```json
 {
   "@type": "ada:QRISCalibrated",
-  "calibrationFile": "calibration_neon_20240301.csv",
-  "pipelineVersion": "2.1.0",
-  "focalLength": 300,
-  "illuminationColor": ["532nm green"],
-  "illuminationLevel": 50,
-  "exposureTime": 10,
-  "target": "olivine grain"
+  "ada:calibrationFile": "calibration_neon_20240301.csv",
+  "ada:pipelineVersion": "2.1.0",
+  "ada:focalLength": 300,
+  "ada:illuminationColor": ["532nm green"],
+  "ada:illuminationLevel": 50,
+  "ada:exposureTime": 10,
+  "ada:target": "olivine grain"
 }
 
 ```
@@ -42,23 +42,31 @@ QRIS (Raman spectroscopy) calibrated data with illumination and calibration deta
     "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailQRIS/context.jsonld"
   ],
   "@type": "ada:QRISCalibrated",
-  "calibrationFile": "calibration_neon_20240301.csv",
-  "pipelineVersion": "2.1.0",
-  "focalLength": 300,
-  "illuminationColor": [
+  "ada:calibrationFile": "calibration_neon_20240301.csv",
+  "ada:pipelineVersion": "2.1.0",
+  "ada:focalLength": 300,
+  "ada:illuminationColor": [
     "532nm green"
   ],
-  "illuminationLevel": 50,
-  "exposureTime": 10,
-  "target": "olivine grain"
+  "ada:illuminationLevel": 50,
+  "ada:exposureTime": 10,
+  "ada:target": "olivine grain"
 }
 ```
 
 #### ttl
 ```ttl
 @prefix ada: <https://ada.astromat.org/metadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-[] a ada:QRISCalibrated .
+[] a ada:QRISCalibrated ;
+    ada:calibrationFile "calibration_neon_20240301.csv" ;
+    ada:exposureTime 10 ;
+    ada:focalLength 300 ;
+    ada:illuminationColor "532nm green" ;
+    ada:illuminationLevel 50 ;
+    ada:pipelineVersion "2.1.0" ;
+    ada:target "olivine grain" .
 
 
 ```
@@ -76,22 +84,22 @@ properties:
     anyOf:
     - const: ada:QRISCalibrated
     - const: ada:QRISRaw
-  calibrationFile:
+  ada:calibrationFile:
     type: string
-  pipelineVersion:
+  ada:pipelineVersion:
     type: string
-  focalLength:
+  ada:focalLength:
     type: integer
-  illuminationColor:
+  ada:illuminationColor:
     type: array
     minItems: 0
     items:
       type: string
-  illuminationLevel:
+  ada:illuminationLevel:
     type: integer
-  exposureTime:
+  ada:exposureTime:
     type: integer
-  target:
+  ada:target:
     type: string
 x-jsonld-prefixes:
   schema: http://schema.org/

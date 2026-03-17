@@ -2,8 +2,8 @@
   "title": "Validation report for ada.bbr.metadata.adaProperties.document - Document Type",
   "bblockName": "Document Type",
   "bblockId": "ada.bbr.metadata.adaProperties.document",
-  "generated": "2026-03-16T22:11:07.313229+00:00",
-  "result": false,
+  "generated": "2026-03-17T21:01:03.542279+00:00",
+  "result": true,
   "items": [
     {
       "source": {
@@ -15,7 +15,7 @@
         "snippetIndex": 1,
         "language": "application/json"
       },
-      "result": false,
+      "result": true,
       "sections": [
         {
           "name": "FILES",
@@ -40,7 +40,7 @@
               "op": "ttl-create",
               "empty": false,
               "filename": "example_1_1.ttl",
-              "size": 4,
+              "size": 6,
               "isError": false,
               "message": "Output Turtle example_1_1.ttl created"
             }
@@ -65,9 +65,9 @@
             {
               "op": "shacl-report",
               "shaclFile": "_sources/adaProperties/document/rules.shacl",
-              "graph": "@prefix ada: <https://ada.astromat.org/metadata/> .\n@prefix schema1: <http://schema.org/> .\n@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms false ;\n    sh:result [ a sh:ValidationResult ;\n            sh:focusNode [ a schema1:DigitalDocument,\n                        ada:document ;\n                    schema1:isBasedOn \"calibration_original_20230415.pdf\" ;\n                    schema1:version \"1.0\" ] ;\n            sh:resultMessage \"A document must have a componentType.\" ;\n            sh:resultPath ada:componentType ;\n            sh:resultSeverity sh:Violation ;\n            sh:sourceConstraintComponent sh:MinCountConstraintComponent ;\n            sh:sourceShape [ sh:message \"A document must have a componentType.\" ;\n                    sh:minCount 1 ;\n                    sh:path ada:componentType ] ] .\n\n",
-              "isError": true,
-              "message": "Validation result for _sources/adaProperties/document/rules.shacl:\n  Validation Report\n  Conforms: False\n  Results (1):\n  Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):\n  \tSeverity: sh:Violation\n  \tSource Shape: [ sh:message Literal(\"A document must have a componentType.\") ; sh:minCount Literal(\"1\", datatype=xsd:integer) ; sh:path ada:componentType ]\n  \tFocus Node: [ rdf:type ada:document, schema1:DigitalDocument ; schema1:isBasedOn Literal(\"calibration_original_20230415.pdf\") ; schema1:version Literal(\"1.0\") ]\n  \tResult Path: ada:componentType\n  \tMessage: A document must have a componentType.\n  "
+              "graph": "@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms true .\n\n",
+              "isError": false,
+              "message": "Validation result for _sources/adaProperties/document/rules.shacl:\n  Validation Report\n  Conforms: True\n  "
             },
             {
               "shaclFile": "_sources/adaProperties/document/rules.shacl",
@@ -104,7 +104,7 @@
   "globalErrors": {},
   "counts": {
     "total": 1,
-    "passed": 0,
-    "failed": 1
+    "passed": 1,
+    "failed": 0
   }
 }

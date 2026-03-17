@@ -21,8 +21,8 @@ Inductively Coupled Plasma Optical Emission Spectrometry processed data detail.
 ```json
 {
   "@type": "ada:ICPOESProcessedTabular",
-  "mass": "50.2 mg",
-  "dissolutionFactor": 100.0
+  "ada:mass": "50.2 mg",
+  "ada:dissolutionFactor": 100.0
 }
 
 ```
@@ -37,16 +37,19 @@ Inductively Coupled Plasma Optical Emission Spectrometry processed data detail.
     "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailICPOES/context.jsonld"
   ],
   "@type": "ada:ICPOESProcessedTabular",
-  "mass": "50.2 mg",
-  "dissolutionFactor": 100.0
+  "ada:mass": "50.2 mg",
+  "ada:dissolutionFactor": 100.0
 }
 ```
 
 #### ttl
 ```ttl
 @prefix ada: <https://ada.astromat.org/metadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-[] a ada:ICPOESProcessedTabular .
+[] a ada:ICPOESProcessedTabular ;
+    ada:dissolutionFactor 1e+02 ;
+    ada:mass "50.2 mg" .
 
 
 ```
@@ -65,9 +68,9 @@ properties:
     - const: ada:ICPOESIntermediateTabular
     - const: ada:ICPOESProcessedTabular
     - const: ada:ICPOESRawTabular
-  mass:
+  ada:mass:
     type: string
-  dissolutionFactor:
+  ada:dissolutionFactor:
     type: number
 x-jsonld-prefixes:
   schema: http://schema.org/

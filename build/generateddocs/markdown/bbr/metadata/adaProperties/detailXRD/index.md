@@ -21,11 +21,11 @@ X-ray Diffraction tabular data with geometry and wavelength parameters.
 ```json
 {
   "@type": "ada:XRDTabular",
-  "geometry": "Bragg-Brentano",
-  "sampleMount": "flat plate",
-  "stepSize": 0.02,
-  "timePerStep": 1.0,
-  "wavelength": 1.5406
+  "ada:geometry": "Bragg-Brentano",
+  "ada:sampleMount": "flat plate",
+  "ada:stepSize": 0.02,
+  "ada:timePerStep": 1.0,
+  "ada:wavelength": 1.5406
 }
 
 ```
@@ -40,19 +40,25 @@ X-ray Diffraction tabular data with geometry and wavelength parameters.
     "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailXRD/context.jsonld"
   ],
   "@type": "ada:XRDTabular",
-  "geometry": "Bragg-Brentano",
-  "sampleMount": "flat plate",
-  "stepSize": 0.02,
-  "timePerStep": 1.0,
-  "wavelength": 1.5406
+  "ada:geometry": "Bragg-Brentano",
+  "ada:sampleMount": "flat plate",
+  "ada:stepSize": 0.02,
+  "ada:timePerStep": 1.0,
+  "ada:wavelength": 1.5406
 }
 ```
 
 #### ttl
 ```ttl
 @prefix ada: <https://ada.astromat.org/metadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-[] a ada:XRDTabular .
+[] a ada:XRDTabular ;
+    ada:geometry "Bragg-Brentano" ;
+    ada:sampleMount "flat plate" ;
+    ada:stepSize 2e-02 ;
+    ada:timePerStep 1e+00 ;
+    ada:wavelength 1.5406e+00 .
 
 
 ```
@@ -67,15 +73,15 @@ type: object
 properties:
   '@type':
     const: ada:XRDTabular
-  geometry:
+  ada:geometry:
     type: string
-  sampleMount:
+  ada:sampleMount:
     type: string
-  stepSize:
+  ada:stepSize:
     type: number
-  timePerStep:
+  ada:timePerStep:
     type: number
-  wavelength:
+  ada:wavelength:
     type: number
 x-jsonld-prefixes:
   schema: http://schema.org/

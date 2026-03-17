@@ -21,8 +21,8 @@ Point Spread Function Data detail with image names and viewing conditions.
 ```json
 {
   "@type": "ada:PSFDTabular",
-  "imageName": ["crater_overview_001.tif", "crater_overview_002.tif"],
-  "imageViewingConditions": "nadir, 50m altitude"
+  "ada:imageName": ["crater_overview_001.tif", "crater_overview_002.tif"],
+  "ada:imageViewingConditions": "nadir, 50m altitude"
 }
 
 ```
@@ -37,11 +37,11 @@ Point Spread Function Data detail with image names and viewing conditions.
     "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailPSFD/context.jsonld"
   ],
   "@type": "ada:PSFDTabular",
-  "imageName": [
+  "ada:imageName": [
     "crater_overview_001.tif",
     "crater_overview_002.tif"
   ],
-  "imageViewingConditions": "nadir, 50m altitude"
+  "ada:imageViewingConditions": "nadir, 50m altitude"
 }
 ```
 
@@ -49,7 +49,10 @@ Point Spread Function Data detail with image names and viewing conditions.
 ```ttl
 @prefix ada: <https://ada.astromat.org/metadata/> .
 
-[] a ada:PSFDTabular .
+[] a ada:PSFDTabular ;
+    ada:imageName "crater_overview_001.tif",
+        "crater_overview_002.tif" ;
+    ada:imageViewingConditions "nadir, 50m altitude" .
 
 
 ```
@@ -64,9 +67,9 @@ type: object
 properties:
   '@type':
     const: ada:PSFDTabular
-  imageName:
+  ada:imageName:
     $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/stringArray/schema.yaml
-  imageViewingConditions:
+  ada:imageViewingConditions:
     type: string
 x-jsonld-prefixes:
   schema: http://schema.org/

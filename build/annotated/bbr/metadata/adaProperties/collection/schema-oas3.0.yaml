@@ -27,7 +27,7 @@ properties:
         enum:
         - https://schema.org/Collection
     description: GeneralType for collections
-  componentType:
+  ada:componentType:
     type: object
     properties:
       '@type':
@@ -61,26 +61,26 @@ properties:
         - ada:VLMImageCollection
         - ada:XANESCollection
         - ada:XCTImageCollection
-  memberTypes:
+  ada:memberTypes:
     description: List of the component types in the collection
     allOf:
     - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/collection/schema-oas3.0.yaml#/x-defs/ada.bbr.metadata.adaProperties.stringArray
-  nFiles:
+  ada:nFiles:
     type: integer
     description: Number of files in the collection, including metadata files
-  filelist:
+  ada:filelist:
     type: array
     items:
       type: object
       properties:
-        fileName:
+        ada:fileName:
           type: string
           description: Full path to file in container object
-        fileNamePattern:
+        ada:fileNamePattern:
           type: string
           description: Pattern for collection members with differentiating suffix
             at '*'
-        componentType:
+        ada:componentType:
           description: The component type for the file(s)
           type: string
         schema:encodingFormat:
@@ -88,9 +88,9 @@ properties:
           description: MIME type with extension
       oneOf:
       - required:
-        - fileName
+        - ada:fileName
       - required:
-        - fileNamePattern
+        - ada:fileNamePattern
 x-jsonld-prefixes:
   schema: http://schema.org/
   ada: https://ada.astromat.org/metadata/

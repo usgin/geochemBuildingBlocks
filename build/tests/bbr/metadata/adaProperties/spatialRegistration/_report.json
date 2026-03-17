@@ -2,8 +2,8 @@
   "title": "Validation report for ada.bbr.metadata.adaProperties.spatialRegistration - Spatial Registration Type",
   "bblockName": "Spatial Registration Type",
   "bblockId": "ada.bbr.metadata.adaProperties.spatialRegistration",
-  "generated": "2026-03-16T22:11:07.169349+00:00",
-  "result": false,
+  "generated": "2026-03-17T21:01:03.411923+00:00",
+  "result": true,
   "items": [
     {
       "source": {
@@ -15,7 +15,7 @@
         "snippetIndex": 1,
         "language": "application/json"
       },
-      "result": false,
+      "result": true,
       "sections": [
         {
           "name": "FILES",
@@ -38,11 +38,11 @@
             },
             {
               "op": "ttl-create",
-              "empty": true,
+              "empty": false,
               "filename": "example_1_1.ttl",
-              "size": 0,
-              "isError": true,
-              "message": "**Empty** output Turtle example_1_1.ttl created"
+              "size": 10,
+              "isError": false,
+              "message": "Output Turtle example_1_1.ttl created"
             }
           ]
         },
@@ -57,6 +57,29 @@
               "message": "Validation passed"
             }
           ]
+        },
+        {
+          "name": "SHACL",
+          "title": "SHACL",
+          "entries": [
+            {
+              "op": "shacl-report",
+              "shaclFile": "_sources/adaProperties/spatialRegistration/rules.shacl",
+              "graph": "@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms true .\n\n",
+              "isError": false,
+              "message": "Validation result for _sources/adaProperties/spatialRegistration/rules.shacl:\n  Validation Report\n  Conforms: True\n  "
+            },
+            {
+              "shaclFile": "_sources/adaProperties/spatialRegistration/rules.shacl",
+              "focusNodes": {
+                "cdifd:spatialRegistrationShape": {
+                  "nodes": []
+                }
+              },
+              "isError": false,
+              "message": "Focus nodes for _sources/adaProperties/spatialRegistration/rules.shacl:\n - Shape cdifd:spatialRegistrationShape: *none*\n"
+            }
+          ]
         }
       ]
     }
@@ -64,7 +87,7 @@
   "globalErrors": {},
   "counts": {
     "total": 1,
-    "passed": 0,
-    "failed": 1
+    "passed": 1,
+    "failed": 0
   }
 }

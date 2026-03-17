@@ -21,8 +21,8 @@ Electron Microprobe Analysis detail with spectrometer and signal information.
 ```json
 {
   "@type": "ada:EMPAQEATabular",
-  "spectrometersUsed": "WDS 1-5",
-  "signalUsed": "characteristic X-rays"
+  "ada:spectrometersUsed": "WDS 1-5",
+  "ada:signalUsed": "characteristic X-rays"
 }
 
 ```
@@ -37,8 +37,8 @@ Electron Microprobe Analysis detail with spectrometer and signal information.
     "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailEMPA/context.jsonld"
   ],
   "@type": "ada:EMPAQEATabular",
-  "spectrometersUsed": "WDS 1-5",
-  "signalUsed": "characteristic X-rays"
+  "ada:spectrometersUsed": "WDS 1-5",
+  "ada:signalUsed": "characteristic X-rays"
 }
 ```
 
@@ -46,7 +46,9 @@ Electron Microprobe Analysis detail with spectrometer and signal information.
 ```ttl
 @prefix ada: <https://ada.astromat.org/metadata/> .
 
-[] a ada:EMPAQEATabular .
+[] a ada:EMPAQEATabular ;
+    ada:signalUsed "characteristic X-rays" ;
+    ada:spectrometersUsed "WDS 1-5" .
 
 
 ```
@@ -64,10 +66,10 @@ properties:
     - const: ada:EMPAImage
     - const: ada:EMPAQEATabular
     - const: ada:EMPAImageCollection
-  spectrometersUsed:
+  ada:spectrometersUsed:
     type: string
     description: Spectrometers used in analysis
-  signalUsed:
+  ada:signalUsed:
     type: string
 x-jsonld-prefixes:
   schema: http://schema.org/

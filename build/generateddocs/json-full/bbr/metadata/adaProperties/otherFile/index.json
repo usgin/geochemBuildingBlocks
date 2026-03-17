@@ -10,7 +10,7 @@
   "itemClass": "schema",
   "register": "cdif-building-block-register",
   "version": "0.1",
-  "dateOfLastChange": "2026-03-16",
+  "dateOfLastChange": "2026-03-17",
   "link": "https://github.com/usgin/geochemBuildingBlocks",
   "maturity": "draft",
   "scope": "unstable",
@@ -45,7 +45,7 @@
   "resolvedSchemaProperties": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/otherFile/resolvedProperties.json",
   "sourceFiles": "https://usgin.github.io/geochemBuildingBlocks/_sources/adaProperties/otherFile/",
   "rdfData": [],
-  "validationPassed": false,
+  "validationPassed": true,
   "testOutputs": "https://github.com/usgin/geochemBuildingBlocks/blob/main/build/tests/bbr/metadata/adaProperties/otherFile/",
   "description": "# Other File Type\n\nDescribes files in non-standard formats that have been approved for submission to the Astromat Archive. Supports EMSA spectral data, OBJ 3D models, STL files, XLSX workbooks, and Neptune Plus exports.\n",
   "examples": [
@@ -59,23 +59,23 @@
       "snippets": [
         {
           "language": "json",
-          "code": "{\n  \"@type\": [\"ada:otherFileType\"],\n  \"componentType\": {\n    \"@type\": \"ada:other\"\n  },\n  \"schema:encodingFormat\": \"model/obj\",\n  \"formatDescription\": \"Wavefront OBJ 3D model file\"\n}\n",
+          "code": "{\n  \"@type\": [\"ada:otherFileType\"],\n  \"ada:componentType\": {\n    \"@type\": \"ada:other\"\n  },\n  \"schema:encodingFormat\": \"model/obj\",\n  \"ada:formatDescription\": \"Wavefront OBJ 3D model file\"\n}\n",
           "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/adaProperties/otherFile/example_1_1.json"
         },
         {
           "language": "jsonld",
-          "code": "{\n  \"@context\": [\n    {\n      \"schema\": \"http://schema.org/\",\n      \"ada\": \"https://ada.astromat.org/metadata/\"\n    },\n    \"https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/otherFile/context.jsonld\"\n  ],\n  \"@type\": [\n    \"ada:otherFileType\"\n  ],\n  \"componentType\": {\n    \"@type\": \"ada:other\"\n  },\n  \"schema:encodingFormat\": \"model/obj\",\n  \"formatDescription\": \"Wavefront OBJ 3D model file\"\n}",
+          "code": "{\n  \"@context\": [\n    {\n      \"schema\": \"http://schema.org/\",\n      \"ada\": \"https://ada.astromat.org/metadata/\"\n    },\n    \"https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/otherFile/context.jsonld\"\n  ],\n  \"@type\": [\n    \"ada:otherFileType\"\n  ],\n  \"ada:componentType\": {\n    \"@type\": \"ada:other\"\n  },\n  \"schema:encodingFormat\": \"model/obj\",\n  \"ada:formatDescription\": \"Wavefront OBJ 3D model file\"\n}",
           "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/adaProperties/otherFile/example_1_1.jsonld"
         },
         {
           "language": "ttl",
-          "code": "@prefix ada: <https://ada.astromat.org/metadata/> .\n@prefix schema1: <http://schema.org/> .\n\n[] a ada:otherFileType ;\n    schema1:encodingFormat \"model/obj\" .\n\n",
+          "code": "@prefix ada: <https://ada.astromat.org/metadata/> .\n@prefix schema1: <http://schema.org/> .\n\n[] a ada:otherFileType ;\n    schema1:encodingFormat \"model/obj\" ;\n    ada:componentType [ a ada:other ] ;\n    ada:formatDescription \"Wavefront OBJ 3D model file\" .\n\n",
           "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/adaProperties/otherFile/example_1_1.ttl"
         }
       ]
     }
   ],
-  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: Other File Type\ndescription: Files in other widely-used formats approved for submission to the Astromat\n  Archive. Includes EMSA, OBJ, STL, XLSX, and Neptune Plus export formats.\ntype: object\nproperties:\n  '@type':\n    type: array\n    items:\n      type: string\n    minItems: 1\n    contains:\n      const: ada:otherFileType\n  componentType:\n    anyOf:\n    - type: object\n      properties:\n        '@type':\n          enum:\n          - ada:other\n      required:\n      - '@type'\n    - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailSLS/schema.yaml\n  schema:encodingFormat:\n    description: 'One of the approved non-standard file formats: ''Spectral Data Exchange\n      File (.emsa)''-->text/plain; ''3D model file (.obj)''-->model/obj; ''Standard\n      Triangle Language (.stl)''-->model/stl; ''Open XML workbook (.xlsx)''-->application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;\n      ''Neptune Plus export (.exp)''-->application/octet-stream'\n    enum:\n    - text/plain\n    - model/obj\n    - model/stl\n    - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet\n    - application/octet-stream\n  formatDescription:\n    type: string\n    description: Free text explanation of file format, or a link to a publicly accessible\n      specification for the format.\nrequired:\n- '@type'\n- componentType\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  ada: https://ada.astromat.org/metadata/\n",
+  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: Other File Type\ndescription: Files in other widely-used formats approved for submission to the Astromat\n  Archive. Includes EMSA, OBJ, STL, XLSX, and Neptune Plus export formats.\ntype: object\nproperties:\n  '@type':\n    type: array\n    items:\n      type: string\n    minItems: 1\n    contains:\n      const: ada:otherFileType\n  ada:componentType:\n    anyOf:\n    - type: object\n      properties:\n        '@type':\n          enum:\n          - ada:other\n      required:\n      - '@type'\n    - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailSLS/schema.yaml\n  schema:encodingFormat:\n    description: 'One of the approved non-standard file formats: ''Spectral Data Exchange\n      File (.emsa)''-->text/plain; ''3D model file (.obj)''-->model/obj; ''Standard\n      Triangle Language (.stl)''-->model/stl; ''Open XML workbook (.xlsx)''-->application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;\n      ''Neptune Plus export (.exp)''-->application/octet-stream'\n    enum:\n    - text/plain\n    - model/obj\n    - model/stl\n    - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet\n    - application/octet-stream\n  ada:formatDescription:\n    type: string\n    description: Free text explanation of file format, or a link to a publicly accessible\n      specification for the format.\nrequired:\n- '@type'\n- ada:componentType\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  ada: https://ada.astromat.org/metadata/\n",
   "gitRepository": "https://github.com/usgin/geochemBuildingBlocks",
   "gitPath": "_sources/adaProperties/otherFile"
 }

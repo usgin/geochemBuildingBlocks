@@ -21,7 +21,7 @@ Differential Scanning Calorimetry heat flow data detail.
 ```json
 {
   "@type": "ada:DSCHeatTabular",
-  "analysisType": "heating"
+  "ada:analysisType": "heating"
 }
 
 ```
@@ -36,7 +36,7 @@ Differential Scanning Calorimetry heat flow data detail.
     "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailDSC/context.jsonld"
   ],
   "@type": "ada:DSCHeatTabular",
-  "analysisType": "heating"
+  "ada:analysisType": "heating"
 }
 ```
 
@@ -44,7 +44,8 @@ Differential Scanning Calorimetry heat flow data detail.
 ```ttl
 @prefix ada: <https://ada.astromat.org/metadata/> .
 
-[] a ada:DSCHeatTabular .
+[] a ada:DSCHeatTabular ;
+    ada:analysisType "heating" .
 
 
 ```
@@ -59,7 +60,7 @@ type: object
 properties:
   '@type':
     const: ada:DSCHeatTabular
-  analysisType:
+  ada:analysisType:
     type: string
 x-jsonld-prefixes:
   schema: http://schema.org/

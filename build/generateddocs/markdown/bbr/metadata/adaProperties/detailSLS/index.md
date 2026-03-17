@@ -21,12 +21,12 @@ Structured Light Scanning shape model with mesh statistics.
 ```json
 {
   "@type": "ada:SLSShapeModel",
-  "countScans": 24,
-  "facets": 524288,
-  "unitsOfMeasurement": "millimeter",
-  "version": 3,
-  "vertices": 262145,
-  "watertight": true
+  "ada:countScans": 24,
+  "ada:facets": 524288,
+  "ada:unitsOfMeasurement": "millimeter",
+  "ada:version": 3,
+  "ada:vertices": 262145,
+  "ada:watertight": true
 }
 
 ```
@@ -41,20 +41,27 @@ Structured Light Scanning shape model with mesh statistics.
     "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailSLS/context.jsonld"
   ],
   "@type": "ada:SLSShapeModel",
-  "countScans": 24,
-  "facets": 524288,
-  "unitsOfMeasurement": "millimeter",
-  "version": 3,
-  "vertices": 262145,
-  "watertight": true
+  "ada:countScans": 24,
+  "ada:facets": 524288,
+  "ada:unitsOfMeasurement": "millimeter",
+  "ada:version": 3,
+  "ada:vertices": 262145,
+  "ada:watertight": true
 }
 ```
 
 #### ttl
 ```ttl
 @prefix ada: <https://ada.astromat.org/metadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-[] a ada:SLSShapeModel .
+[] a ada:SLSShapeModel ;
+    ada:countScans 24 ;
+    ada:facets 524288 ;
+    ada:unitsOfMeasurement "millimeter" ;
+    ada:version 3 ;
+    ada:vertices 262145 ;
+    ada:watertight true .
 
 
 ```
@@ -71,17 +78,17 @@ properties:
     anyOf:
     - const: ada:SLSShapeModel
     - const: ada:SLSPartialScan
-  countScans:
+  ada:countScans:
     type: integer
-  facets:
+  ada:facets:
     type: integer
-  unitsOfMeasurement:
+  ada:unitsOfMeasurement:
     type: string
-  version:
+  ada:version:
     type: integer
-  vertices:
+  ada:vertices:
     type: integer
-  watertight:
+  ada:watertight:
     type: boolean
 x-jsonld-prefixes:
   schema: http://schema.org/

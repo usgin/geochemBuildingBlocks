@@ -12,10 +12,10 @@ x-defs:
           - ada:EMPAQEATabular
         - enum:
           - ada:EMPAImageCollection
-      spectrometersUsed:
+      ada:spectrometersUsed:
         type: string
         description: Spectrometers used in analysis
-      signalUsed:
+      ada:signalUsed:
         type: string
     x-jsonld-prefixes:
       schema: http://schema.org/
@@ -29,39 +29,39 @@ x-defs:
       and maps.
     type: object
     properties:
-      basemap:
+      ada:basemap:
         type: string
         description: link to appropriate basemap image map
-      originX:
+      ada:originX:
         type: number
-      originY:
+      ada:originY:
         type: number
-      originZ:
+      ada:originZ:
         type: number
-      coordDef:
+      ada:coordDef:
         type: string
         description: Whether coordinates are stage-defined or pixel-defined. If pixel-defined,
           are coordinates from stage, upperleftPixel, or centerPixel.
-      coordUnits:
+      ada:coordUnits:
         type: string
-      pixelUnits:
+      ada:pixelUnits:
         type: string
-      pixelScaleX:
+      ada:pixelScaleX:
         type: number
-      pixelScaleY:
+      ada:pixelScaleY:
         type: number
-      originLocation:
+      ada:originLocation:
         type: string
         description: 'The location of the origin pixel of an image. Range: upperLeft,
           upperRight, lowerLeft, lowerRight, center'
     required:
-    - originX
-    - originY
-    - pixelScaleX
-    - pixelScaleY
-    - pixelUnits
-    - originLocation
-    - coordDef
+    - ada:originX
+    - ada:originY
+    - ada:pixelScaleX
+    - ada:pixelScaleY
+    - ada:pixelUnits
+    - ada:originLocation
+    - ada:coordDef
     x-jsonld-prefixes:
       ada: https://ada.astromat.org/metadata/
     x-schema-source: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/spatialRegistration/schema.yaml
@@ -83,9 +83,9 @@ properties:
     - contains:
         enum:
         - schema:ImageObject
-  acquisitionTime:
+  ada:acquisitionTime:
     type: string
-  componentType:
+  ada:componentType:
     anyOf:
     - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/imageMap/schema-oas3.0.yaml#/x-defs/ada.bbr.metadata.adaProperties.detailEMPA
     - type: object
@@ -111,27 +111,27 @@ properties:
           - ada:VNMIROverviewImage
       required:
       - '@type'
-  channel1:
+  ada:channel1:
     type: string
-  channel2:
+  ada:channel2:
     type: string
-  channel3:
+  ada:channel3:
     type: string
-  illuminationType:
+  ada:illuminationType:
     type: string
     description: Type of illumination used to create the image.
-  imageType:
+  ada:imageType:
     type: string
     description: Specifies the nature of the sample's response to the illumination.
-  numPixelsX:
+  ada:numPixelsX:
     type: integer
-  numPixelsY:
+  ada:numPixelsY:
     type: integer
-  spatialRegistration:
+  ada:spatialRegistration:
     $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/imageMap/schema-oas3.0.yaml#/x-defs/ada.bbr.metadata.adaProperties.spatialRegistration
 required:
 - '@type'
-- componentType
+- ada:componentType
 x-jsonld-prefixes:
   schema: http://schema.org/
   ada: https://ada.astromat.org/metadata/

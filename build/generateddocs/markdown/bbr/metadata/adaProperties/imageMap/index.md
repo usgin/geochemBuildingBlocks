@@ -21,23 +21,23 @@ A spatially registered SEM elemental map image with pixel coordinates and spatia
 ```json
 {
   "@type": ["ada:imageMap", "schema:ImageObject"],
-  "componentType": {
+  "ada:componentType": {
     "@type": "ada:SEMEDSElementalMap"
   },
-  "acquisitionTime": "2024-03-15T14:35:00Z",
-  "channel1": "Fe Ka",
-  "illuminationType": "Electron beam",
-  "imageType": "X-ray intensity map",
-  "numPixelsX": 1024,
-  "numPixelsY": 768,
-  "spatialRegistration": {
-    "originX": 0.0,
-    "originY": 0.0,
-    "pixelScaleX": 0.25,
-    "pixelScaleY": 0.25,
-    "pixelUnits": "micrometer",
-    "originLocation": "upperLeft",
-    "coordDef": "pixel-defined"
+  "ada:acquisitionTime": "2024-03-15T14:35:00Z",
+  "ada:channel1": "Fe Ka",
+  "ada:illuminationType": "Electron beam",
+  "ada:imageType": "X-ray intensity map",
+  "ada:numPixelsX": 1024,
+  "ada:numPixelsY": 768,
+  "ada:spatialRegistration": {
+    "ada:originX": 0.0,
+    "ada:originY": 0.0,
+    "ada:pixelScaleX": 0.25,
+    "ada:pixelScaleY": 0.25,
+    "ada:pixelUnits": "micrometer",
+    "ada:originLocation": "upperLeft",
+    "ada:coordDef": "pixel-defined"
   }
 }
 
@@ -57,23 +57,23 @@ A spatially registered SEM elemental map image with pixel coordinates and spatia
     "ada:imageMap",
     "schema:ImageObject"
   ],
-  "componentType": {
+  "ada:componentType": {
     "@type": "ada:SEMEDSElementalMap"
   },
-  "acquisitionTime": "2024-03-15T14:35:00Z",
-  "channel1": "Fe Ka",
-  "illuminationType": "Electron beam",
-  "imageType": "X-ray intensity map",
-  "numPixelsX": 1024,
-  "numPixelsY": 768,
-  "spatialRegistration": {
-    "originX": 0.0,
-    "originY": 0.0,
-    "pixelScaleX": 0.25,
-    "pixelScaleY": 0.25,
-    "pixelUnits": "micrometer",
-    "originLocation": "upperLeft",
-    "coordDef": "pixel-defined"
+  "ada:acquisitionTime": "2024-03-15T14:35:00Z",
+  "ada:channel1": "Fe Ka",
+  "ada:illuminationType": "Electron beam",
+  "ada:imageType": "X-ray intensity map",
+  "ada:numPixelsX": 1024,
+  "ada:numPixelsY": 768,
+  "ada:spatialRegistration": {
+    "ada:originX": 0.0,
+    "ada:originY": 0.0,
+    "ada:pixelScaleX": 0.25,
+    "ada:pixelScaleY": 0.25,
+    "ada:pixelUnits": "micrometer",
+    "ada:originLocation": "upperLeft",
+    "ada:coordDef": "pixel-defined"
   }
 }
 ```
@@ -82,9 +82,24 @@ A spatially registered SEM elemental map image with pixel coordinates and spatia
 ```ttl
 @prefix ada: <https://ada.astromat.org/metadata/> .
 @prefix schema1: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 [] a schema1:ImageObject,
-        ada:imageMap .
+        ada:imageMap ;
+    ada:acquisitionTime "2024-03-15T14:35:00Z" ;
+    ada:channel1 "Fe Ka" ;
+    ada:componentType [ a ada:SEMEDSElementalMap ] ;
+    ada:illuminationType "Electron beam" ;
+    ada:imageType "X-ray intensity map" ;
+    ada:numPixelsX 1024 ;
+    ada:numPixelsY 768 ;
+    ada:spatialRegistration [ ada:coordDef "pixel-defined" ;
+            ada:originLocation "upperLeft" ;
+            ada:originX 0e+00 ;
+            ada:originY 0e+00 ;
+            ada:pixelScaleX 2.5e-01 ;
+            ada:pixelScaleY 2.5e-01 ;
+            ada:pixelUnits "micrometer" ] .
 
 
 ```
@@ -108,9 +123,9 @@ properties:
         const: ada:imageMap
     - contains:
         const: schema:ImageObject
-  acquisitionTime:
+  ada:acquisitionTime:
     type: string
-  componentType:
+  ada:componentType:
     anyOf:
     - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailEMPA/schema.yaml
     - type: object
@@ -136,27 +151,27 @@ properties:
           - ada:VNMIROverviewImage
       required:
       - '@type'
-  channel1:
+  ada:channel1:
     type: string
-  channel2:
+  ada:channel2:
     type: string
-  channel3:
+  ada:channel3:
     type: string
-  illuminationType:
+  ada:illuminationType:
     type: string
     description: Type of illumination used to create the image.
-  imageType:
+  ada:imageType:
     type: string
     description: Specifies the nature of the sample's response to the illumination.
-  numPixelsX:
+  ada:numPixelsX:
     type: integer
-  numPixelsY:
+  ada:numPixelsY:
     type: integer
-  spatialRegistration:
+  ada:spatialRegistration:
     $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/spatialRegistration/schema.yaml
 required:
 - '@type'
-- componentType
+- ada:componentType
 x-jsonld-prefixes:
   schema: http://schema.org/
   ada: https://ada.astromat.org/metadata/

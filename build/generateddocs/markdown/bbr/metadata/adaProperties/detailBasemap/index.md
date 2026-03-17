@@ -22,12 +22,12 @@ A basemap image with RGB channels and pixel scaling for spatial reference.
 {
   "@type": ["ada:basemap", "schema:Map"],
   "schema:description": "BSE basemap image of thin section",
-  "pixelUnits": "micrometer",
-  "pixelScaleX": 0.5,
-  "pixelScaleY": 0.5,
-  "channel1": "BSE",
-  "channel2": "",
-  "channel3": ""
+  "ada:pixelUnits": "micrometer",
+  "ada:pixelScaleX": 0.5,
+  "ada:pixelScaleY": 0.5,
+  "ada:channel1": "BSE",
+  "ada:channel2": "",
+  "ada:channel3": ""
 }
 
 ```
@@ -47,12 +47,12 @@ A basemap image with RGB channels and pixel scaling for spatial reference.
     "schema:Map"
   ],
   "schema:description": "BSE basemap image of thin section",
-  "pixelUnits": "micrometer",
-  "pixelScaleX": 0.5,
-  "pixelScaleY": 0.5,
-  "channel1": "BSE",
-  "channel2": "",
-  "channel3": ""
+  "ada:pixelUnits": "micrometer",
+  "ada:pixelScaleX": 0.5,
+  "ada:pixelScaleY": 0.5,
+  "ada:channel1": "BSE",
+  "ada:channel2": "",
+  "ada:channel3": ""
 }
 ```
 
@@ -60,10 +60,17 @@ A basemap image with RGB channels and pixel scaling for spatial reference.
 ```ttl
 @prefix ada: <https://ada.astromat.org/metadata/> .
 @prefix schema1: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 [] a schema1:Map,
         ada:basemap ;
-    schema1:description "BSE basemap image of thin section" .
+    schema1:description "BSE basemap image of thin section" ;
+    ada:channel1 "BSE" ;
+    ada:channel2 "" ;
+    ada:channel3 "" ;
+    ada:pixelScaleX 5e-01 ;
+    ada:pixelScaleY 5e-01 ;
+    ada:pixelUnits "micrometer" .
 
 
 ```
@@ -83,23 +90,23 @@ properties:
     - schema:Map
   schema:description:
     type: string
-  pixelUnits:
+  ada:pixelUnits:
     type: string
-  pixelScaleX:
+  ada:pixelScaleX:
     type: number
-  pixelScaleY:
+  ada:pixelScaleY:
     type: number
-  channel1:
+  ada:channel1:
     type: string
-  channel2:
+  ada:channel2:
     type: string
-  channel3:
+  ada:channel3:
     type: string
 required:
 - '@type'
-- pixelScaleX
-- pixelScaleY
-- pixelUnits
+- ada:pixelScaleX
+- ada:pixelScaleY
+- ada:pixelUnits
 x-jsonld-prefixes:
   schema: http://schema.org/
   ada: https://ada.astromat.org/metadata/

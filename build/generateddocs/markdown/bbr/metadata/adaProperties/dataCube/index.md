@@ -21,10 +21,10 @@ A multi-dimensional data cube for SEM-EDS elemental map cube data.
 ```json
 {
   "@type": ["ada:dataCube", "cdi:StructuredDataSet"],
-  "componentType": {
+  "ada:componentType": {
     "@type": "ada:SEMEDSElementalMapsCube"
   },
-  "dataComponentResource": "cube_SEMEDS_001.hdf5"
+  "ada:dataComponentResource": "cube_SEMEDS_001.hdf5"
 }
 
 ```
@@ -44,10 +44,10 @@ A multi-dimensional data cube for SEM-EDS elemental map cube data.
     "ada:dataCube",
     "cdi:StructuredDataSet"
   ],
-  "componentType": {
+  "ada:componentType": {
     "@type": "ada:SEMEDSElementalMapsCube"
   },
-  "dataComponentResource": "cube_SEMEDS_001.hdf5"
+  "ada:dataComponentResource": "cube_SEMEDS_001.hdf5"
 }
 ```
 
@@ -57,7 +57,9 @@ A multi-dimensional data cube for SEM-EDS elemental map cube data.
 @prefix cdi: <http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/> .
 
 [] a cdi:StructuredDataSet,
-        ada:dataCube .
+        ada:dataCube ;
+    ada:componentType [ a ada:SEMEDSElementalMapsCube ] ;
+    ada:dataComponentResource "cube_SEMEDS_001.hdf5" .
 
 
 ```
@@ -82,7 +84,7 @@ allOf:
           const: ada:dataCube
       - contains:
           const: cdi:StructuredDataSet
-    componentType:
+    ada:componentType:
       anyOf:
       - type: object
         properties:
@@ -103,7 +105,7 @@ allOf:
         required:
         - '@type'
       - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailL2MS/schema.yaml
-    dataComponentResource:
+    ada:dataComponentResource:
       type: string
 - $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/cdifProperties/cdifDataCube/schema.yaml
 x-jsonld-prefixes:

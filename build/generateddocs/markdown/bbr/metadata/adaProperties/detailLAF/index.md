@@ -21,9 +21,9 @@ Laser Ablation Fluorescence processed data with element and mass details.
 ```json
 {
   "@type": "ada:LAFProcessed",
-  "elementAnalyzed": "U",
-  "sampleMassConsumed": "0.3 mg",
-  "sampleType": "zircon grain mount"
+  "ada:elementAnalyzed": "U",
+  "ada:sampleMassConsumed": "0.3 mg",
+  "ada:sampleType": "zircon grain mount"
 }
 
 ```
@@ -38,9 +38,9 @@ Laser Ablation Fluorescence processed data with element and mass details.
     "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailLAF/context.jsonld"
   ],
   "@type": "ada:LAFProcessed",
-  "elementAnalyzed": "U",
-  "sampleMassConsumed": "0.3 mg",
-  "sampleType": "zircon grain mount"
+  "ada:elementAnalyzed": "U",
+  "ada:sampleMassConsumed": "0.3 mg",
+  "ada:sampleType": "zircon grain mount"
 }
 ```
 
@@ -48,7 +48,10 @@ Laser Ablation Fluorescence processed data with element and mass details.
 ```ttl
 @prefix ada: <https://ada.astromat.org/metadata/> .
 
-[] a ada:LAFProcessed .
+[] a ada:LAFProcessed ;
+    ada:elementAnalyzed "U" ;
+    ada:sampleMassConsumed "0.3 mg" ;
+    ada:sampleType "zircon grain mount" .
 
 
 ```
@@ -66,11 +69,11 @@ properties:
     anyOf:
     - const: ada:LAFProcessed
     - const: ada:LAFRaw
-  elementAnalyzed:
+  ada:elementAnalyzed:
     type: string
-  sampleMassConsumed:
+  ada:sampleMassConsumed:
     type: string
-  sampleType:
+  ada:sampleType:
     type: string
 x-jsonld-prefixes:
   schema: http://schema.org/

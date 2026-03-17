@@ -21,8 +21,8 @@ Argon geochronology document detail with phase and isotope analysis type.
 ```json
 {
   "@type": "ada:ARGTDocument",
-  "phaseAnalyzed": "sanidine",
-  "isotopeType": "40Ar/39Ar"
+  "ada:phaseAnalyzed": "sanidine",
+  "ada:isotopeType": "40Ar/39Ar"
 }
 
 ```
@@ -37,8 +37,8 @@ Argon geochronology document detail with phase and isotope analysis type.
     "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailARGT/context.jsonld"
   ],
   "@type": "ada:ARGTDocument",
-  "phaseAnalyzed": "sanidine",
-  "isotopeType": "40Ar/39Ar"
+  "ada:phaseAnalyzed": "sanidine",
+  "ada:isotopeType": "40Ar/39Ar"
 }
 ```
 
@@ -46,7 +46,9 @@ Argon geochronology document detail with phase and isotope analysis type.
 ```ttl
 @prefix ada: <https://ada.astromat.org/metadata/> .
 
-[] a ada:ARGTDocument .
+[] a ada:ARGTDocument ;
+    ada:isotopeType "40Ar/39Ar" ;
+    ada:phaseAnalyzed "sanidine" .
 
 
 ```
@@ -61,9 +63,9 @@ type: object
 properties:
   '@type':
     const: ada:ARGTDocument
-  phaseAnalyzed:
+  ada:phaseAnalyzed:
     type: string
-  isotopeType:
+  ada:isotopeType:
     type: string
 x-jsonld-prefixes:
   schema: http://schema.org/

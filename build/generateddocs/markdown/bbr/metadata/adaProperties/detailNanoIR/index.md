@@ -21,7 +21,7 @@ Nano-IR background spectroscopy detail with phases analyzed.
 ```json
 {
   "@type": "ada:NanoIRBackground",
-  "phaseAnalyzed": ["carbonate", "silicate"]
+  "ada:phaseAnalyzed": ["carbonate", "silicate"]
 }
 
 ```
@@ -36,7 +36,7 @@ Nano-IR background spectroscopy detail with phases analyzed.
     "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailNanoIR/context.jsonld"
   ],
   "@type": "ada:NanoIRBackground",
-  "phaseAnalyzed": [
+  "ada:phaseAnalyzed": [
     "carbonate",
     "silicate"
   ]
@@ -47,7 +47,9 @@ Nano-IR background spectroscopy detail with phases analyzed.
 ```ttl
 @prefix ada: <https://ada.astromat.org/metadata/> .
 
-[] a ada:NanoIRBackground .
+[] a ada:NanoIRBackground ;
+    ada:phaseAnalyzed "carbonate",
+        "silicate" .
 
 
 ```
@@ -63,7 +65,7 @@ properties:
   '@type':
     anyOf:
     - const: ada:NanoIRBackground
-  phaseAnalyzed:
+  ada:phaseAnalyzed:
     $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/stringArray/schema.yaml
 x-jsonld-prefixes:
   schema: http://schema.org/

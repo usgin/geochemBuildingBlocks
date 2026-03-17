@@ -21,8 +21,8 @@ Elemental Analysis Isotope Ratio Mass Spectrometry collection detail.
 ```json
 {
   "@type": "ada:EAIRMSCollection",
-  "massConsumed": "2.5 mg",
-  "elementType": "carbon"
+  "ada:massConsumed": "2.5 mg",
+  "ada:elementType": "carbon"
 }
 
 ```
@@ -37,8 +37,8 @@ Elemental Analysis Isotope Ratio Mass Spectrometry collection detail.
     "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailEAIRMS/context.jsonld"
   ],
   "@type": "ada:EAIRMSCollection",
-  "massConsumed": "2.5 mg",
-  "elementType": "carbon"
+  "ada:massConsumed": "2.5 mg",
+  "ada:elementType": "carbon"
 }
 ```
 
@@ -46,7 +46,9 @@ Elemental Analysis Isotope Ratio Mass Spectrometry collection detail.
 ```ttl
 @prefix ada: <https://ada.astromat.org/metadata/> .
 
-[] a ada:EAIRMSCollection .
+[] a ada:EAIRMSCollection ;
+    ada:elementType "carbon" ;
+    ada:massConsumed "2.5 mg" .
 
 
 ```
@@ -61,9 +63,9 @@ type: object
 properties:
   '@type':
     const: ada:EAIRMSCollection
-  massConsumed:
+  ada:massConsumed:
     type: string
-  elementType:
+  ada:elementType:
     type: string
 x-jsonld-prefixes:
   schema: http://schema.org/

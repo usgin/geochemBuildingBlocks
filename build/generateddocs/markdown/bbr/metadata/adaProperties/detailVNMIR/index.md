@@ -21,25 +21,25 @@ Very-Near Mid-IR spectroscopy spectral point measurement with detailed parameter
 ```json
 {
   "@type": "ada:VNMIRSpectralPoint",
-  "detector": "MCT",
-  "beamsplitter": "KBr",
-  "calibrationStandards": "gold mirror",
-  "numberOfScans": 256,
-  "spectralRangeMin": "400",
-  "spectralRangeMax": "4000",
-  "spectralResolution": "4 cm-1",
-  "spectralSampling": "2 cm-1",
-  "spotSize": "100 micrometer",
-  "measurement": "reflectance",
-  "measurementEnvironment": "ambient",
-  "environmentalPressure": 1013.25,
-  "sampleHeated": false,
-  "sampleTemperature": 25,
-  "vacuumExposedSample": false,
-  "emissionAngle": 0.0,
-  "incidenceAngle": 30.0,
-  "phaseAngle": 30.0,
-  "uncertaintyNoise": 0.002
+  "ada:detector": "MCT",
+  "ada:beamsplitter": "KBr",
+  "ada:calibrationStandards": "gold mirror",
+  "ada:numberOfScans": 256,
+  "ada:spectralRangeMin": "400",
+  "ada:spectralRangeMax": "4000",
+  "ada:spectralResolution": "4 cm-1",
+  "ada:spectralSampling": "2 cm-1",
+  "ada:spotSize": "100 micrometer",
+  "ada:measurement": "reflectance",
+  "ada:measurementEnvironment": "ambient",
+  "ada:environmentalPressure": 1013.25,
+  "ada:sampleHeated": false,
+  "ada:sampleTemperature": 25,
+  "ada:vacuumExposedSample": false,
+  "ada:emissionAngle": 0.0,
+  "ada:incidenceAngle": 30.0,
+  "ada:phaseAngle": 30.0,
+  "ada:uncertaintyNoise": 0.002
 }
 
 ```
@@ -54,33 +54,53 @@ Very-Near Mid-IR spectroscopy spectral point measurement with detailed parameter
     "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailVNMIR/context.jsonld"
   ],
   "@type": "ada:VNMIRSpectralPoint",
-  "detector": "MCT",
-  "beamsplitter": "KBr",
-  "calibrationStandards": "gold mirror",
-  "numberOfScans": 256,
-  "spectralRangeMin": "400",
-  "spectralRangeMax": "4000",
-  "spectralResolution": "4 cm-1",
-  "spectralSampling": "2 cm-1",
-  "spotSize": "100 micrometer",
-  "measurement": "reflectance",
-  "measurementEnvironment": "ambient",
-  "environmentalPressure": 1013.25,
-  "sampleHeated": false,
-  "sampleTemperature": 25,
-  "vacuumExposedSample": false,
-  "emissionAngle": 0.0,
-  "incidenceAngle": 30.0,
-  "phaseAngle": 30.0,
-  "uncertaintyNoise": 0.002
+  "ada:detector": "MCT",
+  "ada:beamsplitter": "KBr",
+  "ada:calibrationStandards": "gold mirror",
+  "ada:numberOfScans": 256,
+  "ada:spectralRangeMin": "400",
+  "ada:spectralRangeMax": "4000",
+  "ada:spectralResolution": "4 cm-1",
+  "ada:spectralSampling": "2 cm-1",
+  "ada:spotSize": "100 micrometer",
+  "ada:measurement": "reflectance",
+  "ada:measurementEnvironment": "ambient",
+  "ada:environmentalPressure": 1013.25,
+  "ada:sampleHeated": false,
+  "ada:sampleTemperature": 25,
+  "ada:vacuumExposedSample": false,
+  "ada:emissionAngle": 0.0,
+  "ada:incidenceAngle": 30.0,
+  "ada:phaseAngle": 30.0,
+  "ada:uncertaintyNoise": 0.002
 }
 ```
 
 #### ttl
 ```ttl
 @prefix ada: <https://ada.astromat.org/metadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-[] a ada:VNMIRSpectralPoint .
+[] a ada:VNMIRSpectralPoint ;
+    ada:beamsplitter "KBr" ;
+    ada:calibrationStandards "gold mirror" ;
+    ada:detector "MCT" ;
+    ada:emissionAngle 0e+00 ;
+    ada:environmentalPressure 1.01325e+03 ;
+    ada:incidenceAngle 3e+01 ;
+    ada:measurement "reflectance" ;
+    ada:measurementEnvironment "ambient" ;
+    ada:numberOfScans 256 ;
+    ada:phaseAngle 3e+01 ;
+    ada:sampleHeated false ;
+    ada:sampleTemperature 25 ;
+    ada:spectralRangeMax "4000" ;
+    ada:spectralRangeMin "400" ;
+    ada:spectralResolution "4 cm-1" ;
+    ada:spectralSampling "2 cm-1" ;
+    ada:spotSize "100 micrometer" ;
+    ada:uncertaintyNoise 2e-03 ;
+    ada:vacuumExposedSample false .
 
 
 ```
@@ -98,53 +118,53 @@ properties:
     - const: ada:VNMIRSpectralPoint
     - const: ada:VNMIROverviewImage
     - const: ada:VNMIRSpectralMap
-  detector:
+  ada:detector:
     type: string
-  beamsplitter:
+  ada:beamsplitter:
     type: string
-  calibrationStandards:
+  ada:calibrationStandards:
     type: string
-  comments:
+  ada:comments:
     type: string
-  numberOfScans:
+  ada:numberOfScans:
     type: integer
-  eMaxFitRegionMax:
+  ada:eMaxFitRegionMax:
     type: string
-  eMaxFitRegionMin:
+  ada:eMaxFitRegionMin:
     type: string
-  emissionAngle:
+  ada:emissionAngle:
     type: number
-  emissivityMaximum:
+  ada:emissivityMaximum:
     type: string
-  environmentalPressure:
+  ada:environmentalPressure:
     type: number
-  incidenceAngle:
+  ada:incidenceAngle:
     type: number
-  measurement:
+  ada:measurement:
     type: string
-  measurementEnvironment:
+  ada:measurementEnvironment:
     type: string
-  phaseAngle:
+  ada:phaseAngle:
     type: number
-  sampleHeated:
+  ada:sampleHeated:
     type: boolean
-  samplePreparation:
+  ada:samplePreparation:
     type: string
-  sampleTemperature:
+  ada:sampleTemperature:
     type: integer
-  spectralRangeMax:
+  ada:spectralRangeMax:
     type: string
-  spectralRangeMin:
+  ada:spectralRangeMin:
     type: string
-  spectralResolution:
+  ada:spectralResolution:
     type: string
-  spectralSampling:
+  ada:spectralSampling:
     type: string
-  spotSize:
+  ada:spotSize:
     type: string
-  uncertaintyNoise:
+  ada:uncertaintyNoise:
     type: number
-  vacuumExposedSample:
+  ada:vacuumExposedSample:
     type: boolean
 x-jsonld-prefixes:
   schema: http://schema.org/

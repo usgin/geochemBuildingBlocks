@@ -20,16 +20,16 @@ Pixel coordinate system registration for a spatially registered image map.
 #### json
 ```json
 {
-  "basemap": "basemap_BSE_001.tif",
-  "originX": 0.0,
-  "originY": 0.0,
-  "originZ": 0.0,
-  "coordDef": "pixel-defined",
-  "coordUnits": "micrometer",
-  "pixelUnits": "micrometer",
-  "pixelScaleX": 0.125,
-  "pixelScaleY": 0.125,
-  "originLocation": "upperLeft"
+  "ada:basemap": "basemap_BSE_001.tif",
+  "ada:originX": 0.0,
+  "ada:originY": 0.0,
+  "ada:originZ": 0.0,
+  "ada:coordDef": "pixel-defined",
+  "ada:coordUnits": "micrometer",
+  "ada:pixelUnits": "micrometer",
+  "ada:pixelScaleX": 0.125,
+  "ada:pixelScaleY": 0.125,
+  "ada:originLocation": "upperLeft"
 }
 
 ```
@@ -43,21 +43,34 @@ Pixel coordinate system registration for a spatially registered image map.
     },
     "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/spatialRegistration/context.jsonld"
   ],
-  "basemap": "basemap_BSE_001.tif",
-  "originX": 0.0,
-  "originY": 0.0,
-  "originZ": 0.0,
-  "coordDef": "pixel-defined",
-  "coordUnits": "micrometer",
-  "pixelUnits": "micrometer",
-  "pixelScaleX": 0.125,
-  "pixelScaleY": 0.125,
-  "originLocation": "upperLeft"
+  "ada:basemap": "basemap_BSE_001.tif",
+  "ada:originX": 0.0,
+  "ada:originY": 0.0,
+  "ada:originZ": 0.0,
+  "ada:coordDef": "pixel-defined",
+  "ada:coordUnits": "micrometer",
+  "ada:pixelUnits": "micrometer",
+  "ada:pixelScaleX": 0.125,
+  "ada:pixelScaleY": 0.125,
+  "ada:originLocation": "upperLeft"
 }
 ```
 
 #### ttl
 ```ttl
+@prefix ada: <https://ada.astromat.org/metadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+[] ada:basemap "basemap_BSE_001.tif" ;
+    ada:coordDef "pixel-defined" ;
+    ada:coordUnits "micrometer" ;
+    ada:originLocation "upperLeft" ;
+    ada:originX 0e+00 ;
+    ada:originY 0e+00 ;
+    ada:originZ 0e+00 ;
+    ada:pixelScaleX 1.25e-01 ;
+    ada:pixelScaleY 1.25e-01 ;
+    ada:pixelUnits "micrometer" .
 
 
 ```
@@ -72,39 +85,39 @@ description: Defines pixel coordinate system registration including origin coord
   maps.
 type: object
 properties:
-  basemap:
+  ada:basemap:
     type: string
     description: link to appropriate basemap image map
-  originX:
+  ada:originX:
     type: number
-  originY:
+  ada:originY:
     type: number
-  originZ:
+  ada:originZ:
     type: number
-  coordDef:
+  ada:coordDef:
     type: string
     description: Whether coordinates are stage-defined or pixel-defined. If pixel-defined,
       are coordinates from stage, upperleftPixel, or centerPixel.
-  coordUnits:
+  ada:coordUnits:
     type: string
-  pixelUnits:
+  ada:pixelUnits:
     type: string
-  pixelScaleX:
+  ada:pixelScaleX:
     type: number
-  pixelScaleY:
+  ada:pixelScaleY:
     type: number
-  originLocation:
+  ada:originLocation:
     type: string
     description: 'The location of the origin pixel of an image. Range: upperLeft,
       upperRight, lowerLeft, lowerRight, center'
 required:
-- originX
-- originY
-- pixelScaleX
-- pixelScaleY
-- pixelUnits
-- originLocation
-- coordDef
+- ada:originX
+- ada:originY
+- ada:pixelScaleX
+- ada:pixelScaleY
+- ada:pixelUnits
+- ada:originLocation
+- ada:coordDef
 x-jsonld-prefixes:
   ada: https://ada.astromat.org/metadata/
 

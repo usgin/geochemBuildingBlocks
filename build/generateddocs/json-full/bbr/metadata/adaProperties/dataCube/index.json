@@ -10,7 +10,7 @@
   "itemClass": "schema",
   "register": "cdif-building-block-register",
   "version": "0.1",
-  "dateOfLastChange": "2026-03-16",
+  "dateOfLastChange": "2026-03-17",
   "link": "https://github.com/usgin/geochemBuildingBlocks",
   "maturity": "draft",
   "scope": "unstable",
@@ -69,23 +69,23 @@
       "snippets": [
         {
           "language": "json",
-          "code": "{\n  \"@type\": [\"ada:dataCube\", \"cdi:StructuredDataSet\"],\n  \"componentType\": {\n    \"@type\": \"ada:SEMEDSElementalMapsCube\"\n  },\n  \"dataComponentResource\": \"cube_SEMEDS_001.hdf5\"\n}\n",
+          "code": "{\n  \"@type\": [\"ada:dataCube\", \"cdi:StructuredDataSet\"],\n  \"ada:componentType\": {\n    \"@type\": \"ada:SEMEDSElementalMapsCube\"\n  },\n  \"ada:dataComponentResource\": \"cube_SEMEDS_001.hdf5\"\n}\n",
           "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/adaProperties/dataCube/example_1_1.json"
         },
         {
           "language": "jsonld",
-          "code": "{\n  \"@context\": [\n    {\n      \"schema\": \"http://schema.org/\",\n      \"ada\": \"https://ada.astromat.org/metadata/\",\n      \"cdi\": \"http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/\"\n    },\n    \"https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/dataCube/context.jsonld\"\n  ],\n  \"@type\": [\n    \"ada:dataCube\",\n    \"cdi:StructuredDataSet\"\n  ],\n  \"componentType\": {\n    \"@type\": \"ada:SEMEDSElementalMapsCube\"\n  },\n  \"dataComponentResource\": \"cube_SEMEDS_001.hdf5\"\n}",
+          "code": "{\n  \"@context\": [\n    {\n      \"schema\": \"http://schema.org/\",\n      \"ada\": \"https://ada.astromat.org/metadata/\",\n      \"cdi\": \"http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/\"\n    },\n    \"https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/dataCube/context.jsonld\"\n  ],\n  \"@type\": [\n    \"ada:dataCube\",\n    \"cdi:StructuredDataSet\"\n  ],\n  \"ada:componentType\": {\n    \"@type\": \"ada:SEMEDSElementalMapsCube\"\n  },\n  \"ada:dataComponentResource\": \"cube_SEMEDS_001.hdf5\"\n}",
           "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/adaProperties/dataCube/example_1_1.jsonld"
         },
         {
           "language": "ttl",
-          "code": "@prefix ada: <https://ada.astromat.org/metadata/> .\n@prefix cdi: <http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/> .\n\n[] a cdi:StructuredDataSet,\n        ada:dataCube .\n\n",
+          "code": "@prefix ada: <https://ada.astromat.org/metadata/> .\n@prefix cdi: <http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/> .\n\n[] a cdi:StructuredDataSet,\n        ada:dataCube ;\n    ada:componentType [ a ada:SEMEDSElementalMapsCube ] ;\n    ada:dataComponentResource \"cube_SEMEDS_001.hdf5\" .\n\n",
           "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/adaProperties/dataCube/example_1_1.ttl"
         }
       ]
     }
   ],
-  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: Data Cube Type\ndescription: Multi-dimensional data cube structure using DDI-CDI. Typed as ada:dataCube\n  and cdi:StructuredDataSet per CDIF 2026 alignment.\nallOf:\n- type: object\n  properties:\n    '@type':\n      type: array\n      items:\n        type: string\n      minItems: 2\n      allOf:\n      - contains:\n          const: ada:dataCube\n      - contains:\n          const: cdi:StructuredDataSet\n    componentType:\n      anyOf:\n      - type: object\n        properties:\n          '@type':\n            enum:\n            - ada:GCMSCollection\n            - ada:GCMSCube\n            - ada:FTICRMSCube\n            - ada:LCMSCollection\n            - ada:SEMEBSDGrainImageMapCube\n            - ada:SEMEDSElementalMapsCube\n            - ada:SEMEDSPointDataCube\n            - ada:SEMHRCLCube\n            - ada:STEMEDSCube\n            - ada:STEMEDSTomo\n            - ada:STEMEELSCube\n            - ada:VNMIRSpectralMap\n        required:\n        - '@type'\n      - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailL2MS/schema.yaml\n    dataComponentResource:\n      type: string\n- $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/cdifProperties/cdifDataCube/schema.yaml\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  ada: https://ada.astromat.org/metadata/\n  cdi: http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/\n",
+  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: Data Cube Type\ndescription: Multi-dimensional data cube structure using DDI-CDI. Typed as ada:dataCube\n  and cdi:StructuredDataSet per CDIF 2026 alignment.\nallOf:\n- type: object\n  properties:\n    '@type':\n      type: array\n      items:\n        type: string\n      minItems: 2\n      allOf:\n      - contains:\n          const: ada:dataCube\n      - contains:\n          const: cdi:StructuredDataSet\n    ada:componentType:\n      anyOf:\n      - type: object\n        properties:\n          '@type':\n            enum:\n            - ada:GCMSCollection\n            - ada:GCMSCube\n            - ada:FTICRMSCube\n            - ada:LCMSCollection\n            - ada:SEMEBSDGrainImageMapCube\n            - ada:SEMEDSElementalMapsCube\n            - ada:SEMEDSPointDataCube\n            - ada:SEMHRCLCube\n            - ada:STEMEDSCube\n            - ada:STEMEDSTomo\n            - ada:STEMEELSCube\n            - ada:VNMIRSpectralMap\n        required:\n        - '@type'\n      - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailL2MS/schema.yaml\n    ada:dataComponentResource:\n      type: string\n- $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/cdifProperties/cdifDataCube/schema.yaml\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  ada: https://ada.astromat.org/metadata/\n  cdi: http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/\n",
   "gitRepository": "https://github.com/usgin/geochemBuildingBlocks",
   "gitPath": "_sources/adaProperties/dataCube"
 }

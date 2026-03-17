@@ -21,29 +21,29 @@ X-ray Computed Tomography image collection with detailed scan parameters.
 ```json
 {
   "@type": "ada:XCTImageCollection",
-  "instrumentType": "micro-CT",
-  "xraySource": "sealed tube",
-  "xrayTargetMaterial": "tungsten",
-  "xrayTubeEnergy": 120.0,
-  "xrayTubeCurrent": 0.1,
-  "xrayTubePower": 12.0,
-  "beamFilterMaterial": "copper",
-  "beamFilterThickness": 0.5,
-  "sourceToDetectorDistance": "500 mm",
-  "sourceToObjectDistance": 200.0,
-  "detectorType": "flat panel",
-  "detectorSize": "2048x2048",
-  "detectorBinning": "1x1",
-  "numberOfProjections": 1440,
-  "numberOfSlices": 2000,
-  "numberOfFramesAveragedPerProjection": 4,
-  "rotationAngle": "360 degrees",
-  "rotationType": "step-and-shoot",
-  "imageExposure": 0.5,
-  "imageSize": "2048x2048",
-  "reconstructedVoxelSize": "5.0 micrometer",
-  "reconstructedDataFormat": "16-bit TIFF",
-  "reconstructionSoftware": "Nikon CT Pro 3D"
+  "ada:instrumentType": "micro-CT",
+  "ada:xraySource": "sealed tube",
+  "ada:xrayTargetMaterial": "tungsten",
+  "ada:xrayTubeEnergy": 120.0,
+  "ada:xrayTubeCurrent": 0.1,
+  "ada:xrayTubePower": 12.0,
+  "ada:beamFilterMaterial": "copper",
+  "ada:beamFilterThickness": 0.5,
+  "ada:sourceToDetectorDistance": "500 mm",
+  "ada:sourceToObjectDistance": 200.0,
+  "ada:detectorType": "flat panel",
+  "ada:detectorSize": "2048x2048",
+  "ada:detectorBinning": "1x1",
+  "ada:numberOfProjections": 1440,
+  "ada:numberOfSlices": 2000,
+  "ada:numberOfFramesAveragedPerProjection": 4,
+  "ada:rotationAngle": "360 degrees",
+  "ada:rotationType": "step-and-shoot",
+  "ada:imageExposure": 0.5,
+  "ada:imageSize": "2048x2048",
+  "ada:reconstructedVoxelSize": "5.0 micrometer",
+  "ada:reconstructedDataFormat": "16-bit TIFF",
+  "ada:reconstructionSoftware": "Nikon CT Pro 3D"
 }
 
 ```
@@ -58,37 +58,61 @@ X-ray Computed Tomography image collection with detailed scan parameters.
     "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailXCT/context.jsonld"
   ],
   "@type": "ada:XCTImageCollection",
-  "instrumentType": "micro-CT",
-  "xraySource": "sealed tube",
-  "xrayTargetMaterial": "tungsten",
-  "xrayTubeEnergy": 120.0,
-  "xrayTubeCurrent": 0.1,
-  "xrayTubePower": 12.0,
-  "beamFilterMaterial": "copper",
-  "beamFilterThickness": 0.5,
-  "sourceToDetectorDistance": "500 mm",
-  "sourceToObjectDistance": 200.0,
-  "detectorType": "flat panel",
-  "detectorSize": "2048x2048",
-  "detectorBinning": "1x1",
-  "numberOfProjections": 1440,
-  "numberOfSlices": 2000,
-  "numberOfFramesAveragedPerProjection": 4,
-  "rotationAngle": "360 degrees",
-  "rotationType": "step-and-shoot",
-  "imageExposure": 0.5,
-  "imageSize": "2048x2048",
-  "reconstructedVoxelSize": "5.0 micrometer",
-  "reconstructedDataFormat": "16-bit TIFF",
-  "reconstructionSoftware": "Nikon CT Pro 3D"
+  "ada:instrumentType": "micro-CT",
+  "ada:xraySource": "sealed tube",
+  "ada:xrayTargetMaterial": "tungsten",
+  "ada:xrayTubeEnergy": 120.0,
+  "ada:xrayTubeCurrent": 0.1,
+  "ada:xrayTubePower": 12.0,
+  "ada:beamFilterMaterial": "copper",
+  "ada:beamFilterThickness": 0.5,
+  "ada:sourceToDetectorDistance": "500 mm",
+  "ada:sourceToObjectDistance": 200.0,
+  "ada:detectorType": "flat panel",
+  "ada:detectorSize": "2048x2048",
+  "ada:detectorBinning": "1x1",
+  "ada:numberOfProjections": 1440,
+  "ada:numberOfSlices": 2000,
+  "ada:numberOfFramesAveragedPerProjection": 4,
+  "ada:rotationAngle": "360 degrees",
+  "ada:rotationType": "step-and-shoot",
+  "ada:imageExposure": 0.5,
+  "ada:imageSize": "2048x2048",
+  "ada:reconstructedVoxelSize": "5.0 micrometer",
+  "ada:reconstructedDataFormat": "16-bit TIFF",
+  "ada:reconstructionSoftware": "Nikon CT Pro 3D"
 }
 ```
 
 #### ttl
 ```ttl
 @prefix ada: <https://ada.astromat.org/metadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-[] a ada:XCTImageCollection .
+[] a ada:XCTImageCollection ;
+    ada:beamFilterMaterial "copper" ;
+    ada:beamFilterThickness 5e-01 ;
+    ada:detectorBinning "1x1" ;
+    ada:detectorSize "2048x2048" ;
+    ada:detectorType "flat panel" ;
+    ada:imageExposure 5e-01 ;
+    ada:imageSize "2048x2048" ;
+    ada:instrumentType "micro-CT" ;
+    ada:numberOfFramesAveragedPerProjection 4 ;
+    ada:numberOfProjections 1440 ;
+    ada:numberOfSlices 2000 ;
+    ada:reconstructedDataFormat "16-bit TIFF" ;
+    ada:reconstructedVoxelSize "5.0 micrometer" ;
+    ada:reconstructionSoftware "Nikon CT Pro 3D" ;
+    ada:rotationAngle "360 degrees" ;
+    ada:rotationType "step-and-shoot" ;
+    ada:sourceToDetectorDistance "500 mm" ;
+    ada:sourceToObjectDistance 2e+02 ;
+    ada:xraySource "sealed tube" ;
+    ada:xrayTargetMaterial "tungsten" ;
+    ada:xrayTubeCurrent 1e-01 ;
+    ada:xrayTubeEnergy 1.2e+02 ;
+    ada:xrayTubePower 1.2e+01 .
 
 
 ```
@@ -104,69 +128,69 @@ type: object
 properties:
   '@type':
     const: ada:XCTImageCollection
-  beamFilterMaterial:
+  ada:beamFilterMaterial:
     type: string
-  beamFilterThickness:
+  ada:beamFilterThickness:
     type: number
-  dataRangeLower:
+  ada:dataRangeLower:
     type: integer
-  dataRangeUpper:
+  ada:dataRangeUpper:
     type: integer
-  detectorGain:
+  ada:detectorGain:
     type: string
-  detectorBinning:
+  ada:detectorBinning:
     type: string
-  detectorSize:
+  ada:detectorSize:
     type: string
-  detectorType:
+  ada:detectorType:
     type: string
-  imageExposure:
+  ada:imageExposure:
     type: number
-  imageFPS:
+  ada:imageFPS:
     type: string
-  imageGain:
+  ada:imageGain:
     type: number
-  imageSize:
+  ada:imageSize:
     type: string
-  instrumentType:
+  ada:instrumentType:
     type: string
-  nsiBeamHardening:
+  ada:nsiBeamHardening:
     type: number
-  numberOfFramesAveragedPerProjection:
+  ada:numberOfFramesAveragedPerProjection:
     type: integer
-  numberOfProjections:
+  ada:numberOfProjections:
     type: integer
-  numberOfSlices:
+  ada:numberOfSlices:
     type: integer
-  pixelPitch:
+  ada:pixelPitch:
     type: string
-  reconstructedDataFormat:
+  ada:reconstructedDataFormat:
     type: string
-  reconstructedVoxelSize:
+  ada:reconstructedVoxelSize:
     type: string
-  reconstructionSoftware:
+  ada:reconstructionSoftware:
     type: string
-  rotationAngle:
+  ada:rotationAngle:
     type: string
-  rotationType:
+  ada:rotationType:
     type: string
-  sourceToDetectorDistance:
+  ada:sourceToDetectorDistance:
     type: string
-  sourceToObjectDistance:
+  ada:sourceToObjectDistance:
     type: number
-  subPixGrid:
+  ada:subPixGrid:
     type: string
-  subPixShift:
+  ada:subPixShift:
     type: string
-  xraySource:
+  ada:xraySource:
     type: string
-  xrayTargetMaterial:
+  ada:xrayTargetMaterial:
     type: string
-  xrayTubeCurrent:
+  ada:xrayTubeCurrent:
     type: number
-  xrayTubeEnergy:
+  ada:xrayTubeEnergy:
     type: number
-  xrayTubePower:
+  ada:xrayTubePower:
     type: number
 x-jsonld-prefixes:
   schema: http://schema.org/

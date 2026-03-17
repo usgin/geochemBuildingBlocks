@@ -31,7 +31,7 @@ An ADA product file with size, encoding format, and a link to its metadata sidec
     "schema:unitText": "byte"
   },
   "schema:additionalType": ["ada:BSEImage"],
-  "componentType": {
+  "ada:componentType": {
     "@type": "ada:BSEImage"
   },
   "schema:relatedLink": [
@@ -78,7 +78,7 @@ An ADA product file with size, encoding format, and a link to its metadata sidec
   "schema:additionalType": [
     "ada:BSEImage"
   ],
-  "componentType": {
+  "ada:componentType": {
     "@type": "ada:BSEImage"
   },
   "schema:relatedLink": [
@@ -116,7 +116,8 @@ An ADA product file with size, encoding format, and a link to its metadata sidec
                     schema1:name "ALH84001_BSE_001_metadata.json" ] ] ;
     schema1:size [ a schema1:QuantitativeValue ;
             schema1:unitText "byte" ;
-            schema1:value 4521984 ] .
+            schema1:value 4521984 ] ;
+    ada:componentType [ a ada:BSEImage ] .
 
 
 ```
@@ -152,7 +153,7 @@ allOf:
         schema:unitText:
           type: string
           default: byte
-    resultTarget:
+    ada:resultTarget:
       $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/stringArray/schema.yaml
     schema:relatedLink:
       type: array

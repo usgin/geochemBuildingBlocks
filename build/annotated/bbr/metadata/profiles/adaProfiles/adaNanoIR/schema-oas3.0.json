@@ -1010,7 +1010,38 @@
           }
         },
         "schema:subjectOf": {
-          "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaNanoIR/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.cdifProperties.cdifMandatory/$defs/CdifCatalogRecord"
+          "allOf": [
+            {
+              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaNanoIR/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.cdifProperties.cdifMandatory/$defs/CdifCatalogRecord"
+            },
+            {
+              "properties": {
+                "dcterms:conformsTo": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string",
+                        "description": "uri for specifications that this metadata record conforms to"
+                      }
+                    }
+                  },
+                  "minItems": 1,
+                  "contains": {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "enum": [
+                          "https://w3id.org/cdif/core/1.0/"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
         }
       },
       "allOf": [
@@ -1474,6 +1505,33 @@
           "type": "array",
           "items": {
             "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaNanoIR/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.cdifProperties.cdifOptional/$defs/QualityMeasure"
+          }
+        },
+        "schema:subjectOf": {
+          "properties": {
+            "dcterms:conformsTo": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "@id": {
+                    "type": "string",
+                    "description": "uri for specifications that this metadata record conforms to"
+                  }
+                }
+              },
+              "minItems": 1,
+              "contains": {
+                "type": "object",
+                "properties": {
+                  "@id": {
+                    "enum": [
+                      "https://w3id.org/cdif/discovery/1.0/"
+                    ]
+                  }
+                }
+              }
+            }
           }
         },
         "schema:distribution": {

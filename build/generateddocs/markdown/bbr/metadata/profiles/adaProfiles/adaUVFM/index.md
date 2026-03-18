@@ -313,7 +313,7 @@ Mock data for validation and testing.
             "spdx:algorithm": "MD5",
             "spdx:checksumValue": "d41d8cd98f00b204e9800998ecf8427e"
           },
-          "componentType": {
+          "ada:componentType": {
             "@type": "ada:UVFMImage"
           }
         },
@@ -336,7 +336,7 @@ Mock data for validation and testing.
             "schema:value": 524288,
             "schema:unitText": "byte"
           },
-          "componentType": {
+          "ada:componentType": {
             "@type": "ada:methodDescription"
           }
         }
@@ -656,7 +656,7 @@ Mock data for validation and testing.
             "spdx:algorithm": "MD5",
             "spdx:checksumValue": "d41d8cd98f00b204e9800998ecf8427e"
           },
-          "componentType": {
+          "ada:componentType": {
             "@type": "ada:UVFMImage"
           }
         },
@@ -679,7 +679,7 @@ Mock data for validation and testing.
             "schema:value": 524288,
             "schema:unitText": "byte"
           },
-          "componentType": {
+          "ada:componentType": {
             "@type": "ada:methodDescription"
           }
         }
@@ -840,7 +840,8 @@ ex:adaUVFM-file-001 a schema1:ImageObject,
             schema1:value 10485760 ] ;
     spdx:checksum [ a spdx:Checksum ;
             spdx:algorithm "MD5" ;
-            spdx:checksumValue "d41d8cd98f00b204e9800998ecf8427e" ] .
+            spdx:checksumValue "d41d8cd98f00b204e9800998ecf8427e" ] ;
+    ada:componentType [ a ada:UVFMImage ] .
 
 ex:adaUVFM-file-002 a schema1:DigitalDocument,
         ada:document ;
@@ -850,7 +851,8 @@ ex:adaUVFM-file-002 a schema1:DigitalDocument,
     schema1:name "ALH84001_UVFM_methods.pdf" ;
     schema1:size [ a schema1:QuantitativeValue ;
             schema1:unitText "byte" ;
-            schema1:value 524288 ] .
+            schema1:value 524288 ] ;
+    ada:componentType [ a ada:methodDescription ] .
 
 ex:adaUVFM-metadata-001 a schema1:Dataset ;
     dcterms:conformsTo <https://w3id.org/cdif/bbr/metadata/profiles/adaProfiles/adaUVFM>,

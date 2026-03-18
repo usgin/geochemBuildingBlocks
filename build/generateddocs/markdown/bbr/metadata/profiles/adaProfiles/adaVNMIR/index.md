@@ -899,9 +899,9 @@ allOf:
       items:
         oneOf:
         - required:
-          - componentType
+          - ada:componentType
           properties:
-            componentType:
+            ada:componentType:
               anyOf:
               - properties:
                   '@type':
@@ -917,7 +917,7 @@ allOf:
             schema:hasPart:
               items:
                 properties:
-                  componentType:
+                  ada:componentType:
                     anyOf:
                     - properties:
                         '@type':

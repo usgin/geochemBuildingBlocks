@@ -12,7 +12,7 @@ Property building blocks that define ADA-specific metadata elements: file types,
 
 Metadata profiles that compose property building blocks with CDIF base schemas:
 
-- **adaProduct** — base ADA product profile (composes cdifMandatory + cdifOptional + ADA properties)
+- **adaProduct** — base ADA product profile (composes cdifCore + cdifOptional + ADA properties)
 - **35 technique profiles** — technique-specific constraints (e.g., adaSEM, adaXRD, adaICPMS, adaTEM)
 
 ## Cross-repo imports

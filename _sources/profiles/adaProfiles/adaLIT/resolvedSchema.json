@@ -9,333 +9,7 @@
       "type": "object",
       "allOf": [
         {
-          "type": "object",
-          "title": "Optional properties for CDIF Discovery metadata schema, with schema: prefixes",
-          "description": "Building block specifies properties for minimal CDIF schama.org discovery record",
-          "properties": {
-            "@context": {
-              "type": "object",
-              "description": "JSON-LD context declaring namespace prefixes used in the metadata record.",
-              "properties": {
-                "schema": {
-                  "const": "http://schema.org/"
-                },
-                "dcterms": {
-                  "const": "http://purl.org/dc/terms/"
-                },
-                "spdx": {
-                  "const": "http://spdx.org/rdf/terms#"
-                },
-                "dcat": {
-                  "const": "http://www.w3.org/ns/dcat#"
-                }
-              },
-              "required": [
-                "schema",
-                "dcterms"
-              ]
-            },
-            "@id": {
-              "type": "string",
-              "description": "The URI for the resource should be the @id value for the root of the JSON instance document tree. Must be an IRI (e.g. https://doi.org/..., urn:..., or a relative URI like #localid). Note that this identifier can be interpreted to identify the resource that is the subject of this metadata record, or the JSON-LD object that is the digital object containing the metadata information."
-            },
-            "@type": {
-              "description": "a schema.org Class that specifies the expected information content for the metadata record. The array must include at least one schema.org type value. Default is schema:Dataset.",
-              "type": "array",
-              "items": {
-                "type": "string",
-                "enum": [
-                  "schema:CreativeWork",
-                  "schema:SoftwareApplication",
-                  "schema:SoftwareSourceCode",
-                  "schema:Product",
-                  "schema:WebAPI",
-                  "schema:Dataset",
-                  "schema:DigitalDocument",
-                  "schema:Collection",
-                  "schema:ImageObject",
-                  "schema:DataCatalog",
-                  "schema:DefinedTermSet",
-                  "schema:MediaObject"
-                ]
-              },
-              "default": "schema:Dataset",
-              "minItems": 1,
-              "contains": {
-                "const": "schema:Dataset"
-              }
-            },
-            "schema:name": {
-              "type": "string",
-              "description": "A descriptive name of a dataset (e.g., 'Snow depth in Northern Hemisphere'). The name should uniquely identify the described resource for human use, in the scope of the metadata catalog containing this metadata record."
-            },
-            "schema:identifier": {
-              "description": "The primary identifier for the dataset; other identifiers should be listed in the sameAs field. Schema.org has three ways of encoding identifiers-- a text description, a URL, or by using the schema:PropertyValue field. The Science on Schema.org guidance strongly recommends using the PropertyValue approach. see https://github.com/ESIPFed/science-on-schema.org   .... Dataset.md#identifier.  Ideally, for any given data provided they would provide identifiers either all as strings or all as identifier_type.",
-              "anyOf": [
-                {
-                  "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\identifier\\schema.yaml"
-                },
-                {
-                  "type": "string"
-                }
-              ]
-            },
-            "schema:dateModified": {
-              "type": "string",
-              "description": "ISO8601 formatted date (and optional time if relevant) when Dataset was last updated"
-            },
-            "schema:conditionsOfAccess": {
-              "description": "text statement of conditions for use and access; if an online resource documents the restrictions or a URI is used to identify the conditions, recommend using schema:CreativeWork to provide a label (name) and an identifier (URI or URL). ",
-              "type": "array",
-              "minItems": 0,
-              "items": {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "type": "object",
-                    "properties": {
-                      "@id": {
-                        "type": "string",
-                        "description": "a reference to a resource defining conditions of Access"
-                      }
-                    }
-                  },
-                  {
-                    "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\labeledLink\\schema.yaml"
-                  }
-                ]
-              }
-            },
-            "schema:license": {
-              "description": "legal statement of conditions for use and access; recommend using schema:CreativeWork to provide a label (name) for the license, and an identifier. Sources of license identifiers: https://opensource.org/licenses/, https://creativecommons.org/about/cclicenses/, https://spdx.org/licenses/, http://cor.esipfed.org/ont/earthcube/swl. If only a string is provided, it should be an identifier for the license, ideally a resolvable URI",
-              "type": "array",
-              "minItems": 0,
-              "items": {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "type": "object",
-                    "properties": {
-                      "@id": {
-                        "type": "string",
-                        "description": "a reference to a license defintion"
-                      }
-                    }
-                  },
-                  {
-                    "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\labeledLink\\schema.yaml"
-                  }
-                ]
-              }
-            },
-            "schema:url": {
-              "type": "string",
-              "format": "uri",
-              "description": "Web Location of a page describing the dataset (landing page), typically providing links or instructions to get the actual resource content; analogous to dcat:accessURL. If a direct link is available to get the data, put in distribution/contentUrl"
-            },
-            "schema:distribution": {
-              "description": "specifies how to download the data in a specific format or access via a web API. This property describes where to get the data and in what format by using the schema:DataDownload type. If user must access data through a landing page, provide link to landing page in the 'url' property for the dataset",
-              "type": "array",
-              "items": {
-                "anyOf": [
-                  {
-                    "description": "schema to document file-based access to a resoruce via URL, based on schema.org/DataDownload",
-                    "type": "object",
-                    "properties": {
-                      "@id": {
-                        "type": "string"
-                      },
-                      "@type": {
-                        "type": "array",
-                        "description": "implement as array because extensions might need to add additional types",
-                        "items": {
-                          "type": "string"
-                        },
-                        "contains": {
-                          "const": "schema:DataDownload"
-                        },
-                        "minItems": 1
-                      },
-                      "schema:name": {
-                        "type": "string"
-                      },
-                      "schema:description": {
-                        "type": "string",
-                        "description": "Description of this distribution, e.g. what format, access constraints, etc."
-                      },
-                      "schema:contentUrl": {
-                        "type": "string",
-                        "format": "uri"
-                      },
-                      "schema:encodingFormat": {
-                        "type": "array",
-                        "description": "MIME type with extension; should indicate the serialization scheme in sufficient detail that machine can know how to parse.",
-                        "items": {
-                          "type": "string"
-                        }
-                      },
-                      "spdx:checksum": {
-                        "type": "object",
-                        "description": "A string value calculated from the content of the resource representation, used to test if content has been modified. The checksum is a property of a particular distribution/DataDownload.",
-                        "properties": {
-                          "@type": {
-                            "anyOf": [
-                              {
-                                "type": "string",
-                                "const": "spdx:Checksum"
-                              },
-                              {
-                                "type": "array",
-                                "items": {
-                                  "type": "string"
-                                },
-                                "contains": {
-                                  "const": "spdx:Checksum"
-                                }
-                              }
-                            ]
-                          },
-                          "spdx:algorithm": {
-                            "type": "string"
-                          },
-                          "spdx:checksumValue": {
-                            "type": "string"
-                          }
-                        },
-                        "required": [
-                          "@type"
-                        ]
-                      },
-                      "dcterms:conformsTo": {
-                        "description": "An identifier for a standard or specification that the distribution conforms to. Recommended to enable machine-actionable data access.",
-                        "type": "array",
-                        "minItems": 1,
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "@id": {
-                              "type": "string",
-                              "description": "uri for specification that this distribution conforms to"
-                            }
-                          }
-                        }
-                      },
-                      "schema:provider": {
-                        "type": "array",
-                        "description": "Party who maintains this particular distribution option for the dataset. Use this property if there are multiple distributions from different providers",
-                        "items": {
-                          "anyOf": [
-                            {
-                              "type": "object",
-                              "properties": {
-                                "@id": {
-                                  "type": "string",
-                                  "description": "a identifier for an agent defined in this metadata, or externally; must be dereferenceable"
-                                }
-                              },
-                              "required": [
-                                "@id"
-                              ]
-                            },
-                            {
-                              "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\person\\schema.yaml"
-                            },
-                            {
-                              "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\organization\\schema.yaml"
-                            }
-                          ]
-                        }
-                      }
-                    },
-                    "required": [
-                      "schema:contentUrl",
-                      "@type"
-                    ]
-                  },
-                  {
-                    "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\webAPI\\schema.yaml"
-                  }
-                ]
-              }
-            },
-            "schema:subjectOf": {
-              "allOf": [
-                {
-                  "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\cdifProperties\\cdifCatalogRecord\\schema.yaml"
-                },
-                {
-                  "properties": {
-                    "dcterms:conformsTo": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "@id": {
-                            "type": "string",
-                            "description": "uri for specifications that this metadata record conforms to"
-                          }
-                        }
-                      },
-                      "minItems": 1,
-                      "contains": {
-                        "type": "object",
-                        "properties": {
-                          "@id": {
-                            "const": "https://w3id.org/cdif/core/1.0/"
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              ]
-            }
-          },
-          "allOf": [
-            {
-              "required": [
-                "@id",
-                "@type",
-                "@context",
-                "schema:name",
-                "schema:identifier",
-                "schema:dateModified",
-                "schema:subjectOf"
-              ]
-            },
-            {
-              "anyOf": [
-                {
-                  "required": [
-                    "schema:license"
-                  ]
-                },
-                {
-                  "required": [
-                    "schema:conditionsOfAccess"
-                  ]
-                }
-              ]
-            },
-            {
-              "anyOf": [
-                {
-                  "required": [
-                    "schema:url"
-                  ]
-                },
-                {
-                  "required": [
-                    "schema:distribution"
-                  ]
-                }
-              ]
-            }
-          ]
+          "$comment": "failed to fetch URL: https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/cdifProperties/cdifCore/schema.yaml"
         },
         {
           "type": "object",
@@ -374,7 +48,7 @@
                     "type": "string"
                   },
                   {
-                    "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\definedTerm\\schema.yaml"
+                    "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\definedTerm\\schema.yaml"
                   }
                 ]
               }
@@ -398,7 +72,7 @@
                     }
                   },
                   {
-                    "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\identifier\\schema.yaml"
+                    "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\identifier\\schema.yaml"
                   }
                 ]
               }
@@ -444,7 +118,7 @@
                   "schema:linkRelationship": {
                     "anyOf": [
                       {
-                        "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\definedTerm\\schema.yaml"
+                        "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\definedTerm\\schema.yaml"
                       },
                       {
                         "type": "string"
@@ -506,7 +180,7 @@
                     }
                   },
                   {
-                    "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\labeledLink\\schema.yaml"
+                    "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\labeledLink\\schema.yaml"
                   }
                 ]
               }
@@ -518,7 +192,7 @@
                   "type": "string"
                 },
                 {
-                  "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\definedTerm\\schema.yaml"
+                  "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\definedTerm\\schema.yaml"
                 },
                 {
                   "type": "array",
@@ -528,7 +202,7 @@
                         "type": "string"
                       },
                       {
-                        "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\definedTerm\\schema.yaml"
+                        "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\definedTerm\\schema.yaml"
                       }
                     ]
                   }
@@ -541,7 +215,7 @@
               "items": {
                 "anyOf": [
                   {
-                    "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\definedTerm\\schema.yaml"
+                    "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\definedTerm\\schema.yaml"
                   },
                   {
                     "type": "string"
@@ -570,10 +244,10 @@
                         ]
                       },
                       {
-                        "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\person\\schema.yaml"
+                        "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\person\\schema.yaml"
                       },
                       {
-                        "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\organization\\schema.yaml"
+                        "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\organization\\schema.yaml"
                       }
                     ]
                   }
@@ -598,13 +272,13 @@
                     ]
                   },
                   {
-                    "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\person\\schema.yaml"
+                    "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\person\\schema.yaml"
                   },
                   {
-                    "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\organization\\schema.yaml"
+                    "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\organization\\schema.yaml"
                   },
                   {
-                    "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\agentInRole\\schema.yaml"
+                    "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\agentInRole\\schema.yaml"
                   }
                 ]
               }
@@ -625,10 +299,10 @@
                   ]
                 },
                 {
-                  "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\person\\schema.yaml"
+                  "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\person\\schema.yaml"
                 },
                 {
-                  "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\organization\\schema.yaml"
+                  "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\organization\\schema.yaml"
                 }
               ]
             },
@@ -650,10 +324,10 @@
                     ]
                   },
                   {
-                    "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\person\\schema.yaml"
+                    "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\person\\schema.yaml"
                   },
                   {
-                    "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\organization\\schema.yaml"
+                    "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\organization\\schema.yaml"
                   }
                 ]
               }
@@ -661,7 +335,7 @@
             "schema:funding": {
               "type": "array",
               "items": {
-                "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\funder\\schema.yaml"
+                "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\funder\\schema.yaml"
               }
             },
             "schema:variableMeasured": {
@@ -670,10 +344,10 @@
               "items": {
                 "anyOf": [
                   {
-                    "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\cdifProperties\\cdifVariableMeasured\\schema.yaml"
+                    "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\cdifProperties\\cdifVariableMeasured\\schema.yaml"
                   },
                   {
-                    "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\statisticalVariable\\schema.yaml"
+                    "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\statisticalVariable\\schema.yaml"
                   }
                 ]
               }
@@ -682,35 +356,35 @@
               "description": "To specify location that is the subject of resource content; use schema.org place names, bounding box, point or optional OGC WKT gemetry.",
               "type": "array",
               "items": {
-                "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\spatialExtent\\schema.yaml"
+                "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\spatialExtent\\schema.yaml"
               }
             },
             "schema:temporalCoverage": {
               "description": "The time interval during which data was collected or observations were made; or a time period that an activity or collection is linked to intellectually or thematically (for example, 1997 to 1998; the 18th century) (see https://documentation.ardc.edu.au/display/DOC/Temporal+coverage). For documentation of Earth Science, Paleobiology or Paleontology datasets, we are interested in the second case-- the time period that data are linked to thematically.",
               "type": "array",
               "items": {
-                "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\temporalExtent\\schema.yaml"
+                "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\temporalExtent\\schema.yaml"
               }
             },
             "prov:wasGeneratedBy": {
               "description": "Brief information about instruments, software or experimental protocols used",
               "type": "array",
               "items": {
-                "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\provProperties\\generatedBy\\schema.yaml"
+                "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\provProperties\\generatedBy\\schema.yaml"
               }
             },
             "prov:wasDerivedFrom": {
               "description": "Brief information about sources of data used in aggregate datasets",
               "type": "array",
               "items": {
-                "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\provProperties\\derivedFrom\\schema.yaml"
+                "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\provProperties\\derivedFrom\\schema.yaml"
               }
             },
             "dqv:hasQualityMeasurement": {
               "description": "Brief information quality measurements reported to assess the resource",
               "type": "array",
               "items": {
-                "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\qualityProperties\\qualityMeasure\\schema.yaml"
+                "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\qualityProperties\\qualityMeasure\\schema.yaml"
               }
             },
             "schema:subjectOf": {
@@ -843,10 +517,10 @@
                               ]
                             },
                             {
-                              "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\person\\schema.yaml"
+                              "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\person\\schema.yaml"
                             },
                             {
-                              "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\organization\\schema.yaml"
+                              "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\organization\\schema.yaml"
                             }
                           ]
                         }
@@ -858,7 +532,7 @@
                     ]
                   },
                   {
-                    "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\webAPI\\schema.yaml"
+                    "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\webAPI\\schema.yaml"
                   }
                 ]
               }
@@ -1505,10 +1179,10 @@
                                       ]
                                     },
                                     {
-                                      "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\person\\schema.yaml"
+                                      "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\person\\schema.yaml"
                                     },
                                     {
-                                      "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\organization\\schema.yaml"
+                                      "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\organization\\schema.yaml"
                                     }
                                   ]
                                 }
@@ -2387,7 +2061,7 @@
                                         "type": "array",
                                         "description": "Links variables to their physical representation in this dataset.",
                                         "items": {
-                                          "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\cdifProperties\\cdifPhysicalMapping\\schema.yaml"
+                                          "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\cdifProperties\\cdifPhysicalMapping\\schema.yaml"
                                         }
                                       },
                                       "countRows": {
@@ -2659,7 +2333,7 @@
                                         "items": {
                                           "allOf": [
                                             {
-                                              "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\cdifProperties\\cdifPhysicalMapping\\schema.yaml"
+                                              "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\cdifProperties\\cdifPhysicalMapping\\schema.yaml"
                                             },
                                             {
                                               "type": "object",
@@ -3063,10 +2737,10 @@
                                       ]
                                     },
                                     {
-                                      "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\person\\schema.yaml"
+                                      "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\person\\schema.yaml"
                                     },
                                     {
-                                      "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\organization\\schema.yaml"
+                                      "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\organization\\schema.yaml"
                                     }
                                   ]
                                 }
@@ -3945,7 +3619,7 @@
                                         "type": "array",
                                         "description": "Links variables to their physical representation in this dataset.",
                                         "items": {
-                                          "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\cdifProperties\\cdifPhysicalMapping\\schema.yaml"
+                                          "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\cdifProperties\\cdifPhysicalMapping\\schema.yaml"
                                         }
                                       },
                                       "countRows": {
@@ -4217,7 +3891,7 @@
                                         "items": {
                                           "allOf": [
                                             {
-                                              "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\cdifProperties\\cdifPhysicalMapping\\schema.yaml"
+                                              "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\cdifProperties\\cdifPhysicalMapping\\schema.yaml"
                                             },
                                             {
                                               "type": "object",
@@ -4668,10 +4342,10 @@
                                                 ]
                                               },
                                               {
-                                                "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\person\\schema.yaml"
+                                                "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\person\\schema.yaml"
                                               },
                                               {
-                                                "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\organization\\schema.yaml"
+                                                "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\organization\\schema.yaml"
                                               }
                                             ]
                                           }
@@ -5550,7 +5224,7 @@
                                                   "type": "array",
                                                   "description": "Links variables to their physical representation in this dataset.",
                                                   "items": {
-                                                    "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\cdifProperties\\cdifPhysicalMapping\\schema.yaml"
+                                                    "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\cdifProperties\\cdifPhysicalMapping\\schema.yaml"
                                                   }
                                                 },
                                                 "countRows": {
@@ -5822,7 +5496,7 @@
                                                   "items": {
                                                     "allOf": [
                                                       {
-                                                        "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\cdifProperties\\cdifPhysicalMapping\\schema.yaml"
+                                                        "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\cdifProperties\\cdifPhysicalMapping\\schema.yaml"
                                                       },
                                                       {
                                                         "type": "object",
@@ -6372,7 +6046,7 @@
                                 "schema:variableMeasured": {
                                   "type": "array",
                                   "items": {
-                                    "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\variableMeasured\\schema.yaml"
+                                    "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\variableMeasured\\schema.yaml"
                                   }
                                 }
                               }
@@ -6541,10 +6215,10 @@
                                               ]
                                             },
                                             {
-                                              "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\person\\schema.yaml"
+                                              "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\person\\schema.yaml"
                                             },
                                             {
-                                              "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\organization\\schema.yaml"
+                                              "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\organization\\schema.yaml"
                                             }
                                           ]
                                         }
@@ -7423,7 +7097,7 @@
                                                 "type": "array",
                                                 "description": "Links variables to their physical representation in this dataset.",
                                                 "items": {
-                                                  "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\cdifProperties\\cdifPhysicalMapping\\schema.yaml"
+                                                  "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\cdifProperties\\cdifPhysicalMapping\\schema.yaml"
                                                 }
                                               },
                                               "countRows": {
@@ -7695,7 +7369,7 @@
                                                 "items": {
                                                   "allOf": [
                                                     {
-                                                      "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\cdifProperties\\cdifPhysicalMapping\\schema.yaml"
+                                                      "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\cdifProperties\\cdifPhysicalMapping\\schema.yaml"
                                                     },
                                                     {
                                                       "type": "object",
@@ -8099,10 +7773,10 @@
                                               ]
                                             },
                                             {
-                                              "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\person\\schema.yaml"
+                                              "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\person\\schema.yaml"
                                             },
                                             {
-                                              "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\organization\\schema.yaml"
+                                              "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\organization\\schema.yaml"
                                             }
                                           ]
                                         }
@@ -8981,7 +8655,7 @@
                                                 "type": "array",
                                                 "description": "Links variables to their physical representation in this dataset.",
                                                 "items": {
-                                                  "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\cdifProperties\\cdifPhysicalMapping\\schema.yaml"
+                                                  "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\cdifProperties\\cdifPhysicalMapping\\schema.yaml"
                                                 }
                                               },
                                               "countRows": {
@@ -9253,7 +8927,7 @@
                                                 "items": {
                                                   "allOf": [
                                                     {
-                                                      "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\cdifProperties\\cdifPhysicalMapping\\schema.yaml"
+                                                      "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\cdifProperties\\cdifPhysicalMapping\\schema.yaml"
                                                     },
                                                     {
                                                       "type": "object",
@@ -9656,10 +9330,10 @@
                                                         ]
                                                       },
                                                       {
-                                                        "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\person\\schema.yaml"
+                                                        "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\person\\schema.yaml"
                                                       },
                                                       {
-                                                        "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\organization\\schema.yaml"
+                                                        "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\schemaorgProperties\\organization\\schema.yaml"
                                                       }
                                                     ]
                                                   }
@@ -10538,7 +10212,7 @@
                                                           "type": "array",
                                                           "description": "Links variables to their physical representation in this dataset.",
                                                           "items": {
-                                                            "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\cdifProperties\\cdifPhysicalMapping\\schema.yaml"
+                                                            "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\cdifProperties\\cdifPhysicalMapping\\schema.yaml"
                                                           }
                                                         },
                                                         "countRows": {
@@ -10810,7 +10484,7 @@
                                                           "items": {
                                                             "allOf": [
                                                               {
-                                                                "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_5h5ynune\\metadataBuildingBlocks\\_sources\\cdifProperties\\cdifPhysicalMapping\\schema.yaml"
+                                                                "$comment": "file not found: C:\\Users\\smrTu\\AppData\\Local\\Temp\\resolve_schema_15oi3d0g\\metadataBuildingBlocks\\_sources\\cdifProperties\\cdifPhysicalMapping\\schema.yaml"
                                                               },
                                                               {
                                                                 "type": "object",

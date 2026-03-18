@@ -41,10 +41,10 @@ Below is an example of a basemap detail as one representative member.
 {
   "@type": ["ada:basemap", "schema:Map"],
   "schema:description": "BSE overview basemap",
-  "pixelUnits": "micrometer",
-  "pixelScaleX": 0.25,
-  "pixelScaleY": 0.25,
-  "channel1": "BSE"
+  "ada:pixelUnits": "micrometer",
+  "ada:pixelScaleX": 0.25,
+  "ada:pixelScaleY": 0.25,
+  "ada:channel1": "BSE"
 }
 
 ```
@@ -64,10 +64,10 @@ Below is an example of a basemap detail as one representative member.
     "schema:Map"
   ],
   "schema:description": "BSE overview basemap",
-  "pixelUnits": "micrometer",
-  "pixelScaleX": 0.25,
-  "pixelScaleY": 0.25,
-  "channel1": "BSE"
+  "ada:pixelUnits": "micrometer",
+  "ada:pixelScaleX": 0.25,
+  "ada:pixelScaleY": 0.25,
+  "ada:channel1": "BSE"
 }
 ```
 
@@ -75,10 +75,15 @@ Below is an example of a basemap detail as one representative member.
 ```ttl
 @prefix ada: <https://ada.astromat.org/metadata/> .
 @prefix schema1: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 [] a schema1:Map,
         ada:basemap ;
-    schema1:description "BSE overview basemap" .
+    schema1:description "BSE overview basemap" ;
+    ada:channel1 "BSE" ;
+    ada:pixelScaleX 2.5e-01 ;
+    ada:pixelScaleY 2.5e-01 ;
+    ada:pixelUnits "micrometer" .
 
 
 ```

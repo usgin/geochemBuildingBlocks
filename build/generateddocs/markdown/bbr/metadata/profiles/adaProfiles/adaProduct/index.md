@@ -883,8 +883,8 @@ description: Schema for JSON metadata documenting products in Astromat Data Arch
   DDI-CDI variable types and CSVW tabular data properties.
 type: object
 allOf:
-- $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/cdifProperties/cdifMandatory/schema.yaml
-- $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/cdifProperties/cdifOptional/schema.yaml
+- $ref: https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/cdifProperties/cdifMandatory/schema.yaml
+- $ref: https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/cdifProperties/cdifOptional/schema.yaml
 - type: object
   properties:
     '@type':
@@ -1339,7 +1339,7 @@ allOf:
               type: array
               description: Actions that can be invoked via the API.
               items:
-                $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/action/schema.yaml
+                $ref: https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/action/schema.yaml
             schema:result:
               description: The file(s) that result from invoking this API. Reuses
                 the same single-file or archive-with-hasPart structure.
@@ -1443,20 +1443,14 @@ Links to the schema:
 {
   "@context": {
     "schema": "http://schema.org/",
-    "ex": "https://example.org/",
-    "xsd": "http://www.w3.org/2001/XMLSchema#",
-    "dcterms": "http://purl.org/dc/terms/",
-    "dcat": "http://www.w3.org/ns/dcat#",
     "ada": "https://ada.astromat.org/metadata/",
     "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
     "csvw": "http://www.w3.org/ns/csvw#",
     "prov": "http://www.w3.org/ns/prov#",
     "spdx": "http://spdx.org/rdf/terms#",
     "nxs": "http://purl.org/nexusformat/definitions/",
+    "dcterms": "http://purl.org/dc/terms/",
     "geosparql": "http://www.opengis.net/ont/geosparql#",
-    "skos": "http://www.w3.org/2004/02/skos/core#",
-    "xas": "https://xas.org/dictionary/",
-    "time": "http://www.w3.org/2006/time#",
     "@version": 1.1
   }
 }

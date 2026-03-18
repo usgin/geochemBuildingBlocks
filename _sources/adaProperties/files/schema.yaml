@@ -5,30 +5,30 @@ description: Properties for any file in an ADA product distribution. GeneralType
   broad categories of file format (tabular, image, dataCube, document). Type constraints (e.g. DataDownload)
   are applied at the composition level in profiles.
 allOf:
-- $ref: https://usgin.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/dataDownload/schema.yaml
+- $ref: https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/dataDownload/schema.yaml
 - type: object
   description: properties added for geochemical datasets
   properties:
-    schema:additionalType:
+    'schema:additionalType':
       type: array
       description: other classifier for the file. ada componentTypes are specified in the specific file type schema attached by $refs
       items:
         type: string
-    schema:description:
+    'schema:description':
       type: string
-    schema:size:
+    'schema:size':
       type: object
       properties:
         '@type':
           const: schema:QuantitativeValue
-        schema:value:
+        'schema:value':
           type: integer
-        schema:unitText:
+        'schema:unitText':
           type: string
           default: byte
     'ada:resultTarget':
       $ref: ../stringArray/schema.yaml
-    schema:relatedLink:
+    'schema:relatedLink':
       type: array
       description: 'Links between files in the product. Use schema:name for path to target in product, or use #id JSON-LD links. Used to link metadata files in bundle to the data or supplementary files they document.'
       items:
@@ -37,19 +37,19 @@ allOf:
           '@type':
             type: string
             const: schema:LinkRole
-          schema:linkRelationship:
+          'schema:linkRelationship':
             type: string
-          schema:target:
+          'schema:target':
             type: object
             properties:
               '@type':
                 type: string
                 const: schema:EntryPoint
-              schema:encodingFormat:
+              'schema:encodingFormat':
                 type: string
-              schema:name:
+              'schema:name':
                 type: string
-              schema:url:
+              'schema:url':
                 type: string
 - anyOf:
   - $ref: ../image/schema.yaml

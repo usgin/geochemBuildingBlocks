@@ -1,6 +1,6 @@
 # Instrument Detail Types
 
-Umbrella schema referencing all instrument-specific detail type building blocks. Individual detail types are now separate building blocks under `adaProperties/detailXxx/`:
+Umbrella schema referencing all instrument-specific detail type building blocks. Individual detail types are now separate building blocks under `geochemProperties/detailXxx/`:
 
 - **detailARGT** - ARGT (Argon) document type with phase and isotope analysis
 - **detailBasemap** - Basemap images with RGB channels and pixel scaling

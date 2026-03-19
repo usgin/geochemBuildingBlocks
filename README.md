@@ -4,7 +4,7 @@ Modular metadata schema components for the [Astromat Data Archive (ADA)](https:/
 
 ## Structure
 
-### adaProperties (31 schema components)
+### geochemProperties (31 schema components)
 
 Property building blocks that define ADA-specific metadata elements: file types, instrument details, technique-specific data structures, spatial registration, and more.
 

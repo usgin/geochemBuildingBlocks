@@ -1,0 +1,82 @@
+
+
+{
+  "itemIdentifier": "ada.bbr.metadata.geochemProperties.document",
+  "$schema": "metaschema.yaml",
+  "name": "Document Type",
+  "abstract": "Supplemental documents for calibration, methods, and analysis info. Defines properties: @type, componentType, schema:version, schema:isBasedOn. Uses building blocks: detailARGT (geochemProperties).",
+  "status": "under-development",
+  "dateTimeAddition": "2026-02-05T00:00:00Z",
+  "itemClass": "schema",
+  "register": "cdif-building-block-register",
+  "version": "0.1",
+  "dateOfLastChange": "2026-03-19",
+  "link": "https://github.com/usgin/geochemBuildingBlocks",
+  "maturity": "draft",
+  "scope": "unstable",
+  "tags": [
+    "ada",
+    "astromat",
+    "document"
+  ],
+  "sources": [
+    {
+      "title": "ADA Metadata Schema v3",
+      "link": "https://github.com/amds-ldeo/metadata"
+    }
+  ],
+  "shaclShapes": {
+    "ada.bbr.metadata.geochemProperties.document": [
+      "https://usgin.github.io/geochemBuildingBlocks/_sources/geochemProperties/document/rules.shacl"
+    ],
+    "ada.bbr.metadata.geochemProperties.detailARGT": [
+      "https://usgin.github.io/geochemBuildingBlocks/_sources/geochemProperties/detailARGT/rules.shacl"
+    ]
+  },
+  "dependsOn": [
+    "ada.bbr.metadata.geochemProperties.detailARGT"
+  ],
+  "ldContext": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/document/context.jsonld",
+  "schema": {
+    "application/yaml": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/document/schema.yaml",
+    "application/json": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/document/schema.json"
+  },
+  "sourceSchema": "https://usgin.github.io/geochemBuildingBlocks/_sources/geochemProperties/document/schema.yaml",
+  "sourceLdContext": "https://usgin.github.io/geochemBuildingBlocks/_sources/geochemProperties/document/context.jsonld",
+  "resolvedSchemaProperties": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/document/resolvedProperties.json",
+  "sourceFiles": "https://usgin.github.io/geochemBuildingBlocks/_sources/geochemProperties/document/",
+  "rdfData": [],
+  "validationPassed": true,
+  "testOutputs": "https://github.com/usgin/geochemBuildingBlocks/blob/main/build/tests/bbr/metadata/geochemProperties/document/",
+  "description": "# Document Type\n\nDescribes supplemental documents in ADA metadata including calibration files, method descriptions, log files, processing descriptions, and other supplemental information. Typed as `ada:document` and `schema:DigitalDocument`.\n",
+  "examples": [
+    {
+      "title": "Document Type Example",
+      "content": "A calibration document associated with an analytical session.",
+      "prefixes": {
+        "schema": "http://schema.org/",
+        "ada": "https://ada.astromat.org/metadata/"
+      },
+      "snippets": [
+        {
+          "language": "json",
+          "code": "{\n  \"@type\": [\"ada:document\", \"schema:DigitalDocument\"],\n  \"ada:componentType\": {\n    \"@type\": \"ada:calibrationFile\"\n  },\n  \"schema:version\": \"1.0\",\n  \"schema:isBasedOn\": \"calibration_original_20230415.pdf\"\n}\n",
+          "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/geochemProperties/document/example_1_1.json"
+        },
+        {
+          "language": "jsonld",
+          "code": "{\n  \"@context\": [\n    {\n      \"schema\": \"http://schema.org/\",\n      \"ada\": \"https://ada.astromat.org/metadata/\"\n    },\n    \"https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/document/context.jsonld\"\n  ],\n  \"@type\": [\n    \"ada:document\",\n    \"schema:DigitalDocument\"\n  ],\n  \"ada:componentType\": {\n    \"@type\": \"ada:calibrationFile\"\n  },\n  \"schema:version\": \"1.0\",\n  \"schema:isBasedOn\": \"calibration_original_20230415.pdf\"\n}",
+          "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/geochemProperties/document/example_1_1.jsonld"
+        },
+        {
+          "language": "ttl",
+          "code": "@prefix ada: <https://ada.astromat.org/metadata/> .\n@prefix schema1: <http://schema.org/> .\n\n[] a schema1:DigitalDocument,\n        ada:document ;\n    schema1:isBasedOn \"calibration_original_20230415.pdf\" ;\n    schema1:version \"1.0\" ;\n    ada:componentType [ a ada:calibrationFile ] .\n\n",
+          "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/geochemProperties/document/example_1_1.ttl"
+        }
+      ]
+    }
+  ],
+  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: Document Type\ndescription: Text or PDF/A documents providing supplemental information, typically\n  related to calibration, instrument metadata details, analysis methods, or data representation.\n  Typed as ada:document and schema:DigitalDocument.\ntype: object\nproperties:\n  '@type':\n    type: array\n    items:\n      type: string\n    minItems: 2\n    allOf:\n    - contains:\n        const: ada:document\n    - contains:\n        const: schema:DigitalDocument\n  ada:componentType:\n    description: One of the supplemental document types if applicable\n    anyOf:\n    - type: object\n      properties:\n        '@type':\n          enum:\n          - ada:calibrationFile\n          - ada:contextVideo\n          - ada:instrumentMetadata\n          - ada:logFile\n          - ada:methodDescription\n          - ada:peaks\n          - ada:plot\n          - ada:processingMethod\n          - ada:QRISCalibrationFile\n          - ada:report\n          - ada:samplePreparation\n          - ada:shapefile\n          - ada:worldFile\n    - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailARGT/schema.yaml\n  schema:version:\n    type: string\n  schema:isBasedOn:\n    description: same as ada/samis '_originalName'\n    type: string\nrequired:\n- '@type'\n- ada:componentType\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  ada: https://ada.astromat.org/metadata/\n",
+  "gitRepository": "https://github.com/usgin/geochemBuildingBlocks",
+  "gitPath": "_sources/geochemProperties/document"
+}

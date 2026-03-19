@@ -1,0 +1,77 @@
+
+
+{
+  "itemIdentifier": "ada.bbr.metadata.geochemProperties.detailBasemap",
+  "$schema": "metaschema.yaml",
+  "name": "Basemap Instrument Detail",
+  "abstract": "Basemap images with RGB channels and pixel scaling. Defines properties: @type, schema:description, pixelUnits, pixelScaleX, pixelScaleY, channel1, channel2, channel3.",
+  "status": "under-development",
+  "dateTimeAddition": "2026-02-06T00:00:00Z",
+  "itemClass": "schema",
+  "register": "cdif-building-block-register",
+  "version": "0.1",
+  "dateOfLastChange": "2026-03-19",
+  "link": "https://github.com/usgin/geochemBuildingBlocks",
+  "maturity": "draft",
+  "scope": "unstable",
+  "tags": [
+    "ada",
+    "astromat",
+    "instrument",
+    "basemap"
+  ],
+  "sources": [
+    {
+      "title": "ADA Metadata Schema v3",
+      "link": "https://github.com/amds-ldeo/metadata"
+    }
+  ],
+  "shaclShapes": {
+    "ada.bbr.metadata.geochemProperties.detailBasemap": [
+      "https://usgin.github.io/geochemBuildingBlocks/_sources/geochemProperties/detailBasemap/rules.shacl"
+    ]
+  },
+  "ldContext": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailBasemap/context.jsonld",
+  "schema": {
+    "application/yaml": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailBasemap/schema.yaml",
+    "application/json": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailBasemap/schema.json"
+  },
+  "sourceSchema": "https://usgin.github.io/geochemBuildingBlocks/_sources/geochemProperties/detailBasemap/schema.yaml",
+  "sourceLdContext": "https://usgin.github.io/geochemBuildingBlocks/_sources/geochemProperties/detailBasemap/context.jsonld",
+  "resolvedSchemaProperties": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailBasemap/resolvedProperties.json",
+  "sourceFiles": "https://usgin.github.io/geochemBuildingBlocks/_sources/geochemProperties/detailBasemap/",
+  "rdfData": [],
+  "validationPassed": true,
+  "testOutputs": "https://github.com/usgin/geochemBuildingBlocks/blob/main/build/tests/bbr/metadata/geochemProperties/detailBasemap/",
+  "description": "# Basemap Instrument Detail\n\nBasemap images with RGB channels and pixel scaling. (Extension type, not in v3 source schema.)\n",
+  "examples": [
+    {
+      "title": "Basemap Detail Example",
+      "content": "A basemap image with RGB channels and pixel scaling for spatial reference.",
+      "prefixes": {
+        "schema": "http://schema.org/",
+        "ada": "https://ada.astromat.org/metadata/"
+      },
+      "snippets": [
+        {
+          "language": "json",
+          "code": "{\n  \"@type\": [\"ada:basemap\", \"schema:Map\"],\n  \"schema:description\": \"BSE basemap image of thin section\",\n  \"ada:pixelUnits\": \"micrometer\",\n  \"ada:pixelScaleX\": 0.5,\n  \"ada:pixelScaleY\": 0.5,\n  \"ada:channel1\": \"BSE\",\n  \"ada:channel2\": \"\",\n  \"ada:channel3\": \"\"\n}\n",
+          "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/geochemProperties/detailBasemap/example_1_1.json"
+        },
+        {
+          "language": "jsonld",
+          "code": "{\n  \"@context\": [\n    {\n      \"schema\": \"http://schema.org/\",\n      \"ada\": \"https://ada.astromat.org/metadata/\"\n    },\n    \"https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailBasemap/context.jsonld\"\n  ],\n  \"@type\": [\n    \"ada:basemap\",\n    \"schema:Map\"\n  ],\n  \"schema:description\": \"BSE basemap image of thin section\",\n  \"ada:pixelUnits\": \"micrometer\",\n  \"ada:pixelScaleX\": 0.5,\n  \"ada:pixelScaleY\": 0.5,\n  \"ada:channel1\": \"BSE\",\n  \"ada:channel2\": \"\",\n  \"ada:channel3\": \"\"\n}",
+          "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/geochemProperties/detailBasemap/example_1_1.jsonld"
+        },
+        {
+          "language": "ttl",
+          "code": "@prefix ada: <https://ada.astromat.org/metadata/> .\n@prefix schema1: <http://schema.org/> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a schema1:Map,\n        ada:basemap ;\n    schema1:description \"BSE basemap image of thin section\" ;\n    ada:channel1 \"BSE\" ;\n    ada:channel2 \"\" ;\n    ada:channel3 \"\" ;\n    ada:pixelScaleX 5e-01 ;\n    ada:pixelScaleY 5e-01 ;\n    ada:pixelUnits \"micrometer\" .\n\n",
+          "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/geochemProperties/detailBasemap/example_1_1.ttl"
+        }
+      ]
+    }
+  ],
+  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: Basemap Instrument Detail\ndescription: Basemap images with RGB channels and pixel scaling. (Extension type,\n  not in v3 source schema.)\ntype: object\nproperties:\n  '@type':\n    const:\n    - ada:basemap\n    - schema:Map\n  schema:description:\n    type: string\n  ada:pixelUnits:\n    type: string\n  ada:pixelScaleX:\n    type: number\n  ada:pixelScaleY:\n    type: number\n  ada:channel1:\n    type: string\n  ada:channel2:\n    type: string\n  ada:channel3:\n    type: string\nrequired:\n- '@type'\n- ada:pixelScaleX\n- ada:pixelScaleY\n- ada:pixelUnits\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  ada: https://ada.astromat.org/metadata/\n",
+  "gitRepository": "https://github.com/usgin/geochemBuildingBlocks",
+  "gitPath": "_sources/geochemProperties/detailBasemap"
+}

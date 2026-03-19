@@ -1,0 +1,767 @@
+{
+  "x-defs": {
+    "ada.bbr.metadata.geochemProperties.detailBasemap": {
+      "title": "Basemap Instrument Detail",
+      "description": "Basemap images with RGB channels and pixel scaling. (Extension type, not in v3 source schema.)",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "enum": [
+            [
+              "ada:basemap",
+              "schema:Map"
+            ]
+          ]
+        },
+        "schema:description": {
+          "type": "string"
+        },
+        "ada:pixelUnits": {
+          "type": "string"
+        },
+        "ada:pixelScaleX": {
+          "type": "number"
+        },
+        "ada:pixelScaleY": {
+          "type": "number"
+        },
+        "ada:channel1": {
+          "type": "string"
+        },
+        "ada:channel2": {
+          "type": "string"
+        },
+        "ada:channel3": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "@type",
+        "ada:pixelScaleX",
+        "ada:pixelScaleY",
+        "ada:pixelUnits"
+      ],
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/",
+        "ada": "https://ada.astromat.org/metadata/"
+      },
+      "x-schema-source": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailBasemap/schema.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "ada.bbr.metadata.geochemProperties.detailARGT": {
+      "title": "ARGT Instrument Detail",
+      "description": "ARGT (Argon) document type with phase and isotope analysis",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "enum": [
+            "ada:ARGTDocument"
+          ]
+        },
+        "ada:phaseAnalyzed": {
+          "type": "string"
+        },
+        "ada:isotopeType": {
+          "type": "string"
+        }
+      },
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/",
+        "ada": "https://ada.astromat.org/metadata/"
+      },
+      "x-schema-source": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailARGT/schema.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "ada.bbr.metadata.geochemProperties.detailDSC": {
+      "title": "DSC Instrument Detail",
+      "description": "Differential Scanning Calorimetry heat tabular data",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "enum": [
+            "ada:DSCHeatTabular"
+          ]
+        },
+        "ada:analysisType": {
+          "type": "string"
+        }
+      },
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/",
+        "ada": "https://ada.astromat.org/metadata/"
+      },
+      "x-schema-source": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailDSC/schema.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "ada.bbr.metadata.geochemProperties.detailEMPA": {
+      "title": "EMPA Instrument Detail",
+      "description": "Electron Microprobe Analysis with spectrometer and signal details.",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "anyOf": [
+            {
+              "enum": [
+                "ada:EMPAImage"
+              ]
+            },
+            {
+              "enum": [
+                "ada:EMPAQEATabular"
+              ]
+            },
+            {
+              "enum": [
+                "ada:EMPAImageCollection"
+              ]
+            }
+          ]
+        },
+        "ada:spectrometersUsed": {
+          "type": "string",
+          "description": "Spectrometers used in analysis"
+        },
+        "ada:signalUsed": {
+          "type": "string"
+        }
+      },
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/",
+        "ada": "https://ada.astromat.org/metadata/"
+      },
+      "x-schema-source": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailEMPA/schema.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "ada.bbr.metadata.geochemProperties.detailEAIRMS": {
+      "title": "EA-IRMS Instrument Detail",
+      "description": "Elemental Analysis Isotope Ratio Mass Spectrometry collection",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "enum": [
+            "ada:EAIRMSCollection"
+          ]
+        },
+        "ada:massConsumed": {
+          "type": "string"
+        },
+        "ada:elementType": {
+          "type": "string"
+        }
+      },
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/",
+        "ada": "https://ada.astromat.org/metadata/"
+      },
+      "x-schema-source": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailEAIRMS/schema.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "ada.bbr.metadata.geochemProperties.detailICPOES": {
+      "title": "ICP-OES Instrument Detail",
+      "description": "Inductively Coupled Plasma Optical Emission Spectrometry. (Extension type, not in v3 source schema.)",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "anyOf": [
+            {
+              "enum": [
+                "ada:ICPOESIntermediateTabular"
+              ]
+            },
+            {
+              "enum": [
+                "ada:ICPOESProcessedTabular"
+              ]
+            },
+            {
+              "enum": [
+                "ada:ICPOESRawTabular"
+              ]
+            }
+          ]
+        },
+        "ada:mass": {
+          "type": "string"
+        },
+        "ada:dissolutionFactor": {
+          "type": "number"
+        }
+      },
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/",
+        "ada": "https://ada.astromat.org/metadata/"
+      },
+      "x-schema-source": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailICPOES/schema.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "ada.bbr.metadata.geochemProperties.detailL2MS": {
+      "title": "L2MS Instrument Detail",
+      "description": "Laser-2 Mass Spectrometry cube data with ionization parameters",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "enum": [
+            "ada:L2MSCube"
+          ]
+        },
+        "ada:sampleName": {
+          "type": "string"
+        },
+        "ada:ionizationTimeDelay": {
+          "type": "integer"
+        },
+        "ada:massGate": {
+          "type": "boolean"
+        },
+        "ada:photoionizationWavelength": {
+          "type": "integer"
+        },
+        "ada:plasmaShutter": {
+          "type": "boolean"
+        },
+        "ada:timeDelayUnits": {
+          "type": "string"
+        },
+        "ada:wavelengthUnits": {
+          "type": "string"
+        }
+      },
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/",
+        "ada": "https://ada.astromat.org/metadata/"
+      },
+      "x-schema-source": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailL2MS/schema.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "ada.bbr.metadata.geochemProperties.detailLAF": {
+      "title": "LAF Instrument Detail",
+      "description": "Laser Ablation Fluorescence processed/raw data. elementAnalyzed goes in resultTarget.",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "anyOf": [
+            {
+              "enum": [
+                "ada:LAFProcessed"
+              ]
+            },
+            {
+              "enum": [
+                "ada:LAFRaw"
+              ]
+            }
+          ]
+        },
+        "ada:elementAnalyzed": {
+          "type": "string"
+        },
+        "ada:sampleMassConsumed": {
+          "type": "string"
+        },
+        "ada:sampleType": {
+          "type": "string"
+        }
+      },
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/",
+        "ada": "https://ada.astromat.org/metadata/"
+      },
+      "x-schema-source": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailLAF/schema.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "ada.bbr.metadata.geochemProperties.detailNanoIR": {
+      "title": "NanoIR Instrument Detail",
+      "description": "Nano-IR spectroscopy collections with phase analysis",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "anyOf": [
+            {
+              "enum": [
+                "ada:NanoIRBackground"
+              ]
+            }
+          ]
+        },
+        "ada:phaseAnalyzed": {
+          "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/details/schema-oas3.0.json#/x-defs/ada.bbr.metadata.geochemProperties.stringArray"
+        }
+      },
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/",
+        "ada": "https://ada.astromat.org/metadata/"
+      },
+      "x-schema-source": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailNanoIR/schema.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "ada.bbr.metadata.geochemProperties.detailNanoSIMS": {
+      "title": "NanoSIMS Instrument Detail",
+      "description": "Nano Secondary Ion Mass Spectrometry with isotope tracking",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string",
+          "enum": [
+            "ada:NanoSIMSCollection",
+            "ada:NanoSIMSImageCollection",
+            "ada:NanoSIMSTabular",
+            "ada:NanoSIMSMap"
+          ]
+        },
+        "ada:phaseAnalyzed": {
+          "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/details/schema-oas3.0.json#/x-defs/ada.bbr.metadata.geochemProperties.stringArray"
+        },
+        "ada:isotopeAnalyzed": {
+          "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/details/schema-oas3.0.json#/x-defs/ada.bbr.metadata.geochemProperties.stringArray"
+        }
+      },
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/",
+        "ada": "https://ada.astromat.org/metadata/"
+      },
+      "x-schema-source": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailNanoSIMS/schema.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "ada.bbr.metadata.geochemProperties.detailPSFD": {
+      "title": "PSFD Instrument Detail",
+      "description": "Point Spread Function Data with image names and conditions",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "enum": [
+            "ada:PSFDTabular"
+          ]
+        },
+        "ada:imageName": {
+          "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/details/schema-oas3.0.json#/x-defs/ada.bbr.metadata.geochemProperties.stringArray"
+        },
+        "ada:imageViewingConditions": {
+          "type": "string"
+        }
+      },
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/",
+        "ada": "https://ada.astromat.org/metadata/"
+      },
+      "x-schema-source": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailPSFD/schema.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "ada.bbr.metadata.geochemProperties.detailVNMIR": {
+      "title": "VNMIR Instrument Detail",
+      "description": "Very-Near Mid-IR spectroscopy with detailed measurement parameters",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "anyOf": [
+            {
+              "enum": [
+                "ada:VNMIRSpectralPoint"
+              ]
+            },
+            {
+              "enum": [
+                "ada:VNMIROverviewImage"
+              ]
+            },
+            {
+              "enum": [
+                "ada:VNMIRSpectralMap"
+              ]
+            }
+          ]
+        },
+        "ada:detector": {
+          "type": "string"
+        },
+        "ada:beamsplitter": {
+          "type": "string"
+        },
+        "ada:calibrationStandards": {
+          "type": "string"
+        },
+        "ada:comments": {
+          "type": "string"
+        },
+        "ada:numberOfScans": {
+          "type": "integer"
+        },
+        "ada:eMaxFitRegionMax": {
+          "type": "string"
+        },
+        "ada:eMaxFitRegionMin": {
+          "type": "string"
+        },
+        "ada:emissionAngle": {
+          "type": "number"
+        },
+        "ada:emissivityMaximum": {
+          "type": "string"
+        },
+        "ada:environmentalPressure": {
+          "type": "number"
+        },
+        "ada:incidenceAngle": {
+          "type": "number"
+        },
+        "ada:measurement": {
+          "type": "string"
+        },
+        "ada:measurementEnvironment": {
+          "type": "string"
+        },
+        "ada:phaseAngle": {
+          "type": "number"
+        },
+        "ada:sampleHeated": {
+          "type": "boolean"
+        },
+        "ada:samplePreparation": {
+          "type": "string"
+        },
+        "ada:sampleTemperature": {
+          "type": "integer"
+        },
+        "ada:spectralRangeMax": {
+          "type": "string"
+        },
+        "ada:spectralRangeMin": {
+          "type": "string"
+        },
+        "ada:spectralResolution": {
+          "type": "string"
+        },
+        "ada:spectralSampling": {
+          "type": "string"
+        },
+        "ada:spotSize": {
+          "type": "string"
+        },
+        "ada:uncertaintyNoise": {
+          "type": "number"
+        },
+        "ada:vacuumExposedSample": {
+          "type": "boolean"
+        }
+      },
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/",
+        "ada": "https://ada.astromat.org/metadata/"
+      },
+      "x-schema-source": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailVNMIR/schema.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "ada.bbr.metadata.geochemProperties.detailQRIS": {
+      "title": "QRIS Instrument Detail",
+      "description": "QRIS (Raman) with calibration and illumination parameters. (Extension type, not in v3 source schema.)",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "anyOf": [
+            {
+              "enum": [
+                "ada:QRISCalibrated"
+              ]
+            },
+            {
+              "enum": [
+                "ada:QRISRaw"
+              ]
+            }
+          ]
+        },
+        "ada:calibrationFile": {
+          "type": "string"
+        },
+        "ada:pipelineVersion": {
+          "type": "string"
+        },
+        "ada:focalLength": {
+          "type": "integer"
+        },
+        "ada:illuminationColor": {
+          "type": "array",
+          "minItems": 0,
+          "items": {
+            "type": "string"
+          }
+        },
+        "ada:illuminationLevel": {
+          "type": "integer"
+        },
+        "ada:exposureTime": {
+          "type": "integer"
+        },
+        "ada:target": {
+          "type": "string"
+        }
+      },
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/",
+        "ada": "https://ada.astromat.org/metadata/"
+      },
+      "x-schema-source": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailQRIS/schema.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "ada.bbr.metadata.geochemProperties.detailSLS": {
+      "title": "SLS Instrument Detail",
+      "description": "Structured Light Scanning shape models and partial scans",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "anyOf": [
+            {
+              "enum": [
+                "ada:SLSShapeModel"
+              ]
+            },
+            {
+              "enum": [
+                "ada:SLSPartialScan"
+              ]
+            }
+          ]
+        },
+        "ada:countScans": {
+          "type": "integer"
+        },
+        "ada:facets": {
+          "type": "integer"
+        },
+        "ada:unitsOfMeasurement": {
+          "type": "string"
+        },
+        "ada:version": {
+          "type": "integer"
+        },
+        "ada:vertices": {
+          "type": "integer"
+        },
+        "ada:watertight": {
+          "type": "boolean"
+        }
+      },
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/",
+        "ada": "https://ada.astromat.org/metadata/"
+      },
+      "x-schema-source": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailSLS/schema.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "ada.bbr.metadata.geochemProperties.detailXCT": {
+      "title": "XCT Instrument Detail",
+      "description": "X-ray Computed Tomography images with detailed scan parameters. (Extension type, not in v3 source schema.)",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "enum": [
+            "ada:XCTImageCollection"
+          ]
+        },
+        "ada:beamFilterMaterial": {
+          "type": "string"
+        },
+        "ada:beamFilterThickness": {
+          "type": "number"
+        },
+        "ada:dataRangeLower": {
+          "type": "integer"
+        },
+        "ada:dataRangeUpper": {
+          "type": "integer"
+        },
+        "ada:detectorGain": {
+          "type": "string"
+        },
+        "ada:detectorBinning": {
+          "type": "string"
+        },
+        "ada:detectorSize": {
+          "type": "string"
+        },
+        "ada:detectorType": {
+          "type": "string"
+        },
+        "ada:imageExposure": {
+          "type": "number"
+        },
+        "ada:imageFPS": {
+          "type": "string"
+        },
+        "ada:imageGain": {
+          "type": "number"
+        },
+        "ada:imageSize": {
+          "type": "string"
+        },
+        "ada:instrumentType": {
+          "type": "string"
+        },
+        "ada:nsiBeamHardening": {
+          "type": "number"
+        },
+        "ada:numberOfFramesAveragedPerProjection": {
+          "type": "integer"
+        },
+        "ada:numberOfProjections": {
+          "type": "integer"
+        },
+        "ada:numberOfSlices": {
+          "type": "integer"
+        },
+        "ada:pixelPitch": {
+          "type": "string"
+        },
+        "ada:reconstructedDataFormat": {
+          "type": "string"
+        },
+        "ada:reconstructedVoxelSize": {
+          "type": "string"
+        },
+        "ada:reconstructionSoftware": {
+          "type": "string"
+        },
+        "ada:rotationAngle": {
+          "type": "string"
+        },
+        "ada:rotationType": {
+          "type": "string"
+        },
+        "ada:sourceToDetectorDistance": {
+          "type": "string"
+        },
+        "ada:sourceToObjectDistance": {
+          "type": "number"
+        },
+        "ada:subPixGrid": {
+          "type": "string"
+        },
+        "ada:subPixShift": {
+          "type": "string"
+        },
+        "ada:xraySource": {
+          "type": "string"
+        },
+        "ada:xrayTargetMaterial": {
+          "type": "string"
+        },
+        "ada:xrayTubeCurrent": {
+          "type": "number"
+        },
+        "ada:xrayTubeEnergy": {
+          "type": "number"
+        },
+        "ada:xrayTubePower": {
+          "type": "number"
+        }
+      },
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/",
+        "ada": "https://ada.astromat.org/metadata/"
+      },
+      "x-schema-source": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailXCT/schema.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "ada.bbr.metadata.geochemProperties.detailXRD": {
+      "title": "XRD Instrument Detail",
+      "description": "X-ray Diffraction tabular data with geometry and wavelength",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "enum": [
+            "ada:XRDTabular"
+          ]
+        },
+        "ada:geometry": {
+          "type": "string"
+        },
+        "ada:sampleMount": {
+          "type": "string"
+        },
+        "ada:stepSize": {
+          "type": "number"
+        },
+        "ada:timePerStep": {
+          "type": "number"
+        },
+        "ada:wavelength": {
+          "type": "number"
+        }
+      },
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/",
+        "ada": "https://ada.astromat.org/metadata/"
+      },
+      "x-schema-source": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailXRD/schema.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "ada.bbr.metadata.geochemProperties.stringArray": {
+      "title": "String Array Type",
+      "description": "Simple reusable array of strings",
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "type": "string"
+      },
+      "x-schema-source": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/stringArray/schema.yaml",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    }
+  },
+  "title": "Instrument Detail Types",
+  "description": "Umbrella schema referencing all instrument-specific detail type building blocks. Individual detail types are now separate building blocks under geochemProperties/detailXxx/.",
+  "type": "object",
+  "anyOf": [
+    {
+      "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/details/schema-oas3.0.json#/x-defs/ada.bbr.metadata.geochemProperties.detailBasemap"
+    },
+    {
+      "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/details/schema-oas3.0.json#/x-defs/ada.bbr.metadata.geochemProperties.detailARGT"
+    },
+    {
+      "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/details/schema-oas3.0.json#/x-defs/ada.bbr.metadata.geochemProperties.detailDSC"
+    },
+    {
+      "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/details/schema-oas3.0.json#/x-defs/ada.bbr.metadata.geochemProperties.detailEMPA"
+    },
+    {
+      "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/details/schema-oas3.0.json#/x-defs/ada.bbr.metadata.geochemProperties.detailEAIRMS"
+    },
+    {
+      "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/details/schema-oas3.0.json#/x-defs/ada.bbr.metadata.geochemProperties.detailICPOES"
+    },
+    {
+      "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/details/schema-oas3.0.json#/x-defs/ada.bbr.metadata.geochemProperties.detailL2MS"
+    },
+    {
+      "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/details/schema-oas3.0.json#/x-defs/ada.bbr.metadata.geochemProperties.detailLAF"
+    },
+    {
+      "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/details/schema-oas3.0.json#/x-defs/ada.bbr.metadata.geochemProperties.detailNanoIR"
+    },
+    {
+      "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/details/schema-oas3.0.json#/x-defs/ada.bbr.metadata.geochemProperties.detailNanoSIMS"
+    },
+    {
+      "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/details/schema-oas3.0.json#/x-defs/ada.bbr.metadata.geochemProperties.detailPSFD"
+    },
+    {
+      "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/details/schema-oas3.0.json#/x-defs/ada.bbr.metadata.geochemProperties.detailVNMIR"
+    },
+    {
+      "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/details/schema-oas3.0.json#/x-defs/ada.bbr.metadata.geochemProperties.detailQRIS"
+    },
+    {
+      "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/details/schema-oas3.0.json#/x-defs/ada.bbr.metadata.geochemProperties.detailSLS"
+    },
+    {
+      "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/details/schema-oas3.0.json#/x-defs/ada.bbr.metadata.geochemProperties.detailXCT"
+    },
+    {
+      "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/details/schema-oas3.0.json#/x-defs/ada.bbr.metadata.geochemProperties.detailXRD"
+    }
+  ],
+  "x-jsonld-prefixes": {
+    "schema": "http://schema.org/",
+    "ada": "https://ada.astromat.org/metadata/"
+  },
+  "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+}

@@ -1,0 +1,199 @@
+{
+  "x-defs": {
+    "ada.bbr.metadata.geochemProperties.detailEMPA": {
+      "title": "EMPA Instrument Detail",
+      "description": "Electron Microprobe Analysis with spectrometer and signal details.",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "anyOf": [
+            {
+              "enum": [
+                "ada:EMPAImage"
+              ]
+            },
+            {
+              "enum": [
+                "ada:EMPAQEATabular"
+              ]
+            },
+            {
+              "enum": [
+                "ada:EMPAImageCollection"
+              ]
+            }
+          ]
+        },
+        "ada:spectrometersUsed": {
+          "type": "string",
+          "description": "Spectrometers used in analysis"
+        },
+        "ada:signalUsed": {
+          "type": "string"
+        }
+      },
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/",
+        "ada": "https://ada.astromat.org/metadata/"
+      },
+      "x-schema-source": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailEMPA/schema.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "ada.bbr.metadata.geochemProperties.spatialRegistration": {
+      "title": "Spatial Registration Type",
+      "description": "Defines pixel coordinate system registration including origin coordinates, pixel scales, and coordinate definition type for spatially registered images and maps.",
+      "type": "object",
+      "properties": {
+        "ada:basemap": {
+          "type": "string",
+          "description": "link to appropriate basemap image map"
+        },
+        "ada:originX": {
+          "type": "number"
+        },
+        "ada:originY": {
+          "type": "number"
+        },
+        "ada:originZ": {
+          "type": "number"
+        },
+        "ada:coordDef": {
+          "type": "string",
+          "description": "Whether coordinates are stage-defined or pixel-defined. If pixel-defined, are coordinates from stage, upperleftPixel, or centerPixel."
+        },
+        "ada:coordUnits": {
+          "type": "string"
+        },
+        "ada:pixelUnits": {
+          "type": "string"
+        },
+        "ada:pixelScaleX": {
+          "type": "number"
+        },
+        "ada:pixelScaleY": {
+          "type": "number"
+        },
+        "ada:originLocation": {
+          "type": "string",
+          "description": "The location of the origin pixel of an image. Range: upperLeft, upperRight, lowerLeft, lowerRight, center"
+        }
+      },
+      "required": [
+        "ada:originX",
+        "ada:originY",
+        "ada:pixelScaleX",
+        "ada:pixelScaleY",
+        "ada:pixelUnits",
+        "ada:originLocation",
+        "ada:coordDef"
+      ],
+      "x-jsonld-prefixes": {
+        "ada": "https://ada.astromat.org/metadata/"
+      },
+      "x-schema-source": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/spatialRegistration/schema.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    }
+  },
+  "title": "Image Map Type",
+  "description": "Spatially registered image maps with pixel coordinates, component type classification, and spatial registration metadata.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 2,
+      "allOf": [
+        {
+          "contains": {
+            "enum": [
+              "ada:imageMap"
+            ]
+          }
+        },
+        {
+          "contains": {
+            "enum": [
+              "schema:ImageObject"
+            ]
+          }
+        }
+      ]
+    },
+    "ada:acquisitionTime": {
+      "type": "string"
+    },
+    "ada:componentType": {
+      "anyOf": [
+        {
+          "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/imageMap/schema-oas3.0.json#/x-defs/ada.bbr.metadata.geochemProperties.detailEMPA"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "enum": [
+                "ada:basemap",
+                "ada:supplementalBasemap",
+                "ada:L2MSOverviewImage",
+                "ada:NanoIRMap",
+                "ada:LITImage",
+                "ada:UVFMImage",
+                "ada:VLMImage",
+                "ada:SEMEBSDGrainImageMap",
+                "ada:SEMEDSElementalMap",
+                "ada:SEMHRCLMap",
+                "ada:SEMImageMap",
+                "ada:STEMImage",
+                "ada:TEMImage",
+                "ada:TEMPatternsImage",
+                "ada:NanoSIMSMap",
+                "ada:XANESimage",
+                "ada:VNMIROverviewImage"
+              ]
+            }
+          },
+          "required": [
+            "@type"
+          ]
+        }
+      ]
+    },
+    "ada:channel1": {
+      "type": "string"
+    },
+    "ada:channel2": {
+      "type": "string"
+    },
+    "ada:channel3": {
+      "type": "string"
+    },
+    "ada:illuminationType": {
+      "type": "string",
+      "description": "Type of illumination used to create the image."
+    },
+    "ada:imageType": {
+      "type": "string",
+      "description": "Specifies the nature of the sample's response to the illumination."
+    },
+    "ada:numPixelsX": {
+      "type": "integer"
+    },
+    "ada:numPixelsY": {
+      "type": "integer"
+    },
+    "ada:spatialRegistration": {
+      "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/imageMap/schema-oas3.0.json#/x-defs/ada.bbr.metadata.geochemProperties.spatialRegistration"
+    }
+  },
+  "required": [
+    "@type",
+    "ada:componentType"
+  ],
+  "x-jsonld-prefixes": {
+    "schema": "http://schema.org/",
+    "ada": "https://ada.astromat.org/metadata/"
+  },
+  "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+}

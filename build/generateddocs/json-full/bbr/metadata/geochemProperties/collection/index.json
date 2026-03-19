@@ -1,0 +1,82 @@
+
+
+{
+  "itemIdentifier": "ada.bbr.metadata.geochemProperties.collection",
+  "$schema": "metaschema.yaml",
+  "name": "Collection Type",
+  "abstract": "Set of related files with identical information models or composite datasets. Defines properties: @type, componentType, memberTypes, nFiles, filelist. Uses building blocks: stringArray (geochemProperties).",
+  "status": "under-development",
+  "dateTimeAddition": "2026-02-05T00:00:00Z",
+  "itemClass": "schema",
+  "register": "cdif-building-block-register",
+  "version": "0.1",
+  "dateOfLastChange": "2026-03-19",
+  "link": "https://github.com/usgin/geochemBuildingBlocks",
+  "maturity": "draft",
+  "scope": "unstable",
+  "tags": [
+    "ada",
+    "astromat",
+    "collection"
+  ],
+  "sources": [
+    {
+      "title": "ADA Metadata Schema v3",
+      "link": "https://github.com/amds-ldeo/metadata"
+    }
+  ],
+  "shaclShapes": {
+    "ada.bbr.metadata.geochemProperties.collection": [
+      "https://usgin.github.io/geochemBuildingBlocks/_sources/geochemProperties/collection/rules.shacl"
+    ],
+    "ada.bbr.metadata.geochemProperties.stringArray": [
+      "https://usgin.github.io/geochemBuildingBlocks/_sources/geochemProperties/stringArray/rules.shacl"
+    ]
+  },
+  "dependsOn": [
+    "ada.bbr.metadata.geochemProperties.stringArray"
+  ],
+  "ldContext": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/collection/context.jsonld",
+  "schema": {
+    "application/yaml": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/collection/schema.yaml",
+    "application/json": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/collection/schema.json"
+  },
+  "sourceSchema": "https://usgin.github.io/geochemBuildingBlocks/_sources/geochemProperties/collection/schema.yaml",
+  "sourceLdContext": "https://usgin.github.io/geochemBuildingBlocks/_sources/geochemProperties/collection/context.jsonld",
+  "resolvedSchemaProperties": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/collection/resolvedProperties.json",
+  "sourceFiles": "https://usgin.github.io/geochemBuildingBlocks/_sources/geochemProperties/collection/",
+  "rdfData": [],
+  "validationPassed": true,
+  "testOutputs": "https://github.com/usgin/geochemBuildingBlocks/blob/main/build/tests/bbr/metadata/geochemProperties/collection/",
+  "description": "# Collection Type\n\nDescribes a collection of related files in ADA metadata. Can represent a set of files with identical information models and serialization (a collection), or a heterogeneous set of files constituting a composite dataset. Typed as `ada:collection` and `schema:Collection`.\n",
+  "examples": [
+    {
+      "title": "Collection Type Example",
+      "content": "A collection of SEM-EDS elemental map images with file listing.",
+      "prefixes": {
+        "schema": "http://schema.org/",
+        "ada": "https://ada.astromat.org/metadata/"
+      },
+      "snippets": [
+        {
+          "language": "json",
+          "code": "{\n  \"@type\": [\"ada:collection\", \"https://schema.org/Collection\"],\n  \"ada:componentType\": {\n    \"@type\": \"ada:SEMEDSElementalMaps\"\n  },\n  \"ada:memberTypes\": [\"ada:SEMEDSElementalMap\"],\n  \"ada:nFiles\": 5,\n  \"ada:filelist\": [\n    {\n      \"ada:fileName\": \"map_Fe_Ka.tif\",\n      \"ada:componentType\": \"ada:SEMEDSElementalMap\",\n      \"schema:encodingFormat\": \"image/tiff\"\n    },\n    {\n      \"ada:fileName\": \"map_Si_Ka.tif\",\n      \"ada:componentType\": \"ada:SEMEDSElementalMap\",\n      \"schema:encodingFormat\": \"image/tiff\"\n    }\n  ]\n}\n",
+          "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/geochemProperties/collection/example_1_1.json"
+        },
+        {
+          "language": "jsonld",
+          "code": "{\n  \"@context\": [\n    {\n      \"schema\": \"http://schema.org/\",\n      \"ada\": \"https://ada.astromat.org/metadata/\"\n    },\n    \"https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/collection/context.jsonld\"\n  ],\n  \"@type\": [\n    \"ada:collection\",\n    \"https://schema.org/Collection\"\n  ],\n  \"ada:componentType\": {\n    \"@type\": \"ada:SEMEDSElementalMaps\"\n  },\n  \"ada:memberTypes\": [\n    \"ada:SEMEDSElementalMap\"\n  ],\n  \"ada:nFiles\": 5,\n  \"ada:filelist\": [\n    {\n      \"ada:fileName\": \"map_Fe_Ka.tif\",\n      \"ada:componentType\": \"ada:SEMEDSElementalMap\",\n      \"schema:encodingFormat\": \"image/tiff\"\n    },\n    {\n      \"ada:fileName\": \"map_Si_Ka.tif\",\n      \"ada:componentType\": \"ada:SEMEDSElementalMap\",\n      \"schema:encodingFormat\": \"image/tiff\"\n    }\n  ]\n}",
+          "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/geochemProperties/collection/example_1_1.jsonld"
+        },
+        {
+          "language": "ttl",
+          "code": "@prefix ada: <https://ada.astromat.org/metadata/> .\n@prefix schema: <https://schema.org/> .\n@prefix schema1: <http://schema.org/> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a ada:collection,\n        schema:Collection ;\n    ada:componentType [ a ada:SEMEDSElementalMaps ] ;\n    ada:filelist [ schema1:encodingFormat \"image/tiff\" ;\n            ada:componentType \"ada:SEMEDSElementalMap\" ;\n            ada:fileName \"map_Fe_Ka.tif\" ],\n        [ schema1:encodingFormat \"image/tiff\" ;\n            ada:componentType \"ada:SEMEDSElementalMap\" ;\n            ada:fileName \"map_Si_Ka.tif\" ] ;\n    ada:memberTypes \"ada:SEMEDSElementalMap\" ;\n    ada:nFiles 5 .\n\n",
+          "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/geochemProperties/collection/example_1_1.ttl"
+        }
+      ]
+    }
+  ],
+  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: Collection Type\ndescription: A collection can be a set of files with identical information model and\n  serialization/formatting, or a heterogeneous set of files that together constitute\n  a dataset (a composite dataset).\ntype: object\nproperties:\n  '@type':\n    type: array\n    items:\n      type: string\n    minItems: 2\n    allOf:\n    - contains:\n        const: ada:collection\n    - contains:\n        const: https://schema.org/Collection\n    description: GeneralType for collections\n  ada:componentType:\n    type: object\n    properties:\n      '@type':\n        type: string\n        enum:\n        - ada:AIVAImageCollection\n        - ada:ARGTCollection\n        - ada:EAIRMSCollection\n        - ada:EMPAImageCollection\n        - ada:GCMSCollection\n        - ada:GCGCMSCollection\n        - ada:LCMSCollection\n        - ada:LCMSMSCollection\n        - ada:LIT2DDataCollection\n        - ada:LITPolarDataCollection\n        - ada:MCICPMSCollection\n        - ada:NanoIRMapCollection\n        - ada:NanoIRPointCollection\n        - ada:NanoSIMSCollection\n        - ada:NanoSIMSImageCollection\n        - ada:QRISCalibratedCollection\n        - ada:QRISRawCollection\n        - ada:RITOFNGMSCollection\n        - ada:SEMEDSElementalMaps\n        - ada:SEMEDSPointDataCollection\n        - ada:SEMImageCollection\n        - ada:SIMSCollection\n        - ada:TEMEDSImageCollection\n        - ada:TOFSIMSCollection\n        - ada:UVFMImageCollection\n        - ada:VLMImageCollection\n        - ada:XANESCollection\n        - ada:XCTImageCollection\n  ada:memberTypes:\n    description: List of the component types in the collection\n    $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/stringArray/schema.yaml\n  ada:nFiles:\n    type: integer\n    description: Number of files in the collection, including metadata files\n  ada:filelist:\n    type: array\n    items:\n      type: object\n      properties:\n        ada:fileName:\n          type: string\n          description: Full path to file in container object\n        ada:fileNamePattern:\n          type: string\n          description: Pattern for collection members with differentiating suffix\n            at '*'\n        ada:componentType:\n          description: The component type for the file(s)\n          type: string\n        schema:encodingFormat:\n          type: string\n          description: MIME type with extension\n      oneOf:\n      - required:\n        - ada:fileName\n      - required:\n        - ada:fileNamePattern\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  ada: https://ada.astromat.org/metadata/\n",
+  "gitRepository": "https://github.com/usgin/geochemBuildingBlocks",
+  "gitPath": "_sources/geochemProperties/collection"
+}

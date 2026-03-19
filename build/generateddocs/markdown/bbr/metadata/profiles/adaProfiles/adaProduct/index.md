@@ -885,7 +885,7 @@ description: Schema for JSON metadata documenting products in Astromat Data Arch
   DDI-CDI variable types and CSVW tabular data properties.
 type: object
 allOf:
-- $ref: https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/cdifProperties/cdifMandatory/schema.yaml
+- $ref: https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/cdifProperties/cdifCore/schema.yaml
 - $ref: https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/cdifProperties/cdifOptional/schema.yaml
 - type: object
   properties:
@@ -991,7 +991,7 @@ allOf:
       items:
         anyOf:
         - type: string
-        - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/creativeWork/schema.yaml
+        - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/creativeWork/schema.yaml
     schema:relatedLink:
       type: array
       description: Links to related resources at the product level
@@ -1047,9 +1047,9 @@ allOf:
             type: array
             description: Instruments used in the analysis
             items:
-              $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/instrument/schema.yaml
+              $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema.yaml
           schema:location:
-            $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/laboratory/schema.yaml
+            $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/laboratory/schema.yaml
           schema:mainEntity:
             type: array
             description: Samples analyzed
@@ -1226,7 +1226,7 @@ allOf:
       items:
         anyOf:
         - allOf:
-          - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/files/schema.yaml
+          - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/files/schema.yaml
           - type: object
             description: Single file distribution.
             properties:
@@ -1238,7 +1238,7 @@ allOf:
                   const: schema:DataDownload
                 minItems: 1
         - allOf:
-          - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/files/schema.yaml
+          - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/files/schema.yaml
           - type: object
             description: Archive file with parts.
             properties:
@@ -1286,7 +1286,7 @@ allOf:
                 description: Array describing the files in the zip archive.
                 items:
                   allOf:
-                  - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/files/schema.yaml
+                  - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/files/schema.yaml
                   - type: object
                     properties:
                       '@type':
@@ -1347,7 +1347,7 @@ allOf:
                 the same single-file or archive-with-hasPart structure.
               oneOf:
               - allOf:
-                - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/files/schema.yaml
+                - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/files/schema.yaml
                 - type: object
                   description: Single file result.
                   properties:
@@ -1359,7 +1359,7 @@ allOf:
                         const: schema:DataDownload
                       minItems: 1
               - allOf:
-                - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/files/schema.yaml
+                - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/files/schema.yaml
                 - type: object
                   description: Archive file result with parts.
                   properties:
@@ -1375,7 +1375,7 @@ allOf:
                       description: Files within the archive result.
                       items:
                         allOf:
-                        - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/adaProperties/files/schema.yaml
+                        - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/files/schema.yaml
                         - type: object
                           properties:
                             '@type':

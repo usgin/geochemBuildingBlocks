@@ -1,0 +1,75 @@
+
+
+{
+  "itemIdentifier": "ada.bbr.metadata.geochemProperties.spatialRegistration",
+  "$schema": "metaschema.yaml",
+  "name": "Spatial Registration Type",
+  "abstract": "Pixel coordinate system registration for images and maps. Defines properties: basemap, originX, originY, originZ, coordDef, coordUnits, pixelUnits, pixelScaleX, pixelScaleY, originLocation.",
+  "status": "under-development",
+  "dateTimeAddition": "2026-02-05T00:00:00Z",
+  "itemClass": "schema",
+  "register": "cdif-building-block-register",
+  "version": "0.1",
+  "dateOfLastChange": "2026-03-19",
+  "link": "https://github.com/usgin/geochemBuildingBlocks",
+  "maturity": "draft",
+  "scope": "unstable",
+  "tags": [
+    "ada",
+    "astromat",
+    "spatial"
+  ],
+  "sources": [
+    {
+      "title": "ADA Metadata Schema v3",
+      "link": "https://github.com/amds-ldeo/metadata"
+    }
+  ],
+  "shaclShapes": {
+    "ada.bbr.metadata.geochemProperties.spatialRegistration": [
+      "https://usgin.github.io/geochemBuildingBlocks/_sources/geochemProperties/spatialRegistration/rules.shacl"
+    ]
+  },
+  "ldContext": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/spatialRegistration/context.jsonld",
+  "schema": {
+    "application/yaml": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/spatialRegistration/schema.yaml",
+    "application/json": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/spatialRegistration/schema.json"
+  },
+  "sourceSchema": "https://usgin.github.io/geochemBuildingBlocks/_sources/geochemProperties/spatialRegistration/schema.yaml",
+  "sourceLdContext": "https://usgin.github.io/geochemBuildingBlocks/_sources/geochemProperties/spatialRegistration/context.jsonld",
+  "resolvedSchemaProperties": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/spatialRegistration/resolvedProperties.json",
+  "sourceFiles": "https://usgin.github.io/geochemBuildingBlocks/_sources/geochemProperties/spatialRegistration/",
+  "rdfData": [],
+  "validationPassed": true,
+  "testOutputs": "https://github.com/usgin/geochemBuildingBlocks/blob/main/build/tests/bbr/metadata/geochemProperties/spatialRegistration/",
+  "description": "# Spatial Registration Type\n\nDefines the pixel coordinate system registration for spatially registered images and maps. Includes origin coordinates (X, Y, Z), pixel scales, coordinate units, and the coordinate definition type (stage-defined or pixel-defined).\n",
+  "examples": [
+    {
+      "title": "Spatial Registration Example",
+      "content": "Pixel coordinate system registration for a spatially registered image map.",
+      "prefixes": {
+        "ada": "https://ada.astromat.org/metadata/"
+      },
+      "snippets": [
+        {
+          "language": "json",
+          "code": "{\n  \"ada:basemap\": \"basemap_BSE_001.tif\",\n  \"ada:originX\": 0.0,\n  \"ada:originY\": 0.0,\n  \"ada:originZ\": 0.0,\n  \"ada:coordDef\": \"pixel-defined\",\n  \"ada:coordUnits\": \"micrometer\",\n  \"ada:pixelUnits\": \"micrometer\",\n  \"ada:pixelScaleX\": 0.125,\n  \"ada:pixelScaleY\": 0.125,\n  \"ada:originLocation\": \"upperLeft\"\n}\n",
+          "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/geochemProperties/spatialRegistration/example_1_1.json"
+        },
+        {
+          "language": "jsonld",
+          "code": "{\n  \"@context\": [\n    {\n      \"ada\": \"https://ada.astromat.org/metadata/\"\n    },\n    \"https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/spatialRegistration/context.jsonld\"\n  ],\n  \"ada:basemap\": \"basemap_BSE_001.tif\",\n  \"ada:originX\": 0.0,\n  \"ada:originY\": 0.0,\n  \"ada:originZ\": 0.0,\n  \"ada:coordDef\": \"pixel-defined\",\n  \"ada:coordUnits\": \"micrometer\",\n  \"ada:pixelUnits\": \"micrometer\",\n  \"ada:pixelScaleX\": 0.125,\n  \"ada:pixelScaleY\": 0.125,\n  \"ada:originLocation\": \"upperLeft\"\n}",
+          "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/geochemProperties/spatialRegistration/example_1_1.jsonld"
+        },
+        {
+          "language": "ttl",
+          "code": "@prefix ada: <https://ada.astromat.org/metadata/> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] ada:basemap \"basemap_BSE_001.tif\" ;\n    ada:coordDef \"pixel-defined\" ;\n    ada:coordUnits \"micrometer\" ;\n    ada:originLocation \"upperLeft\" ;\n    ada:originX 0e+00 ;\n    ada:originY 0e+00 ;\n    ada:originZ 0e+00 ;\n    ada:pixelScaleX 1.25e-01 ;\n    ada:pixelScaleY 1.25e-01 ;\n    ada:pixelUnits \"micrometer\" .\n\n",
+          "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/geochemProperties/spatialRegistration/example_1_1.ttl"
+        }
+      ]
+    }
+  ],
+  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: Spatial Registration Type\ndescription: Defines pixel coordinate system registration including origin coordinates,\n  pixel scales, and coordinate definition type for spatially registered images and\n  maps.\ntype: object\nproperties:\n  ada:basemap:\n    type: string\n    description: link to appropriate basemap image map\n  ada:originX:\n    type: number\n  ada:originY:\n    type: number\n  ada:originZ:\n    type: number\n  ada:coordDef:\n    type: string\n    description: Whether coordinates are stage-defined or pixel-defined. If pixel-defined,\n      are coordinates from stage, upperleftPixel, or centerPixel.\n  ada:coordUnits:\n    type: string\n  ada:pixelUnits:\n    type: string\n  ada:pixelScaleX:\n    type: number\n  ada:pixelScaleY:\n    type: number\n  ada:originLocation:\n    type: string\n    description: 'The location of the origin pixel of an image. Range: upperLeft,\n      upperRight, lowerLeft, lowerRight, center'\nrequired:\n- ada:originX\n- ada:originY\n- ada:pixelScaleX\n- ada:pixelScaleY\n- ada:pixelUnits\n- ada:originLocation\n- ada:coordDef\nx-jsonld-prefixes:\n  ada: https://ada.astromat.org/metadata/\n",
+  "gitRepository": "https://github.com/usgin/geochemBuildingBlocks",
+  "gitPath": "_sources/geochemProperties/spatialRegistration"
+}

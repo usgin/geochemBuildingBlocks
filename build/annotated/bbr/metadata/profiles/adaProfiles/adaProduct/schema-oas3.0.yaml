@@ -255,16 +255,13 @@ x-defs:
           type: object
           properties:
             '@type':
-              anyOf:
-              - type: string
+              type: array
+              items:
+                type: string
+              contains:
                 enum:
                 - schema:LinkRole
-              - type: array
-                items:
-                  type: string
-                contains:
-                  enum:
-                  - schema:LinkRole
+              minItems: 1
             schema:linkRelationship:
               anyOf:
               - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaProduct/schema-oas3.0.yaml#/x-defs/metadataBuildingBlocks__sources_cdifProperties_cdifOptional_schema/$defs/DefinedTerm
@@ -273,16 +270,13 @@ x-defs:
               type: object
               properties:
                 '@type':
-                  anyOf:
-                  - type: string
+                  type: array
+                  items:
+                    type: string
+                  contains:
                     enum:
                     - schema:EntryPoint
-                  - type: array
-                    items:
-                      type: string
-                    contains:
-                      enum:
-                      - schema:EntryPoint
+                  minItems: 1
                 schema:encodingFormat:
                   type: string
                   description: registered MIME types are expected
@@ -686,8 +680,10 @@ x-defs:
       '@type':
         description: The type of action. Must be schema:Action or one of its subtypes.
         default: schema:Action
-        anyOf:
-        - type: string
+        type: array
+        items:
+          type: string
+        contains:
           enum:
           - schema:Action
           - schema:AssessAction
@@ -702,24 +698,7 @@ x-defs:
           - schema:SearchAction
           - schema:TransferAction
           - schema:UpdateAction
-        - type: array
-          items:
-            type: string
-          contains:
-            enum:
-            - schema:Action
-            - schema:AssessAction
-            - schema:ConsumeAction
-            - schema:ControlAction
-            - schema:CreateAction
-            - schema:DeleteAction
-            - schema:FindAction
-            - schema:InteractAction
-            - schema:MoveAction
-            - schema:PlayAction
-            - schema:SearchAction
-            - schema:TransferAction
-            - schema:UpdateAction
+        minItems: 1
       schema:name:
         type: string
         description: text label for the action
@@ -754,16 +733,13 @@ x-defs:
         properties:
           '@type':
             default: schema:EntryPoint
-            anyOf:
-            - type: string
+            type: array
+            items:
+              type: string
+            contains:
               enum:
               - schema:EntryPoint
-            - type: array
-              items:
-                type: string
-              contains:
-                enum:
-                - schema:EntryPoint
+            minItems: 1
           schema:description:
             type: string
           schema:urlTemplate:
@@ -840,16 +816,13 @@ x-defs:
               type: string
             '@type':
               default: schema:PropertyValueSpecification
-              anyOf:
-              - type: string
+              type: array
+              items:
+                type: string
+              contains:
                 enum:
                 - schema:PropertyValueSpecification
-              - type: array
-                items:
-                  type: string
-                contains:
-                  enum:
-                  - schema:PropertyValueSpecification
+              minItems: 1
             schema:valueName:
               type: string
             schema:description:
@@ -868,16 +841,13 @@ x-defs:
         properties:
           '@type':
             default: schema:DataFeed
-            anyOf:
-            - type: string
+            type: array
+            items:
+              type: string
+            contains:
               enum:
               - schema:DataFeed
-            - type: array
-              items:
-                type: string
-              contains:
-                enum:
-                - schema:DataFeed
+            minItems: 1
           schema:description:
             type: string
           schema:encodingFormat-input:
@@ -899,16 +869,13 @@ x-defs:
     properties:
       '@type':
         default: schema:CreativeWork
-        anyOf:
-        - type: string
+        type: array
+        items:
+          type: string
+        contains:
           enum:
           - schema:CreativeWork
-        - type: array
-          items:
-            type: string
-          contains:
-            enum:
-            - schema:CreativeWork
+        minItems: 1
       schema:name:
         type: string
       schema:description:
@@ -926,16 +893,13 @@ x-defs:
     type: object
     properties:
       '@type':
-        anyOf:
-        - type: string
+        type: array
+        items:
+          type: string
+        contains:
           enum:
           - schema:PropertyValue
-        - type: array
-          items:
-            type: string
-          contains:
-            enum:
-            - schema:PropertyValue
+        minItems: 1
       schema:propertyID:
         type: string
         description: In this context for the schema:PropertyValue, this field is an
@@ -965,16 +929,13 @@ x-defs:
     type: object
     properties:
       '@type':
-        anyOf:
-        - type: string
+        type: array
+        items:
+          type: string
+        contains:
           enum:
           - schema:DefinedTerm
-        - type: array
-          items:
-            type: string
-          contains:
-            enum:
-            - schema:DefinedTerm
+        minItems: 1
       schema:name:
         type: string
         description: text label for the term that is useful to human user
@@ -1041,16 +1002,13 @@ x-defs:
           a particular distribution/DataDownload.
         properties:
           '@type':
-            anyOf:
-            - type: string
+            type: array
+            items:
+              type: string
+            contains:
               enum:
               - spdx:Checksum
-            - type: array
-              items:
-                type: string
-              contains:
-                enum:
-                - spdx:Checksum
+            minItems: 1
           spdx:algorithm:
             type: string
           spdx:checksumValue:
@@ -1228,16 +1186,13 @@ x-defs:
               puts identifier here
           '@type':
             default: schema:DataCatalog
-            anyOf:
-            - type: string
+            type: array
+            items:
+              type: string
+            contains:
               enum:
               - schema:DataCatalog
-            - type: array
-              items:
-                type: string
-              contains:
-                enum:
-                - schema:DataCatalog
+            minItems: 1
           schema:name:
             type: string
           schema:url:
@@ -1271,16 +1226,13 @@ x-defs:
       '@id':
         type: string
       '@type':
-        anyOf:
-        - type: string
+        type: array
+        items:
+          type: string
+        contains:
           enum:
           - schema:Person
-        - type: array
-          items:
-            type: string
-          contains:
-            enum:
-            - schema:Person
+        minItems: 1
       schema:name:
         type: string
         description: string label for person that is meaningful for human users
@@ -1303,16 +1255,13 @@ x-defs:
         properties:
           '@type':
             default: schema:ContactPoint
-            anyOf:
-            - type: string
+            type: array
+            items:
+              type: string
+            contains:
               enum:
               - schema:ContactPoint
-            - type: array
-              items:
-                type: string
-              contains:
-                enum:
-                - schema:ContactPoint
+            minItems: 1
           schema:email:
             type: string
         description: restrict to email only. Schema.org allows telephone and postal
@@ -1345,16 +1294,13 @@ x-defs:
         type: string
       '@type':
         default: schema:Organization
-        anyOf:
-        - type: string
+        type: array
+        items:
+          type: string
+        contains:
           enum:
           - schema:Organization
-        - type: array
-          items:
-            type: string
-          contains:
-            enum:
-            - schema:Organization
+        minItems: 1
       schema:additionalType:
         type: array
         items:
@@ -1416,16 +1362,13 @@ x-defs:
     properties:
       '@type':
         default: schema:Role
-        anyOf:
-        - type: string
+        type: array
+        items:
+          type: string
+        contains:
           enum:
           - schema:Role
-        - type: array
-          items:
-            type: string
-          contains:
-            enum:
-            - schema:Role
+        minItems: 1
       schema:roleName:
         anyOf:
         - type: string
@@ -1455,16 +1398,13 @@ x-defs:
         description: URI identifier for this funding record
       '@type':
         default: schema:MonetaryGrant
-        anyOf:
-        - type: string
+        type: array
+        items:
+          type: string
+        contains:
           enum:
           - schema:MonetaryGrant
-        - type: array
-          items:
-            type: string
-          contains:
-            enum:
-            - schema:MonetaryGrant
+        minItems: 1
       schema:identifier:
         description: identifier for a particular grant
         allOf:
@@ -1631,16 +1571,13 @@ x-defs:
             type: string
             description: reference to a skos concept for the property
           '@type':
-            anyOf:
-            - type: string
+            type: array
+            items:
+              type: string
+            contains:
               enum:
               - schema:Property
-            - type: array
-              items:
-                type: string
-              contains:
-                enum:
-                - schema:Property
+            minItems: 1
           schema:name:
             anyOf:
             - type: string
@@ -1666,16 +1603,13 @@ x-defs:
     properties:
       '@type':
         default: schema:Place
-        anyOf:
-        - type: string
+        type: array
+        items:
+          type: string
+        contains:
           enum:
           - schema:Place
-        - type: array
-          items:
-            type: string
-          contains:
-            enum:
-            - schema:Place
+        minItems: 1
       schema:name:
         description: multiple place names or DefinedTerms that have a place name and
           URI for the location
@@ -1696,16 +1630,13 @@ x-defs:
           properties:
             '@type':
               default: schema:GeoCoordinates
-              anyOf:
-              - type: string
+              type: array
+              items:
+                type: string
+              contains:
                 enum:
                 - schema:GeoCoordinates
-              - type: array
-                items:
-                  type: string
-                contains:
-                  enum:
-                  - schema:GeoCoordinates
+              minItems: 1
             schema:latitude:
               type: number
               minimum: -90
@@ -1727,16 +1658,13 @@ x-defs:
           properties:
             '@type':
               default: schema:GeoShape
-              anyOf:
-              - type: string
+              type: array
+              items:
+                type: string
+              contains:
                 enum:
                 - schema:GeoShape
-              - type: array
-                items:
-                  type: string
-                contains:
-                  enum:
-                  - schema:GeoShape
+              minItems: 1
             schema:box:
               type: string
               description: A GeoShape box defines an area on the surface of the earth
@@ -1754,16 +1682,13 @@ x-defs:
           properties:
             '@type':
               default: schema:GeoShape
-              anyOf:
-              - type: string
+              type: array
+              items:
+                type: string
+              contains:
                 enum:
                 - schema:GeoShape
-              - type: array
-                items:
-                  type: string
-                contains:
-                  enum:
-                  - schema:GeoShape
+              minItems: 1
             schema:line:
               type: string
               description: 'A GeoShape box defines a curvilinear geometry as a string
@@ -1785,27 +1710,23 @@ x-defs:
           or contained within the specified bounding box.
         properties:
           '@type':
-            anyOf:
-            - type: string
-            - type: array
-              items:
-                type: string
+            type: array
+            items:
+              type: string
+            minItems: 1
             description: 'MUST be sf: (<http://www.opengis.net/ont/sf#>) SimpleFeature
               geometry type. See https://opengeospatial.github.io/ogc-geosparql/geosparql11/sf_geometries.ttl'
           geosparql:asWKT:
             type: object
             properties:
               '@type':
-                anyOf:
-                - type: string
+                type: array
+                items:
+                  type: string
+                contains:
                   enum:
                   - geosparql:wktLiteral
-                - type: array
-                  items:
-                    type: string
-                  contains:
-                    enum:
-                    - geosparql:wktLiteral
+                minItems: 1
               '@value':
                 type: string
                 description: a WKT geometry description string, e.g. 'POINT(-76 -18)'
@@ -1835,16 +1756,13 @@ x-defs:
       properties:
         '@type':
           default: time:ProperInterval
-          anyOf:
-          - type: string
+          type: array
+          items:
+            type: string
+          contains:
             enum:
             - time:ProperInterval
-          - type: array
-            items:
-              type: string
-            contains:
-              enum:
-              - time:ProperInterval
+          minItems: 1
         schema:description:
           type: string
           description: free text description of the temporal interval
@@ -1879,16 +1797,13 @@ x-defs:
           description: Must exactly match the specified @context object.
         '@type':
           default: time:ProperInterval
-          anyOf:
-          - type: string
+          type: array
+          items:
+            type: string
+          contains:
             enum:
             - time:ProperInterval
-          - type: array
-            items:
-              type: string
-            contains:
-              enum:
-              - time:ProperInterval
+          minItems: 1
         schema:description:
           type: string
           description: free text description of the temporal interval
@@ -1896,32 +1811,26 @@ x-defs:
           type: object
           properties:
             '@type':
-              anyOf:
-              - type: string
+              type: array
+              items:
+                type: string
+              contains:
                 enum:
                 - time:Instant
-              - type: array
-                items:
-                  type: string
-                contains:
-                  enum:
-                  - time:Instant
+              minItems: 1
             time:inTimePosition:
               $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaProduct/schema-oas3.0.yaml#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_temporalExtent_schema/$defs/timePosition_type
         time:hasEnd:
           type: object
           properties:
             '@type':
-              anyOf:
-              - type: string
+              type: array
+              items:
+                type: string
+              contains:
                 enum:
                 - time:Instant
-              - type: array
-                items:
-                  type: string
-                contains:
-                  enum:
-                  - time:Instant
+              minItems: 1
             time:inTimePosition:
               $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaProduct/schema-oas3.0.yaml#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_temporalExtent_schema/$defs/timePosition_type
     - type: string
@@ -1933,16 +1842,13 @@ x-defs:
         properties:
           '@type':
             default: time:TimePosition
-            anyOf:
-            - type: string
+            type: array
+            items:
+              type: string
+            contains:
               enum:
               - time:TimePosition
-            - type: array
-              items:
-                type: string
-              contains:
-                enum:
-                - time:TimePosition
+            minItems: 1
           time:hasTRS:
             type: string
             description: identifier for a temporal reference system; default is million
@@ -1997,16 +1903,13 @@ x-defs:
     type: object
     properties:
       '@type':
-        anyOf:
-        - type: string
+        type: array
+        items:
+          type: string
+        contains:
           enum:
           - dqv:QualityMeasurement
-        - type: array
-          items:
-            type: string
-          contains:
-            enum:
-            - dqv:QualityMeasurement
+        minItems: 1
       dqv:isMeasurementOf:
         description: specify the quality measure that is reported, by name, with an
           ID ref, or as a Defined Term

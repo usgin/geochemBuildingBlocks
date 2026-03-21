@@ -8,31 +8,32 @@
 @prefix cdifd: <https://cdif.org/validation/0.1/shacl#> .
 @base <https://www.ogc.org/rules/template/> .
 
-# Validates instrument nodes typed as nxs:BaseClass/NXinstrument.
-# JSON schema requires @type = ["schema:Thing", "prov:Entity", "nxs:BaseClass/NXinstrument"]
-# and defines schema:name, schema:description, schema:identifier, schema:additionalType.
-cdifd:instrumentShape
+# Validates ADA instrument nodes typed as schema:Product.
+# Extends core instrument BB with additionalType requirement.
+cdifd:adaInstrumentShape
     a sh:NodeShape ;
     sh:target [
         a sh:SPARQLTarget ;
         sh:select """
-            PREFIX nxs: <http://purl.org/nexusformat/definitions/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
             SELECT ?this
             WHERE {
-                ?this a <http://purl.org/nexusformat/definitions/BaseClass/NXinstrument> .
+                ?this a schema:Product .
+                ?activity prov:used ?this .
             }
         """ ;
-    ] ;
-    sh:property [
-        sh:path rdf:type ;
-        sh:hasValue prov:Entity ;
-        sh:message "Instrument nodes must also be typed as prov:Entity." ;
     ] ;
     sh:property [
         sh:path schema:name ;
         sh:minCount 1 ;
         sh:datatype xsd:string ;
-        sh:message "An instrument should have a name (schema:name)." ;
+        sh:message "An instrument must have a name (schema:name)." ;
     ] ;
-    sh:message "Instrument nodes (nxs:BaseClass/NXinstrument) should be typed as prov:Entity and have a name." ;
+    sh:property [
+        sh:path schema:identifier ;
+        sh:minCount 1 ;
+        sh:message "An instrument must have an identifier (schema:identifier)." ;
+    ] ;
+    sh:message "ADA instrument nodes (schema:Product used in prov:Activity) must have a name and identifier." ;
     .

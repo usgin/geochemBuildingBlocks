@@ -1,25 +1,24 @@
 $schema: https://json-schema.org/draft/2020-12/schema
-title: Analysis Instrument Type
+title: ADA Analysis Instrument
 description: >-
-  Analytical instrument definition combining NeXus NXinstrument base class
-  with PROV-O Entity. Used to describe instruments involved in analysis events.
-type: object
-properties:
-  "@type":
-    const:
-      - "schema:Thing"
-      - "prov:Entity"
-      - "nxs:BaseClass/NXinstrument"
-  "schema:additionalType":
-    description: >-
-      Identifier for an instrument or component in the analytical instrumentation,
-      e.g. GCMD instrument identifier.
-    type: array
-    items:
-      type: string
-  "schema:name":
-    type: string
-  "schema:description":
-    type: string
-  "schema:identifier":
-    type: string
+  ADA analytical instrument building block. Extends the core CDIF instrument
+  building block with NeXus NXinstrument classification via additionalType.
+  Instruments are typed as schema:Thing + schema:Product (from core) with
+  domain-specific types (e.g. nxs:BaseClass/NXinstrument, ada:AMSInstrument)
+  in additionalType.
+allOf:
+- $ref: https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/instrument/schema.yaml
+- type: object
+  properties:
+    'schema:additionalType':
+      description: >-
+        Domain-specific instrument type classifications. Should include
+        a NeXus base class (e.g. nxs:BaseClass/NXinstrument) and/or
+        technique-specific identifier (e.g. ada:AMSInstrument, GCMD
+        instrument identifier).
+      type: array
+      items:
+        type: string
+      minItems: 1
+  required:
+  - schema:additionalType

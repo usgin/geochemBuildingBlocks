@@ -1,17 +1,18 @@
-- title: Instrument Type Example
+- title: ADA Analysis Instrument Example
   content: |-
-    An analytical instrument described as a NeXus NXinstrument with PROV-O Entity typing.
+    An analytical instrument extending the core CDIF instrument building block.
+    Typed as schema:Thing + schema:Product with NeXus and technique-specific
+    classifications in additionalType.
   prefixes:
     schema: http://schema.org/
-    prov: http://www.w3.org/ns/prov#
     nxs: http://purl.org/nexusformat/definitions/
   snippets:
     - language: json
       code: |
         {
-          "@type": ["schema:Thing", "prov:Entity", "nxs:BaseClass/NXinstrument"],
+          "@type": ["schema:Thing", "schema:Product"],
           "schema:name": "JEOL JXA-8530F Electron Microprobe",
           "schema:description": "Field-emission electron probe microanalyzer with 5 wavelength-dispersive spectrometers",
           "schema:identifier": "https://www.wikidata.org/wiki/Q116917974",
-          "schema:additionalType": ["https://gcmd.earthdata.nasa.gov/kms/concept/76a947a3-4529-4fb7-87a7-f4b3a0a0de48"]
+          "schema:additionalType": ["nxs:BaseClass/NXinstrument", "https://gcmd.earthdata.nasa.gov/kms/concept/76a947a3-4529-4fb7-87a7-f4b3a0a0de48"]
         }

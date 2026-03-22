@@ -1,43 +1,31 @@
 $schema: https://json-schema.org/draft/2020-12/schema
 title: ADA SV-RUEC Product Profile
-description: >-
-  Technique-specific profile for Seismic Velocities and Rock Ultrasonic Elastic Constants (SV-RUEC) products.
-  Extends the base ADA product profile with constraints on valid SV-RUEC component
-  types.
+description: Technique-specific profile for Seismic Velocities and Rock Ultrasonic Elastic Constants (SV-RUEC) products. Extends
+  the base ADA product profile with constraints on valid SV-RUEC component types.
 allOf:
-  - $ref: ../adaProduct/schema.yaml
-  - type: object
-    properties:
-      "schema:additionalType":
-        description: >-
-          Must include a SV-RUEC product type identifier.
-        contains:
-          enum:
-            - "Seismic Velocities and Rock Ultrasonic Elastic Constants (SVRUEC)"
-            - "Seismic Velocities and Rock Ultrasonic Elastic Constants"
-      "schema:distribution":
-        items:
-          oneOf:
-            - required:
-                - "ada:componentType"
+- $ref: ../adaProduct/schema.yaml
+- type: object
+  properties:
+    schema:additionalType:
+      description: Must include a SV-RUEC product type identifier.
+      contains:
+        enum:
+        - Seismic Velocities and Rock Ultrasonic Elastic Constants (SVRUEC)
+        - Seismic Velocities and Rock Ultrasonic Elastic Constants
+    schema:distribution:
+      description: Distribution items for adaSVRUEC. Archive hasPart items must have ada:componentType from technique-specific
+        or universal values.
+      type: array
+      items:
+        type: object
+        properties:
+          schema:hasPart:
+            items:
+              type: object
               properties:
-                "ada:componentType":
+                ada:componentType:
                   anyOf:
-                    - properties:
-                        "@type":
-                          enum:
-                            - "ada:SVRUECTabular"
-                    - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType
-            - required:
-                - "schema:hasPart"
-              properties:
-                "schema:hasPart":
-                  items:
-                    properties:
-                      "ada:componentType":
-                        anyOf:
-                          - properties:
-                              "@type":
-                                enum:
-                                  - "ada:SVRUECTabular"
-                          - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType
+                  - enum:
+                    - ada:SVRUECTabular
+                  - ? ''
+                    : ../adaProduct/schema.yaml#//universalComponentType

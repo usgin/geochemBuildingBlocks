@@ -1,46 +1,33 @@
 $schema: https://json-schema.org/draft/2020-12/schema
 title: ADA RI-TOF-NGMS Product Profile
-description: >-
-  Technique-specific profile for Resonance Ionization Time-of-Flight Noble Gas Mass Spectrometry (RI-TOF-NGMS) products.
-  Extends the base ADA product profile with constraints on valid RI-TOF-NGMS component
-  types.
+description: Technique-specific profile for Resonance Ionization Time-of-Flight Noble Gas Mass Spectrometry (RI-TOF-NGMS)
+  products. Extends the base ADA product profile with constraints on valid RI-TOF-NGMS component types.
 allOf:
-  - $ref: ../adaProduct/schema.yaml
-  - type: object
-    properties:
-      "schema:additionalType":
-        description: >-
-          Must include a RI-TOF-NGMS product type identifier.
-        contains:
-          enum:
-            - "Resonance ionization time of flight noble gas mass spectrometry (RITOFNGMS) Spectra"
-            - "Resonance ionization time of flight noble gas mass spectrometry (RITOFNGMS) Processed"
-            - "Resonance ionization time of flight noble gas mass spectrometry"
-      "schema:distribution":
-        items:
-          oneOf:
-            - required:
-                - "ada:componentType"
+- $ref: ../adaProduct/schema.yaml
+- type: object
+  properties:
+    schema:additionalType:
+      description: Must include a RI-TOF-NGMS product type identifier.
+      contains:
+        enum:
+        - Resonance ionization time of flight noble gas mass spectrometry (RITOFNGMS) Spectra
+        - Resonance ionization time of flight noble gas mass spectrometry (RITOFNGMS) Processed
+        - Resonance ionization time of flight noble gas mass spectrometry
+    schema:distribution:
+      description: Distribution items for adaRITOFNGMS. Archive hasPart items must have ada:componentType from technique-specific
+        or universal values.
+      type: array
+      items:
+        type: object
+        properties:
+          schema:hasPart:
+            items:
+              type: object
               properties:
-                "ada:componentType":
+                ada:componentType:
                   anyOf:
-                    - properties:
-                        "@type":
-                          enum:
-                            - "ada:RITOFNGMSTabular"
-                            - "ada:RITOFNGMSCollection"
-                    - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType
-            - required:
-                - "schema:hasPart"
-              properties:
-                "schema:hasPart":
-                  items:
-                    properties:
-                      "ada:componentType":
-                        anyOf:
-                          - properties:
-                              "@type":
-                                enum:
-                                  - "ada:RITOFNGMSTabular"
-                                  - "ada:RITOFNGMSCollection"
-                          - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType
+                  - enum:
+                    - ada:RITOFNGMSTabular
+                    - ada:RITOFNGMSCollection
+                  - ? ''
+                    : ../adaProduct/schema.yaml#//universalComponentType

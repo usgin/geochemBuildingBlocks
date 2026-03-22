@@ -1,43 +1,31 @@
 $schema: https://json-schema.org/draft/2020-12/schema
 title: ADA EA-IRMS Product Profile
-description: >-
-  Technique-specific profile for Elemental Analysis - Isotope Ratio Mass Spectrometry (EA-IRMS) products.
-  Extends the base ADA product profile with constraints on valid EA-IRMS component
-  types and detailEAIRMS requirements.
+description: Technique-specific profile for Elemental Analysis - Isotope Ratio Mass Spectrometry (EA-IRMS) products. Extends
+  the base ADA product profile with constraints on valid EA-IRMS component types and detailEAIRMS requirements.
 allOf:
-  - $ref: ../adaProduct/schema.yaml
-  - type: object
-    properties:
-      "schema:additionalType":
-        description: >-
-          Must include a EA-IRMS product type identifier.
-        contains:
-          enum:
-            - "Elemental Analysis-Isotope Ratio Mass Spectrometry (EA-IRMS)"
-            - "Elemental analysis - isotope ratio mass spectrometry"
-      "schema:distribution":
-        items:
-          oneOf:
-            - required:
-                - "ada:componentType"
+- $ref: ../adaProduct/schema.yaml
+- type: object
+  properties:
+    schema:additionalType:
+      description: Must include a EA-IRMS product type identifier.
+      contains:
+        enum:
+        - Elemental Analysis-Isotope Ratio Mass Spectrometry (EA-IRMS)
+        - Elemental analysis - isotope ratio mass spectrometry
+    schema:distribution:
+      description: Distribution items for adaEAIRMS. Archive hasPart items must have ada:componentType from technique-specific
+        or universal values.
+      type: array
+      items:
+        type: object
+        properties:
+          schema:hasPart:
+            items:
+              type: object
               properties:
-                "ada:componentType":
+                ada:componentType:
                   anyOf:
-                    - properties:
-                        "@type":
-                          enum:
-                            - "ada:EAIRMSCollection"
-                    - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType
-            - required:
-                - "schema:hasPart"
-              properties:
-                "schema:hasPart":
-                  items:
-                    properties:
-                      "ada:componentType":
-                        anyOf:
-                          - properties:
-                              "@type":
-                                enum:
-                                  - "ada:EAIRMSCollection"
-                          - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType
+                  - enum:
+                    - ada:EAIRMSCollection
+                  - ? ''
+                    : ../adaProduct/schema.yaml#//universalComponentType

@@ -1,49 +1,35 @@
 $schema: https://json-schema.org/draft/2020-12/schema
 title: ADA ICP-OES Product Profile
-description: >-
-  Technique-specific profile for Inductively Coupled Plasma Optical Emission Spectrometry (ICP-OES) products.
-  Extends the base ADA product profile with constraints on valid ICP-OES component
-  types and detailICPOES requirements.
+description: Technique-specific profile for Inductively Coupled Plasma Optical Emission Spectrometry (ICP-OES) products. Extends
+  the base ADA product profile with constraints on valid ICP-OES component types and detailICPOES requirements.
 allOf:
-  - $ref: ../adaProduct/schema.yaml
-  - type: object
-    properties:
-      "schema:additionalType":
-        description: >-
-          Must include a ICP-OES product type identifier.
-        contains:
-          enum:
-            - "Inductively Coupled Plasma - Optical Emission Spectroscopy (ICPOES) Raw"
-            - "Inductively Coupled Plasma - Optical Emission Spectroscopy (ICPOES) Intermediate"
-            - "Inductively Coupled Plasma - Optical Emission Spectroscopy (ICPOES) Processed"
-            - "Inductively coupled plasma - optical emission spectrometry"
-      "schema:distribution":
-        items:
-          oneOf:
-            - required:
-                - "ada:componentType"
+- $ref: ../adaProduct/schema.yaml
+- type: object
+  properties:
+    schema:additionalType:
+      description: Must include a ICP-OES product type identifier.
+      contains:
+        enum:
+        - Inductively Coupled Plasma - Optical Emission Spectroscopy (ICPOES) Raw
+        - Inductively Coupled Plasma - Optical Emission Spectroscopy (ICPOES) Intermediate
+        - Inductively Coupled Plasma - Optical Emission Spectroscopy (ICPOES) Processed
+        - Inductively coupled plasma - optical emission spectrometry
+    schema:distribution:
+      description: Distribution items for adaICPOES. Archive hasPart items must have ada:componentType from technique-specific
+        or universal values.
+      type: array
+      items:
+        type: object
+        properties:
+          schema:hasPart:
+            items:
+              type: object
               properties:
-                "ada:componentType":
+                ada:componentType:
                   anyOf:
-                    - properties:
-                        "@type":
-                          enum:
-                            - "ada:ICPOESIntermediateTabular"
-                            - "ada:ICPOESProcessedTabular"
-                            - "ada:ICPOESRawTabular"
-                    - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType
-            - required:
-                - "schema:hasPart"
-              properties:
-                "schema:hasPart":
-                  items:
-                    properties:
-                      "ada:componentType":
-                        anyOf:
-                          - properties:
-                              "@type":
-                                enum:
-                                  - "ada:ICPOESIntermediateTabular"
-                                  - "ada:ICPOESProcessedTabular"
-                                  - "ada:ICPOESRawTabular"
-                          - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType
+                  - enum:
+                    - ada:ICPOESIntermediateTabular
+                    - ada:ICPOESProcessedTabular
+                    - ada:ICPOESRawTabular
+                  - ? ''
+                    : ../adaProduct/schema.yaml#//universalComponentType

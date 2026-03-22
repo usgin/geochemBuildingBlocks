@@ -1,41 +1,29 @@
 $schema: https://json-schema.org/draft/2020-12/schema
 title: ADA RAMAN Product Profile
-description: >-
-  Technique-specific profile for Raman Spectroscopy (RAMAN) products.
-  Extends the base ADA product profile with constraints on valid RAMAN component
-  types.
+description: Technique-specific profile for Raman Spectroscopy (RAMAN) products. Extends the base ADA product profile with
+  constraints on valid RAMAN component types.
 allOf:
-  - $ref: ../adaProduct/schema.yaml
-  - type: object
-    properties:
-      "schema:additionalType":
-        description: >-
-          Must include a RAMAN product type identifier.
-        contains:
-          const: "Raman vibrational spectroscopy"
-      "schema:distribution":
-        items:
-          oneOf:
-            - required:
-                - "ada:componentType"
+- $ref: ../adaProduct/schema.yaml
+- type: object
+  properties:
+    schema:additionalType:
+      description: Must include a RAMAN product type identifier.
+      contains:
+        const: Raman vibrational spectroscopy
+    schema:distribution:
+      description: Distribution items for adaRAMAN. Archive hasPart items must have ada:componentType from technique-specific
+        or universal values.
+      type: array
+      items:
+        type: object
+        properties:
+          schema:hasPart:
+            items:
+              type: object
               properties:
-                "ada:componentType":
+                ada:componentType:
                   anyOf:
-                    - properties:
-                        "@type":
-                          enum:
-                            - "ada:RAMANRawTabular"
-                    - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType
-            - required:
-                - "schema:hasPart"
-              properties:
-                "schema:hasPart":
-                  items:
-                    properties:
-                      "ada:componentType":
-                        anyOf:
-                          - properties:
-                              "@type":
-                                enum:
-                                  - "ada:RAMANRawTabular"
-                          - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType
+                  - enum:
+                    - ada:RAMANRawTabular
+                  - ? ''
+                    : ../adaProduct/schema.yaml#//universalComponentType

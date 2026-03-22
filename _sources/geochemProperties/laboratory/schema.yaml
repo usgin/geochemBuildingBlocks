@@ -1,18 +1,18 @@
 $schema: https://json-schema.org/draft/2020-12/schema
-title: Analysis Laboratory Type
+title: ADA Analysis Laboratory
 description: >-
-  Laboratory or facility definition combining NeXus NXsource with schema:Place.
-  Used to identify the location where analysis was performed.
-type: object
-properties:
-  "@type":
-    const:
-      - "schema:Place"
-      - "nxs:BaseClass/NXsource"
-  "schema:identifier":
-    type: string
-    format: uri
-  "schema:name":
-    type: string
-  "schema:alternateName":
-    type: string
+  ADA laboratory or facility building block. Extends the core CDIF spatialExtent
+  (schema:Place) with NeXus NXsource classification via additionalType.
+  Inherits place name, identifier, alternateName, geo coordinates, and
+  geosparql geometry from spatialExtent.
+allOf:
+- $ref: https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/spatialExtent/schema.yaml
+- type: object
+  properties:
+    'schema:additionalType':
+      type: array
+      items:
+        type: string
+      contains:
+        const: "nxs:BaseClass/NXsource"
+      description: Must include nxs:BaseClass/NXsource for NeXus facility classification.

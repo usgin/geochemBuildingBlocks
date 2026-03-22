@@ -1,46 +1,33 @@
 $schema: https://json-schema.org/draft/2020-12/schema
 title: ADA FTICR-MS Product Profile
-description: >-
-  Technique-specific profile for Fourier Transform Ion Cyclotron Resonance Mass Spectrometry (FTICR-MS) products.
-  Extends the base ADA product profile with constraints on valid FTICR-MS component
-  types.
+description: Technique-specific profile for Fourier Transform Ion Cyclotron Resonance Mass Spectrometry (FTICR-MS) products.
+  Extends the base ADA product profile with constraints on valid FTICR-MS component types.
 allOf:
-  - $ref: ../adaProduct/schema.yaml
-  - type: object
-    properties:
-      "schema:additionalType":
-        description: >-
-          Must include a FTICR-MS product type identifier.
-        contains:
-          enum:
-            - "Fourier Transform Ion Cyclotron Resonance Mass Spectrometry (FTICRMS) Cube"
-            - "Fourier Transform Ion Cyclotron Resonance Mass Spectrometry (FTICRMS) Tabular"
-            - "Fourier Transform Ion Cyclotron Resonance Mass Spectrometry"
-      "schema:distribution":
-        items:
-          oneOf:
-            - required:
-                - "ada:componentType"
+- $ref: ../adaProduct/schema.yaml
+- type: object
+  properties:
+    schema:additionalType:
+      description: Must include a FTICR-MS product type identifier.
+      contains:
+        enum:
+        - Fourier Transform Ion Cyclotron Resonance Mass Spectrometry (FTICRMS) Cube
+        - Fourier Transform Ion Cyclotron Resonance Mass Spectrometry (FTICRMS) Tabular
+        - Fourier Transform Ion Cyclotron Resonance Mass Spectrometry
+    schema:distribution:
+      description: Distribution items for adaFTICRMS. Archive hasPart items must have ada:componentType from technique-specific
+        or universal values.
+      type: array
+      items:
+        type: object
+        properties:
+          schema:hasPart:
+            items:
+              type: object
               properties:
-                "ada:componentType":
+                ada:componentType:
                   anyOf:
-                    - properties:
-                        "@type":
-                          enum:
-                            - "ada:FTICRMSTabular"
-                            - "ada:FTICRMSCube"
-                    - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType
-            - required:
-                - "schema:hasPart"
-              properties:
-                "schema:hasPart":
-                  items:
-                    properties:
-                      "ada:componentType":
-                        anyOf:
-                          - properties:
-                              "@type":
-                                enum:
-                                  - "ada:FTICRMSTabular"
-                                  - "ada:FTICRMSCube"
-                          - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType
+                  - enum:
+                    - ada:FTICRMSTabular
+                    - ada:FTICRMSCube
+                  - ? ''
+                    : ../adaProduct/schema.yaml#//universalComponentType

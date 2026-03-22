@@ -1,73 +1,48 @@
 $schema: https://json-schema.org/draft/2020-12/schema
 title: ADA SEM Product Profile
-description: >-
-  Technique-specific profile for Scanning Electron Microscopy (SEM) products.
-  Extends the base ADA product profile with constraints on valid SEM component
-  types.
+description: Technique-specific profile for Scanning Electron Microscopy (SEM) products. Extends the base ADA product profile
+  with constraints on valid SEM component types.
 allOf:
-  - $ref: ../adaProduct/schema.yaml
-  - type: object
-    properties:
-      "schema:additionalType":
-        description: >-
-          Must include a SEM product type identifier.
-        contains:
-          enum:
-            - "Scanning Electron Microscopy (SEM) Image"
-            - "Scanning Electron Microscopy Electron Backscatter Diffraction (SEMEBSD) Grain Image"
-            - "Scanning Electron Microscopy Energy Dispersive X-ray Spectroscopy (SEMEDS) image"
-            - "Scanning Electron Microscopy Energy Dispersive X-ray Spectroscopy (SEMEDS) Point Data"
-            - "Scanning Electron Microscopy High Resolution Cathodoluminescence (SEMHRCL) image"
-            - "Scanning electron microscopy"
-      "schema:distribution":
-        items:
-          oneOf:
-            - required:
-                - "ada:componentType"
+- $ref: ../adaProduct/schema.yaml
+- type: object
+  properties:
+    schema:additionalType:
+      description: Must include a SEM product type identifier.
+      contains:
+        enum:
+        - Scanning Electron Microscopy (SEM) Image
+        - Scanning Electron Microscopy Electron Backscatter Diffraction (SEMEBSD) Grain Image
+        - Scanning Electron Microscopy Energy Dispersive X-ray Spectroscopy (SEMEDS) image
+        - Scanning Electron Microscopy Energy Dispersive X-ray Spectroscopy (SEMEDS) Point Data
+        - Scanning Electron Microscopy High Resolution Cathodoluminescence (SEMHRCL) image
+        - Scanning electron microscopy
+    schema:distribution:
+      description: Distribution items for adaSEM. Archive hasPart items must have ada:componentType from technique-specific
+        or universal values.
+      type: array
+      items:
+        type: object
+        properties:
+          schema:hasPart:
+            items:
+              type: object
               properties:
-                "ada:componentType":
+                ada:componentType:
                   anyOf:
-                    - properties:
-                        "@type":
-                          enum:
-                            - "ada:SEMImageCollection"
-                            - "ada:SEMImageMap"
-                            - "ada:SEMEBSDGrainImage"
-                            - "ada:SEMEBSDGrainImageMap"
-                            - "ada:SEMEBSDGrainImageMapCube"
-                            - "ada:SEMEDSElementalMap"
-                            - "ada:SEMEDSElementalMaps"
-                            - "ada:SEMEDSElementalMapsCube"
-                            - "ada:SEMEDSPointData"
-                            - "ada:SEMEDSPointDataCollection"
-                            - "ada:SEMEDSPointDataCube"
-                            - "ada:SEMHRCLImage"
-                            - "ada:SEMHRCLMap"
-                            - "ada:SEMHRCLCube"
-                    - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType
-            - required:
-                - "schema:hasPart"
-              properties:
-                "schema:hasPart":
-                  items:
-                    properties:
-                      "ada:componentType":
-                        anyOf:
-                          - properties:
-                              "@type":
-                                enum:
-                                  - "ada:SEMImageCollection"
-                                  - "ada:SEMImageMap"
-                                  - "ada:SEMEBSDGrainImage"
-                                  - "ada:SEMEBSDGrainImageMap"
-                                  - "ada:SEMEBSDGrainImageMapCube"
-                                  - "ada:SEMEDSElementalMap"
-                                  - "ada:SEMEDSElementalMaps"
-                                  - "ada:SEMEDSElementalMapsCube"
-                                  - "ada:SEMEDSPointData"
-                                  - "ada:SEMEDSPointDataCollection"
-                                  - "ada:SEMEDSPointDataCube"
-                                  - "ada:SEMHRCLImage"
-                                  - "ada:SEMHRCLMap"
-                                  - "ada:SEMHRCLCube"
-                          - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType
+                  - enum:
+                    - ada:SEMImageCollection
+                    - ada:SEMImageMap
+                    - ada:SEMEBSDGrainImage
+                    - ada:SEMEBSDGrainImageMap
+                    - ada:SEMEBSDGrainImageMapCube
+                    - ada:SEMEDSElementalMap
+                    - ada:SEMEDSElementalMaps
+                    - ada:SEMEDSElementalMapsCube
+                    - ada:SEMEDSPointData
+                    - ada:SEMEDSPointDataCollection
+                    - ada:SEMEDSPointDataCube
+                    - ada:SEMHRCLImage
+                    - ada:SEMHRCLMap
+                    - ada:SEMHRCLCube
+                  - ? ''
+                    : ../adaProduct/schema.yaml#//universalComponentType

@@ -1,3 +1,3 @@
-# Analysis Laboratory Type
+# ADA Analysis Laboratory
 
-Defines the laboratory or facility where analysis was performed. Combines NeXus NXsource typing with schema:Place for location semantics. Supports URI-based identifiers for facility lookup.
+Extends the core CDIF [spatialExtent](https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/spatialExtent/) building block for ADA laboratory/facility descriptions. Adds `nxs:BaseClass/NXsource` classification via `schema:additionalType`. Inherits place name, identifier, alternateName, geo coordinates, and GeoSPARQL geometry from core spatialExtent.

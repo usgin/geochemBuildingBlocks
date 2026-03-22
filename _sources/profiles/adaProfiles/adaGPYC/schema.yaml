@@ -1,46 +1,33 @@
 $schema: https://json-schema.org/draft/2020-12/schema
 title: ADA GPYC Product Profile
-description: >-
-  Technique-specific profile for Gas Pycnometry (GPYC) products.
-  Extends the base ADA product profile with constraints on valid GPYC component
-  types.
+description: Technique-specific profile for Gas Pycnometry (GPYC) products. Extends the base ADA product profile with constraints
+  on valid GPYC component types.
 allOf:
-  - $ref: ../adaProduct/schema.yaml
-  - type: object
-    properties:
-      "schema:additionalType":
-        description: >-
-          Must include a GPYC product type identifier.
-        contains:
-          enum:
-            - "Gas Pycnometry (GPYC) Processed"
-            - "Gas Pycnometry (GPYC) Raw"
-            - "Gas pycnometry"
-      "schema:distribution":
-        items:
-          oneOf:
-            - required:
-                - "ada:componentType"
+- $ref: ../adaProduct/schema.yaml
+- type: object
+  properties:
+    schema:additionalType:
+      description: Must include a GPYC product type identifier.
+      contains:
+        enum:
+        - Gas Pycnometry (GPYC) Processed
+        - Gas Pycnometry (GPYC) Raw
+        - Gas pycnometry
+    schema:distribution:
+      description: Distribution items for adaGPYC. Archive hasPart items must have ada:componentType from technique-specific
+        or universal values.
+      type: array
+      items:
+        type: object
+        properties:
+          schema:hasPart:
+            items:
+              type: object
               properties:
-                "ada:componentType":
+                ada:componentType:
                   anyOf:
-                    - properties:
-                        "@type":
-                          enum:
-                            - "ada:GPYCProcessedTabular"
-                            - "ada:GPYCRawTabular"
-                    - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType
-            - required:
-                - "schema:hasPart"
-              properties:
-                "schema:hasPart":
-                  items:
-                    properties:
-                      "ada:componentType":
-                        anyOf:
-                          - properties:
-                              "@type":
-                                enum:
-                                  - "ada:GPYCProcessedTabular"
-                                  - "ada:GPYCRawTabular"
-                          - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType
+                  - enum:
+                    - ada:GPYCProcessedTabular
+                    - ada:GPYCRawTabular
+                  - ? ''
+                    : ../adaProduct/schema.yaml#//universalComponentType

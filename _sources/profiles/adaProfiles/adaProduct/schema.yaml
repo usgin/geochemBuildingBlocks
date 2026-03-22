@@ -10,7 +10,9 @@ description: >-
 type: object
 allOf:
   - $ref: https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/cdifProperties/cdifCore/schema.yaml
-  - $ref: https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/cdifProperties/cdifOptional/schema.yaml
+  - $ref: https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/cdifProperties/cdifDataDescription/schema.yaml
+  - $ref: https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/cdifProperties/cdifArchiveDistribution/schema.yaml
+  - $ref: https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/cdifProperties/cdifProvenance/schema.yaml
   - type: object
     properties:
       "@type":
@@ -113,16 +115,24 @@ allOf:
           type: object
           properties:
             "@type":
-              type: string
-              const: "schema:LinkRole"
+              type: array
+              items:
+                type: string
+              contains:
+                const: "schema:LinkRole"
+              minItems: 1
             "schema:linkRelationship":
               type: string
             "schema:target":
               type: object
               properties:
                 "@type":
-                  type: string
-                  const: "schema:EntryPoint"
+                  type: array
+                  items:
+                    type: string
+                  contains:
+                    const: "schema:EntryPoint"
+                  minItems: 1
                 "schema:encodingFormat":
                   type: string
                 "schema:name":
@@ -136,28 +146,24 @@ allOf:
         description: Text description of the measurement method
         properties:
           "@type":
-            const: "schema:DefinedTerm"
+            type: array
+            items:
+              type: string
+            contains:
+              const: "schema:DefinedTerm"
+            minItems: 1
           "schema:name":
             type: string
           "schema:identifier":
             type: string
       "prov:wasGeneratedBy":
+        description: >-
+          ADA analysis events. Extends cdifProvActivity (from cdifProvenance) with
+          ADA-specific instrument, laboratory, and sample properties.
         type: array
-        description: Analysis events that generated this product
         items:
           type: object
           properties:
-            "@type":
-              description: >-
-                Include 'schema:Action' and 'prov:Activity'
-              type: array
-              items:
-                type: string
-              allOf:
-                - contains:
-                    const: "schema:Action"
-                - contains:
-                    const: "prov:Activity"
             "prov:used":
               type: array
               description: Instruments used in the analysis
@@ -172,9 +178,15 @@ allOf:
                 type: object
                 properties:
                   "@type":
-                    const:
-                      - "schema:Thing"
-                      - "https://w3id.org/isample/vocabulary/materialsampleobjecttype/materialsample"
+                    type: array
+                    items:
+                      type: string
+                    allOf:
+                    - contains:
+                        const: "schema:Thing"
+                    - contains:
+                        const: "https://w3id.org/isample/vocabulary/materialsampleobjecttype/materialsample"
+                    minItems: 2
                   "schema:additionalType":
                     type: array
                     items:
@@ -183,73 +195,26 @@ allOf:
                     type: array
                     items:
                       type: string
-            "schema:identifier":
-              description: Identifier for the analysis event (sessionID)
-              type: string
             "schema:startDate":
               type: string
           required:
             - "prov:used"
       "schema:variableMeasured":
         description: >-
-          What does the dataset measure? Define the variables here at the conceptual
-          level; the physical implementation details are in the data structure.
-          Requires dual typing with schema:PropertyValue and cdi:InstanceVariable
-          per CDIF 2026.
+          ADA variable definitions. Extends cdifVariableMeasured (from cdifDataDescription)
+          with additional ADA properties. Requires description with minLength 10.
         type: array
         items:
           type: object
           properties:
-            "@id":
-              type: string
-              description: >-
-                Identifier for this variable, used to link from physical mappings
-                in distributions.
-            "@type":
-              type: array
-              items:
-                type: string
-                enum:
-                  - "schema:PropertyValue"
-                  - "cdi:InstanceVariable"
-              minItems: 2
             "schema:description":
               type: string
               minLength: 10
-            "schema:name":
-              description: The name as it typically appears in a dataset
-              type: string
             "schema:alternateName":
               type: array
               items:
                 type: string
                 description: Human intelligible name for variable that conveys semantics
-            "schema:propertyID":
-              description: Ideally a resolvable URI for a property concept
-              type: array
-              items:
-                anyOf:
-                  - type: string
-                  - type: object
-                    properties:
-                      "@id":
-                        type: string
-                  - type: object
-                    properties:
-                      "@type":
-                        type: string
-                        const: "schema:DefinedTerm"
-                      "schema:name":
-                        type: string
-                      "schema:identifier":
-                        type: object
-                      "schema:inDefinedTermSet":
-                        type: string
-                      "schema:termCode":
-                        type: string
-                    required:
-                      - "@type"
-                      - "schema:name"
             "schema:measurementTechnique":
               anyOf:
                 - type: string
@@ -260,8 +225,12 @@ allOf:
                 - type: object
                   properties:
                     "@type":
-                      type: string
-                      const: "schema:DefinedTerm"
+                      type: array
+                      items:
+                        type: string
+                      contains:
+                        const: "schema:DefinedTerm"
+                      minItems: 1
                     "schema:name":
                       type: string
                   required:
@@ -279,8 +248,12 @@ allOf:
                 - type: object
                   properties:
                     "@type":
-                      type: string
-                      const: "schema:DefinedTerm"
+                      type: array
+                      items:
+                        type: string
+                      contains:
+                        const: "schema:DefinedTerm"
+                      minItems: 1
                     "schema:name":
                       type: string
                   required:
@@ -293,252 +266,74 @@ allOf:
             "schema:url":
               type: string
               format: uri
-            "cdi:intendedDataType":
-              type: string
-            "cdi:role":
-              type: string
-              description: >-
-                The role of the variable: MeasureComponent, AttributeComponent,
-                DimensionComponent, IdentifierComponent.
-            "cdi:describedUnitOfMeasure":
-              type: object
-              properties:
-                "@type":
-                  type: string
-                  const: "schema:DefinedTerm"
-                "schema:name":
-                  type: string
-              required:
-                - "@type"
-                - "schema:name"
-            "cdi:simpleUnitOfMeasure":
-              type: string
-            "cdi:uses":
-              type: array
-              items:
-                anyOf:
-                  - type: string
-                  - type: object
-                    properties:
-                      "@id":
-                        type: string
-                  - type: object
-                    properties:
-                      "@type":
-                        type: string
-                        const: "schema:DefinedTerm"
-                      "schema:name":
-                        type: string
-                    required:
-                      - "@type"
-                      - "schema:name"
           required:
-            - "@id"
-            - "@type"
             - "schema:description"
-            - "schema:name"
-      "schema:distribution":
+      "schema:spatialCoverage":
+        description: Geographic extent of resource content.
         type: array
-        description: >-
-          Access options for the dataset. Each distribution item is expected to be
-          a single file or an archive containing multiple files described in hasPart.
         items:
-          anyOf:
-            - allOf:
-                - $ref: ../../../geochemProperties/files/schema.yaml
-                - type: object
-                  description: Single file distribution.
-                  properties:
-                    "@type":
-                      type: array
-                      items:
-                        type: string
-                      contains:
-                        const: "schema:DataDownload"
-                      minItems: 1
-            - allOf:
-                - $ref: ../../../geochemProperties/files/schema.yaml
-                - type: object
-                  description: Archive file with parts.
-                  properties:
-                    "@type":
-                      type: array
-                      items:
-                        type: string
-                      contains:
-                        const: "schema:DataDownload"
-                      minItems: 1
-                    "schema:provider":
-                      type: array
-                      description: Party who maintains this particular distribution option.
-                      items:
-                        anyOf:
-                          - type: object
-                            properties:
-                              "@type":
-                                type: string
-                                const: "schema:Person"
-                              "schema:name":
-                                type: string
-                            required:
-                              - "@type"
-                              - "schema:name"
-                          - type: object
-                            properties:
-                              "@type":
-                                type: string
-                                const: "schema:Organization"
-                                default: "schema:Organization"
-                              "schema:name":
-                                type: string
-                            required:
-                              - "@type"
-                              - "schema:name"
-                    "schema:additionalType":
-                      type: array
-                      description: "Identify the package scheme, e.g. NASA PDS bundle, RO-CRATE, Bagit"
-                      items:
-                        type: string
-                    "schema:hasPart":
-                      type: array
-                      description: >-
-                        Array describing the files in the zip archive.
-                      items:
-                        allOf:
-                          - $ref: ../../../geochemProperties/files/schema.yaml
-                          - type: object
-                            properties:
-                              "@type":
-                                type: array
-                                items:
-                                  type: string
-                                not:
-                                  contains:
-                                    const: "schema:DataDownload"
-            - type: object
-              description: >-
-                Web API distribution with file result. The API provides access
-                to data that can also be described as DataDownload file(s).
-              properties:
-                "@type":
-                  type: array
-                  items:
+          $ref: '#/$defs/SpatialExtent'
+      "schema:temporalCoverage":
+        description: Temporal extent of resource content.
+        type: array
+        items:
+          $ref: '#/$defs/TemporalExtent'
+      "dqv:hasQualityMeasurement":
+        description: Quality measurements reported to assess the resource.
+        type: array
+        items:
+          $ref: '#/$defs/QualityMeasure'
+      "schema:distribution":
+        description: >-
+          Distribution inherits from cdifCore (DataDownload, WebAPI) and
+          cdifArchiveDistribution (archive with hasPart). ADA file-type
+          classification uses ada:componentType on hasPart items.
+        type: array
+        items:
+          type: object
+          properties:
+            "schema:hasPart":
+              items:
+                type: object
+                properties:
+                  "ada:componentType":
                     type: string
-                    enum:
-                      - "schema:WebAPI"
-                  minItems: 1
-                "schema:name":
-                  type: string
-                "schema:description":
-                  type: string
-                "schema:serviceType":
-                  anyOf:
-                    - type: string
-                    - type: object
-                      properties:
-                        "@type":
-                          type: string
-                          const: "schema:DefinedTerm"
-                        "schema:name":
-                          type: string
-                      required:
-                        - "@type"
-                        - "schema:name"
-                "schema:documentation":
-                  oneOf:
-                    - type: string
-                    - type: object
-                      properties:
-                        "@type":
-                          type: string
-                          const: "schema:CreativeWork"
-                        "schema:name":
-                          type: string
-                        "schema:url":
-                          type: string
-                          format: uri
-                "schema:potentialAction":
-                  type: array
-                  description: Actions that can be invoked via the API.
-                  items:
-                    $ref: https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/action/schema.yaml
-                "schema:result":
-                  description: >-
-                    The file(s) that result from invoking this API. Reuses the
-                    same single-file or archive-with-hasPart structure.
-                  oneOf:
-                    - allOf:
-                        - $ref: ../../../geochemProperties/files/schema.yaml
-                        - type: object
-                          description: Single file result.
-                          properties:
-                            "@type":
-                              type: array
-                              items:
-                                type: string
-                              contains:
-                                const: "schema:DataDownload"
-                              minItems: 1
-                    - allOf:
-                        - $ref: ../../../geochemProperties/files/schema.yaml
-                        - type: object
-                          description: Archive file result with parts.
-                          properties:
-                            "@type":
-                              type: array
-                              items:
-                                type: string
-                              contains:
-                                const: "schema:DataDownload"
-                              minItems: 1
-                            "schema:hasPart":
-                              type: array
-                              description: Files within the archive result.
-                              items:
-                                allOf:
-                                  - $ref: ../../../geochemProperties/files/schema.yaml
-                                  - type: object
-                                    properties:
-                                      "@type":
-                                        type: array
-                                        items:
-                                          type: string
-                                        not:
-                                          contains:
-                                            const: "schema:DataDownload"
-              required:
-                - "@type"
-                - "schema:serviceType"
-                - "schema:potentialAction"
+                    description: >-
+                      ADA file type classification. Values are restricted by
+                      technique-specific profiles. Universal types (e.g.
+                      ada:calibrationFile, ada:report) are valid across all
+                      techniques.
 $defs:
+  SpatialExtent:
+    $ref: https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/spatialExtent/schema.yaml
+  TemporalExtent:
+    $ref: https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/temporalExtent/schema.yaml
+  QualityMeasure:
+    $ref: https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/qualityProperties/qualityMeasure/schema.yaml
   universalComponentType:
-    type: object
     description: >-
-      Supplement/supporting component types valid across all ADA techniques.
-    properties:
-      "@type":
-        enum:
-          - "ada:analysisLocation"
-          - "ada:annotatedImage"
-          - "ada:areaOfInterest"
-          - "ada:basemap"
-          - "ada:calibrationFile"
-          - "ada:code"
-          - "ada:contextPhotography"
-          - "ada:contextVideo"
-          - "ada:inputFile"
-          - "ada:instrumentMetadata"
-          - "ada:logFile"
-          - "ada:methodDescription"
-          - "ada:other"
-          - "ada:plot"
-          - "ada:processingMethod"
-          - "ada:quickLook"
-          - "ada:report"
-          - "ada:samplePreparation"
-          - "ada:shapefile"
-          - "ada:supplementalBasemap"
-          - "ada:supplementaryImage"
-          - "ada:worldFile"
-    required:
-      - "@type"
+      Component type values valid across all ADA techniques. Used in
+      ada:componentType on hasPart items.
+    enum:
+      - "ada:analysisLocation"
+      - "ada:annotatedImage"
+      - "ada:areaOfInterest"
+      - "ada:basemap"
+      - "ada:calibrationFile"
+      - "ada:code"
+      - "ada:contextPhotography"
+      - "ada:contextVideo"
+      - "ada:inputFile"
+      - "ada:instrumentMetadata"
+      - "ada:logFile"
+      - "ada:methodDescription"
+      - "ada:other"
+      - "ada:plot"
+      - "ada:processingMethod"
+      - "ada:quickLook"
+      - "ada:report"
+      - "ada:samplePreparation"
+      - "ada:shapefile"
+      - "ada:supplementalBasemap"
+      - "ada:supplementaryImage"
+      - "ada:worldFile"

@@ -1,45 +1,32 @@
 $schema: https://json-schema.org/draft/2020-12/schema
 title: ADA AMS Product Profile
-description: >-
-  Technique-specific profile for Accelerator Mass Spectrometry (AMS) products.
-  Extends the base ADA product profile with constraints on valid AMS component
-  types.
+description: Technique-specific profile for Accelerator Mass Spectrometry (AMS) products. Extends the base ADA product profile
+  with constraints on valid AMS component types.
 allOf:
-  - $ref: ../adaProduct/schema.yaml
-  - type: object
-    properties:
-      "schema:additionalType":
-        description: >-
-          Must include a AMS product type identifier.
-        contains:
-          enum:
-            - "Accelerator Mass Spectrometry (AMS)"
-            - "Accelerator Mass Spectrometry"
-      "schema:distribution":
-        items:
-          oneOf:
-            - required:
-                - "ada:componentType"
+- $ref: ../adaProduct/schema.yaml
+- type: object
+  properties:
+    schema:additionalType:
+      description: Must include a AMS product type identifier.
+      contains:
+        enum:
+        - Accelerator Mass Spectrometry (AMS)
+        - Accelerator Mass Spectrometry
+    schema:distribution:
+      description: Distribution items for adaAMS. Archive hasPart items must have ada:componentType from technique-specific
+        or universal values.
+      type: array
+      items:
+        type: object
+        properties:
+          schema:hasPart:
+            items:
+              type: object
               properties:
-                "ada:componentType":
+                ada:componentType:
                   anyOf:
-                    - properties:
-                        "@type":
-                          enum:
-                            - "ada:AMSRawData"
-                            - "ada:AMSProcessedData"
-                    - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType
-            - required:
-                - "schema:hasPart"
-              properties:
-                "schema:hasPart":
-                  items:
-                    properties:
-                      "ada:componentType":
-                        anyOf:
-                          - properties:
-                              "@type":
-                                enum:
-                                  - "ada:AMSRawData"
-                                  - "ada:AMSProcessedData"
-                          - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType
+                  - enum:
+                    - ada:AMSRawData
+                    - ada:AMSProcessedData
+                  - ? ''
+                    : ../adaProduct/schema.yaml#//universalComponentType

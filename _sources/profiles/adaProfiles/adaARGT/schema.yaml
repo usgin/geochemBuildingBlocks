@@ -1,45 +1,32 @@
 $schema: https://json-schema.org/draft/2020-12/schema
 title: ADA ARGT Product Profile
-description: >-
-  Technique-specific profile for Argon Geochronology and Thermochronology (ARGT) products.
-  Extends the base ADA product profile with constraints on valid ARGT component
-  types and detailARGT requirements.
+description: Technique-specific profile for Argon Geochronology and Thermochronology (ARGT) products. Extends the base ADA
+  product profile with constraints on valid ARGT component types and detailARGT requirements.
 allOf:
-  - $ref: ../adaProduct/schema.yaml
-  - type: object
-    properties:
-      "schema:additionalType":
-        description: >-
-          Must include a ARGT product type identifier.
-        contains:
-          enum:
-            - "40Ar/39Ar Geochronology and Thermochronology (ARGT)"
-            - "40Ar/39Ar geochronology and thermochronology"
-      "schema:distribution":
-        items:
-          oneOf:
-            - required:
-                - "ada:componentType"
+- $ref: ../adaProduct/schema.yaml
+- type: object
+  properties:
+    schema:additionalType:
+      description: Must include a ARGT product type identifier.
+      contains:
+        enum:
+        - 40Ar/39Ar Geochronology and Thermochronology (ARGT)
+        - 40Ar/39Ar geochronology and thermochronology
+    schema:distribution:
+      description: Distribution items for adaARGT. Archive hasPart items must have ada:componentType from technique-specific
+        or universal values.
+      type: array
+      items:
+        type: object
+        properties:
+          schema:hasPart:
+            items:
+              type: object
               properties:
-                "ada:componentType":
+                ada:componentType:
                   anyOf:
-                    - properties:
-                        "@type":
-                          enum:
-                            - "ada:ARGTDocument"
-                            - "ada:ARGTCollection"
-                    - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType
-            - required:
-                - "schema:hasPart"
-              properties:
-                "schema:hasPart":
-                  items:
-                    properties:
-                      "ada:componentType":
-                        anyOf:
-                          - properties:
-                              "@type":
-                                enum:
-                                  - "ada:ARGTDocument"
-                                  - "ada:ARGTCollection"
-                          - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType
+                  - enum:
+                    - ada:ARGTDocument
+                    - ada:ARGTCollection
+                  - ? ''
+                    : ../adaProduct/schema.yaml#//universalComponentType

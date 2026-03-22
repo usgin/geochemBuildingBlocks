@@ -1,43 +1,31 @@
 $schema: https://json-schema.org/draft/2020-12/schema
 title: ADA XCT Product Profile
-description: >-
-  Technique-specific profile for X-ray Computed Tomography (XCT) products.
-  Extends the base ADA product profile with constraints on valid XCT component
-  types and detailXCT requirements.
+description: Technique-specific profile for X-ray Computed Tomography (XCT) products. Extends the base ADA product profile
+  with constraints on valid XCT component types and detailXCT requirements.
 allOf:
-  - $ref: ../adaProduct/schema.yaml
-  - type: object
-    properties:
-      "schema:additionalType":
-        description: >-
-          Must include a XCT product type identifier.
-        contains:
-          enum:
-            - "X-ray Computed Tomography (XCT) Image Collection"
-            - "X-ray computed tomography"
-      "schema:distribution":
-        items:
-          oneOf:
-            - required:
-                - "ada:componentType"
+- $ref: ../adaProduct/schema.yaml
+- type: object
+  properties:
+    schema:additionalType:
+      description: Must include a XCT product type identifier.
+      contains:
+        enum:
+        - X-ray Computed Tomography (XCT) Image Collection
+        - X-ray computed tomography
+    schema:distribution:
+      description: Distribution items for adaXCT. Archive hasPart items must have ada:componentType from technique-specific
+        or universal values.
+      type: array
+      items:
+        type: object
+        properties:
+          schema:hasPart:
+            items:
+              type: object
               properties:
-                "ada:componentType":
+                ada:componentType:
                   anyOf:
-                    - properties:
-                        "@type":
-                          enum:
-                            - "ada:XCTImageCollection"
-                    - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType
-            - required:
-                - "schema:hasPart"
-              properties:
-                "schema:hasPart":
-                  items:
-                    properties:
-                      "ada:componentType":
-                        anyOf:
-                          - properties:
-                              "@type":
-                                enum:
-                                  - "ada:XCTImageCollection"
-                          - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType
+                  - enum:
+                    - ada:XCTImageCollection
+                  - ? ''
+                    : ../adaProduct/schema.yaml#//universalComponentType

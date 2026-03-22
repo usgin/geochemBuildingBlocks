@@ -1,45 +1,32 @@
 $schema: https://json-schema.org/draft/2020-12/schema
 title: ADA L2MS Product Profile
-description: >-
-  Technique-specific profile for Two-Step Laser Mass Spectrometry (L2MS) products.
-  Extends the base ADA product profile with constraints on valid L2MS component
-  types and detailL2MS requirements.
+description: Technique-specific profile for Two-Step Laser Mass Spectrometry (L2MS) products. Extends the base ADA product
+  profile with constraints on valid L2MS component types and detailL2MS requirements.
 allOf:
-  - $ref: ../adaProduct/schema.yaml
-  - type: object
-    properties:
-      "schema:additionalType":
-        description: >-
-          Must include a L2MS product type identifier.
-        contains:
-          enum:
-            - "Microprobe Two-Step Laser Mass Spectrometry (L2MS)"
-            - "Microprobe Two-Step Laser Mass Spectrometry"
-      "schema:distribution":
-        items:
-          oneOf:
-            - required:
-                - "ada:componentType"
+- $ref: ../adaProduct/schema.yaml
+- type: object
+  properties:
+    schema:additionalType:
+      description: Must include a L2MS product type identifier.
+      contains:
+        enum:
+        - Microprobe Two-Step Laser Mass Spectrometry (L2MS)
+        - Microprobe Two-Step Laser Mass Spectrometry
+    schema:distribution:
+      description: Distribution items for adaL2MS. Archive hasPart items must have ada:componentType from technique-specific
+        or universal values.
+      type: array
+      items:
+        type: object
+        properties:
+          schema:hasPart:
+            items:
+              type: object
               properties:
-                "ada:componentType":
+                ada:componentType:
                   anyOf:
-                    - properties:
-                        "@type":
-                          enum:
-                            - "ada:L2MSCube"
-                            - "ada:L2MSOverviewImage"
-                    - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType
-            - required:
-                - "schema:hasPart"
-              properties:
-                "schema:hasPart":
-                  items:
-                    properties:
-                      "ada:componentType":
-                        anyOf:
-                          - properties:
-                              "@type":
-                                enum:
-                                  - "ada:L2MSCube"
-                                  - "ada:L2MSOverviewImage"
-                          - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType
+                  - enum:
+                    - ada:L2MSCube
+                    - ada:L2MSOverviewImage
+                  - ? ''
+                    : ../adaProduct/schema.yaml#//universalComponentType

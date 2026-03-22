@@ -1,45 +1,32 @@
 $schema: https://json-schema.org/draft/2020-12/schema
 title: ADA AIVA Product Profile
-description: >-
-  Technique-specific profile for AI-driven Visual Analysis (AIVA) products.
-  Extends the base ADA product profile with constraints on valid AIVA component
-  types.
+description: Technique-specific profile for AI-driven Visual Analysis (AIVA) products. Extends the base ADA product profile
+  with constraints on valid AIVA component types.
 allOf:
-  - $ref: ../adaProduct/schema.yaml
-  - type: object
-    properties:
-      "schema:additionalType":
-        description: >-
-          Must include a AIVA product type identifier.
-        contains:
-          enum:
-            - "Advanced Imaging and Visualization of Astromaterials (AIVA)"
-            - "Advanced Imaging and Visualization of Astromaterials"
-      "schema:distribution":
-        items:
-          oneOf:
-            - required:
-                - "ada:componentType"
+- $ref: ../adaProduct/schema.yaml
+- type: object
+  properties:
+    schema:additionalType:
+      description: Must include a AIVA product type identifier.
+      contains:
+        enum:
+        - Advanced Imaging and Visualization of Astromaterials (AIVA)
+        - Advanced Imaging and Visualization of Astromaterials
+    schema:distribution:
+      description: Distribution items for adaAIVA. Archive hasPart items must have ada:componentType from technique-specific
+        or universal values.
+      type: array
+      items:
+        type: object
+        properties:
+          schema:hasPart:
+            items:
+              type: object
               properties:
-                "ada:componentType":
+                ada:componentType:
                   anyOf:
-                    - properties:
-                        "@type":
-                          enum:
-                            - "ada:AIVAImage"
-                            - "ada:AIVAImageCollection"
-                    - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType
-            - required:
-                - "schema:hasPart"
-              properties:
-                "schema:hasPart":
-                  items:
-                    properties:
-                      "ada:componentType":
-                        anyOf:
-                          - properties:
-                              "@type":
-                                enum:
-                                  - "ada:AIVAImage"
-                                  - "ada:AIVAImageCollection"
-                          - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType
+                  - enum:
+                    - ada:AIVAImage
+                    - ada:AIVAImageCollection
+                  - ? ''
+                    : ../adaProduct/schema.yaml#//universalComponentType

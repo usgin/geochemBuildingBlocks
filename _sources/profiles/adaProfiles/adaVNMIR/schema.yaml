@@ -1,51 +1,36 @@
 $schema: https://json-schema.org/draft/2020-12/schema
 title: ADA VNMIR Product Profile
-description: >-
-  Technique-specific profile for Very-Near Mid-Infrared (VNMIR/FTIR) spectroscopy
-  products. Extends the base ADA product profile with constraints on valid VNMIR
-  component types and vnmir_detail requirements.
+description: Technique-specific profile for Very-Near Mid-Infrared (VNMIR/FTIR) spectroscopy products. Extends the base ADA
+  product profile with constraints on valid VNMIR component types and vnmir_detail requirements.
 allOf:
-  - $ref: ../adaProduct/schema.yaml
-  - type: object
-    properties:
-      "schema:additionalType":
-        description: >-
-          Must include a VNMIR product type identifier.
-        contains:
-          enum:
-            - "Visible, near-infrared, and mid-infrared Spectroscopy (VNMIR) Point"
-            - "Visible, near-infrared, and mid-infrared Spectroscopy (VNMIR) Overview Image"
-            - "Visible, near-infrared, and mid-infrared Spectroscopy (VNMIR) Spectral Map"
-            - "Visible, near-, and mid-infrared spectroscopy"
-      "schema:distribution":
-        items:
-          oneOf:
-            - required:
-                - "ada:componentType"
+- $ref: ../adaProduct/schema.yaml
+- type: object
+  properties:
+    schema:additionalType:
+      description: Must include a VNMIR product type identifier.
+      contains:
+        enum:
+        - Visible, near-infrared, and mid-infrared Spectroscopy (VNMIR) Point
+        - Visible, near-infrared, and mid-infrared Spectroscopy (VNMIR) Overview Image
+        - Visible, near-infrared, and mid-infrared Spectroscopy (VNMIR) Spectral Map
+        - Visible, near-, and mid-infrared spectroscopy
+    schema:distribution:
+      description: Distribution items for adaVNMIR. Archive hasPart items must have ada:componentType from technique-specific
+        or universal values.
+      type: array
+      items:
+        type: object
+        properties:
+          schema:hasPart:
+            items:
+              type: object
               properties:
-                "ada:componentType":
+                ada:componentType:
                   anyOf:
-                    - properties:
-                        "@type":
-                          enum:
-                            - "ada:VNMIRSpectralPoint"
-                            - "ada:VNMIROverviewImage"
-                            - "ada:VNMIRSpectralMap"
-                            - "ada:VNMIRSpectraPlot"
-                    - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType
-            - required:
-                - "schema:hasPart"
-              properties:
-                "schema:hasPart":
-                  items:
-                    properties:
-                      "ada:componentType":
-                        anyOf:
-                          - properties:
-                              "@type":
-                                enum:
-                                  - "ada:VNMIRSpectralPoint"
-                                  - "ada:VNMIROverviewImage"
-                                  - "ada:VNMIRSpectralMap"
-                                  - "ada:VNMIRSpectraPlot"
-                          - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType
+                  - enum:
+                    - ada:VNMIRSpectralPoint
+                    - ada:VNMIROverviewImage
+                    - ada:VNMIRSpectralMap
+                    - ada:VNMIRSpectraPlot
+                  - ? ''
+                    : ../adaProduct/schema.yaml#//universalComponentType

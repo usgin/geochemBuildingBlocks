@@ -1,56 +1,39 @@
 $schema: https://json-schema.org/draft/2020-12/schema
 title: ADA EMPA Product Profile
-description: >-
-  Technique-specific profile for Electron Microprobe Analysis (EMPA) products.
-  Extends the base ADA product profile with constraints on valid EMPA component
-  types and empa_detail requirements.
+description: Technique-specific profile for Electron Microprobe Analysis (EMPA) products. Extends the base ADA product profile
+  with constraints on valid EMPA component types and empa_detail requirements.
 allOf:
-  - $ref: ../adaProduct/schema.yaml
-  - type: object
-    properties:
-      "schema:additionalType":
-        description: >-
-          Must include an EMPA product type identifier.
-        contains:
-          enum:
-            - "Electron Microprobe Analysis (EMPA) Collection"
-            - "Electron Microprobe Analysis Image (EMPA)"
-            - "Electron Microprobe Analysis Quantitative Elemental Abundances (EMPAQEA)"
-            - "Electron Microprobe Analysis (EMPA)"
-            - "Electron microprobe analysis"
-      "schema:distribution":
-        items:
-          oneOf:
-            - required:
-                - "ada:componentType"
+- $ref: ../adaProduct/schema.yaml
+- type: object
+  properties:
+    schema:additionalType:
+      description: Must include an EMPA product type identifier.
+      contains:
+        enum:
+        - Electron Microprobe Analysis (EMPA) Collection
+        - Electron Microprobe Analysis Image (EMPA)
+        - Electron Microprobe Analysis Quantitative Elemental Abundances (EMPAQEA)
+        - Electron Microprobe Analysis (EMPA)
+        - Electron microprobe analysis
+    schema:distribution:
+      description: Distribution items for adaEMPA. Archive hasPart items must have ada:componentType from technique-specific
+        or universal values.
+      type: array
+      items:
+        type: object
+        properties:
+          schema:hasPart:
+            items:
+              type: object
               properties:
-                "ada:componentType":
+                ada:componentType:
                   anyOf:
-                    - properties:
-                        "@type":
-                          enum:
-                            - "ada:EMPAImageMap"
-                            - "ada:EMPAImage"
-                            - "ada:EMPAQEATabular"
-                            - "ada:EMPAImageCollection"
-                            - "ada:EMPAESPCTabular"
-                            - "ada:EMPAESPCPlot"
-                    - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType
-            - required:
-                - "schema:hasPart"
-              properties:
-                "schema:hasPart":
-                  items:
-                    properties:
-                      "ada:componentType":
-                        anyOf:
-                          - properties:
-                              "@type":
-                                enum:
-                                  - "ada:EMPAImageMap"
-                                  - "ada:EMPAImage"
-                                  - "ada:EMPAQEATabular"
-                                  - "ada:EMPAImageCollection"
-                                  - "ada:EMPAESPCTabular"
-                                  - "ada:EMPAESPCPlot"
-                          - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType
+                  - enum:
+                    - ada:EMPAImageMap
+                    - ada:EMPAImage
+                    - ada:EMPAQEATabular
+                    - ada:EMPAImageCollection
+                    - ada:EMPAESPCTabular
+                    - ada:EMPAESPCPlot
+                  - ? ''
+                    : ../adaProduct/schema.yaml#//universalComponentType

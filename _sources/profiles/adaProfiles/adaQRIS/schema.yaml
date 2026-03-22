@@ -1,47 +1,33 @@
 $schema: https://json-schema.org/draft/2020-12/schema
 title: ADA QRIS Product Profile
-description: >-
-  Technique-specific profile for Quantitative Reflectance Imaging Spectroscopy (QRIS) products.
-  Extends the base ADA product profile with constraints on valid QRIS component
-  types and detailQRIS requirements.
+description: Technique-specific profile for Quantitative Reflectance Imaging Spectroscopy (QRIS) products. Extends the base
+  ADA product profile with constraints on valid QRIS component types and detailQRIS requirements.
 allOf:
-  - $ref: ../adaProduct/schema.yaml
-  - type: object
-    properties:
-      "schema:additionalType":
-        description: >-
-          Must include a QRIS product type identifier.
-        contains:
-          enum:
-            - "Quantitative Reflective Imaging System (QRIS)"
-            - "Quantitative Reflective Imaging System"
-      "schema:distribution":
-        items:
-          oneOf:
-            - required:
-                - "ada:componentType"
+- $ref: ../adaProduct/schema.yaml
+- type: object
+  properties:
+    schema:additionalType:
+      description: Must include a QRIS product type identifier.
+      contains:
+        enum:
+        - Quantitative Reflective Imaging System (QRIS)
+        - Quantitative Reflective Imaging System
+    schema:distribution:
+      description: Distribution items for adaQRIS. Archive hasPart items must have ada:componentType from technique-specific
+        or universal values.
+      type: array
+      items:
+        type: object
+        properties:
+          schema:hasPart:
+            items:
+              type: object
               properties:
-                "ada:componentType":
+                ada:componentType:
                   anyOf:
-                    - properties:
-                        "@type":
-                          enum:
-                            - "ada:QRISCalibratedCollection"
-                            - "ada:QRISRawCollection"
-                            - "ada:QRISCalibrationFile"
-                    - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType
-            - required:
-                - "schema:hasPart"
-              properties:
-                "schema:hasPart":
-                  items:
-                    properties:
-                      "ada:componentType":
-                        anyOf:
-                          - properties:
-                              "@type":
-                                enum:
-                                  - "ada:QRISCalibratedCollection"
-                                  - "ada:QRISRawCollection"
-                                  - "ada:QRISCalibrationFile"
-                          - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType
+                  - enum:
+                    - ada:QRISCalibratedCollection
+                    - ada:QRISRawCollection
+                    - ada:QRISCalibrationFile
+                  - ? ''
+                    : ../adaProduct/schema.yaml#//universalComponentType

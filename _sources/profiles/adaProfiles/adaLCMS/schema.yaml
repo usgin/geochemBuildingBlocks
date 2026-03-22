@@ -1,45 +1,32 @@
 $schema: https://json-schema.org/draft/2020-12/schema
 title: ADA LC-MS Product Profile
-description: >-
-  Technique-specific profile for Liquid Chromatography Mass Spectrometry (LC-MS) products.
-  Extends the base ADA product profile with constraints on valid LC-MS component
-  types.
+description: Technique-specific profile for Liquid Chromatography Mass Spectrometry (LC-MS) products. Extends the base ADA
+  product profile with constraints on valid LC-MS component types.
 allOf:
-  - $ref: ../adaProduct/schema.yaml
-  - type: object
-    properties:
-      "schema:additionalType":
-        description: >-
-          Must include a LC-MS product type identifier.
-        contains:
-          enum:
-            - "Liquid Chromatography - Mass Spectrometry (LCMS) Collection"
-            - "Liquid chromatography-mass spectrometry"
-      "schema:distribution":
-        items:
-          oneOf:
-            - required:
-                - "ada:componentType"
+- $ref: ../adaProduct/schema.yaml
+- type: object
+  properties:
+    schema:additionalType:
+      description: Must include a LC-MS product type identifier.
+      contains:
+        enum:
+        - Liquid Chromatography - Mass Spectrometry (LCMS) Collection
+        - Liquid chromatography-mass spectrometry
+    schema:distribution:
+      description: Distribution items for adaLCMS. Archive hasPart items must have ada:componentType from technique-specific
+        or universal values.
+      type: array
+      items:
+        type: object
+        properties:
+          schema:hasPart:
+            items:
+              type: object
               properties:
-                "ada:componentType":
+                ada:componentType:
                   anyOf:
-                    - properties:
-                        "@type":
-                          enum:
-                            - "ada:LCMSCollection"
-                            - "ada:LCMSMSCollection"
-                    - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType
-            - required:
-                - "schema:hasPart"
-              properties:
-                "schema:hasPart":
-                  items:
-                    properties:
-                      "ada:componentType":
-                        anyOf:
-                          - properties:
-                              "@type":
-                                enum:
-                                  - "ada:LCMSCollection"
-                                  - "ada:LCMSMSCollection"
-                          - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType
+                  - enum:
+                    - ada:LCMSCollection
+                    - ada:LCMSMSCollection
+                  - ? ''
+                    : ../adaProduct/schema.yaml#//universalComponentType

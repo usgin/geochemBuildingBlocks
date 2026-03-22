@@ -1,46 +1,33 @@
 $schema: https://json-schema.org/draft/2020-12/schema
 title: ADA LAF Product Profile
-description: >-
-  Technique-specific profile for Laser-Assisted Fluorination (LAF) products.
-  Extends the base ADA product profile with constraints on valid LAF component
-  types and detailLAF requirements.
+description: Technique-specific profile for Laser-Assisted Fluorination (LAF) products. Extends the base ADA product profile
+  with constraints on valid LAF component types and detailLAF requirements.
 allOf:
-  - $ref: ../adaProduct/schema.yaml
-  - type: object
-    properties:
-      "schema:additionalType":
-        description: >-
-          Must include a LAF product type identifier.
-        contains:
-          enum:
-            - "Laser Assisted Fluorination (LAF) Processed"
-            - "Laser Assisted Fluorination (LAF) Raw"
-            - "Laser Assisted Fluorination"
-      "schema:distribution":
-        items:
-          oneOf:
-            - required:
-                - "ada:componentType"
+- $ref: ../adaProduct/schema.yaml
+- type: object
+  properties:
+    schema:additionalType:
+      description: Must include a LAF product type identifier.
+      contains:
+        enum:
+        - Laser Assisted Fluorination (LAF) Processed
+        - Laser Assisted Fluorination (LAF) Raw
+        - Laser Assisted Fluorination
+    schema:distribution:
+      description: Distribution items for adaLAF. Archive hasPart items must have ada:componentType from technique-specific
+        or universal values.
+      type: array
+      items:
+        type: object
+        properties:
+          schema:hasPart:
+            items:
+              type: object
               properties:
-                "ada:componentType":
+                ada:componentType:
                   anyOf:
-                    - properties:
-                        "@type":
-                          enum:
-                            - "ada:LAFProcessed"
-                            - "ada:LAFRaw"
-                    - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType
-            - required:
-                - "schema:hasPart"
-              properties:
-                "schema:hasPart":
-                  items:
-                    properties:
-                      "ada:componentType":
-                        anyOf:
-                          - properties:
-                              "@type":
-                                enum:
-                                  - "ada:LAFProcessed"
-                                  - "ada:LAFRaw"
-                          - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType
+                  - enum:
+                    - ada:LAFProcessed
+                    - ada:LAFRaw
+                  - ? ''
+                    : ../adaProduct/schema.yaml#//universalComponentType

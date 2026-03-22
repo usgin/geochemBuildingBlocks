@@ -1,53 +1,37 @@
 $schema: https://json-schema.org/draft/2020-12/schema
 title: ADA NanoSIMS Product Profile
-description: >-
-  Technique-specific profile for Nanoscale Secondary Ion Mass Spectrometry (NanoSIMS) products.
-  Extends the base ADA product profile with constraints on valid NanoSIMS component
-  types and detailNanoSIMS requirements.
+description: Technique-specific profile for Nanoscale Secondary Ion Mass Spectrometry (NanoSIMS) products. Extends the base
+  ADA product profile with constraints on valid NanoSIMS component types and detailNanoSIMS requirements.
 allOf:
-  - $ref: ../adaProduct/schema.yaml
-  - type: object
-    properties:
-      "schema:additionalType":
-        description: >-
-          Must include a NanoSIMS product type identifier.
-        contains:
-          enum:
-            - "Nanoscale Secondary Ion Mass Spectrometry (NanoSIMS) Raw"
-            - "Nanoscale Secondary Ion Mass Spectrometry (NanoSIMS) Image"
-            - "Nanoscale Secondary Ion Mass Spectrometry (NanoSIMS) Tabular"
-            - "Nanoscale secondary ion mass spectrometry"
-      "schema:distribution":
-        items:
-          oneOf:
-            - required:
-                - "ada:componentType"
+- $ref: ../adaProduct/schema.yaml
+- type: object
+  properties:
+    schema:additionalType:
+      description: Must include a NanoSIMS product type identifier.
+      contains:
+        enum:
+        - Nanoscale Secondary Ion Mass Spectrometry (NanoSIMS) Raw
+        - Nanoscale Secondary Ion Mass Spectrometry (NanoSIMS) Image
+        - Nanoscale Secondary Ion Mass Spectrometry (NanoSIMS) Tabular
+        - Nanoscale secondary ion mass spectrometry
+    schema:distribution:
+      description: Distribution items for adaNanoSIMS. Archive hasPart items must have ada:componentType from technique-specific
+        or universal values.
+      type: array
+      items:
+        type: object
+        properties:
+          schema:hasPart:
+            items:
+              type: object
               properties:
-                "ada:componentType":
+                ada:componentType:
                   anyOf:
-                    - properties:
-                        "@type":
-                          enum:
-                            - "ada:NanoSIMSCollection"
-                            - "ada:NanoSIMSImageCollection"
-                            - "ada:NanoSIMSTabular"
-                            - "ada:NanoSIMSMap"
-                            - "ada:NanoSIMSImage"
-                    - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType
-            - required:
-                - "schema:hasPart"
-              properties:
-                "schema:hasPart":
-                  items:
-                    properties:
-                      "ada:componentType":
-                        anyOf:
-                          - properties:
-                              "@type":
-                                enum:
-                                  - "ada:NanoSIMSCollection"
-                                  - "ada:NanoSIMSImageCollection"
-                                  - "ada:NanoSIMSTabular"
-                                  - "ada:NanoSIMSMap"
-                                  - "ada:NanoSIMSImage"
-                          - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType
+                  - enum:
+                    - ada:NanoSIMSCollection
+                    - ada:NanoSIMSImageCollection
+                    - ada:NanoSIMSTabular
+                    - ada:NanoSIMSMap
+                    - ada:NanoSIMSImage
+                  - ? ''
+                    : ../adaProduct/schema.yaml#//universalComponentType

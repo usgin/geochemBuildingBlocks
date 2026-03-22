@@ -1,63 +1,44 @@
 $schema: https://json-schema.org/draft/2020-12/schema
 title: ADA ICP-MS Product Profile
-description: >-
-  Technique-specific profile for Inductively Coupled Plasma Mass Spectrometry
-  (ICP-MS) products. Covers HR-ICP-MS, Q-ICP-MS, and MC-ICP-MS variants.
-  Extends the base ADA product profile with constraints on valid ICP-MS
-  component types.
+description: Technique-specific profile for Inductively Coupled Plasma Mass Spectrometry (ICP-MS) products. Covers HR-ICP-MS,
+  Q-ICP-MS, and MC-ICP-MS variants. Extends the base ADA product profile with constraints on valid ICP-MS component types.
 allOf:
-  - $ref: ../adaProduct/schema.yaml
-  - type: object
-    properties:
-      "schema:additionalType":
-        description: >-
-          Must include an ICP-MS product type identifier.
-        contains:
-          enum:
-            - "High-resolution Inductively Coupled Plasma Mass Spectroscopy (HRICPMS) Processed"
-            - "High-resolution Inductively Coupled Plasma Mass Spectroscopy (HRICPMS) Raw"
-            - "Quadrupole Inductively Coupled Plasma Mass Spectrometry (QICPMS) Processed"
-            - "Quadrupole Inductively Coupled Plasma Mass Spectrometry (QICPMS) Raw"
-            - "Multi-Collector Inductively Coupled Plasma Mass Spectrometry (MCICPMS) processed"
-            - "Multi-Collector Inductively Coupled Plasma Mass Spectrometry (MCICPMS) Raw"
-            - "High-resolution inductively coupled plasma mass spectrometry"
-            - "Quadrupole Inductively Coupled Plasma Mass Spectrometry"
-            - "Multi-Collector Inductively Coupled Plasma Mass Spectrometry"
-      "schema:distribution":
-        items:
-          oneOf:
-            - required:
-                - "ada:componentType"
+- $ref: ../adaProduct/schema.yaml
+- type: object
+  properties:
+    schema:additionalType:
+      description: Must include an ICP-MS product type identifier.
+      contains:
+        enum:
+        - High-resolution Inductively Coupled Plasma Mass Spectroscopy (HRICPMS) Processed
+        - High-resolution Inductively Coupled Plasma Mass Spectroscopy (HRICPMS) Raw
+        - Quadrupole Inductively Coupled Plasma Mass Spectrometry (QICPMS) Processed
+        - Quadrupole Inductively Coupled Plasma Mass Spectrometry (QICPMS) Raw
+        - Multi-Collector Inductively Coupled Plasma Mass Spectrometry (MCICPMS) processed
+        - Multi-Collector Inductively Coupled Plasma Mass Spectrometry (MCICPMS) Raw
+        - High-resolution inductively coupled plasma mass spectrometry
+        - Quadrupole Inductively Coupled Plasma Mass Spectrometry
+        - Multi-Collector Inductively Coupled Plasma Mass Spectrometry
+    schema:distribution:
+      description: Distribution items for adaICPMS. Archive hasPart items must have ada:componentType from technique-specific
+        or universal values.
+      type: array
+      items:
+        type: object
+        properties:
+          schema:hasPart:
+            items:
+              type: object
               properties:
-                "ada:componentType":
+                ada:componentType:
                   anyOf:
-                    - properties:
-                        "@type":
-                          enum:
-                            - "ada:HRICPMSProcessed"
-                            - "ada:HRICPMSRaw"
-                            - "ada:QICPMSProcessedTabular"
-                            - "ada:QICPMSRawTabular"
-                            - "ada:MCICPMSTabular"
-                            - "ada:MCICPMSCollection"
-                            - "ada:MCICPMSRaw"
-                    - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType
-            - required:
-                - "schema:hasPart"
-              properties:
-                "schema:hasPart":
-                  items:
-                    properties:
-                      "ada:componentType":
-                        anyOf:
-                          - properties:
-                              "@type":
-                                enum:
-                                  - "ada:HRICPMSProcessed"
-                                  - "ada:HRICPMSRaw"
-                                  - "ada:QICPMSProcessedTabular"
-                                  - "ada:QICPMSRawTabular"
-                                  - "ada:MCICPMSTabular"
-                                  - "ada:MCICPMSCollection"
-                                  - "ada:MCICPMSRaw"
-                          - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType
+                  - enum:
+                    - ada:HRICPMSProcessed
+                    - ada:HRICPMSRaw
+                    - ada:QICPMSProcessedTabular
+                    - ada:QICPMSRawTabular
+                    - ada:MCICPMSTabular
+                    - ada:MCICPMSCollection
+                    - ada:MCICPMSRaw
+                  - ? ''
+                    : ../adaProduct/schema.yaml#//universalComponentType

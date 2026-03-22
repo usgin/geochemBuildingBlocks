@@ -1,45 +1,32 @@
 $schema: https://json-schema.org/draft/2020-12/schema
 title: ADA UVFM Product Profile
-description: >-
-  Technique-specific profile for Ultraviolet Fluorescence Microscopy (UVFM) products.
-  Extends the base ADA product profile with constraints on valid UVFM component
-  types.
+description: Technique-specific profile for Ultraviolet Fluorescence Microscopy (UVFM) products. Extends the base ADA product
+  profile with constraints on valid UVFM component types.
 allOf:
-  - $ref: ../adaProduct/schema.yaml
-  - type: object
-    properties:
-      "schema:additionalType":
-        description: >-
-          Must include a UVFM product type identifier.
-        contains:
-          enum:
-            - "Fluorescence Microscopy (UVFM) Image"
-            - "UV Fluorescence Microscopy"
-      "schema:distribution":
-        items:
-          oneOf:
-            - required:
-                - "ada:componentType"
+- $ref: ../adaProduct/schema.yaml
+- type: object
+  properties:
+    schema:additionalType:
+      description: Must include a UVFM product type identifier.
+      contains:
+        enum:
+        - Fluorescence Microscopy (UVFM) Image
+        - UV Fluorescence Microscopy
+    schema:distribution:
+      description: Distribution items for adaUVFM. Archive hasPart items must have ada:componentType from technique-specific
+        or universal values.
+      type: array
+      items:
+        type: object
+        properties:
+          schema:hasPart:
+            items:
+              type: object
               properties:
-                "ada:componentType":
+                ada:componentType:
                   anyOf:
-                    - properties:
-                        "@type":
-                          enum:
-                            - "ada:UVFMImage"
-                            - "ada:UVFMImageCollection"
-                    - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType
-            - required:
-                - "schema:hasPart"
-              properties:
-                "schema:hasPart":
-                  items:
-                    properties:
-                      "ada:componentType":
-                        anyOf:
-                          - properties:
-                              "@type":
-                                enum:
-                                  - "ada:UVFMImage"
-                                  - "ada:UVFMImageCollection"
-                          - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType
+                  - enum:
+                    - ada:UVFMImage
+                    - ada:UVFMImageCollection
+                  - ? ''
+                    : ../adaProduct/schema.yaml#//universalComponentType

@@ -1,53 +1,36 @@
 $schema: https://json-schema.org/draft/2020-12/schema
 title: ADA XANES Product Profile
-description: >-
-  Technique-specific profile for X-ray Absorption Near Edge Structure (XANES) products.
-  Extends the base ADA product profile with constraints on valid XANES component
-  types.
+description: Technique-specific profile for X-ray Absorption Near Edge Structure (XANES) products. Extends the base ADA product
+  profile with constraints on valid XANES component types.
 allOf:
-  - $ref: ../adaProduct/schema.yaml
-  - type: object
-    properties:
-      "schema:additionalType":
-        description: >-
-          Must include a XANES product type identifier.
-        contains:
-          enum:
-            - "X-ray Absorption Near Edge Structure Hyperspectral Image Stack (XANES)"
-            - "X-ray absorption near edge structure (XANES) spectroscopy"
-      "schema:distribution":
-        items:
-          oneOf:
-            - required:
-                - "ada:componentType"
+- $ref: ../adaProduct/schema.yaml
+- type: object
+  properties:
+    schema:additionalType:
+      description: Must include a XANES product type identifier.
+      contains:
+        enum:
+        - X-ray Absorption Near Edge Structure Hyperspectral Image Stack (XANES)
+        - X-ray absorption near edge structure (XANES) spectroscopy
+    schema:distribution:
+      description: Distribution items for adaXANES. Archive hasPart items must have ada:componentType from technique-specific
+        or universal values.
+      type: array
+      items:
+        type: object
+        properties:
+          schema:hasPart:
+            items:
+              type: object
               properties:
-                "ada:componentType":
+                ada:componentType:
                   anyOf:
-                    - properties:
-                        "@type":
-                          enum:
-                            - "ada:XANESImageStack"
-                            - "ada:XANESStackOverviewImage"
-                            - "ada:XANESRawTabular"
-                            - "ada:XANESProcessedTabular"
-                            - "ada:XANESimage"
-                            - "ada:XANESCollection"
-                    - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType
-            - required:
-                - "schema:hasPart"
-              properties:
-                "schema:hasPart":
-                  items:
-                    properties:
-                      "ada:componentType":
-                        anyOf:
-                          - properties:
-                              "@type":
-                                enum:
-                                  - "ada:XANESImageStack"
-                                  - "ada:XANESStackOverviewImage"
-                                  - "ada:XANESRawTabular"
-                                  - "ada:XANESProcessedTabular"
-                                  - "ada:XANESimage"
-                                  - "ada:XANESCollection"
-                          - $ref: ../adaProduct/schema.yaml#/$defs/universalComponentType
+                  - enum:
+                    - ada:XANESImageStack
+                    - ada:XANESStackOverviewImage
+                    - ada:XANESRawTabular
+                    - ada:XANESProcessedTabular
+                    - ada:XANESimage
+                    - ada:XANESCollection
+                  - ? ''
+                    : ../adaProduct/schema.yaml#//universalComponentType

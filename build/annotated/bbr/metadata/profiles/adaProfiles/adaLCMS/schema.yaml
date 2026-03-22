@@ -14,33 +14,22 @@ allOf:
         - Liquid Chromatography - Mass Spectrometry (LCMS) Collection
         - Liquid chromatography-mass spectrometry
     schema:distribution:
+      description: Distribution items for adaLCMS. Archive hasPart items must have
+        ada:componentType from technique-specific or universal values.
+      type: array
       items:
-        oneOf:
-        - required:
-          - ada:componentType
-          properties:
-            ada:componentType:
-              anyOf:
-              - properties:
-                  '@type':
-                    enum:
+        type: object
+        properties:
+          schema:hasPart:
+            items:
+              type: object
+              properties:
+                ada:componentType:
+                  anyOf:
+                  - enum:
                     - ada:LCMSCollection
                     - ada:LCMSMSCollection
-              - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaProduct/schema.yaml#/$defs/universalComponentType
-        - required:
-          - schema:hasPart
-          properties:
-            schema:hasPart:
-              items:
-                properties:
-                  ada:componentType:
-                    anyOf:
-                    - properties:
-                        '@type':
-                          enum:
-                          - ada:LCMSCollection
-                          - ada:LCMSMSCollection
-                    - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaProduct/schema.yaml#/$defs/universalComponentType
+                  - '': ../adaProduct/schema.yaml#//universalComponentType
 x-jsonld-prefixes:
   schema: http://schema.org/
   ada: https://ada.astromat.org/metadata/

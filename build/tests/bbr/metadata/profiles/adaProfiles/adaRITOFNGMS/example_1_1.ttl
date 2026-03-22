@@ -83,8 +83,8 @@ ex:adaRITOFNGMS-example-001 a schema1:Dataset,
     prov:wasGeneratedBy [ a schema1:Action,
                 prov:Activity ;
             schema1:identifier "session-ri-tof-ngms-20260110-001" ;
-            schema1:location [ a <http://purl.org/nexusformat/definitions/BaseClass/NXsource>,
-                        schema1:Place ;
+            schema1:location [ a schema1:Place ;
+                    schema1:additionalType "nxs:BaseClass/NXsource" ;
                     schema1:identifier "https://ror.org/00hx57361" ;
                     schema1:name "Analytical Sciences Laboratory" ] ;
             schema1:mainEntity [ a schema1:Thing,
@@ -94,14 +94,15 @@ ex:adaRITOFNGMS-example-001 a schema1:Dataset,
                     schema1:identifier "igsn:10.60471/GSEEXAMPLE001" ;
                     schema1:name "ALH 84001,123" ] ;
             schema1:startDate "2026-01-10T09:30:00" ;
-            prov:used [ a <http://purl.org/nexusformat/definitions/BaseClass/NXinstrument>,
-                        schema1:Thing,
-                        prov:Entity ;
-                    schema1:additionalType "ada:RI-TOF-NGMSInstrument" ;
+            prov:used [ a schema1:Product,
+                        schema1:Thing ;
+                    schema1:additionalType "ada:RI-TOF-NGMSInstrument",
+                        "nxs:BaseClass/NXinstrument" ;
                     schema1:identifier "ex:instrument-ri-tof-ngms-001" ;
                     schema1:name "Example RI-TOF-NGMS Instrument" ] ] .
 
 ex:adaRITOFNGMS-file-001 a schema1:ImageObject,
+        schema1:MediaObject,
         ada:image ;
     schema1:additionalType "ada:RITOFNGMSTabular" ;
     schema1:description "RI-TOF-NGMS data file for ALH 84001 thin section" ;
@@ -113,9 +114,10 @@ ex:adaRITOFNGMS-file-001 a schema1:ImageObject,
     spdx:checksum [ a spdx:Checksum ;
             spdx:algorithm "MD5" ;
             spdx:checksumValue "d41d8cd98f00b204e9800998ecf8427e" ] ;
-    ada:componentType [ a ada:RITOFNGMSTabular ] .
+    ada:componentType "ada:RITOFNGMSTabular" .
 
 ex:adaRITOFNGMS-file-002 a schema1:DigitalDocument,
+        schema1:MediaObject,
         ada:document ;
     schema1:additionalType "ada:methodDescription" ;
     schema1:description "Method description document for this analysis" ;
@@ -124,12 +126,15 @@ ex:adaRITOFNGMS-file-002 a schema1:DigitalDocument,
     schema1:size [ a schema1:QuantitativeValue ;
             schema1:unitText "byte" ;
             schema1:value 524288 ] ;
-    ada:componentType [ a ada:methodDescription ] .
+    ada:componentType "ada:methodDescription" .
 
 ex:adaRITOFNGMS-metadata-001 a schema1:Dataset ;
     dcterms:conformsTo <https://w3id.org/cdif/bbr/metadata/profiles/adaProfiles/adaRITOFNGMS>,
         <https://w3id.org/cdif/core/1.0/>,
-        <https://w3id.org/cdif/discovery/1.0/> ;
+        <https://w3id.org/cdif/dataDescription/1.0/>,
+        <https://w3id.org/cdif/discovery/1.0/>,
+        <https://w3id.org/cdif/manifest/1.0/>,
+        <https://w3id.org/cdif/provenance/1.0/> ;
     schema1:about ex:adaRITOFNGMS-example-001 ;
     schema1:additionalType "dcat:CatalogRecord" ;
     schema1:dateModified "2026-01-15" ;

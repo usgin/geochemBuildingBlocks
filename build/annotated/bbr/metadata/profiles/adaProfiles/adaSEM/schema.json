@@ -23,87 +23,44 @@
           }
         },
         "schema:distribution": {
+          "description": "Distribution items for adaSEM. Archive hasPart items must have ada:componentType from technique-specific or universal values.",
+          "type": "array",
           "items": {
-            "oneOf": [
-              {
-                "required": [
-                  "ada:componentType"
-                ],
-                "properties": {
-                  "ada:componentType": {
-                    "anyOf": [
-                      {
-                        "properties": {
-                          "@type": {
-                            "enum": [
-                              "ada:SEMImageCollection",
-                              "ada:SEMImageMap",
-                              "ada:SEMEBSDGrainImage",
-                              "ada:SEMEBSDGrainImageMap",
-                              "ada:SEMEBSDGrainImageMapCube",
-                              "ada:SEMEDSElementalMap",
-                              "ada:SEMEDSElementalMaps",
-                              "ada:SEMEDSElementalMapsCube",
-                              "ada:SEMEDSPointData",
-                              "ada:SEMEDSPointDataCollection",
-                              "ada:SEMEDSPointDataCube",
-                              "ada:SEMHRCLImage",
-                              "ada:SEMHRCLMap",
-                              "ada:SEMHRCLCube"
-                            ]
-                          }
-                        }
-                      },
-                      {
-                        "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaProduct/schema.json#/$defs/universalComponentType"
-                      }
-                    ]
-                  }
-                }
-              },
-              {
-                "required": [
-                  "schema:hasPart"
-                ],
-                "properties": {
-                  "schema:hasPart": {
-                    "items": {
-                      "properties": {
-                        "ada:componentType": {
-                          "anyOf": [
-                            {
-                              "properties": {
-                                "@type": {
-                                  "enum": [
-                                    "ada:SEMImageCollection",
-                                    "ada:SEMImageMap",
-                                    "ada:SEMEBSDGrainImage",
-                                    "ada:SEMEBSDGrainImageMap",
-                                    "ada:SEMEBSDGrainImageMapCube",
-                                    "ada:SEMEDSElementalMap",
-                                    "ada:SEMEDSElementalMaps",
-                                    "ada:SEMEDSElementalMapsCube",
-                                    "ada:SEMEDSPointData",
-                                    "ada:SEMEDSPointDataCollection",
-                                    "ada:SEMEDSPointDataCube",
-                                    "ada:SEMHRCLImage",
-                                    "ada:SEMHRCLMap",
-                                    "ada:SEMHRCLCube"
-                                  ]
-                                }
-                              }
-                            },
-                            {
-                              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaProduct/schema.json#/$defs/universalComponentType"
-                            }
+            "type": "object",
+            "properties": {
+              "schema:hasPart": {
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "ada:componentType": {
+                      "anyOf": [
+                        {
+                          "enum": [
+                            "ada:SEMImageCollection",
+                            "ada:SEMImageMap",
+                            "ada:SEMEBSDGrainImage",
+                            "ada:SEMEBSDGrainImageMap",
+                            "ada:SEMEBSDGrainImageMapCube",
+                            "ada:SEMEDSElementalMap",
+                            "ada:SEMEDSElementalMaps",
+                            "ada:SEMEDSElementalMapsCube",
+                            "ada:SEMEDSPointData",
+                            "ada:SEMEDSPointDataCollection",
+                            "ada:SEMEDSPointDataCube",
+                            "ada:SEMHRCLImage",
+                            "ada:SEMHRCLMap",
+                            "ada:SEMHRCLCube"
                           ]
+                        },
+                        {
+                          "": "../adaProduct/schema.yaml#//universalComponentType"
                         }
-                      }
+                      ]
                     }
                   }
                 }
               }
-            ]
+            }
           }
         }
       }

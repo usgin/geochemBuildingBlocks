@@ -1,30 +1,34 @@
 
-# Analysis Instrument Type (Schema)
+# ADA Analysis Instrument (Schema)
 
 `ada.bbr.metadata.geochemProperties.instrument` *v0.1*
 
-Analytical instrument definition combining NXinstrument and prov:Entity. Defines properties: @type, schema:additionalType, schema:name, schema:description, schema:identifier.
+ADA analytical instrument extending the core CDIF instrument building block. Typed as schema:Thing + schema:Product with domain-specific classifications (e.g. nxs:BaseClass/NXinstrument) in schema:additionalType. Inherits hierarchical sub-components, manufacturer, model, calibration properties from core.
 
 [*Status*](http://www.opengis.net/def/status): Under development
 
 ## Description
 
-# Analysis Instrument Type
+# ADA Analysis Instrument
 
-Defines analytical instruments used in analysis events. Combines the NeXus NXinstrument base class with PROV-O Entity typing. Supports GCMD instrument identifiers via `schema:additionalType`.
+Extends the core CDIF [instrument](https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/instrument/) building block for ADA analytical instruments. Instruments are typed as `schema:Thing` + `schema:Product` (from core) with domain-specific classifications in `schema:additionalType` (e.g. `nxs:BaseClass/NXinstrument`, `ada:AMSInstrument`).
+
+Inherits all core instrument properties: hierarchical sub-components via `schema:hasPart`, manufacturer, model, ownership, calibration properties, and linked resources.
 
 ## Examples
 
-### Instrument Type Example
-An analytical instrument described as a NeXus NXinstrument with PROV-O Entity typing.
+### ADA Analysis Instrument Example
+An analytical instrument extending the core CDIF instrument building block.
+Typed as schema:Thing + schema:Product with NeXus and technique-specific
+classifications in additionalType.
 #### json
 ```json
 {
-  "@type": ["schema:Thing", "prov:Entity", "nxs:BaseClass/NXinstrument"],
+  "@type": ["schema:Thing", "schema:Product"],
   "schema:name": "JEOL JXA-8530F Electron Microprobe",
   "schema:description": "Field-emission electron probe microanalyzer with 5 wavelength-dispersive spectrometers",
   "schema:identifier": "https://www.wikidata.org/wiki/Q116917974",
-  "schema:additionalType": ["https://gcmd.earthdata.nasa.gov/kms/concept/76a947a3-4529-4fb7-87a7-f4b3a0a0de48"]
+  "schema:additionalType": ["nxs:BaseClass/NXinstrument", "https://gcmd.earthdata.nasa.gov/kms/concept/76a947a3-4529-4fb7-87a7-f4b3a0a0de48"]
 }
 
 ```
@@ -35,20 +39,19 @@ An analytical instrument described as a NeXus NXinstrument with PROV-O Entity ty
   "@context": [
     {
       "schema": "http://schema.org/",
-      "prov": "http://www.w3.org/ns/prov#",
       "nxs": "http://purl.org/nexusformat/definitions/"
     },
     "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/context.jsonld"
   ],
   "@type": [
     "schema:Thing",
-    "prov:Entity",
-    "nxs:BaseClass/NXinstrument"
+    "schema:Product"
   ],
   "schema:name": "JEOL JXA-8530F Electron Microprobe",
   "schema:description": "Field-emission electron probe microanalyzer with 5 wavelength-dispersive spectrometers",
   "schema:identifier": "https://www.wikidata.org/wiki/Q116917974",
   "schema:additionalType": [
+    "nxs:BaseClass/NXinstrument",
     "https://gcmd.earthdata.nasa.gov/kms/concept/76a947a3-4529-4fb7-87a7-f4b3a0a0de48"
   ]
 }
@@ -56,13 +59,12 @@ An analytical instrument described as a NeXus NXinstrument with PROV-O Entity ty
 
 #### ttl
 ```ttl
-@prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix schema1: <http://schema.org/> .
 
-[] a <http://purl.org/nexusformat/definitions/BaseClass/NXinstrument>,
-        schema1:Thing,
-        prov:Entity ;
-    schema1:additionalType "https://gcmd.earthdata.nasa.gov/kms/concept/76a947a3-4529-4fb7-87a7-f4b3a0a0de48" ;
+[] a schema1:Product,
+        schema1:Thing ;
+    schema1:additionalType "https://gcmd.earthdata.nasa.gov/kms/concept/76a947a3-4529-4fb7-87a7-f4b3a0a0de48",
+        "nxs:BaseClass/NXinstrument" ;
     schema1:description "Field-emission electron probe microanalyzer with 5 wavelength-dispersive spectrometers" ;
     schema1:identifier "https://www.wikidata.org/wiki/Q116917974" ;
     schema1:name "JEOL JXA-8530F Electron Microprobe" .
@@ -74,31 +76,27 @@ An analytical instrument described as a NeXus NXinstrument with PROV-O Entity ty
 
 ```yaml
 $schema: https://json-schema.org/draft/2020-12/schema
-title: Analysis Instrument Type
-description: Analytical instrument definition combining NeXus NXinstrument base class
-  with PROV-O Entity. Used to describe instruments involved in analysis events.
-type: object
-properties:
-  '@type':
-    const:
-    - schema:Thing
-    - prov:Entity
-    - nxs:BaseClass/NXinstrument
-  schema:additionalType:
-    description: Identifier for an instrument or component in the analytical instrumentation,
-      e.g. GCMD instrument identifier.
-    type: array
-    items:
-      type: string
-  schema:name:
-    type: string
-  schema:description:
-    type: string
-  schema:identifier:
-    type: string
+title: ADA Analysis Instrument
+description: ADA analytical instrument building block. Extends the core CDIF instrument
+  building block with NeXus NXinstrument classification via additionalType. Instruments
+  are typed as schema:Thing + schema:Product (from core) with domain-specific types
+  (e.g. nxs:BaseClass/NXinstrument, ada:AMSInstrument) in additionalType.
+allOf:
+- $ref: https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/instrument/schema.yaml
+- type: object
+  properties:
+    schema:additionalType:
+      description: Domain-specific instrument type classifications. Should include
+        a NeXus base class (e.g. nxs:BaseClass/NXinstrument) and/or technique-specific
+        identifier (e.g. ada:AMSInstrument, GCMD instrument identifier).
+      type: array
+      items:
+        type: string
+      minItems: 1
+  required:
+  - schema:additionalType
 x-jsonld-prefixes:
   schema: http://schema.org/
-  prov: http://www.w3.org/ns/prov#
   nxs: http://purl.org/nexusformat/definitions/
 
 ```
@@ -115,7 +113,6 @@ Links to the schema:
 {
   "@context": {
     "schema": "http://schema.org/",
-    "prov": "http://www.w3.org/ns/prov#",
     "nxs": "http://purl.org/nexusformat/definitions/",
     "@version": 1.1
   }

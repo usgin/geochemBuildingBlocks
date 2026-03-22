@@ -19,61 +19,31 @@
           }
         },
         "schema:distribution": {
+          "description": "Distribution items for adaXCT. Archive hasPart items must have ada:componentType from technique-specific or universal values.",
+          "type": "array",
           "items": {
-            "oneOf": [
-              {
-                "required": [
-                  "ada:componentType"
-                ],
-                "properties": {
-                  "ada:componentType": {
-                    "anyOf": [
-                      {
-                        "properties": {
-                          "@type": {
-                            "enum": [
-                              "ada:XCTImageCollection"
-                            ]
-                          }
-                        }
-                      },
-                      {
-                        "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaProduct/schema.json#/$defs/universalComponentType"
-                      }
-                    ]
-                  }
-                }
-              },
-              {
-                "required": [
-                  "schema:hasPart"
-                ],
-                "properties": {
-                  "schema:hasPart": {
-                    "items": {
-                      "properties": {
-                        "ada:componentType": {
-                          "anyOf": [
-                            {
-                              "properties": {
-                                "@type": {
-                                  "enum": [
-                                    "ada:XCTImageCollection"
-                                  ]
-                                }
-                              }
-                            },
-                            {
-                              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaProduct/schema.json#/$defs/universalComponentType"
-                            }
+            "type": "object",
+            "properties": {
+              "schema:hasPart": {
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "ada:componentType": {
+                      "anyOf": [
+                        {
+                          "enum": [
+                            "ada:XCTImageCollection"
                           ]
+                        },
+                        {
+                          "": "../adaProduct/schema.yaml#//universalComponentType"
                         }
-                      }
+                      ]
                     }
                   }
                 }
               }
-            ]
+            }
           }
         }
       }

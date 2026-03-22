@@ -58,331 +58,388 @@ Mock data for validation and testing.
 #### json
 ```json
 {
-  "@context": {
-    "schema": "http://schema.org/",
-    "ada": "https://ada.astromat.org/metadata/",
-    "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
-    "csvw": "http://www.w3.org/ns/csvw#",
-    "prov": "http://www.w3.org/ns/prov#",
-    "spdx": "http://spdx.org/rdf/terms#",
-    "nxs": "http://purl.org/nexusformat/definitions/",
-    "dcterms": "http://purl.org/dc/terms/",
-    "geosparql": "http://www.opengis.net/ont/geosparql#",
-    "ex": "https://example.org/",
-    "dcat": "http://www.w3.org/ns/dcat#"
-  },
-  "@id": "ex:adaNanoIR-example-001",
-  "@type": [
-    "schema:Dataset",
-    "schema:Product"
-  ],
-  "schema:name": "NanoIR Analysis of Meteorite ALH 84001 Fragment",
-  "schema:description": "Example Nano-Infrared Spectroscopy (NanoIR) product metadata demonstrating all properties defined by the adaNanoIR profile. Contains mock data for testing and validation.",
-  "schema:additionalType": [
-    "Nanoscale Infrared Mapping (NanoIR) Background",
-    "ada:DataDeliveryPackage"
-  ],
-  "schema:identifier": {
-    "@type": "schema:PropertyValue",
-    "schema:propertyID": "https://registry.identifiers.org/registry/doi",
-    "schema:value": "10.99999/adananoir-example-001",
-    "schema:url": "https://doi.org/10.99999/adananoir-example-001"
-  },
-  "schema:url": "https://astromat.org/products/adananoir-example-001",
-  "schema:dateModified": "2026-01-15",
-  "schema:version": "1.0",
-  "schema:conditionsOfAccess": [
-    "Unrestricted access for research purposes"
-  ],
-  "schema:license": [
-    "https://creativecommons.org/licenses/by/4.0/"
-  ],
-  "schema:creativeWorkStatus": "Published",
-  "schema:keywords": [
-    {
-      "@type": "schema:DefinedTerm",
-      "schema:name": "NanoIR",
-      "schema:termCode": "NanoIR",
-      "schema:inDefinedTermSet": "https://ada.astromat.org/vocabulary/techniques"
+    "@context": {
+        "schema": "http://schema.org/",
+        "ada": "https://ada.astromat.org/metadata/",
+        "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
+        "csvw": "http://www.w3.org/ns/csvw#",
+        "prov": "http://www.w3.org/ns/prov#",
+        "spdx": "http://spdx.org/rdf/terms#",
+        "nxs": "http://purl.org/nexusformat/definitions/",
+        "dcterms": "http://purl.org/dc/terms/",
+        "geosparql": "http://www.opengis.net/ont/geosparql#",
+        "ex": "https://example.org/",
+        "dcat": "http://www.w3.org/ns/dcat#"
     },
-    "meteorite",
-    "astromaterials"
-  ],
-  "schema:creator": {
-    "@list": [
-      {
-        "@type": "schema:Person",
-        "schema:name": "Analytica, Maria",
-        "schema:identifier": "https://orcid.org/0000-0001-2345-6789",
-        "schema:affiliation": {
-          "@type": "schema:Organization",
-          "schema:name": "Lunar and Planetary Institute"
-        },
-        "schema:contactPoint": {
-          "@type": "schema:ContactPoint",
-          "schema:email": "analytica@example.org"
-        }
-      },
-      {
-        "@type": "schema:Person",
-        "schema:name": "Researcher, John Q.",
-        "schema:identifier": "https://orcid.org/0000-0002-9876-5432",
-        "schema:affiliation": {
-          "@type": "schema:Organization",
-          "schema:name": "NASA Johnson Space Center"
-        },
-        "schema:contactPoint": {
-          "@type": "schema:ContactPoint",
-          "schema:email": "researcher@example.org"
-        }
-      }
-    ]
-  },
-  "schema:contributor": [
-    {
-      "@type": "schema:Role",
-      "schema:roleName": "principalInvestigator",
-      "schema:contributor": {
-        "@type": "schema:Person",
-        "schema:name": "Leadscientist, Patricia",
-        "schema:identifier": "https://orcid.org/0000-0003-1111-2222",
-        "schema:contactPoint": {
-          "@type": "schema:ContactPoint",
-          "schema:email": "leadscientist@example.org"
-        }
-      }
-    }
-  ],
-  "schema:funding": [
-    {
-      "@type": "schema:MonetaryGrant",
-      "schema:identifier": {
-        "@type": "schema:PropertyValue",
-        "schema:propertyID": "award number",
-        "schema:value": "NNX17AE48G"
-      },
-      "schema:name": "Astromaterials Curation and Analysis",
-      "schema:funder": {
-        "@type": "schema:Organization",
-        "schema:additionalType": [
-          "schema:FundingAgency"
-        ],
-        "schema:name": "NASA - National Aeronautics and Space Administration"
-      }
-    }
-  ],
-  "schema:measurementTechnique": {
-    "@type": "schema:DefinedTerm",
-    "schema:name": "Nano-Infrared Spectroscopy (NanoIR)",
-    "schema:identifier": "https://ada.astromat.org/vocabulary/techniques/NanoIR"
-  },
-  "prov:wasGeneratedBy": [
-    {
-      "@type": [
-        "prov:Activity",
-        "schema:Action"
-      ],
-      "schema:identifier": "session-nanoir-20260110-001",
-      "schema:startDate": "2026-01-10T09:30:00",
-      "prov:used": [
-        {
-          "@type": [
-            "schema:Thing",
-            "prov:Entity",
-            "nxs:BaseClass/NXinstrument"
-          ],
-          "schema:additionalType": [
-            "ada:NanoIRInstrument"
-          ],
-          "schema:name": "Example NanoIR Instrument",
-          "schema:identifier": "ex:instrument-nanoir-001"
-        }
-      ],
-      "schema:location": {
-        "@type": [
-          "schema:Place",
-          "nxs:BaseClass/NXsource"
-        ],
-        "schema:name": "Analytical Sciences Laboratory",
-        "schema:identifier": "https://ror.org/00hx57361"
-      },
-      "schema:mainEntity": [
-        {
-          "@type": [
-            "schema:Thing",
-            "https://w3id.org/isample/vocabulary/materialsampleobjecttype/materialsample"
-          ],
-          "schema:additionalType": [
-            "MaterialSample"
-          ],
-          "schema:name": "ALH 84001,123",
-          "schema:identifier": [
-            "igsn:10.60471/GSEEXAMPLE001"
-          ],
-          "schema:description": "Thin section of Allan Hills 84001 martian meteorite"
-        }
-      ]
-    }
-  ],
-  "schema:variableMeasured": [
-    {
-      "@id": "ex:adaNanoIR-var-001",
-      "@type": [
-        "schema:PropertyValue",
-        "cdi:InstanceVariable"
-      ],
-      "schema:name": "measurement_value",
-      "schema:alternateName": [
-        "NanoIR primary measurement"
-      ],
-      "schema:description": "Primary measured quantity from Nano-Infrared Spectroscopy (NanoIR) analysis. This is example mock data for testing.",
-      "schema:propertyID": [
-        "https://ada.astromat.org/vocabulary/variables/nanoir_primary"
-      ],
-      "schema:unitText": "counts",
-      "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#decimal",
-      "cdi:role": "MeasureComponent",
-      "cdi:simpleUnitOfMeasure": "counts"
-    },
-    {
-      "@id": "ex:adaNanoIR-var-002",
-      "@type": [
-        "schema:PropertyValue",
-        "cdi:InstanceVariable"
-      ],
-      "schema:name": "position_x",
-      "schema:alternateName": [
-        "X coordinate"
-      ],
-      "schema:description": "Horizontal position coordinate on sample surface.",
-      "schema:propertyID": [
-        "https://ada.astromat.org/vocabulary/variables/position_x"
-      ],
-      "schema:unitText": "micrometer",
-      "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#decimal",
-      "cdi:role": "DimensionComponent",
-      "cdi:simpleUnitOfMeasure": "um"
-    }
-  ],
-  "schema:distribution": [
-    {
-      "@type": [
-        "schema:DataDownload"
-      ],
-      "schema:name": "adaNanoIR-ALH84001-archive.zip",
-      "schema:description": "Archive containing NanoIR data files and supplementary materials",
-      "schema:contentUrl": "https://astromat.org/downloads/adananoir-example-001.zip",
-      "schema:encodingFormat": [
-        "application/zip"
-      ],
-      "schema:additionalType": [
-        "RO-CRATE"
-      ],
-      "spdx:checksum": {
-        "@type": "spdx:Checksum",
-        "spdx:algorithm": "SHA256",
-        "spdx:checksumValue": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2"
-      },
-      "schema:size": {
-        "@type": "schema:QuantitativeValue",
-        "schema:value": 15728640,
-        "schema:unitText": "byte"
-      },
-      "schema:provider": [
-        {
-          "@type": "schema:Organization",
-          "schema:name": "Astromat Data Archive"
-        }
-      ],
-      "schema:hasPart": [
-        {
-          "@id": "ex:adaNanoIR-file-001",
-          "@type": [
-            "ada:image",
-            "schema:ImageObject"
-          ],
-          "schema:name": "ALH84001_NanoIR_001.tif",
-          "schema:description": "NanoIR data file for ALH 84001 thin section",
-          "schema:additionalType": [
-            "ada:NanoIRBackground"
-          ],
-          "schema:encodingFormat": [
-            "image/tiff"
-          ],
-          "schema:size": {
-            "@type": "schema:QuantitativeValue",
-            "schema:value": 10485760,
-            "schema:unitText": "byte"
-          },
-          "spdx:checksum": {
-            "@type": "spdx:Checksum",
-            "spdx:algorithm": "MD5",
-            "spdx:checksumValue": "d41d8cd98f00b204e9800998ecf8427e"
-          },
-          "ada:componentType": {
-            "@type": "ada:NanoIRBackground"
-          }
-        },
-        {
-          "@id": "ex:adaNanoIR-file-002",
-          "@type": [
-            "ada:document",
-            "schema:DigitalDocument"
-          ],
-          "schema:name": "ALH84001_NanoIR_methods.pdf",
-          "schema:description": "Method description document for this analysis",
-          "schema:additionalType": [
-            "ada:methodDescription"
-          ],
-          "schema:encodingFormat": [
-            "application/pdf"
-          ],
-          "schema:size": {
-            "@type": "schema:QuantitativeValue",
-            "schema:value": 524288,
-            "schema:unitText": "byte"
-          },
-          "ada:componentType": {
-            "@type": "ada:methodDescription"
-          }
-        }
-      ]
-    }
-  ],
-  "schema:subjectOf": {
+    "@id": "ex:adaNanoIR-example-001",
     "@type": [
-      "schema:Dataset"
+        "schema:Dataset",
+        "schema:Product"
     ],
+    "schema:name": "NanoIR Analysis of Meteorite ALH 84001 Fragment",
+    "schema:description": "Example Nano-Infrared Spectroscopy (NanoIR) product metadata demonstrating all properties defined by the adaNanoIR profile. Contains mock data for testing and validation.",
     "schema:additionalType": [
-      "dcat:CatalogRecord"
+        "Nanoscale Infrared Mapping (NanoIR) Background",
+        "ada:DataDeliveryPackage"
     ],
-    "@id": "ex:adaNanoIR-metadata-001",
-    "schema:about": {
-      "@id": "ex:adaNanoIR-example-001"
+    "schema:identifier": {
+        "@type": [
+            "schema:PropertyValue"
+        ],
+        "schema:propertyID": "https://registry.identifiers.org/registry/doi",
+        "schema:value": "10.99999/adananoir-example-001",
+        "schema:url": "https://doi.org/10.99999/adananoir-example-001"
     },
+    "schema:url": "https://astromat.org/products/adananoir-example-001",
     "schema:dateModified": "2026-01-15",
-    "dcterms:conformsTo": [
-      {
-        "@id": "https://w3id.org/cdif/core/1.0/"
-      },
-      {
-        "@id": "https://w3id.org/cdif/discovery/1.0/"
-      },
-      {
-        "@id": "https://w3id.org/cdif/bbr/metadata/profiles/adaProfiles/adaNanoIR"
-      }
+    "schema:version": "1.0",
+    "schema:conditionsOfAccess": [
+        "Unrestricted access for research purposes"
     ],
-    "schema:maintainer": {
-      "@type": "schema:Organization",
-      "schema:name": "Astromat Data Archive"
+    "schema:license": [
+        "https://creativecommons.org/licenses/by/4.0/"
+    ],
+    "schema:creativeWorkStatus": "Published",
+    "schema:keywords": [
+        {
+            "@type": [
+                "schema:DefinedTerm"
+            ],
+            "schema:name": "NanoIR",
+            "schema:termCode": "NanoIR",
+            "schema:inDefinedTermSet": "https://ada.astromat.org/vocabulary/techniques"
+        },
+        "meteorite",
+        "astromaterials"
+    ],
+    "schema:creator": {
+        "@list": [
+            {
+                "@type": [
+                    "schema:Person"
+                ],
+                "schema:name": "Analytica, Maria",
+                "schema:identifier": "https://orcid.org/0000-0001-2345-6789",
+                "schema:affiliation": {
+                    "@type": [
+                        "schema:Organization"
+                    ],
+                    "schema:name": "Lunar and Planetary Institute"
+                },
+                "schema:contactPoint": {
+                    "@type": [
+                        "schema:ContactPoint"
+                    ],
+                    "schema:email": "analytica@example.org"
+                }
+            },
+            {
+                "@type": [
+                    "schema:Person"
+                ],
+                "schema:name": "Researcher, John Q.",
+                "schema:identifier": "https://orcid.org/0000-0002-9876-5432",
+                "schema:affiliation": {
+                    "@type": [
+                        "schema:Organization"
+                    ],
+                    "schema:name": "NASA Johnson Space Center"
+                },
+                "schema:contactPoint": {
+                    "@type": [
+                        "schema:ContactPoint"
+                    ],
+                    "schema:email": "researcher@example.org"
+                }
+            }
+        ]
     },
-    "schema:sdDatePublished": "2026-01-15T12:00:00Z",
-    "schema:includedInDataCatalog": {
-      "@type": "schema:DataCatalog",
-      "schema:name": "Astromat Data Archive",
-      "schema:url": "https://astromat.org"
+    "schema:contributor": [
+        {
+            "@type": [
+                "schema:Role"
+            ],
+            "schema:roleName": "principalInvestigator",
+            "schema:contributor": {
+                "@type": [
+                    "schema:Person"
+                ],
+                "schema:name": "Leadscientist, Patricia",
+                "schema:identifier": "https://orcid.org/0000-0003-1111-2222",
+                "schema:contactPoint": {
+                    "@type": [
+                        "schema:ContactPoint"
+                    ],
+                    "schema:email": "leadscientist@example.org"
+                }
+            }
+        }
+    ],
+    "schema:funding": [
+        {
+            "@type": [
+                "schema:MonetaryGrant"
+            ],
+            "schema:identifier": {
+                "@type": [
+                    "schema:PropertyValue"
+                ],
+                "schema:propertyID": "award number",
+                "schema:value": "NNX17AE48G"
+            },
+            "schema:name": "Astromaterials Curation and Analysis",
+            "schema:funder": {
+                "@type": [
+                    "schema:Organization"
+                ],
+                "schema:additionalType": [
+                    "schema:FundingAgency"
+                ],
+                "schema:name": "NASA - National Aeronautics and Space Administration"
+            }
+        }
+    ],
+    "schema:measurementTechnique": {
+        "@type": [
+            "schema:DefinedTerm"
+        ],
+        "schema:name": "Nano-Infrared Spectroscopy (NanoIR)",
+        "schema:identifier": "https://ada.astromat.org/vocabulary/techniques/NanoIR"
+    },
+    "prov:wasGeneratedBy": [
+        {
+            "@type": [
+                "prov:Activity",
+                "schema:Action"
+            ],
+            "schema:identifier": "session-nanoir-20260110-001",
+            "schema:startDate": "2026-01-10T09:30:00",
+            "prov:used": [
+                {
+                    "@type": [
+                        "schema:Thing",
+                        "schema:Product"
+                    ],
+                    "schema:additionalType": [
+                        "nxs:BaseClass/NXinstrument",
+                        "ada:NanoIRInstrument"
+                    ],
+                    "schema:name": "Example NanoIR Instrument",
+                    "schema:identifier": "ex:instrument-nanoir-001"
+                }
+            ],
+            "schema:location": {
+                "@type": [
+                    "schema:Place"
+                ],
+                "schema:name": [
+                    "Analytical Sciences Laboratory"
+                ],
+                "schema:identifier": "https://ror.org/00hx57361",
+                "schema:additionalType": [
+                    "nxs:BaseClass/NXsource"
+                ]
+            },
+            "schema:mainEntity": [
+                {
+                    "@type": [
+                        "schema:Thing",
+                        "https://w3id.org/isample/vocabulary/materialsampleobjecttype/materialsample"
+                    ],
+                    "schema:additionalType": [
+                        "MaterialSample"
+                    ],
+                    "schema:name": "ALH 84001,123",
+                    "schema:identifier": [
+                        "igsn:10.60471/GSEEXAMPLE001"
+                    ],
+                    "schema:description": "Thin section of Allan Hills 84001 martian meteorite"
+                }
+            ]
+        }
+    ],
+    "schema:variableMeasured": [
+        {
+            "@id": "ex:adaNanoIR-var-001",
+            "@type": [
+                "schema:PropertyValue",
+                "cdi:InstanceVariable"
+            ],
+            "schema:name": "measurement_value",
+            "schema:alternateName": [
+                "NanoIR primary measurement"
+            ],
+            "schema:description": "Primary measured quantity from Nano-Infrared Spectroscopy (NanoIR) analysis. This is example mock data for testing.",
+            "schema:propertyID": [
+                "https://ada.astromat.org/vocabulary/variables/nanoir_primary"
+            ],
+            "schema:unitText": "counts",
+            "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#decimal",
+            "cdi:role": "MeasureComponent",
+            "cdi:simpleUnitOfMeasure": "counts"
+        },
+        {
+            "@id": "ex:adaNanoIR-var-002",
+            "@type": [
+                "schema:PropertyValue",
+                "cdi:InstanceVariable"
+            ],
+            "schema:name": "position_x",
+            "schema:alternateName": [
+                "X coordinate"
+            ],
+            "schema:description": "Horizontal position coordinate on sample surface.",
+            "schema:propertyID": [
+                "https://ada.astromat.org/vocabulary/variables/position_x"
+            ],
+            "schema:unitText": "micrometer",
+            "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#decimal",
+            "cdi:role": "DimensionComponent",
+            "cdi:simpleUnitOfMeasure": "um"
+        }
+    ],
+    "schema:distribution": [
+        {
+            "@type": [
+                "schema:DataDownload"
+            ],
+            "schema:name": "adaNanoIR-ALH84001-archive.zip",
+            "schema:description": "Archive containing NanoIR data files and supplementary materials",
+            "schema:contentUrl": "https://astromat.org/downloads/adananoir-example-001.zip",
+            "schema:encodingFormat": [
+                "application/zip"
+            ],
+            "schema:additionalType": [
+                "RO-CRATE"
+            ],
+            "spdx:checksum": {
+                "@type": [
+                    "spdx:Checksum"
+                ],
+                "spdx:algorithm": "SHA256",
+                "spdx:checksumValue": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2"
+            },
+            "schema:size": {
+                "@type": [
+                    "schema:QuantitativeValue"
+                ],
+                "schema:value": 15728640,
+                "schema:unitText": "byte"
+            },
+            "schema:provider": [
+                {
+                    "@type": [
+                        "schema:Organization"
+                    ],
+                    "schema:name": "Astromat Data Archive"
+                }
+            ],
+            "schema:hasPart": [
+                {
+                    "@id": "ex:adaNanoIR-file-001",
+                    "@type": [
+                        "ada:image",
+                        "schema:ImageObject",
+                        "schema:MediaObject"
+                    ],
+                    "schema:name": "ALH84001_NanoIR_001.tif",
+                    "schema:description": "NanoIR data file for ALH 84001 thin section",
+                    "schema:additionalType": [
+                        "ada:NanoIRBackground"
+                    ],
+                    "schema:encodingFormat": [
+                        "image/tiff"
+                    ],
+                    "schema:size": {
+                        "@type": [
+                            "schema:QuantitativeValue"
+                        ],
+                        "schema:value": 10485760,
+                        "schema:unitText": "byte"
+                    },
+                    "spdx:checksum": {
+                        "@type": [
+                            "spdx:Checksum"
+                        ],
+                        "spdx:algorithm": "MD5",
+                        "spdx:checksumValue": "d41d8cd98f00b204e9800998ecf8427e"
+                    },
+                    "ada:componentType": "ada:NanoIRBackground"
+                },
+                {
+                    "@id": "ex:adaNanoIR-file-002",
+                    "@type": [
+                        "ada:document",
+                        "schema:DigitalDocument",
+                        "schema:MediaObject"
+                    ],
+                    "schema:name": "ALH84001_NanoIR_methods.pdf",
+                    "schema:description": "Method description document for this analysis",
+                    "schema:additionalType": [
+                        "ada:methodDescription"
+                    ],
+                    "schema:encodingFormat": [
+                        "application/pdf"
+                    ],
+                    "schema:size": {
+                        "@type": [
+                            "schema:QuantitativeValue"
+                        ],
+                        "schema:value": 524288,
+                        "schema:unitText": "byte"
+                    },
+                    "ada:componentType": "ada:methodDescription"
+                }
+            ]
+        }
+    ],
+    "schema:subjectOf": {
+        "@type": [
+            "schema:Dataset"
+        ],
+        "schema:additionalType": [
+            "dcat:CatalogRecord"
+        ],
+        "@id": "ex:adaNanoIR-metadata-001",
+        "schema:about": {
+            "@id": "ex:adaNanoIR-example-001"
+        },
+        "schema:dateModified": "2026-01-15",
+        "dcterms:conformsTo": [
+            {
+                "@id": "https://w3id.org/cdif/core/1.0/"
+            },
+            {
+                "@id": "https://w3id.org/cdif/discovery/1.0/"
+            },
+            {
+                "@id": "https://w3id.org/cdif/bbr/metadata/profiles/adaProfiles/adaNanoIR"
+            },
+            {
+                "@id": "https://w3id.org/cdif/dataDescription/1.0/"
+            },
+            {
+                "@id": "https://w3id.org/cdif/provenance/1.0/"
+            },
+            {
+                "@id": "https://w3id.org/cdif/manifest/1.0/"
+            }
+        ],
+        "schema:maintainer": {
+            "@type": [
+                "schema:Organization"
+            ],
+            "schema:name": "Astromat Data Archive"
+        },
+        "schema:sdDatePublished": "2026-01-15T12:00:00Z",
+        "schema:includedInDataCatalog": {
+            "@type": [
+                "schema:DataCatalog"
+            ],
+            "schema:name": "Astromat Data Archive",
+            "schema:url": "https://astromat.org"
+        }
     }
-  }
 }
 
 ```
@@ -425,7 +482,9 @@ Mock data for validation and testing.
     "ada:DataDeliveryPackage"
   ],
   "schema:identifier": {
-    "@type": "schema:PropertyValue",
+    "@type": [
+      "schema:PropertyValue"
+    ],
     "schema:propertyID": "https://registry.identifiers.org/registry/doi",
     "schema:value": "10.99999/adananoir-example-001",
     "schema:url": "https://doi.org/10.99999/adananoir-example-001"
@@ -442,7 +501,9 @@ Mock data for validation and testing.
   "schema:creativeWorkStatus": "Published",
   "schema:keywords": [
     {
-      "@type": "schema:DefinedTerm",
+      "@type": [
+        "schema:DefinedTerm"
+      ],
       "schema:name": "NanoIR",
       "schema:termCode": "NanoIR",
       "schema:inDefinedTermSet": "https://ada.astromat.org/vocabulary/techniques"
@@ -453,28 +514,40 @@ Mock data for validation and testing.
   "schema:creator": {
     "@list": [
       {
-        "@type": "schema:Person",
+        "@type": [
+          "schema:Person"
+        ],
         "schema:name": "Analytica, Maria",
         "schema:identifier": "https://orcid.org/0000-0001-2345-6789",
         "schema:affiliation": {
-          "@type": "schema:Organization",
+          "@type": [
+            "schema:Organization"
+          ],
           "schema:name": "Lunar and Planetary Institute"
         },
         "schema:contactPoint": {
-          "@type": "schema:ContactPoint",
+          "@type": [
+            "schema:ContactPoint"
+          ],
           "schema:email": "analytica@example.org"
         }
       },
       {
-        "@type": "schema:Person",
+        "@type": [
+          "schema:Person"
+        ],
         "schema:name": "Researcher, John Q.",
         "schema:identifier": "https://orcid.org/0000-0002-9876-5432",
         "schema:affiliation": {
-          "@type": "schema:Organization",
+          "@type": [
+            "schema:Organization"
+          ],
           "schema:name": "NASA Johnson Space Center"
         },
         "schema:contactPoint": {
-          "@type": "schema:ContactPoint",
+          "@type": [
+            "schema:ContactPoint"
+          ],
           "schema:email": "researcher@example.org"
         }
       }
@@ -482,14 +555,20 @@ Mock data for validation and testing.
   },
   "schema:contributor": [
     {
-      "@type": "schema:Role",
+      "@type": [
+        "schema:Role"
+      ],
       "schema:roleName": "principalInvestigator",
       "schema:contributor": {
-        "@type": "schema:Person",
+        "@type": [
+          "schema:Person"
+        ],
         "schema:name": "Leadscientist, Patricia",
         "schema:identifier": "https://orcid.org/0000-0003-1111-2222",
         "schema:contactPoint": {
-          "@type": "schema:ContactPoint",
+          "@type": [
+            "schema:ContactPoint"
+          ],
           "schema:email": "leadscientist@example.org"
         }
       }
@@ -497,15 +576,21 @@ Mock data for validation and testing.
   ],
   "schema:funding": [
     {
-      "@type": "schema:MonetaryGrant",
+      "@type": [
+        "schema:MonetaryGrant"
+      ],
       "schema:identifier": {
-        "@type": "schema:PropertyValue",
+        "@type": [
+          "schema:PropertyValue"
+        ],
         "schema:propertyID": "award number",
         "schema:value": "NNX17AE48G"
       },
       "schema:name": "Astromaterials Curation and Analysis",
       "schema:funder": {
-        "@type": "schema:Organization",
+        "@type": [
+          "schema:Organization"
+        ],
         "schema:additionalType": [
           "schema:FundingAgency"
         ],
@@ -514,7 +599,9 @@ Mock data for validation and testing.
     }
   ],
   "schema:measurementTechnique": {
-    "@type": "schema:DefinedTerm",
+    "@type": [
+      "schema:DefinedTerm"
+    ],
     "schema:name": "Nano-Infrared Spectroscopy (NanoIR)",
     "schema:identifier": "https://ada.astromat.org/vocabulary/techniques/NanoIR"
   },
@@ -530,10 +617,10 @@ Mock data for validation and testing.
         {
           "@type": [
             "schema:Thing",
-            "prov:Entity",
-            "nxs:BaseClass/NXinstrument"
+            "schema:Product"
           ],
           "schema:additionalType": [
+            "nxs:BaseClass/NXinstrument",
             "ada:NanoIRInstrument"
           ],
           "schema:name": "Example NanoIR Instrument",
@@ -542,11 +629,15 @@ Mock data for validation and testing.
       ],
       "schema:location": {
         "@type": [
-          "schema:Place",
-          "nxs:BaseClass/NXsource"
+          "schema:Place"
         ],
-        "schema:name": "Analytical Sciences Laboratory",
-        "schema:identifier": "https://ror.org/00hx57361"
+        "schema:name": [
+          "Analytical Sciences Laboratory"
+        ],
+        "schema:identifier": "https://ror.org/00hx57361",
+        "schema:additionalType": [
+          "nxs:BaseClass/NXsource"
+        ]
       },
       "schema:mainEntity": [
         {
@@ -621,18 +712,24 @@ Mock data for validation and testing.
         "RO-CRATE"
       ],
       "spdx:checksum": {
-        "@type": "spdx:Checksum",
+        "@type": [
+          "spdx:Checksum"
+        ],
         "spdx:algorithm": "SHA256",
         "spdx:checksumValue": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2"
       },
       "schema:size": {
-        "@type": "schema:QuantitativeValue",
+        "@type": [
+          "schema:QuantitativeValue"
+        ],
         "schema:value": 15728640,
         "schema:unitText": "byte"
       },
       "schema:provider": [
         {
-          "@type": "schema:Organization",
+          "@type": [
+            "schema:Organization"
+          ],
           "schema:name": "Astromat Data Archive"
         }
       ],
@@ -641,7 +738,8 @@ Mock data for validation and testing.
           "@id": "ex:adaNanoIR-file-001",
           "@type": [
             "ada:image",
-            "schema:ImageObject"
+            "schema:ImageObject",
+            "schema:MediaObject"
           ],
           "schema:name": "ALH84001_NanoIR_001.tif",
           "schema:description": "NanoIR data file for ALH 84001 thin section",
@@ -652,24 +750,27 @@ Mock data for validation and testing.
             "image/tiff"
           ],
           "schema:size": {
-            "@type": "schema:QuantitativeValue",
+            "@type": [
+              "schema:QuantitativeValue"
+            ],
             "schema:value": 10485760,
             "schema:unitText": "byte"
           },
           "spdx:checksum": {
-            "@type": "spdx:Checksum",
+            "@type": [
+              "spdx:Checksum"
+            ],
             "spdx:algorithm": "MD5",
             "spdx:checksumValue": "d41d8cd98f00b204e9800998ecf8427e"
           },
-          "ada:componentType": {
-            "@type": "ada:NanoIRBackground"
-          }
+          "ada:componentType": "ada:NanoIRBackground"
         },
         {
           "@id": "ex:adaNanoIR-file-002",
           "@type": [
             "ada:document",
-            "schema:DigitalDocument"
+            "schema:DigitalDocument",
+            "schema:MediaObject"
           ],
           "schema:name": "ALH84001_NanoIR_methods.pdf",
           "schema:description": "Method description document for this analysis",
@@ -680,13 +781,13 @@ Mock data for validation and testing.
             "application/pdf"
           ],
           "schema:size": {
-            "@type": "schema:QuantitativeValue",
+            "@type": [
+              "schema:QuantitativeValue"
+            ],
             "schema:value": 524288,
             "schema:unitText": "byte"
           },
-          "ada:componentType": {
-            "@type": "ada:methodDescription"
-          }
+          "ada:componentType": "ada:methodDescription"
         }
       ]
     }
@@ -712,15 +813,28 @@ Mock data for validation and testing.
       },
       {
         "@id": "https://w3id.org/cdif/bbr/metadata/profiles/adaProfiles/adaNanoIR"
+      },
+      {
+        "@id": "https://w3id.org/cdif/dataDescription/1.0/"
+      },
+      {
+        "@id": "https://w3id.org/cdif/provenance/1.0/"
+      },
+      {
+        "@id": "https://w3id.org/cdif/manifest/1.0/"
       }
     ],
     "schema:maintainer": {
-      "@type": "schema:Organization",
+      "@type": [
+        "schema:Organization"
+      ],
       "schema:name": "Astromat Data Archive"
     },
     "schema:sdDatePublished": "2026-01-15T12:00:00Z",
     "schema:includedInDataCatalog": {
-      "@type": "schema:DataCatalog",
+      "@type": [
+        "schema:DataCatalog"
+      ],
       "schema:name": "Astromat Data Archive",
       "schema:url": "https://astromat.org"
     }
@@ -815,8 +929,8 @@ ex:adaNanoIR-example-001 a schema1:Dataset,
     prov:wasGeneratedBy [ a schema1:Action,
                 prov:Activity ;
             schema1:identifier "session-nanoir-20260110-001" ;
-            schema1:location [ a <http://purl.org/nexusformat/definitions/BaseClass/NXsource>,
-                        schema1:Place ;
+            schema1:location [ a schema1:Place ;
+                    schema1:additionalType "nxs:BaseClass/NXsource" ;
                     schema1:identifier "https://ror.org/00hx57361" ;
                     schema1:name "Analytical Sciences Laboratory" ] ;
             schema1:mainEntity [ a schema1:Thing,
@@ -826,14 +940,15 @@ ex:adaNanoIR-example-001 a schema1:Dataset,
                     schema1:identifier "igsn:10.60471/GSEEXAMPLE001" ;
                     schema1:name "ALH 84001,123" ] ;
             schema1:startDate "2026-01-10T09:30:00" ;
-            prov:used [ a <http://purl.org/nexusformat/definitions/BaseClass/NXinstrument>,
-                        schema1:Thing,
-                        prov:Entity ;
-                    schema1:additionalType "ada:NanoIRInstrument" ;
+            prov:used [ a schema1:Product,
+                        schema1:Thing ;
+                    schema1:additionalType "ada:NanoIRInstrument",
+                        "nxs:BaseClass/NXinstrument" ;
                     schema1:identifier "ex:instrument-nanoir-001" ;
                     schema1:name "Example NanoIR Instrument" ] ] .
 
 ex:adaNanoIR-file-001 a schema1:ImageObject,
+        schema1:MediaObject,
         ada:image ;
     schema1:additionalType "ada:NanoIRBackground" ;
     schema1:description "NanoIR data file for ALH 84001 thin section" ;
@@ -845,9 +960,10 @@ ex:adaNanoIR-file-001 a schema1:ImageObject,
     spdx:checksum [ a spdx:Checksum ;
             spdx:algorithm "MD5" ;
             spdx:checksumValue "d41d8cd98f00b204e9800998ecf8427e" ] ;
-    ada:componentType [ a ada:NanoIRBackground ] .
+    ada:componentType "ada:NanoIRBackground" .
 
 ex:adaNanoIR-file-002 a schema1:DigitalDocument,
+        schema1:MediaObject,
         ada:document ;
     schema1:additionalType "ada:methodDescription" ;
     schema1:description "Method description document for this analysis" ;
@@ -856,12 +972,15 @@ ex:adaNanoIR-file-002 a schema1:DigitalDocument,
     schema1:size [ a schema1:QuantitativeValue ;
             schema1:unitText "byte" ;
             schema1:value 524288 ] ;
-    ada:componentType [ a ada:methodDescription ] .
+    ada:componentType "ada:methodDescription" .
 
 ex:adaNanoIR-metadata-001 a schema1:Dataset ;
     dcterms:conformsTo <https://w3id.org/cdif/bbr/metadata/profiles/adaProfiles/adaNanoIR>,
         <https://w3id.org/cdif/core/1.0/>,
-        <https://w3id.org/cdif/discovery/1.0/> ;
+        <https://w3id.org/cdif/dataDescription/1.0/>,
+        <https://w3id.org/cdif/discovery/1.0/>,
+        <https://w3id.org/cdif/manifest/1.0/>,
+        <https://w3id.org/cdif/provenance/1.0/> ;
     schema1:about ex:adaNanoIR-example-001 ;
     schema1:additionalType "dcat:CatalogRecord" ;
     schema1:dateModified "2026-01-15" ;
@@ -918,37 +1037,24 @@ allOf:
         - Nanoscale Infrared Mapping (NanoIR) Point Data
         - Nanoscale Infrared Mapping
     schema:distribution:
+      description: Distribution items for adaNanoIR. Archive hasPart items must have
+        ada:componentType from technique-specific or universal values.
+      type: array
       items:
-        oneOf:
-        - required:
-          - ada:componentType
-          properties:
-            ada:componentType:
-              anyOf:
-              - properties:
-                  '@type':
-                    enum:
+        type: object
+        properties:
+          schema:hasPart:
+            items:
+              type: object
+              properties:
+                ada:componentType:
+                  anyOf:
+                  - enum:
                     - ada:NanoIRBackground
                     - ada:NanoIRMap
                     - ada:NanoIRMapCollection
                     - ada:NanoIRPointCollection
-              - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaProduct/schema.yaml#/$defs/universalComponentType
-        - required:
-          - schema:hasPart
-          properties:
-            schema:hasPart:
-              items:
-                properties:
-                  ada:componentType:
-                    anyOf:
-                    - properties:
-                        '@type':
-                          enum:
-                          - ada:NanoIRBackground
-                          - ada:NanoIRMap
-                          - ada:NanoIRMapCollection
-                          - ada:NanoIRPointCollection
-                    - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaProduct/schema.yaml#/$defs/universalComponentType
+                  - '': ../adaProduct/schema.yaml#//universalComponentType
 x-jsonld-prefixes:
   schema: http://schema.org/
   ada: https://ada.astromat.org/metadata/

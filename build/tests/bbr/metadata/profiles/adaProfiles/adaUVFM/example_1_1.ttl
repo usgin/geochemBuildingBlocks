@@ -84,8 +84,8 @@ ex:adaUVFM-example-001 a schema1:Dataset,
     prov:wasGeneratedBy [ a schema1:Action,
                 prov:Activity ;
             schema1:identifier "session-uvfm-20260110-001" ;
-            schema1:location [ a <http://purl.org/nexusformat/definitions/BaseClass/NXsource>,
-                        schema1:Place ;
+            schema1:location [ a schema1:Place ;
+                    schema1:additionalType "nxs:BaseClass/NXsource" ;
                     schema1:identifier "https://ror.org/00hx57361" ;
                     schema1:name "Analytical Sciences Laboratory" ] ;
             schema1:mainEntity [ a schema1:Thing,
@@ -95,14 +95,15 @@ ex:adaUVFM-example-001 a schema1:Dataset,
                     schema1:identifier "igsn:10.60471/GSEEXAMPLE001" ;
                     schema1:name "ALH 84001,123" ] ;
             schema1:startDate "2026-01-10T09:30:00" ;
-            prov:used [ a <http://purl.org/nexusformat/definitions/BaseClass/NXinstrument>,
-                        schema1:Thing,
-                        prov:Entity ;
-                    schema1:additionalType "ada:UVFMInstrument" ;
+            prov:used [ a schema1:Product,
+                        schema1:Thing ;
+                    schema1:additionalType "ada:UVFMInstrument",
+                        "nxs:BaseClass/NXinstrument" ;
                     schema1:identifier "ex:instrument-uvfm-001" ;
                     schema1:name "Example UVFM Instrument" ] ] .
 
 ex:adaUVFM-file-001 a schema1:ImageObject,
+        schema1:MediaObject,
         ada:image ;
     schema1:additionalType "ada:UVFMImage" ;
     schema1:description "UVFM data file for ALH 84001 thin section" ;
@@ -114,9 +115,10 @@ ex:adaUVFM-file-001 a schema1:ImageObject,
     spdx:checksum [ a spdx:Checksum ;
             spdx:algorithm "MD5" ;
             spdx:checksumValue "d41d8cd98f00b204e9800998ecf8427e" ] ;
-    ada:componentType [ a ada:UVFMImage ] .
+    ada:componentType "ada:UVFMImage" .
 
 ex:adaUVFM-file-002 a schema1:DigitalDocument,
+        schema1:MediaObject,
         ada:document ;
     schema1:additionalType "ada:methodDescription" ;
     schema1:description "Method description document for this analysis" ;
@@ -125,12 +127,15 @@ ex:adaUVFM-file-002 a schema1:DigitalDocument,
     schema1:size [ a schema1:QuantitativeValue ;
             schema1:unitText "byte" ;
             schema1:value 524288 ] ;
-    ada:componentType [ a ada:methodDescription ] .
+    ada:componentType "ada:methodDescription" .
 
 ex:adaUVFM-metadata-001 a schema1:Dataset ;
     dcterms:conformsTo <https://w3id.org/cdif/bbr/metadata/profiles/adaProfiles/adaUVFM>,
         <https://w3id.org/cdif/core/1.0/>,
-        <https://w3id.org/cdif/discovery/1.0/> ;
+        <https://w3id.org/cdif/dataDescription/1.0/>,
+        <https://w3id.org/cdif/discovery/1.0/>,
+        <https://w3id.org/cdif/manifest/1.0/>,
+        <https://w3id.org/cdif/provenance/1.0/> ;
     schema1:about ex:adaUVFM-example-001 ;
     schema1:additionalType "dcat:CatalogRecord" ;
     schema1:dateModified "2026-01-15" ;

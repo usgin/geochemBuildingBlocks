@@ -34,13 +34,29 @@ Browse the building blocks at: https://usgin.github.io/geochemBuildingBlocks/
 
 ## Tools
 
+### Schema generation and resolution
+
 - `tools/generate_profiles.py` — generates technique-specific profile building blocks from configuration data
-- `tools/resolve_schema.py` — Resolve all `$ref` into single resolvedSchema.json files
-- `tools/regenerate_schema_json.py` — Generate *Schema.json from schema.yaml sources (YAML→JSON + ref rewrite)
+- `tools/resolve_schema.py` — resolve all `$ref` into single resolvedSchema.json files
+- `tools/regenerate_schema_json.py` — generate *Schema.json from schema.yaml sources (YAML→JSON + ref rewrite)
 
-`resolve_schema.py` and `regenerate_schema_json.py` are synced from the canonical copies in [metadataBuildingBlocks/tools/](https://github.com/Cross-Domain-Interoperability-Framework/metadataBuildingBlocks/tree/main/tools). Do not edit locally — update the canonical copy and run `python tools/sync_resolve_schema.py --apply` from the metadataBuildingBlocks repo.
+### Validation and auditing
 
-The metadataBuildingBlocks repo also has `tools/audit_building_blocks.py` which can be run against this repo's `_sources/` directory for comprehensive validation.
+- `tools/audit_building_blocks.py` — comprehensive audit: file completeness, schema consistency, resolvedSchema freshness, SHACL coverage
+- `tools/audit_shacl_coverage.py` — check SHACL rules cover all schema.yaml properties; reports missing/extra shapes
+- `tools/validate_examples.py` — validate example JSON files against resolved schemas
+- `tools/validate_instance.py` — profile-aware validation of ADA metadata instances
+- `tools/compare_schemas.py` — detect drift between schema.yaml and *Schema.json
+
+### Build and deployment support
+
+- `tools/augment_register.py` — add resolvedSchema URLs to build/register.json for the viewer
+- `tools/generate_custom_report.py` — generate HTML validation report with granular SHACL severity breakdown
+- `tools/cors_server.py` — local HTTP server with CORS headers for testing the viewer
+
+### Tool provenance
+
+`resolve_schema.py` and `regenerate_schema_json.py` are synced from the canonical copies in [metadataBuildingBlocks/tools/](https://github.com/Cross-Domain-Interoperability-Framework/metadataBuildingBlocks/tree/main/tools). Do not edit locally — update the canonical copy and run `python tools/sync_resolve_schema.py --apply` from the metadataBuildingBlocks repo. The audit, validation, and report tools were also sourced from that repository.
 
 ## License
 

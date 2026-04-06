@@ -1,0 +1,166 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Image Map Type",
+  "description": "Spatially registered image maps with pixel coordinates, component type classification, and spatial registration metadata.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 2,
+      "allOf": [
+        {
+          "contains": {
+            "const": "ada:imageMap"
+          }
+        },
+        {
+          "contains": {
+            "const": "schema:ImageObject"
+          }
+        }
+      ]
+    },
+    "ada:acquisitionTime": {
+      "type": "string"
+    },
+    "ada:componentType": {
+      "anyOf": [
+        {
+          "title": "EMPA Instrument Detail",
+          "description": "Electron Microprobe Analysis with spectrometer and signal details.",
+          "type": "object",
+          "properties": {
+            "@type": {
+              "anyOf": [
+                {
+                  "const": "ada:EMPAImage"
+                },
+                {
+                  "const": "ada:EMPAQEATabular"
+                },
+                {
+                  "const": "ada:EMPAImageCollection"
+                }
+              ]
+            },
+            "ada:spectrometersUsed": {
+              "type": "string",
+              "description": "Spectrometers used in analysis"
+            },
+            "ada:signalUsed": {
+              "type": "string"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "enum": [
+                "ada:basemap",
+                "ada:supplementalBasemap",
+                "ada:L2MSOverviewImage",
+                "ada:NanoIRMap",
+                "ada:LITImage",
+                "ada:UVFMImage",
+                "ada:VLMImage",
+                "ada:SEMEBSDGrainImageMap",
+                "ada:SEMEDSElementalMap",
+                "ada:SEMHRCLMap",
+                "ada:SEMImageMap",
+                "ada:STEMImage",
+                "ada:TEMImage",
+                "ada:TEMPatternsImage",
+                "ada:NanoSIMSMap",
+                "ada:XANESimage",
+                "ada:VNMIROverviewImage"
+              ]
+            }
+          },
+          "required": [
+            "@type"
+          ]
+        }
+      ]
+    },
+    "ada:channel1": {
+      "type": "string"
+    },
+    "ada:channel2": {
+      "type": "string"
+    },
+    "ada:channel3": {
+      "type": "string"
+    },
+    "ada:illuminationType": {
+      "type": "string",
+      "description": "Type of illumination used to create the image."
+    },
+    "ada:imageType": {
+      "type": "string",
+      "description": "Specifies the nature of the sample's response to the illumination."
+    },
+    "ada:numPixelsX": {
+      "type": "integer"
+    },
+    "ada:numPixelsY": {
+      "type": "integer"
+    },
+    "ada:spatialRegistration": {
+      "title": "Spatial Registration Type",
+      "description": "Defines pixel coordinate system registration including origin coordinates, pixel scales, and coordinate definition type for spatially registered images and maps.",
+      "type": "object",
+      "properties": {
+        "ada:basemap": {
+          "type": "string",
+          "description": "link to appropriate basemap image map"
+        },
+        "ada:originX": {
+          "type": "number"
+        },
+        "ada:originY": {
+          "type": "number"
+        },
+        "ada:originZ": {
+          "type": "number"
+        },
+        "ada:coordDef": {
+          "type": "string",
+          "description": "Whether coordinates are stage-defined or pixel-defined. If pixel-defined, are coordinates from stage, upperleftPixel, or centerPixel."
+        },
+        "ada:coordUnits": {
+          "type": "string"
+        },
+        "ada:pixelUnits": {
+          "type": "string"
+        },
+        "ada:pixelScaleX": {
+          "type": "number"
+        },
+        "ada:pixelScaleY": {
+          "type": "number"
+        },
+        "ada:originLocation": {
+          "type": "string",
+          "description": "The location of the origin pixel of an image. Range: upperLeft, upperRight, lowerLeft, lowerRight, center"
+        }
+      },
+      "required": [
+        "ada:originX",
+        "ada:originY",
+        "ada:pixelScaleX",
+        "ada:pixelScaleY",
+        "ada:pixelUnits",
+        "ada:originLocation",
+        "ada:coordDef"
+      ]
+    }
+  },
+  "required": [
+    "@type",
+    "ada:componentType"
+  ]
+}

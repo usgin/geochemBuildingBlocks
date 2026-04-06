@@ -1,7 +1,4 @@
 #!/usr/bin/env python3
-# resolve_schema.py — canonical copy lives in metadataBuildingBlocks/tools/
-# Sync to domain repos via: python tools/sync_resolve_schema.py
-# VERSION: 2026-03-20
 """
 Resolve OGC Building Block schemas into a single complete JSON Schema.
 
@@ -20,12 +17,12 @@ $ref patterns handled:
 Usage:
     python tools/resolve_schema.py adaEMPA
     python tools/resolve_schema.py adaProduct
-    python tools/resolve_schema.py CDIFDiscovery
+    python tools/resolve_schema.py CDIFDiscoveryProfile
     python tools/resolve_schema.py --file path/to/any/schema.yaml
     python tools/resolve_schema.py adaEMPA -o resolved.json
     python tools/resolve_schema.py adaEMPA --flatten-allof
     python tools/resolve_schema.py --all
-    python tools/resolve_schema.py CDIFDiscovery --structured
+    python tools/resolve_schema.py CDIFDiscoveryProfile --structured
     python tools/resolve_schema.py --all --structured
 """
 
@@ -91,27 +88,6 @@ def _fetch_url_schema(url: str) -> Path:
     return cache_path
 
 
-def _try_fetch_relative_from_cache(file_path: Path) -> Path:
-    """If file_path is inside the URL cache but doesn't exist, reconstruct
-    the full URL from a previously cached URL's scheme+host and fetch it.
-    Returns the (possibly updated) file_path."""
-    try:
-        file_path.relative_to(_URL_CACHE_DIR)  # only proceed if in cache
-    except ValueError:
-        return file_path
-    for cached_url, cached_path in _URL_CACHE.items():
-        try:
-            file_rel = file_path.relative_to(_URL_CACHE_DIR)
-            parsed = urlparse(cached_url if not cached_url.startswith("//") else "https:" + cached_url)
-            target_url = f"{parsed.scheme}://{parsed.netloc}/{str(file_rel).replace(os.sep, '/')}"
-            local_path = _fetch_url_schema(target_url)
-            if local_path is not None:
-                return local_path
-        except (ValueError, Exception):
-            continue
-    return file_path
-
-
 # ---------------------------------------------------------------------------
 # File loading
 # ---------------------------------------------------------------------------
@@ -148,7 +124,7 @@ def resolve_fragment(schema: dict, pointer: str) -> Any:
 # ---------------------------------------------------------------------------
 
 def strip_metadata_keys(schema: Any, is_root: bool = True) -> Any:
-    """Recursively remove $id, x-jsonld-*, and nested $schema keys."""
+    """Recursively remove $id, x-jsonld-*, nested $schema keys, and null values."""
     if isinstance(schema, dict):
         result = {}
         for k, v in schema.items():
@@ -158,6 +134,8 @@ def strip_metadata_keys(schema: Any, is_root: bool = True) -> Any:
                 continue
             if k == "$schema" and not is_root:
                 continue
+            if v is None:
+                continue  # drop null values (e.g. empty YAML description)
             result[k] = strip_metadata_keys(v, is_root=False)
         return result
     elif isinstance(schema, list):
@@ -393,8 +371,6 @@ def _resolve_ref(ref: str, base_dir: Path, defs: dict, seen: set) -> Any:
         file_path = (base_dir / file_part).resolve()
 
     if not file_path.exists():
-        file_path = _try_fetch_relative_from_cache(file_path)
-    if not file_path.exists():
         return {"$comment": f"file not found: {file_path}"}
 
     # For cross-file $defs fragment refs, resolve the defs from the raw schema
@@ -619,13 +595,17 @@ def collect_global_defs(schema_path: Path) -> tuple[dict, dict]:
 
 
 def _resolve_node_structured(node: Any, base_dir: Path, local_defs: dict,
-                             file_to_def: dict, seen: set) -> Any:
+                             file_to_def: dict, seen: set,
+                             resolving_defs: frozenset = frozenset()) -> Any:
     """Phase 2 node walker: resolve $refs but emit #/$defs/X for known types.
 
     - External file $refs whose target is in file_to_def -> {"$ref": "#/$defs/Name"}
     - Fragment-only $refs (#/$defs/X) where X maps to a known file -> {"$ref": "#/$defs/GlobalName"}
     - Internal $defs (not in file_to_def) -> resolved inline normally
     - Everything else -> recursed into
+
+    resolving_defs tracks local def names currently being resolved to prevent
+    infinite recursion on self-referential defs (e.g. CdifCodelistConcept).
     """
     if isinstance(node, dict):
         if "$ref" in node:
@@ -633,11 +613,13 @@ def _resolve_node_structured(node: Any, base_dir: Path, local_defs: dict,
             siblings = {k: v for k, v in node.items() if k != "$ref"}
 
             resolved_ref = _resolve_ref_structured(ref, base_dir, local_defs,
-                                                    file_to_def, seen)
+                                                    file_to_def, seen,
+                                                    resolving_defs)
 
             if siblings:
                 siblings = _resolve_node_structured(siblings, base_dir, local_defs,
-                                                     file_to_def, seen)
+                                                     file_to_def, seen,
+                                                     resolving_defs)
                 if isinstance(resolved_ref, dict) and "$ref" not in resolved_ref:
                     resolved_ref = deep_merge(resolved_ref, siblings)
                 elif isinstance(resolved_ref, dict) and "$ref" in resolved_ref:
@@ -650,17 +632,20 @@ def _resolve_node_structured(node: Any, base_dir: Path, local_defs: dict,
             if k == "$defs":
                 continue  # Strip $defs; they're promoted to global
             result[k] = _resolve_node_structured(v, base_dir, local_defs,
-                                                  file_to_def, seen)
+                                                  file_to_def, seen,
+                                                  resolving_defs)
         return result
 
     elif isinstance(node, list):
         return [_resolve_node_structured(item, base_dir, local_defs,
-                                          file_to_def, seen) for item in node]
+                                          file_to_def, seen,
+                                          resolving_defs) for item in node]
     return node
 
 
 def _resolve_ref_structured(ref: str, base_dir: Path, local_defs: dict,
-                             file_to_def: dict, seen: set) -> Any:
+                             file_to_def: dict, seen: set,
+                             resolving_defs: frozenset = frozenset()) -> Any:
     """Resolve a $ref, returning #/$defs/X for known types or inline content."""
     if ref == "#":
         return {"$comment": "circular-ref"}
@@ -670,7 +655,11 @@ def _resolve_ref_structured(ref: str, base_dir: Path, local_defs: dict,
         pointer = ref[1:]
         parts = pointer.lstrip("/").split("/")
         if len(parts) == 2 and parts[0] == "$defs" and parts[1] in local_defs:
-            local_def = local_defs[parts[1]]
+            def_name = parts[1]
+            # Self-referential def — emit $comment to break recursion
+            if def_name in resolving_defs:
+                return {"$comment": f"self-referential: {def_name}"}
+            local_def = local_defs[def_name]
             # Check if this local def points to an external file in file_to_def
             if isinstance(local_def, dict) and "$ref" in local_def:
                 inner_ref = local_def["$ref"]
@@ -680,17 +669,18 @@ def _resolve_ref_structured(ref: str, base_dir: Path, local_defs: dict,
                         return {"$ref": f"#/$defs/{file_to_def[ref_path]}"}
             # Check if the def name itself matches a known global def name
             # (defs may already be resolved)
-            if parts[1] in local_defs:
-                raw = local_defs[parts[1]]
+            if def_name in local_defs:
+                raw = local_defs[def_name]
                 if isinstance(raw, dict) and "$ref" in raw:
                     inner_ref = raw["$ref"]
                     if isinstance(inner_ref, str) and not inner_ref.startswith("#"):
                         ref_path = (base_dir / inner_ref.split("#")[0]).resolve()
                         if ref_path in file_to_def:
                             return {"$ref": f"#/$defs/{file_to_def[ref_path]}"}
-                # Inline def (not external) — resolve normally
+                # Inline def (not external) — resolve with self-ref tracking
                 return _resolve_node_structured(copy.deepcopy(raw), base_dir,
-                                                local_defs, file_to_def, seen)
+                                                local_defs, file_to_def, seen,
+                                                resolving_defs | {def_name})
         return {"$comment": f"unresolved fragment ref: {ref}"}
 
     # File ref, possibly with fragment
@@ -708,8 +698,6 @@ def _resolve_ref_structured(ref: str, base_dir: Path, local_defs: dict,
     else:
         file_path = (base_dir / file_part).resolve()
 
-    if not file_path.exists():
-        file_path = _try_fetch_relative_from_cache(file_path)
     if not file_path.exists():
         return {"$comment": f"file not found: {file_path}"}
 
@@ -984,7 +972,7 @@ def resolve_structured(schema_path: Path) -> dict:
 def _structured_output_name(schema_path: Path) -> str:
     """Derive the structured output filename from the schema's parent directory.
 
-    E.g., .../CDIFDiscovery/schema.yaml -> CDIFDiscoveryStructuredSchema.json
+    E.g., .../CDIFDiscoveryProfile/schema.yaml -> CDIFDiscoveryProfileStructuredSchema.json
           .../cdifCore/schema.yaml       -> cdifCoreStructuredSchema.json
     """
     bb_name = schema_path.resolve().parent.name
@@ -1035,7 +1023,7 @@ def find_profile_schema(name: str) -> Path:
     if yaml_path.exists():
         return yaml_path
 
-    # Fall back to any .json file in the profile directory (e.g., CDIFDiscoverySchema.json)
+    # Fall back to any .json file in the profile directory (e.g., CDIFDiscoveryProfileSchema.json)
     json_files = sorted(profile_dir.glob("*Schema.json"))
     if json_files:
         return json_files[0]
@@ -1097,7 +1085,7 @@ def main():
     parser.add_argument(
         "profile",
         nargs="?",
-        help="Profile name (e.g., adaEMPA, adaProduct, CDIFDiscovery)",
+        help="Profile name (e.g., adaEMPA, adaProduct, CDIFDiscoveryProfile)",
     )
     parser.add_argument(
         "--file",

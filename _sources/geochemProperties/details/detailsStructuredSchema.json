@@ -1,0 +1,569 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Instrument Detail Types",
+  "description": "Umbrella schema referencing all instrument-specific detail type building blocks. Individual detail types are now separate building blocks under geochemProperties/detailXxx/.",
+  "type": "object",
+  "anyOf": [
+    {
+      "title": "Basemap Instrument Detail",
+      "description": "Basemap images with RGB channels and pixel scaling. (Extension type, not in v3 source schema.)",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "const": [
+            "ada:basemap",
+            "schema:Map"
+          ]
+        },
+        "schema:description": {
+          "type": "string"
+        },
+        "ada:pixelUnits": {
+          "type": "string"
+        },
+        "ada:pixelScaleX": {
+          "type": "number"
+        },
+        "ada:pixelScaleY": {
+          "type": "number"
+        },
+        "ada:channel1": {
+          "type": "string"
+        },
+        "ada:channel2": {
+          "type": "string"
+        },
+        "ada:channel3": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "@type",
+        "ada:pixelScaleX",
+        "ada:pixelScaleY",
+        "ada:pixelUnits"
+      ]
+    },
+    {
+      "title": "ARGT Instrument Detail",
+      "description": "ARGT (Argon) document type with phase and isotope analysis",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "const": "ada:ARGTDocument"
+        },
+        "ada:phaseAnalyzed": {
+          "type": "string"
+        },
+        "ada:isotopeType": {
+          "type": "string"
+        }
+      }
+    },
+    {
+      "title": "DSC Instrument Detail",
+      "description": "Differential Scanning Calorimetry heat tabular data",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "const": "ada:DSCHeatTabular"
+        },
+        "ada:analysisType": {
+          "type": "string"
+        }
+      }
+    },
+    {
+      "title": "EMPA Instrument Detail",
+      "description": "Electron Microprobe Analysis with spectrometer and signal details.",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "anyOf": [
+            {
+              "const": "ada:EMPAImage"
+            },
+            {
+              "const": "ada:EMPAQEATabular"
+            },
+            {
+              "const": "ada:EMPAImageCollection"
+            }
+          ]
+        },
+        "ada:spectrometersUsed": {
+          "type": "string",
+          "description": "Spectrometers used in analysis"
+        },
+        "ada:signalUsed": {
+          "type": "string"
+        }
+      }
+    },
+    {
+      "title": "EA-IRMS Instrument Detail",
+      "description": "Elemental Analysis Isotope Ratio Mass Spectrometry collection",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "const": "ada:EAIRMSCollection"
+        },
+        "ada:massConsumed": {
+          "type": "string"
+        },
+        "ada:elementType": {
+          "type": "string"
+        }
+      }
+    },
+    {
+      "title": "ICP-OES Instrument Detail",
+      "description": "Inductively Coupled Plasma Optical Emission Spectrometry. (Extension type, not in v3 source schema.)",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "anyOf": [
+            {
+              "const": "ada:ICPOESIntermediateTabular"
+            },
+            {
+              "const": "ada:ICPOESProcessedTabular"
+            },
+            {
+              "const": "ada:ICPOESRawTabular"
+            }
+          ]
+        },
+        "ada:mass": {
+          "type": "string"
+        },
+        "ada:dissolutionFactor": {
+          "type": "number"
+        }
+      }
+    },
+    {
+      "title": "L2MS Instrument Detail",
+      "description": "Laser-2 Mass Spectrometry cube data with ionization parameters",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "const": "ada:L2MSCube"
+        },
+        "ada:sampleName": {
+          "type": "string"
+        },
+        "ada:ionizationTimeDelay": {
+          "type": "integer"
+        },
+        "ada:massGate": {
+          "type": "boolean"
+        },
+        "ada:photoionizationWavelength": {
+          "type": "integer"
+        },
+        "ada:plasmaShutter": {
+          "type": "boolean"
+        },
+        "ada:timeDelayUnits": {
+          "type": "string"
+        },
+        "ada:wavelengthUnits": {
+          "type": "string"
+        }
+      }
+    },
+    {
+      "title": "LAF Instrument Detail",
+      "description": "Laser Ablation Fluorescence processed/raw data. elementAnalyzed goes in resultTarget.",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "anyOf": [
+            {
+              "const": "ada:LAFProcessed"
+            },
+            {
+              "const": "ada:LAFRaw"
+            }
+          ]
+        },
+        "ada:elementAnalyzed": {
+          "type": "string"
+        },
+        "ada:sampleMassConsumed": {
+          "type": "string"
+        },
+        "ada:sampleType": {
+          "type": "string"
+        }
+      }
+    },
+    {
+      "title": "NanoIR Instrument Detail",
+      "description": "Nano-IR spectroscopy collections with phase analysis",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "anyOf": [
+            {
+              "const": "ada:NanoIRBackground"
+            }
+          ]
+        },
+        "ada:phaseAnalyzed": {
+          "$ref": "#/$defs/StringArray"
+        }
+      }
+    },
+    {
+      "title": "NanoSIMS Instrument Detail",
+      "description": "Nano Secondary Ion Mass Spectrometry with isotope tracking",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string",
+          "enum": [
+            "ada:NanoSIMSCollection",
+            "ada:NanoSIMSImageCollection",
+            "ada:NanoSIMSTabular",
+            "ada:NanoSIMSMap"
+          ]
+        },
+        "ada:phaseAnalyzed": {
+          "$ref": "#/$defs/StringArray"
+        },
+        "ada:isotopeAnalyzed": {
+          "$ref": "#/$defs/StringArray"
+        }
+      }
+    },
+    {
+      "title": "PSFD Instrument Detail",
+      "description": "Point Spread Function Data with image names and conditions",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "const": "ada:PSFDTabular"
+        },
+        "ada:imageName": {
+          "$ref": "#/$defs/StringArray"
+        },
+        "ada:imageViewingConditions": {
+          "type": "string"
+        }
+      }
+    },
+    {
+      "title": "VNMIR Instrument Detail",
+      "description": "Very-Near Mid-IR spectroscopy with detailed measurement parameters",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "anyOf": [
+            {
+              "const": "ada:VNMIRSpectralPoint"
+            },
+            {
+              "const": "ada:VNMIROverviewImage"
+            },
+            {
+              "const": "ada:VNMIRSpectralMap"
+            }
+          ]
+        },
+        "ada:detector": {
+          "type": "string"
+        },
+        "ada:beamsplitter": {
+          "type": "string"
+        },
+        "ada:calibrationStandards": {
+          "type": "string"
+        },
+        "ada:comments": {
+          "type": "string"
+        },
+        "ada:numberOfScans": {
+          "type": "integer"
+        },
+        "ada:eMaxFitRegionMax": {
+          "type": "string"
+        },
+        "ada:eMaxFitRegionMin": {
+          "type": "string"
+        },
+        "ada:emissionAngle": {
+          "type": "number"
+        },
+        "ada:emissivityMaximum": {
+          "type": "string"
+        },
+        "ada:environmentalPressure": {
+          "type": "number"
+        },
+        "ada:incidenceAngle": {
+          "type": "number"
+        },
+        "ada:measurement": {
+          "type": "string"
+        },
+        "ada:measurementEnvironment": {
+          "type": "string"
+        },
+        "ada:phaseAngle": {
+          "type": "number"
+        },
+        "ada:sampleHeated": {
+          "type": "boolean"
+        },
+        "ada:samplePreparation": {
+          "type": "string"
+        },
+        "ada:sampleTemperature": {
+          "type": "integer"
+        },
+        "ada:spectralRangeMax": {
+          "type": "string"
+        },
+        "ada:spectralRangeMin": {
+          "type": "string"
+        },
+        "ada:spectralResolution": {
+          "type": "string"
+        },
+        "ada:spectralSampling": {
+          "type": "string"
+        },
+        "ada:spotSize": {
+          "type": "string"
+        },
+        "ada:uncertaintyNoise": {
+          "type": "number"
+        },
+        "ada:vacuumExposedSample": {
+          "type": "boolean"
+        }
+      }
+    },
+    {
+      "title": "QRIS Instrument Detail",
+      "description": "QRIS (Raman) with calibration and illumination parameters. (Extension type, not in v3 source schema.)",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "anyOf": [
+            {
+              "const": "ada:QRISCalibrated"
+            },
+            {
+              "const": "ada:QRISRaw"
+            }
+          ]
+        },
+        "ada:calibrationFile": {
+          "type": "string"
+        },
+        "ada:pipelineVersion": {
+          "type": "string"
+        },
+        "ada:focalLength": {
+          "type": "integer"
+        },
+        "ada:illuminationColor": {
+          "type": "array",
+          "minItems": 0,
+          "items": {
+            "type": "string"
+          }
+        },
+        "ada:illuminationLevel": {
+          "type": "integer"
+        },
+        "ada:exposureTime": {
+          "type": "integer"
+        },
+        "ada:target": {
+          "type": "string"
+        }
+      }
+    },
+    {
+      "title": "SLS Instrument Detail",
+      "description": "Structured Light Scanning shape models and partial scans",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "anyOf": [
+            {
+              "const": "ada:SLSShapeModel"
+            },
+            {
+              "const": "ada:SLSPartialScan"
+            }
+          ]
+        },
+        "ada:countScans": {
+          "type": "integer"
+        },
+        "ada:facets": {
+          "type": "integer"
+        },
+        "ada:unitsOfMeasurement": {
+          "type": "string"
+        },
+        "ada:version": {
+          "type": "integer"
+        },
+        "ada:vertices": {
+          "type": "integer"
+        },
+        "ada:watertight": {
+          "type": "boolean"
+        }
+      }
+    },
+    {
+      "title": "XCT Instrument Detail",
+      "description": "X-ray Computed Tomography images with detailed scan parameters. (Extension type, not in v3 source schema.)",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "const": "ada:XCTImageCollection"
+        },
+        "ada:beamFilterMaterial": {
+          "type": "string"
+        },
+        "ada:beamFilterThickness": {
+          "type": "number"
+        },
+        "ada:dataRangeLower": {
+          "type": "integer"
+        },
+        "ada:dataRangeUpper": {
+          "type": "integer"
+        },
+        "ada:detectorGain": {
+          "type": "string"
+        },
+        "ada:detectorBinning": {
+          "type": "string"
+        },
+        "ada:detectorSize": {
+          "type": "string"
+        },
+        "ada:detectorType": {
+          "type": "string"
+        },
+        "ada:imageExposure": {
+          "type": "number"
+        },
+        "ada:imageFPS": {
+          "type": "string"
+        },
+        "ada:imageGain": {
+          "type": "number"
+        },
+        "ada:imageSize": {
+          "type": "string"
+        },
+        "ada:instrumentType": {
+          "type": "string"
+        },
+        "ada:nsiBeamHardening": {
+          "type": "number"
+        },
+        "ada:numberOfFramesAveragedPerProjection": {
+          "type": "integer"
+        },
+        "ada:numberOfProjections": {
+          "type": "integer"
+        },
+        "ada:numberOfSlices": {
+          "type": "integer"
+        },
+        "ada:pixelPitch": {
+          "type": "string"
+        },
+        "ada:reconstructedDataFormat": {
+          "type": "string"
+        },
+        "ada:reconstructedVoxelSize": {
+          "type": "string"
+        },
+        "ada:reconstructionSoftware": {
+          "type": "string"
+        },
+        "ada:rotationAngle": {
+          "type": "string"
+        },
+        "ada:rotationType": {
+          "type": "string"
+        },
+        "ada:sourceToDetectorDistance": {
+          "type": "string"
+        },
+        "ada:sourceToObjectDistance": {
+          "type": "number"
+        },
+        "ada:subPixGrid": {
+          "type": "string"
+        },
+        "ada:subPixShift": {
+          "type": "string"
+        },
+        "ada:xraySource": {
+          "type": "string"
+        },
+        "ada:xrayTargetMaterial": {
+          "type": "string"
+        },
+        "ada:xrayTubeCurrent": {
+          "type": "number"
+        },
+        "ada:xrayTubeEnergy": {
+          "type": "number"
+        },
+        "ada:xrayTubePower": {
+          "type": "number"
+        }
+      }
+    },
+    {
+      "title": "XRD Instrument Detail",
+      "description": "X-ray Diffraction tabular data with geometry and wavelength",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "const": "ada:XRDTabular"
+        },
+        "ada:geometry": {
+          "type": "string"
+        },
+        "ada:sampleMount": {
+          "type": "string"
+        },
+        "ada:stepSize": {
+          "type": "number"
+        },
+        "ada:timePerStep": {
+          "type": "number"
+        },
+        "ada:wavelength": {
+          "type": "number"
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "StringArray": {
+      "title": "String Array Type",
+      "description": "Simple reusable array of strings",
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

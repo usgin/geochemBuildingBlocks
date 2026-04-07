@@ -20,7 +20,7 @@ Elemental Analysis Isotope Ratio Mass Spectrometry collection detail.
 #### json
 ```json
 {
-  "@type": "ada:EAIRMSCollection",
+  "@type": ["ada:EAIRMSCollection"],
   "ada:massConsumed": "2.5 mg",
   "ada:elementType": "carbon"
 }
@@ -36,7 +36,9 @@ Elemental Analysis Isotope Ratio Mass Spectrometry collection detail.
     },
     "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailEAIRMS/context.jsonld"
   ],
-  "@type": "ada:EAIRMSCollection",
+  "@type": [
+    "ada:EAIRMSCollection"
+  ],
   "ada:massConsumed": "2.5 mg",
   "ada:elementType": "carbon"
 }
@@ -62,7 +64,10 @@ description: Elemental Analysis Isotope Ratio Mass Spectrometry collection
 type: object
 properties:
   '@type':
-    const: ada:EAIRMSCollection
+    type: array
+    contains:
+      const: ada:EAIRMSCollection
+    minItems: 1
   ada:massConsumed:
     type: string
   ada:elementType:

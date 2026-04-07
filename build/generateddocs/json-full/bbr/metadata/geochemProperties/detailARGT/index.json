@@ -54,12 +54,12 @@
       "snippets": [
         {
           "language": "json",
-          "code": "{\n  \"@type\": \"ada:ARGTDocument\",\n  \"ada:phaseAnalyzed\": \"sanidine\",\n  \"ada:isotopeType\": \"40Ar/39Ar\"\n}\n",
+          "code": "{\n  \"@type\": [\"ada:ARGTDocument\"],\n  \"ada:phaseAnalyzed\": \"sanidine\",\n  \"ada:isotopeType\": \"40Ar/39Ar\"\n}\n",
           "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/geochemProperties/detailARGT/example_1_1.json"
         },
         {
           "language": "jsonld",
-          "code": "{\n  \"@context\": [\n    {\n      \"ada\": \"https://ada.astromat.org/metadata/\"\n    },\n    \"https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailARGT/context.jsonld\"\n  ],\n  \"@type\": \"ada:ARGTDocument\",\n  \"ada:phaseAnalyzed\": \"sanidine\",\n  \"ada:isotopeType\": \"40Ar/39Ar\"\n}",
+          "code": "{\n  \"@context\": [\n    {\n      \"ada\": \"https://ada.astromat.org/metadata/\"\n    },\n    \"https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailARGT/context.jsonld\"\n  ],\n  \"@type\": [\n    \"ada:ARGTDocument\"\n  ],\n  \"ada:phaseAnalyzed\": \"sanidine\",\n  \"ada:isotopeType\": \"40Ar/39Ar\"\n}",
           "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/geochemProperties/detailARGT/example_1_1.jsonld"
         },
         {
@@ -70,7 +70,7 @@
       ]
     }
   ],
-  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: ARGT Instrument Detail\ndescription: ARGT (Argon) document type with phase and isotope analysis\ntype: object\nproperties:\n  '@type':\n    const: ada:ARGTDocument\n  ada:phaseAnalyzed:\n    type: string\n  ada:isotopeType:\n    type: string\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  ada: https://ada.astromat.org/metadata/\n",
+  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: ARGT Instrument Detail\ndescription: ARGT (Argon) document type with phase and isotope analysis\ntype: object\nproperties:\n  '@type':\n    type: array\n    contains:\n      const: ada:ARGTDocument\n    minItems: 1\n  ada:phaseAnalyzed:\n    type: string\n  ada:isotopeType:\n    type: string\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  ada: https://ada.astromat.org/metadata/\n",
   "gitRepository": "https://github.com/usgin/geochemBuildingBlocks",
   "gitPath": "_sources/geochemProperties/detailARGT"
 }

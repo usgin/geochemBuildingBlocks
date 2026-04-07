@@ -2,8 +2,8 @@
   "title": "Validation report for ada.bbr.metadata.geochemProperties.detailLAF - LAF Instrument Detail",
   "bblockName": "LAF Instrument Detail",
   "bblockId": "ada.bbr.metadata.geochemProperties.detailLAF",
-  "generated": "2026-04-07T16:48:18.123466+00:00",
-  "result": true,
+  "generated": "2026-04-07T18:45:49.367990+00:00",
+  "result": false,
   "items": [
     {
       "source": {
@@ -15,7 +15,7 @@
         "snippetIndex": 1,
         "language": "application/json"
       },
-      "result": true,
+      "result": false,
       "sections": [
         {
           "name": "FILES",
@@ -52,9 +52,11 @@
           "entries": [
             {
               "op": "validation",
-              "result": true,
-              "isError": false,
-              "message": "Validation passed"
+              "result": false,
+              "exception": "ValidationError",
+              "errorMessage": "['ada:LAFProcessed'] is not valid under any of the given schemas",
+              "isError": true,
+              "message": "ValidationError: ['ada:LAFProcessed'] is not valid under any of the given schemas\n\nFailed validating 'anyOf' in schema['properties']['@type']:\n    {'anyOf': [{'const': 'ada:LAFProcessed'}, {'const': 'ada:LAFRaw'}]}\n\nOn instance['@type']:\n    ['ada:LAFProcessed']"
             }
           ]
         },
@@ -87,7 +89,7 @@
   "globalErrors": {},
   "counts": {
     "total": 1,
-    "passed": 1,
-    "failed": 0
+    "passed": 0,
+    "failed": 1
   }
 }

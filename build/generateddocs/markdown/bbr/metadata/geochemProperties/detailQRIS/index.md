@@ -20,7 +20,7 @@ QRIS (Raman spectroscopy) calibrated data with illumination and calibration deta
 #### json
 ```json
 {
-  "@type": "ada:QRISCalibrated",
+  "@type": ["ada:QRISCalibrated"],
   "ada:calibrationFile": "calibration_neon_20240301.csv",
   "ada:pipelineVersion": "2.1.0",
   "ada:focalLength": 300,
@@ -41,7 +41,9 @@ QRIS (Raman spectroscopy) calibrated data with illumination and calibration deta
     },
     "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailQRIS/context.jsonld"
   ],
-  "@type": "ada:QRISCalibrated",
+  "@type": [
+    "ada:QRISCalibrated"
+  ],
   "ada:calibrationFile": "calibration_neon_20240301.csv",
   "ada:pipelineVersion": "2.1.0",
   "ada:focalLength": 300,

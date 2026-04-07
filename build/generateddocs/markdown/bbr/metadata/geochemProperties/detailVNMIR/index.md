@@ -20,7 +20,7 @@ Very-Near Mid-IR spectroscopy spectral point measurement with detailed parameter
 #### json
 ```json
 {
-  "@type": "ada:VNMIRSpectralPoint",
+  "@type": ["ada:VNMIRSpectralPoint"],
   "ada:detector": "MCT",
   "ada:beamsplitter": "KBr",
   "ada:calibrationStandards": "gold mirror",
@@ -53,7 +53,9 @@ Very-Near Mid-IR spectroscopy spectral point measurement with detailed parameter
     },
     "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailVNMIR/context.jsonld"
   ],
-  "@type": "ada:VNMIRSpectralPoint",
+  "@type": [
+    "ada:VNMIRSpectralPoint"
+  ],
   "ada:detector": "MCT",
   "ada:beamsplitter": "KBr",
   "ada:calibrationStandards": "gold mirror",

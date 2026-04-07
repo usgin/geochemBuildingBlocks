@@ -20,7 +20,7 @@ Laser-2 Mass Spectrometry cube data with ionization parameters.
 #### json
 ```json
 {
-  "@type": "ada:L2MSCube",
+  "@type": ["ada:L2MSCube"],
   "ada:sampleName": "Murchison_CM2_grain01",
   "ada:ionizationTimeDelay": 500,
   "ada:massGate": true,
@@ -41,7 +41,9 @@ Laser-2 Mass Spectrometry cube data with ionization parameters.
     },
     "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailL2MS/context.jsonld"
   ],
-  "@type": "ada:L2MSCube",
+  "@type": [
+    "ada:L2MSCube"
+  ],
   "ada:sampleName": "Murchison_CM2_grain01",
   "ada:ionizationTimeDelay": 500,
   "ada:massGate": true,
@@ -78,7 +80,10 @@ description: Laser-2 Mass Spectrometry cube data with ionization parameters
 type: object
 properties:
   '@type':
-    const: ada:L2MSCube
+    type: array
+    contains:
+      const: ada:L2MSCube
+    minItems: 1
   ada:sampleName:
     type: string
   ada:ionizationTimeDelay:

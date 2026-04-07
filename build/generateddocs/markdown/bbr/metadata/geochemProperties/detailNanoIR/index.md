@@ -20,7 +20,7 @@ Nano-IR background spectroscopy detail with phases analyzed.
 #### json
 ```json
 {
-  "@type": "ada:NanoIRBackground",
+  "@type": ["ada:NanoIRBackground"],
   "ada:phaseAnalyzed": ["carbonate", "silicate"]
 }
 
@@ -35,7 +35,9 @@ Nano-IR background spectroscopy detail with phases analyzed.
     },
     "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailNanoIR/context.jsonld"
   ],
-  "@type": "ada:NanoIRBackground",
+  "@type": [
+    "ada:NanoIRBackground"
+  ],
   "ada:phaseAnalyzed": [
     "carbonate",
     "silicate"

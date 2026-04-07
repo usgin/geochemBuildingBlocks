@@ -20,7 +20,7 @@ Structured Light Scanning shape model with mesh statistics.
 #### json
 ```json
 {
-  "@type": "ada:SLSShapeModel",
+  "@type": ["ada:SLSShapeModel"],
   "ada:countScans": 24,
   "ada:facets": 524288,
   "ada:unitsOfMeasurement": "millimeter",
@@ -40,7 +40,9 @@ Structured Light Scanning shape model with mesh statistics.
     },
     "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailSLS/context.jsonld"
   ],
-  "@type": "ada:SLSShapeModel",
+  "@type": [
+    "ada:SLSShapeModel"
+  ],
   "ada:countScans": 24,
   "ada:facets": 524288,
   "ada:unitsOfMeasurement": "millimeter",

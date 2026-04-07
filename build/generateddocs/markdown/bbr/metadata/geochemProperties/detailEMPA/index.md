@@ -20,7 +20,7 @@ Electron Microprobe Analysis detail with spectrometer and signal information.
 #### json
 ```json
 {
-  "@type": "ada:EMPAQEATabular",
+  "@type": ["ada:EMPAQEATabular"],
   "ada:spectrometersUsed": "WDS 1-5",
   "ada:signalUsed": "characteristic X-rays"
 }
@@ -36,7 +36,9 @@ Electron Microprobe Analysis detail with spectrometer and signal information.
     },
     "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailEMPA/context.jsonld"
   ],
-  "@type": "ada:EMPAQEATabular",
+  "@type": [
+    "ada:EMPAQEATabular"
+  ],
   "ada:spectrometersUsed": "WDS 1-5",
   "ada:signalUsed": "characteristic X-rays"
 }

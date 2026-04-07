@@ -20,7 +20,7 @@ Point Spread Function Data detail with image names and viewing conditions.
 #### json
 ```json
 {
-  "@type": "ada:PSFDTabular",
+  "@type": ["ada:PSFDTabular"],
   "ada:imageName": ["crater_overview_001.tif", "crater_overview_002.tif"],
   "ada:imageViewingConditions": "nadir, 50m altitude"
 }
@@ -36,7 +36,9 @@ Point Spread Function Data detail with image names and viewing conditions.
     },
     "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailPSFD/context.jsonld"
   ],
-  "@type": "ada:PSFDTabular",
+  "@type": [
+    "ada:PSFDTabular"
+  ],
   "ada:imageName": [
     "crater_overview_001.tif",
     "crater_overview_002.tif"
@@ -66,7 +68,10 @@ description: Point Spread Function Data with image names and conditions
 type: object
 properties:
   '@type':
-    const: ada:PSFDTabular
+    type: array
+    contains:
+      const: ada:PSFDTabular
+    minItems: 1
   ada:imageName:
     $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/stringArray/schema.yaml
   ada:imageViewingConditions:

@@ -90,10 +90,10 @@ A collection of SEM-EDS elemental map images with file listing.
     ada:componentType [ a ada:SEMEDSElementalMaps ] ;
     ada:filelist [ schema1:encodingFormat "image/tiff" ;
             ada:componentType "ada:SEMEDSElementalMap" ;
-            ada:fileName "map_Fe_Ka.tif" ],
+            ada:fileName "map_Si_Ka.tif" ],
         [ schema1:encodingFormat "image/tiff" ;
             ada:componentType "ada:SEMEDSElementalMap" ;
-            ada:fileName "map_Si_Ka.tif" ] ;
+            ada:fileName "map_Fe_Ka.tif" ] ;
     ada:memberTypes "ada:SEMEDSElementalMap" ;
     ada:nFiles 5 .
 

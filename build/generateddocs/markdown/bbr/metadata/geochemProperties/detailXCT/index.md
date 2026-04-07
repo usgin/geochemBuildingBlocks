@@ -20,7 +20,7 @@ X-ray Computed Tomography image collection with detailed scan parameters.
 #### json
 ```json
 {
-  "@type": "ada:XCTImageCollection",
+  "@type": ["ada:XCTImageCollection"],
   "ada:instrumentType": "micro-CT",
   "ada:xraySource": "sealed tube",
   "ada:xrayTargetMaterial": "tungsten",
@@ -57,7 +57,9 @@ X-ray Computed Tomography image collection with detailed scan parameters.
     },
     "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailXCT/context.jsonld"
   ],
-  "@type": "ada:XCTImageCollection",
+  "@type": [
+    "ada:XCTImageCollection"
+  ],
   "ada:instrumentType": "micro-CT",
   "ada:xraySource": "sealed tube",
   "ada:xrayTargetMaterial": "tungsten",
@@ -127,7 +129,10 @@ description: X-ray Computed Tomography images with detailed scan parameters. (Ex
 type: object
 properties:
   '@type':
-    const: ada:XCTImageCollection
+    type: array
+    contains:
+      const: ada:XCTImageCollection
+    minItems: 1
   ada:beamFilterMaterial:
     type: string
   ada:beamFilterThickness:

@@ -20,7 +20,7 @@ A labeled link to an external resource typed as schema:CreativeWork.
 #### json
 ```json
 {
-  "@type": "schema:CreativeWork",
+  "@type": ["schema:CreativeWork"],
   "schema:name": "Analytical Methods for Geochemistry",
   "schema:description": "Reference document describing standard analytical procedures.",
   "schema:url": "https://doi.org/10.1234/example-methods"
@@ -37,7 +37,9 @@ A labeled link to an external resource typed as schema:CreativeWork.
     },
     "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/creativeWork/context.jsonld"
   ],
-  "@type": "schema:CreativeWork",
+  "@type": [
+    "schema:CreativeWork"
+  ],
   "schema:name": "Analytical Methods for Geochemistry",
   "schema:description": "Reference document describing standard analytical procedures.",
   "schema:url": "https://doi.org/10.1234/example-methods"

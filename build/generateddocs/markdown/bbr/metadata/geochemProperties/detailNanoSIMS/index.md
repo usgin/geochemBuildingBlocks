@@ -20,7 +20,7 @@ NanoSIMS detail with isotope and phase tracking for presolar grain analysis.
 #### json
 ```json
 {
-  "@type": "ada:NanoSIMSTabular",
+  "@type": ["ada:NanoSIMSTabular"],
   "ada:phaseAnalyzed": ["presolar SiC", "presolar graphite"],
   "ada:isotopeAnalyzed": ["12C", "13C", "28Si", "29Si"]
 }
@@ -36,7 +36,9 @@ NanoSIMS detail with isotope and phase tracking for presolar grain analysis.
     },
     "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailNanoSIMS/context.jsonld"
   ],
-  "@type": "ada:NanoSIMSTabular",
+  "@type": [
+    "ada:NanoSIMSTabular"
+  ],
   "ada:phaseAnalyzed": [
     "presolar SiC",
     "presolar graphite"

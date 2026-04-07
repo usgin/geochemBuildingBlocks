@@ -20,7 +20,7 @@ Differential Scanning Calorimetry heat flow data detail.
 #### json
 ```json
 {
-  "@type": "ada:DSCHeatTabular",
+  "@type": ["ada:DSCHeatTabular"],
   "ada:analysisType": "heating"
 }
 
@@ -35,7 +35,9 @@ Differential Scanning Calorimetry heat flow data detail.
     },
     "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailDSC/context.jsonld"
   ],
-  "@type": "ada:DSCHeatTabular",
+  "@type": [
+    "ada:DSCHeatTabular"
+  ],
   "ada:analysisType": "heating"
 }
 ```
@@ -59,7 +61,10 @@ description: Differential Scanning Calorimetry heat tabular data
 type: object
 properties:
   '@type':
-    const: ada:DSCHeatTabular
+    type: array
+    contains:
+      const: ada:DSCHeatTabular
+    minItems: 1
   ada:analysisType:
     type: string
 x-jsonld-prefixes:

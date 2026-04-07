@@ -20,7 +20,7 @@ Laser Ablation Fluorescence processed data with element and mass details.
 #### json
 ```json
 {
-  "@type": "ada:LAFProcessed",
+  "@type": ["ada:LAFProcessed"],
   "ada:elementAnalyzed": "U",
   "ada:sampleMassConsumed": "0.3 mg",
   "ada:sampleType": "zircon grain mount"
@@ -37,7 +37,9 @@ Laser Ablation Fluorescence processed data with element and mass details.
     },
     "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailLAF/context.jsonld"
   ],
-  "@type": "ada:LAFProcessed",
+  "@type": [
+    "ada:LAFProcessed"
+  ],
   "ada:elementAnalyzed": "U",
   "ada:sampleMassConsumed": "0.3 mg",
   "ada:sampleType": "zircon grain mount"

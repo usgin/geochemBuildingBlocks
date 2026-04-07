@@ -60,12 +60,12 @@
       "snippets": [
         {
           "language": "json",
-          "code": "{\n  \"@type\": \"ada:PSFDTabular\",\n  \"ada:imageName\": [\"crater_overview_001.tif\", \"crater_overview_002.tif\"],\n  \"ada:imageViewingConditions\": \"nadir, 50m altitude\"\n}\n",
+          "code": "{\n  \"@type\": [\"ada:PSFDTabular\"],\n  \"ada:imageName\": [\"crater_overview_001.tif\", \"crater_overview_002.tif\"],\n  \"ada:imageViewingConditions\": \"nadir, 50m altitude\"\n}\n",
           "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/geochemProperties/detailPSFD/example_1_1.json"
         },
         {
           "language": "jsonld",
-          "code": "{\n  \"@context\": [\n    {\n      \"ada\": \"https://ada.astromat.org/metadata/\"\n    },\n    \"https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailPSFD/context.jsonld\"\n  ],\n  \"@type\": \"ada:PSFDTabular\",\n  \"ada:imageName\": [\n    \"crater_overview_001.tif\",\n    \"crater_overview_002.tif\"\n  ],\n  \"ada:imageViewingConditions\": \"nadir, 50m altitude\"\n}",
+          "code": "{\n  \"@context\": [\n    {\n      \"ada\": \"https://ada.astromat.org/metadata/\"\n    },\n    \"https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailPSFD/context.jsonld\"\n  ],\n  \"@type\": [\n    \"ada:PSFDTabular\"\n  ],\n  \"ada:imageName\": [\n    \"crater_overview_001.tif\",\n    \"crater_overview_002.tif\"\n  ],\n  \"ada:imageViewingConditions\": \"nadir, 50m altitude\"\n}",
           "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/geochemProperties/detailPSFD/example_1_1.jsonld"
         },
         {
@@ -76,7 +76,7 @@
       ]
     }
   ],
-  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: PSFD Instrument Detail\ndescription: Point Spread Function Data with image names and conditions\ntype: object\nproperties:\n  '@type':\n    const: ada:PSFDTabular\n  ada:imageName:\n    $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/stringArray/schema.yaml\n  ada:imageViewingConditions:\n    type: string\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  ada: https://ada.astromat.org/metadata/\n",
+  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: PSFD Instrument Detail\ndescription: Point Spread Function Data with image names and conditions\ntype: object\nproperties:\n  '@type':\n    type: array\n    contains:\n      const: ada:PSFDTabular\n    minItems: 1\n  ada:imageName:\n    $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/stringArray/schema.yaml\n  ada:imageViewingConditions:\n    type: string\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  ada: https://ada.astromat.org/metadata/\n",
   "gitRepository": "https://github.com/usgin/geochemBuildingBlocks",
   "gitPath": "_sources/geochemProperties/detailPSFD"
 }

@@ -20,7 +20,7 @@ Inductively Coupled Plasma Optical Emission Spectrometry processed data detail.
 #### json
 ```json
 {
-  "@type": "ada:ICPOESProcessedTabular",
+  "@type": ["ada:ICPOESProcessedTabular"],
   "ada:mass": "50.2 mg",
   "ada:dissolutionFactor": 100.0
 }
@@ -36,7 +36,9 @@ Inductively Coupled Plasma Optical Emission Spectrometry processed data detail.
     },
     "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailICPOES/context.jsonld"
   ],
-  "@type": "ada:ICPOESProcessedTabular",
+  "@type": [
+    "ada:ICPOESProcessedTabular"
+  ],
   "ada:mass": "50.2 mg",
   "ada:dissolutionFactor": 100.0
 }

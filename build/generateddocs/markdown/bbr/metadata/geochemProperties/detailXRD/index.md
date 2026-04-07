@@ -20,7 +20,7 @@ X-ray Diffraction tabular data with geometry and wavelength parameters.
 #### json
 ```json
 {
-  "@type": "ada:XRDTabular",
+  "@type": ["ada:XRDTabular"],
   "ada:geometry": "Bragg-Brentano",
   "ada:sampleMount": "flat plate",
   "ada:stepSize": 0.02,
@@ -39,7 +39,9 @@ X-ray Diffraction tabular data with geometry and wavelength parameters.
     },
     "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailXRD/context.jsonld"
   ],
-  "@type": "ada:XRDTabular",
+  "@type": [
+    "ada:XRDTabular"
+  ],
   "ada:geometry": "Bragg-Brentano",
   "ada:sampleMount": "flat plate",
   "ada:stepSize": 0.02,
@@ -72,7 +74,10 @@ description: X-ray Diffraction tabular data with geometry and wavelength
 type: object
 properties:
   '@type':
-    const: ada:XRDTabular
+    type: array
+    contains:
+      const: ada:XRDTabular
+    minItems: 1
   ada:geometry:
     type: string
   ada:sampleMount:

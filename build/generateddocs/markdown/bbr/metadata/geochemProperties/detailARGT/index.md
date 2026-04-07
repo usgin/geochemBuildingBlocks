@@ -20,7 +20,7 @@ Argon geochronology document detail with phase and isotope analysis type.
 #### json
 ```json
 {
-  "@type": "ada:ARGTDocument",
+  "@type": ["ada:ARGTDocument"],
   "ada:phaseAnalyzed": "sanidine",
   "ada:isotopeType": "40Ar/39Ar"
 }
@@ -36,7 +36,9 @@ Argon geochronology document detail with phase and isotope analysis type.
     },
     "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailARGT/context.jsonld"
   ],
-  "@type": "ada:ARGTDocument",
+  "@type": [
+    "ada:ARGTDocument"
+  ],
   "ada:phaseAnalyzed": "sanidine",
   "ada:isotopeType": "40Ar/39Ar"
 }
@@ -62,7 +64,10 @@ description: ARGT (Argon) document type with phase and isotope analysis
 type: object
 properties:
   '@type':
-    const: ada:ARGTDocument
+    type: array
+    contains:
+      const: ada:ARGTDocument
+    minItems: 1
   ada:phaseAnalyzed:
     type: string
   ada:isotopeType:

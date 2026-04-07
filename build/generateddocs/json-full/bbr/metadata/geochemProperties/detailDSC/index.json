@@ -54,12 +54,12 @@
       "snippets": [
         {
           "language": "json",
-          "code": "{\n  \"@type\": \"ada:DSCHeatTabular\",\n  \"ada:analysisType\": \"heating\"\n}\n",
+          "code": "{\n  \"@type\": [\"ada:DSCHeatTabular\"],\n  \"ada:analysisType\": \"heating\"\n}\n",
           "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/geochemProperties/detailDSC/example_1_1.json"
         },
         {
           "language": "jsonld",
-          "code": "{\n  \"@context\": [\n    {\n      \"ada\": \"https://ada.astromat.org/metadata/\"\n    },\n    \"https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailDSC/context.jsonld\"\n  ],\n  \"@type\": \"ada:DSCHeatTabular\",\n  \"ada:analysisType\": \"heating\"\n}",
+          "code": "{\n  \"@context\": [\n    {\n      \"ada\": \"https://ada.astromat.org/metadata/\"\n    },\n    \"https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailDSC/context.jsonld\"\n  ],\n  \"@type\": [\n    \"ada:DSCHeatTabular\"\n  ],\n  \"ada:analysisType\": \"heating\"\n}",
           "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/geochemProperties/detailDSC/example_1_1.jsonld"
         },
         {
@@ -70,7 +70,7 @@
       ]
     }
   ],
-  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: DSC Instrument Detail\ndescription: Differential Scanning Calorimetry heat tabular data\ntype: object\nproperties:\n  '@type':\n    const: ada:DSCHeatTabular\n  ada:analysisType:\n    type: string\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  ada: https://ada.astromat.org/metadata/\n",
+  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: DSC Instrument Detail\ndescription: Differential Scanning Calorimetry heat tabular data\ntype: object\nproperties:\n  '@type':\n    type: array\n    contains:\n      const: ada:DSCHeatTabular\n    minItems: 1\n  ada:analysisType:\n    type: string\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  ada: https://ada.astromat.org/metadata/\n",
   "gitRepository": "https://github.com/usgin/geochemBuildingBlocks",
   "gitPath": "_sources/geochemProperties/detailDSC"
 }

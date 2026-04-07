@@ -54,12 +54,12 @@
       "snippets": [
         {
           "language": "json",
-          "code": "{\n  \"@type\": \"ada:EAIRMSCollection\",\n  \"ada:massConsumed\": \"2.5 mg\",\n  \"ada:elementType\": \"carbon\"\n}\n",
+          "code": "{\n  \"@type\": [\"ada:EAIRMSCollection\"],\n  \"ada:massConsumed\": \"2.5 mg\",\n  \"ada:elementType\": \"carbon\"\n}\n",
           "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/geochemProperties/detailEAIRMS/example_1_1.json"
         },
         {
           "language": "jsonld",
-          "code": "{\n  \"@context\": [\n    {\n      \"ada\": \"https://ada.astromat.org/metadata/\"\n    },\n    \"https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailEAIRMS/context.jsonld\"\n  ],\n  \"@type\": \"ada:EAIRMSCollection\",\n  \"ada:massConsumed\": \"2.5 mg\",\n  \"ada:elementType\": \"carbon\"\n}",
+          "code": "{\n  \"@context\": [\n    {\n      \"ada\": \"https://ada.astromat.org/metadata/\"\n    },\n    \"https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailEAIRMS/context.jsonld\"\n  ],\n  \"@type\": [\n    \"ada:EAIRMSCollection\"\n  ],\n  \"ada:massConsumed\": \"2.5 mg\",\n  \"ada:elementType\": \"carbon\"\n}",
           "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/geochemProperties/detailEAIRMS/example_1_1.jsonld"
         },
         {
@@ -70,7 +70,7 @@
       ]
     }
   ],
-  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: EA-IRMS Instrument Detail\ndescription: Elemental Analysis Isotope Ratio Mass Spectrometry collection\ntype: object\nproperties:\n  '@type':\n    const: ada:EAIRMSCollection\n  ada:massConsumed:\n    type: string\n  ada:elementType:\n    type: string\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  ada: https://ada.astromat.org/metadata/\n",
+  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: EA-IRMS Instrument Detail\ndescription: Elemental Analysis Isotope Ratio Mass Spectrometry collection\ntype: object\nproperties:\n  '@type':\n    type: array\n    contains:\n      const: ada:EAIRMSCollection\n    minItems: 1\n  ada:massConsumed:\n    type: string\n  ada:elementType:\n    type: string\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  ada: https://ada.astromat.org/metadata/\n",
   "gitRepository": "https://github.com/usgin/geochemBuildingBlocks",
   "gitPath": "_sources/geochemProperties/detailEAIRMS"
 }

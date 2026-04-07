@@ -5,6 +5,7 @@
 @prefix schema:      <http://schema.org/> .
 @prefix ada:         <https://ada.astromat.org/metadata/> .
 @prefix cdifd: <https://cdif.org/validation/0.1/shacl#> .
+@prefix dcterms:     <http://purl.org/dc/terms/> .
 @base <https://www.ogc.org/rules/template/> .
 
 # LAF technique profile SHACL rules.
@@ -18,16 +19,14 @@ cdifd:lafProductShape
         a sh:SPARQLTarget ;
         sh:select """
             PREFIX schema: <http://schema.org/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
             SELECT ?this
             WHERE {
                 ?this a schema:Dataset .
                 ?this a schema:Product .
-                MINUS {
-                    ?parent a schema:Dataset .
-                    ?parent ?p ?this .
-                    FILTER (?parent != ?this)
-                    FILTER (?p != schema:about)
-                }
+                ?this schema:subjectOf ?meta .
+                ?meta schema:additionalType "dcat:CatalogRecord" .
+                ?meta dcterms:conformsTo <https://w3id.org/geochem/metadata/profiles/adaLAF> .
             }
         """ ;
     ] ;

@@ -5,13 +5,24 @@
   "type": "object",
   "properties": {
     "@type": {
-      "type": "string",
-      "enum": [
-        "ada:NanoSIMSCollection",
-        "ada:NanoSIMSImageCollection",
-        "ada:NanoSIMSTabular",
-        "ada:NanoSIMSMap"
-      ]
+      "type": "array",
+      "minItems": 1,
+      "contains": {
+        "anyOf": [
+          {
+            "const": "ada:NanoSIMSCollection"
+          },
+          {
+            "const": "ada:NanoSIMSImageCollection"
+          },
+          {
+            "const": "ada:NanoSIMSTabular"
+          },
+          {
+            "const": "ada:NanoSIMSMap"
+          }
+        ]
+      }
     },
     "ada:phaseAnalyzed": {
       "title": "String Array Type",

@@ -35,14 +35,18 @@
           "type": "object",
           "properties": {
             "@type": {
-              "anyOf": [
-                {
-                  "const": "ada:SLSShapeModel"
-                },
-                {
-                  "const": "ada:SLSPartialScan"
-                }
-              ]
+              "type": "array",
+              "minItems": 1,
+              "contains": {
+                "anyOf": [
+                  {
+                    "const": "ada:SLSShapeModel"
+                  },
+                  {
+                    "const": "ada:SLSPartialScan"
+                  }
+                ]
+              }
             },
             "ada:countScans": {
               "type": "integer"

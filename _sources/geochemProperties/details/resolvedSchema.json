@@ -10,9 +10,19 @@
       "type": "object",
       "properties": {
         "@type": {
-          "const": [
-            "ada:basemap",
-            "schema:Map"
+          "type": "array",
+          "minItems": 2,
+          "allOf": [
+            {
+              "contains": {
+                "const": "ada:basemap"
+              }
+            },
+            {
+              "contains": {
+                "const": "schema:Map"
+              }
+            }
           ]
         },
         "schema:description": {
@@ -50,7 +60,11 @@
       "type": "object",
       "properties": {
         "@type": {
-          "const": "ada:ARGTDocument"
+          "type": "array",
+          "contains": {
+            "const": "ada:ARGTDocument"
+          },
+          "minItems": 1
         },
         "ada:phaseAnalyzed": {
           "type": "string"
@@ -66,7 +80,11 @@
       "type": "object",
       "properties": {
         "@type": {
-          "const": "ada:DSCHeatTabular"
+          "type": "array",
+          "contains": {
+            "const": "ada:DSCHeatTabular"
+          },
+          "minItems": 1
         },
         "ada:analysisType": {
           "type": "string"
@@ -79,17 +97,21 @@
       "type": "object",
       "properties": {
         "@type": {
-          "anyOf": [
-            {
-              "const": "ada:EMPAImage"
-            },
-            {
-              "const": "ada:EMPAQEATabular"
-            },
-            {
-              "const": "ada:EMPAImageCollection"
-            }
-          ]
+          "type": "array",
+          "minItems": 1,
+          "contains": {
+            "anyOf": [
+              {
+                "const": "ada:EMPAImage"
+              },
+              {
+                "const": "ada:EMPAQEATabular"
+              },
+              {
+                "const": "ada:EMPAImageCollection"
+              }
+            ]
+          }
         },
         "ada:spectrometersUsed": {
           "type": "string",
@@ -106,7 +128,11 @@
       "type": "object",
       "properties": {
         "@type": {
-          "const": "ada:EAIRMSCollection"
+          "type": "array",
+          "contains": {
+            "const": "ada:EAIRMSCollection"
+          },
+          "minItems": 1
         },
         "ada:massConsumed": {
           "type": "string"
@@ -122,17 +148,21 @@
       "type": "object",
       "properties": {
         "@type": {
-          "anyOf": [
-            {
-              "const": "ada:ICPOESIntermediateTabular"
-            },
-            {
-              "const": "ada:ICPOESProcessedTabular"
-            },
-            {
-              "const": "ada:ICPOESRawTabular"
-            }
-          ]
+          "type": "array",
+          "minItems": 1,
+          "contains": {
+            "anyOf": [
+              {
+                "const": "ada:ICPOESIntermediateTabular"
+              },
+              {
+                "const": "ada:ICPOESProcessedTabular"
+              },
+              {
+                "const": "ada:ICPOESRawTabular"
+              }
+            ]
+          }
         },
         "ada:mass": {
           "type": "string"
@@ -148,7 +178,11 @@
       "type": "object",
       "properties": {
         "@type": {
-          "const": "ada:L2MSCube"
+          "type": "array",
+          "contains": {
+            "const": "ada:L2MSCube"
+          },
+          "minItems": 1
         },
         "ada:sampleName": {
           "type": "string"
@@ -179,14 +213,18 @@
       "type": "object",
       "properties": {
         "@type": {
-          "anyOf": [
-            {
-              "const": "ada:LAFProcessed"
-            },
-            {
-              "const": "ada:LAFRaw"
-            }
-          ]
+          "type": "array",
+          "minItems": 1,
+          "contains": {
+            "anyOf": [
+              {
+                "const": "ada:LAFProcessed"
+              },
+              {
+                "const": "ada:LAFRaw"
+              }
+            ]
+          }
         },
         "ada:elementAnalyzed": {
           "type": "string"
@@ -205,11 +243,15 @@
       "type": "object",
       "properties": {
         "@type": {
-          "anyOf": [
-            {
-              "const": "ada:NanoIRBackground"
-            }
-          ]
+          "type": "array",
+          "minItems": 1,
+          "contains": {
+            "anyOf": [
+              {
+                "const": "ada:NanoIRBackground"
+              }
+            ]
+          }
         },
         "ada:phaseAnalyzed": {
           "title": "String Array Type",
@@ -228,13 +270,24 @@
       "type": "object",
       "properties": {
         "@type": {
-          "type": "string",
-          "enum": [
-            "ada:NanoSIMSCollection",
-            "ada:NanoSIMSImageCollection",
-            "ada:NanoSIMSTabular",
-            "ada:NanoSIMSMap"
-          ]
+          "type": "array",
+          "minItems": 1,
+          "contains": {
+            "anyOf": [
+              {
+                "const": "ada:NanoSIMSCollection"
+              },
+              {
+                "const": "ada:NanoSIMSImageCollection"
+              },
+              {
+                "const": "ada:NanoSIMSTabular"
+              },
+              {
+                "const": "ada:NanoSIMSMap"
+              }
+            ]
+          }
         },
         "ada:phaseAnalyzed": {
           "title": "String Array Type",
@@ -262,7 +315,11 @@
       "type": "object",
       "properties": {
         "@type": {
-          "const": "ada:PSFDTabular"
+          "type": "array",
+          "contains": {
+            "const": "ada:PSFDTabular"
+          },
+          "minItems": 1
         },
         "ada:imageName": {
           "title": "String Array Type",
@@ -284,17 +341,21 @@
       "type": "object",
       "properties": {
         "@type": {
-          "anyOf": [
-            {
-              "const": "ada:VNMIRSpectralPoint"
-            },
-            {
-              "const": "ada:VNMIROverviewImage"
-            },
-            {
-              "const": "ada:VNMIRSpectralMap"
-            }
-          ]
+          "type": "array",
+          "minItems": 1,
+          "contains": {
+            "anyOf": [
+              {
+                "const": "ada:VNMIRSpectralPoint"
+              },
+              {
+                "const": "ada:VNMIROverviewImage"
+              },
+              {
+                "const": "ada:VNMIRSpectralMap"
+              }
+            ]
+          }
         },
         "ada:detector": {
           "type": "string"
@@ -376,14 +437,18 @@
       "type": "object",
       "properties": {
         "@type": {
-          "anyOf": [
-            {
-              "const": "ada:QRISCalibrated"
-            },
-            {
-              "const": "ada:QRISRaw"
-            }
-          ]
+          "type": "array",
+          "minItems": 1,
+          "contains": {
+            "anyOf": [
+              {
+                "const": "ada:QRISCalibrated"
+              },
+              {
+                "const": "ada:QRISRaw"
+              }
+            ]
+          }
         },
         "ada:calibrationFile": {
           "type": "string"
@@ -418,14 +483,18 @@
       "type": "object",
       "properties": {
         "@type": {
-          "anyOf": [
-            {
-              "const": "ada:SLSShapeModel"
-            },
-            {
-              "const": "ada:SLSPartialScan"
-            }
-          ]
+          "type": "array",
+          "minItems": 1,
+          "contains": {
+            "anyOf": [
+              {
+                "const": "ada:SLSShapeModel"
+              },
+              {
+                "const": "ada:SLSPartialScan"
+              }
+            ]
+          }
         },
         "ada:countScans": {
           "type": "integer"
@@ -453,7 +522,11 @@
       "type": "object",
       "properties": {
         "@type": {
-          "const": "ada:XCTImageCollection"
+          "type": "array",
+          "contains": {
+            "const": "ada:XCTImageCollection"
+          },
+          "minItems": 1
         },
         "ada:beamFilterMaterial": {
           "type": "string"
@@ -559,7 +632,11 @@
       "type": "object",
       "properties": {
         "@type": {
-          "const": "ada:XRDTabular"
+          "type": "array",
+          "contains": {
+            "const": "ada:XRDTabular"
+          },
+          "minItems": 1
         },
         "ada:geometry": {
           "type": "string"

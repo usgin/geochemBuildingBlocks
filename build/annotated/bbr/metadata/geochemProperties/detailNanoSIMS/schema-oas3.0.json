@@ -17,13 +17,32 @@
   "type": "object",
   "properties": {
     "@type": {
-      "type": "string",
-      "enum": [
-        "ada:NanoSIMSCollection",
-        "ada:NanoSIMSImageCollection",
-        "ada:NanoSIMSTabular",
-        "ada:NanoSIMSMap"
-      ]
+      "type": "array",
+      "minItems": 1,
+      "contains": {
+        "anyOf": [
+          {
+            "enum": [
+              "ada:NanoSIMSCollection"
+            ]
+          },
+          {
+            "enum": [
+              "ada:NanoSIMSImageCollection"
+            ]
+          },
+          {
+            "enum": [
+              "ada:NanoSIMSTabular"
+            ]
+          },
+          {
+            "enum": [
+              "ada:NanoSIMSMap"
+            ]
+          }
+        ]
+      }
     },
     "ada:phaseAnalyzed": {
       "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailNanoSIMS/schema-oas3.0.json#/x-defs/ada.bbr.metadata.geochemProperties.stringArray"

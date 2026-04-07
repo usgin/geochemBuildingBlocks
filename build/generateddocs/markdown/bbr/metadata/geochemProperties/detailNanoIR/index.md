@@ -65,8 +65,11 @@ description: Nano-IR spectroscopy collections with phase analysis
 type: object
 properties:
   '@type':
-    anyOf:
-    - const: ada:NanoIRBackground
+    type: array
+    minItems: 1
+    contains:
+      anyOf:
+      - const: ada:NanoIRBackground
   ada:phaseAnalyzed:
     $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/stringArray/schema.yaml
 x-jsonld-prefixes:

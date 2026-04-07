@@ -41,7 +41,7 @@
   "resolvedSchemaProperties": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailSLS/resolvedProperties.json",
   "sourceFiles": "https://usgin.github.io/geochemBuildingBlocks/_sources/geochemProperties/detailSLS/",
   "rdfData": [],
-  "validationPassed": false,
+  "validationPassed": true,
   "testOutputs": "https://github.com/usgin/geochemBuildingBlocks/blob/main/build/tests/bbr/metadata/geochemProperties/detailSLS/",
   "description": "# SLS Instrument Detail\n\nStructured Light Scanning shape models and partial scans.\n",
   "examples": [
@@ -70,7 +70,7 @@
       ]
     }
   ],
-  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: SLS Instrument Detail\ndescription: Structured Light Scanning shape models and partial scans\ntype: object\nproperties:\n  '@type':\n    anyOf:\n    - const: ada:SLSShapeModel\n    - const: ada:SLSPartialScan\n  ada:countScans:\n    type: integer\n  ada:facets:\n    type: integer\n  ada:unitsOfMeasurement:\n    type: string\n  ada:version:\n    type: integer\n  ada:vertices:\n    type: integer\n  ada:watertight:\n    type: boolean\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  ada: https://ada.astromat.org/metadata/\n",
+  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: SLS Instrument Detail\ndescription: Structured Light Scanning shape models and partial scans\ntype: object\nproperties:\n  '@type':\n    type: array\n    minItems: 1\n    contains:\n      anyOf:\n      - const: ada:SLSShapeModel\n      - const: ada:SLSPartialScan\n  ada:countScans:\n    type: integer\n  ada:facets:\n    type: integer\n  ada:unitsOfMeasurement:\n    type: string\n  ada:version:\n    type: integer\n  ada:vertices:\n    type: integer\n  ada:watertight:\n    type: boolean\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  ada: https://ada.astromat.org/metadata/\n",
   "gitRepository": "https://github.com/usgin/geochemBuildingBlocks",
   "gitPath": "_sources/geochemProperties/detailSLS"
 }

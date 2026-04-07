@@ -71,7 +71,7 @@
       ]
     }
   ],
-  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: Basemap Instrument Detail\ndescription: Basemap images with RGB channels and pixel scaling. (Extension type,\n  not in v3 source schema.)\ntype: object\nproperties:\n  '@type':\n    const:\n    - ada:basemap\n    - schema:Map\n  schema:description:\n    type: string\n  ada:pixelUnits:\n    type: string\n  ada:pixelScaleX:\n    type: number\n  ada:pixelScaleY:\n    type: number\n  ada:channel1:\n    type: string\n  ada:channel2:\n    type: string\n  ada:channel3:\n    type: string\nrequired:\n- '@type'\n- ada:pixelScaleX\n- ada:pixelScaleY\n- ada:pixelUnits\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  ada: https://ada.astromat.org/metadata/\n",
+  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: Basemap Instrument Detail\ndescription: Basemap images with RGB channels and pixel scaling. (Extension type,\n  not in v3 source schema.)\ntype: object\nproperties:\n  '@type':\n    type: array\n    minItems: 2\n    allOf:\n    - contains:\n        const: ada:basemap\n    - contains:\n        const: schema:Map\n  schema:description:\n    type: string\n  ada:pixelUnits:\n    type: string\n  ada:pixelScaleX:\n    type: number\n  ada:pixelScaleY:\n    type: number\n  ada:channel1:\n    type: string\n  ada:channel2:\n    type: string\n  ada:channel3:\n    type: string\nrequired:\n- '@type'\n- ada:pixelScaleX\n- ada:pixelScaleY\n- ada:pixelUnits\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  ada: https://ada.astromat.org/metadata/\n",
   "gitRepository": "https://github.com/usgin/geochemBuildingBlocks",
   "gitPath": "_sources/geochemProperties/detailBasemap"
 }

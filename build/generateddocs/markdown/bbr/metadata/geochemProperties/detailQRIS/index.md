@@ -83,9 +83,12 @@ description: QRIS (Raman) with calibration and illumination parameters. (Extensi
 type: object
 properties:
   '@type':
-    anyOf:
-    - const: ada:QRISCalibrated
-    - const: ada:QRISRaw
+    type: array
+    minItems: 1
+    contains:
+      anyOf:
+      - const: ada:QRISCalibrated
+      - const: ada:QRISRaw
   ada:calibrationFile:
     type: string
   ada:pipelineVersion:

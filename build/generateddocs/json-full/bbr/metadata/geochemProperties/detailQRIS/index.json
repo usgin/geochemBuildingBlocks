@@ -41,7 +41,7 @@
   "resolvedSchemaProperties": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailQRIS/resolvedProperties.json",
   "sourceFiles": "https://usgin.github.io/geochemBuildingBlocks/_sources/geochemProperties/detailQRIS/",
   "rdfData": [],
-  "validationPassed": false,
+  "validationPassed": true,
   "testOutputs": "https://github.com/usgin/geochemBuildingBlocks/blob/main/build/tests/bbr/metadata/geochemProperties/detailQRIS/",
   "description": "# QRIS Instrument Detail\n\nQRIS (Raman) with calibration and illumination parameters. (Extension type, not in v3 source schema.)\n",
   "examples": [
@@ -70,7 +70,7 @@
       ]
     }
   ],
-  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: QRIS Instrument Detail\ndescription: QRIS (Raman) with calibration and illumination parameters. (Extension\n  type, not in v3 source schema.)\ntype: object\nproperties:\n  '@type':\n    anyOf:\n    - const: ada:QRISCalibrated\n    - const: ada:QRISRaw\n  ada:calibrationFile:\n    type: string\n  ada:pipelineVersion:\n    type: string\n  ada:focalLength:\n    type: integer\n  ada:illuminationColor:\n    type: array\n    minItems: 0\n    items:\n      type: string\n  ada:illuminationLevel:\n    type: integer\n  ada:exposureTime:\n    type: integer\n  ada:target:\n    type: string\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  ada: https://ada.astromat.org/metadata/\n",
+  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: QRIS Instrument Detail\ndescription: QRIS (Raman) with calibration and illumination parameters. (Extension\n  type, not in v3 source schema.)\ntype: object\nproperties:\n  '@type':\n    type: array\n    minItems: 1\n    contains:\n      anyOf:\n      - const: ada:QRISCalibrated\n      - const: ada:QRISRaw\n  ada:calibrationFile:\n    type: string\n  ada:pipelineVersion:\n    type: string\n  ada:focalLength:\n    type: integer\n  ada:illuminationColor:\n    type: array\n    minItems: 0\n    items:\n      type: string\n  ada:illuminationLevel:\n    type: integer\n  ada:exposureTime:\n    type: integer\n  ada:target:\n    type: string\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  ada: https://ada.astromat.org/metadata/\n",
   "gitRepository": "https://github.com/usgin/geochemBuildingBlocks",
   "gitPath": "_sources/geochemProperties/detailQRIS"
 }

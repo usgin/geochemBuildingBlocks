@@ -85,9 +85,13 @@ description: Basemap images with RGB channels and pixel scaling. (Extension type
 type: object
 properties:
   '@type':
-    const:
-    - ada:basemap
-    - schema:Map
+    type: array
+    minItems: 2
+    allOf:
+    - contains:
+        const: ada:basemap
+    - contains:
+        const: schema:Map
   schema:description:
     type: string
   ada:pixelUnits:

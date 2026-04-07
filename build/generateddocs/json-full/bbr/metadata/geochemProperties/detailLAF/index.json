@@ -41,7 +41,7 @@
   "resolvedSchemaProperties": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailLAF/resolvedProperties.json",
   "sourceFiles": "https://usgin.github.io/geochemBuildingBlocks/_sources/geochemProperties/detailLAF/",
   "rdfData": [],
-  "validationPassed": false,
+  "validationPassed": true,
   "testOutputs": "https://github.com/usgin/geochemBuildingBlocks/blob/main/build/tests/bbr/metadata/geochemProperties/detailLAF/",
   "description": "# LAF Instrument Detail\n\nLaser Ablation Fluorescence processed/raw data. elementAnalyzed goes in resultTarget.\n",
   "examples": [
@@ -70,7 +70,7 @@
       ]
     }
   ],
-  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: LAF Instrument Detail\ndescription: Laser Ablation Fluorescence processed/raw data. elementAnalyzed goes\n  in resultTarget.\ntype: object\nproperties:\n  '@type':\n    anyOf:\n    - const: ada:LAFProcessed\n    - const: ada:LAFRaw\n  ada:elementAnalyzed:\n    type: string\n  ada:sampleMassConsumed:\n    type: string\n  ada:sampleType:\n    type: string\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  ada: https://ada.astromat.org/metadata/\n",
+  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: LAF Instrument Detail\ndescription: Laser Ablation Fluorescence processed/raw data. elementAnalyzed goes\n  in resultTarget.\ntype: object\nproperties:\n  '@type':\n    type: array\n    minItems: 1\n    contains:\n      anyOf:\n      - const: ada:LAFProcessed\n      - const: ada:LAFRaw\n  ada:elementAnalyzed:\n    type: string\n  ada:sampleMassConsumed:\n    type: string\n  ada:sampleType:\n    type: string\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  ada: https://ada.astromat.org/metadata/\n",
   "gitRepository": "https://github.com/usgin/geochemBuildingBlocks",
   "gitPath": "_sources/geochemProperties/detailLAF"
 }

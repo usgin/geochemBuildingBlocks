@@ -6,23 +6,27 @@
       "type": "object",
       "properties": {
         "@type": {
-          "anyOf": [
-            {
-              "enum": [
-                "ada:EMPAImage"
-              ]
-            },
-            {
-              "enum": [
-                "ada:EMPAQEATabular"
-              ]
-            },
-            {
-              "enum": [
-                "ada:EMPAImageCollection"
-              ]
-            }
-          ]
+          "type": "array",
+          "minItems": 1,
+          "contains": {
+            "anyOf": [
+              {
+                "enum": [
+                  "ada:EMPAImage"
+                ]
+              },
+              {
+                "enum": [
+                  "ada:EMPAQEATabular"
+                ]
+              },
+              {
+                "enum": [
+                  "ada:EMPAImageCollection"
+                ]
+              }
+            ]
+          }
         },
         "ada:spectrometersUsed": {
           "type": "string",

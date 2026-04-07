@@ -41,7 +41,7 @@
   "resolvedSchemaProperties": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailEMPA/resolvedProperties.json",
   "sourceFiles": "https://usgin.github.io/geochemBuildingBlocks/_sources/geochemProperties/detailEMPA/",
   "rdfData": [],
-  "validationPassed": false,
+  "validationPassed": true,
   "testOutputs": "https://github.com/usgin/geochemBuildingBlocks/blob/main/build/tests/bbr/metadata/geochemProperties/detailEMPA/",
   "description": "# EMPA Instrument Detail\n\nElectron Microprobe Analysis with spectrometer and signal details.\n",
   "examples": [
@@ -70,7 +70,7 @@
       ]
     }
   ],
-  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: EMPA Instrument Detail\ndescription: Electron Microprobe Analysis with spectrometer and signal details.\ntype: object\nproperties:\n  '@type':\n    anyOf:\n    - const: ada:EMPAImage\n    - const: ada:EMPAQEATabular\n    - const: ada:EMPAImageCollection\n  ada:spectrometersUsed:\n    type: string\n    description: Spectrometers used in analysis\n  ada:signalUsed:\n    type: string\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  ada: https://ada.astromat.org/metadata/\n",
+  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: EMPA Instrument Detail\ndescription: Electron Microprobe Analysis with spectrometer and signal details.\ntype: object\nproperties:\n  '@type':\n    type: array\n    minItems: 1\n    contains:\n      anyOf:\n      - const: ada:EMPAImage\n      - const: ada:EMPAQEATabular\n      - const: ada:EMPAImageCollection\n  ada:spectrometersUsed:\n    type: string\n    description: Spectrometers used in analysis\n  ada:signalUsed:\n    type: string\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  ada: https://ada.astromat.org/metadata/\n",
   "gitRepository": "https://github.com/usgin/geochemBuildingBlocks",
   "gitPath": "_sources/geochemProperties/detailEMPA"
 }

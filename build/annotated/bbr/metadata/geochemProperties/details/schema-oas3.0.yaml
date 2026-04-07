@@ -6,9 +6,15 @@ x-defs:
     type: object
     properties:
       '@type':
-        enum:
-        - - ada:basemap
-          - schema:Map
+        type: array
+        minItems: 2
+        allOf:
+        - contains:
+            enum:
+            - ada:basemap
+        - contains:
+            enum:
+            - schema:Map
       schema:description:
         type: string
       ada:pixelUnits:
@@ -77,13 +83,16 @@ x-defs:
     type: object
     properties:
       '@type':
-        anyOf:
-        - enum:
-          - ada:EMPAImage
-        - enum:
-          - ada:EMPAQEATabular
-        - enum:
-          - ada:EMPAImageCollection
+        type: array
+        minItems: 1
+        contains:
+          anyOf:
+          - enum:
+            - ada:EMPAImage
+          - enum:
+            - ada:EMPAQEATabular
+          - enum:
+            - ada:EMPAImageCollection
       ada:spectrometersUsed:
         type: string
         description: Spectrometers used in analysis
@@ -121,13 +130,16 @@ x-defs:
     type: object
     properties:
       '@type':
-        anyOf:
-        - enum:
-          - ada:ICPOESIntermediateTabular
-        - enum:
-          - ada:ICPOESProcessedTabular
-        - enum:
-          - ada:ICPOESRawTabular
+        type: array
+        minItems: 1
+        contains:
+          anyOf:
+          - enum:
+            - ada:ICPOESIntermediateTabular
+          - enum:
+            - ada:ICPOESProcessedTabular
+          - enum:
+            - ada:ICPOESRawTabular
       ada:mass:
         type: string
       ada:dissolutionFactor:
@@ -174,11 +186,14 @@ x-defs:
     type: object
     properties:
       '@type':
-        anyOf:
-        - enum:
-          - ada:LAFProcessed
-        - enum:
-          - ada:LAFRaw
+        type: array
+        minItems: 1
+        contains:
+          anyOf:
+          - enum:
+            - ada:LAFProcessed
+          - enum:
+            - ada:LAFRaw
       ada:elementAnalyzed:
         type: string
       ada:sampleMassConsumed:
@@ -196,9 +211,12 @@ x-defs:
     type: object
     properties:
       '@type':
-        anyOf:
-        - enum:
-          - ada:NanoIRBackground
+        type: array
+        minItems: 1
+        contains:
+          anyOf:
+          - enum:
+            - ada:NanoIRBackground
       ada:phaseAnalyzed:
         $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/details/schema-oas3.0.yaml#/x-defs/ada.bbr.metadata.geochemProperties.stringArray
     x-jsonld-prefixes:
@@ -212,12 +230,18 @@ x-defs:
     type: object
     properties:
       '@type':
-        type: string
-        enum:
-        - ada:NanoSIMSCollection
-        - ada:NanoSIMSImageCollection
-        - ada:NanoSIMSTabular
-        - ada:NanoSIMSMap
+        type: array
+        minItems: 1
+        contains:
+          anyOf:
+          - enum:
+            - ada:NanoSIMSCollection
+          - enum:
+            - ada:NanoSIMSImageCollection
+          - enum:
+            - ada:NanoSIMSTabular
+          - enum:
+            - ada:NanoSIMSMap
       ada:phaseAnalyzed:
         $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/details/schema-oas3.0.yaml#/x-defs/ada.bbr.metadata.geochemProperties.stringArray
       ada:isotopeAnalyzed:
@@ -253,13 +277,16 @@ x-defs:
     type: object
     properties:
       '@type':
-        anyOf:
-        - enum:
-          - ada:VNMIRSpectralPoint
-        - enum:
-          - ada:VNMIROverviewImage
-        - enum:
-          - ada:VNMIRSpectralMap
+        type: array
+        minItems: 1
+        contains:
+          anyOf:
+          - enum:
+            - ada:VNMIRSpectralPoint
+          - enum:
+            - ada:VNMIROverviewImage
+          - enum:
+            - ada:VNMIRSpectralMap
       ada:detector:
         type: string
       ada:beamsplitter:
@@ -320,11 +347,14 @@ x-defs:
     type: object
     properties:
       '@type':
-        anyOf:
-        - enum:
-          - ada:QRISCalibrated
-        - enum:
-          - ada:QRISRaw
+        type: array
+        minItems: 1
+        contains:
+          anyOf:
+          - enum:
+            - ada:QRISCalibrated
+          - enum:
+            - ada:QRISRaw
       ada:calibrationFile:
         type: string
       ada:pipelineVersion:
@@ -353,11 +383,14 @@ x-defs:
     type: object
     properties:
       '@type':
-        anyOf:
-        - enum:
-          - ada:SLSShapeModel
-        - enum:
-          - ada:SLSPartialScan
+        type: array
+        minItems: 1
+        contains:
+          anyOf:
+          - enum:
+            - ada:SLSShapeModel
+          - enum:
+            - ada:SLSPartialScan
       ada:countScans:
         type: integer
       ada:facets:

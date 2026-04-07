@@ -116,10 +116,13 @@ description: Very-Near Mid-IR spectroscopy with detailed measurement parameters
 type: object
 properties:
   '@type':
-    anyOf:
-    - const: ada:VNMIRSpectralPoint
-    - const: ada:VNMIROverviewImage
-    - const: ada:VNMIRSpectralMap
+    type: array
+    minItems: 1
+    contains:
+      anyOf:
+      - const: ada:VNMIRSpectralPoint
+      - const: ada:VNMIROverviewImage
+      - const: ada:VNMIRSpectralMap
   ada:detector:
     type: string
   ada:beamsplitter:

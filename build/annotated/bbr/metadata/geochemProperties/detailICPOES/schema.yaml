@@ -5,10 +5,13 @@ description: Inductively Coupled Plasma Optical Emission Spectrometry. (Extensio
 type: object
 properties:
   '@type':
-    anyOf:
-    - const: ada:ICPOESIntermediateTabular
-    - const: ada:ICPOESProcessedTabular
-    - const: ada:ICPOESRawTabular
+    type: array
+    minItems: 1
+    contains:
+      anyOf:
+      - const: ada:ICPOESIntermediateTabular
+      - const: ada:ICPOESProcessedTabular
+      - const: ada:ICPOESRawTabular
   ada:mass:
     type: string
   ada:dissolutionFactor:

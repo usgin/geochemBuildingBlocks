@@ -5,11 +5,13 @@ description: >-
 type: object
 properties:
   "@type":
-    anyOf:
-      - const: "ada:EMPAImage"
-      - const: "ada:EMPAQEATabular"
-      - const: "ada:EMPAImageCollection"
-  'ada:spectrometersUsed':
+    type: array
+    minItems: 1
+    contains:
+      anyOf:
+        - const: "ada:EMPAImage"
+        - const: "ada:EMPAQEATabular"
+        - const: "ada:EMPAImageCollection"  'ada:spectrometersUsed':
     type: string
     description: Spectrometers used in analysis
   'ada:signalUsed':

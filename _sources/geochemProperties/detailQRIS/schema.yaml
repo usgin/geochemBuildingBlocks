@@ -6,10 +6,12 @@ description: >-
 type: object
 properties:
   "@type":
-    anyOf:
-      - const: "ada:QRISCalibrated"
-      - const: "ada:QRISRaw"
-  'ada:calibrationFile':
+    type: array
+    minItems: 1
+    contains:
+      anyOf:
+        - const: "ada:QRISCalibrated"
+        - const: "ada:QRISRaw"  'ada:calibrationFile':
     type: string
   'ada:pipelineVersion':
     type: string

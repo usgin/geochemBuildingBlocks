@@ -6,11 +6,13 @@ description: >-
 type: object
 properties:
   "@type":
-    anyOf:
-      - const: "ada:ICPOESIntermediateTabular"
-      - const: "ada:ICPOESProcessedTabular"
-      - const: "ada:ICPOESRawTabular"
-  'ada:mass':
+    type: array
+    minItems: 1
+    contains:
+      anyOf:
+        - const: "ada:ICPOESIntermediateTabular"
+        - const: "ada:ICPOESProcessedTabular"
+        - const: "ada:ICPOESRawTabular"  'ada:mass':
     type: string
   'ada:dissolutionFactor':
     type: number

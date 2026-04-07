@@ -4,10 +4,12 @@ description: Structured Light Scanning shape models and partial scans
 type: object
 properties:
   "@type":
-    anyOf:
-      - const: "ada:SLSShapeModel"
-      - const: "ada:SLSPartialScan"
-  'ada:countScans':
+    type: array
+    minItems: 1
+    contains:
+      anyOf:
+        - const: "ada:SLSShapeModel"
+        - const: "ada:SLSPartialScan"  'ada:countScans':
     type: integer
   'ada:facets':
     type: integer

@@ -170,13 +170,11 @@ def audit_building_block(bb_dir, verbose=False):
 def main():
     verbose = "--verbose" in sys.argv or "-v" in sys.argv
 
-    # Collect all BB dirs
+    # Collect all BB dirs — scan all category directories under _sources
     bb_dirs = []
-    for category in ["schemaorgProperties", "provProperties", "qualityProperties",
-                      "cdifProperties", "skosProperties"]:
-        cat_dir = BB_ROOT / category
-        if cat_dir.exists():
-            for d in sorted(cat_dir.iterdir()):
+    for category in sorted(BB_ROOT.iterdir()):
+        if category.is_dir() and category.name != "profiles":
+            for d in sorted(category.iterdir()):
                 if d.is_dir() and (d / "schema.yaml").exists():
                     bb_dirs.append(d)
 
@@ -190,13 +188,15 @@ def main():
         else:
             leaves.append(d)
 
-    # Profiles
+    # Profiles — scan all profile category directories
     profiles = []
-    profile_dir = BB_ROOT / "profiles" / "cdifProfiles"
-    if profile_dir.exists():
-        for d in sorted(profile_dir.iterdir()):
-            if d.is_dir() and (d / "schema.yaml").exists():
-                profiles.append(d)
+    profiles_root = BB_ROOT / "profiles"
+    if profiles_root.exists():
+        for profile_category in sorted(profiles_root.iterdir()):
+            if profile_category.is_dir():
+                for d in sorted(profile_category.iterdir()):
+                    if d.is_dir() and (d / "schema.yaml").exists():
+                        profiles.append(d)
 
     total_issues = 0
 

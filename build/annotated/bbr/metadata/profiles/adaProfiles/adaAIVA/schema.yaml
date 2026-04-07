@@ -12,6 +12,7 @@ allOf:
         enum:
         - Advanced Imaging and Visualization of Astromaterials (AIVA)
         - Advanced Imaging and Visualization of Astromaterials
+        - Analysis Advanced Imaging and Visualization of Astromaterials (AIVA)
     schema:distribution:
       description: Distribution items for adaAIVA. Archive hasPart items must have
         ada:componentType from technique-specific or universal values.
@@ -29,6 +30,14 @@ allOf:
                     - ada:AIVAImage
                     - ada:AIVAImageCollection
                   - '': ../adaProduct/schema.yaml#//universalComponentType
+    schema:subjectOf:
+      properties:
+        dcterms:conformsTo:
+          contains:
+            type: object
+            properties:
+              '@id':
+                const: https://w3id.org/geochem/metadata/profiles/adaAIVA
 x-jsonld-prefixes:
   schema: http://schema.org/
   ada: https://ada.astromat.org/metadata/

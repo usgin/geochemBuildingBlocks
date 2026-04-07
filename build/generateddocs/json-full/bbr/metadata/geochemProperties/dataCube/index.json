@@ -10,7 +10,7 @@
   "itemClass": "schema",
   "register": "cdif-building-block-register",
   "version": "0.1",
-  "dateOfLastChange": "2026-03-22",
+  "dateOfLastChange": "2026-04-07",
   "link": "https://github.com/usgin/geochemBuildingBlocks",
   "maturity": "draft",
   "scope": "unstable",
@@ -30,11 +30,18 @@
     "ada.bbr.metadata.geochemProperties.dataCube": [
       "https://usgin.github.io/geochemBuildingBlocks/_sources/geochemProperties/dataCube/rules.shacl"
     ],
+    "cdif.bbr.metadata.cdifProperties.cdifDataCube": [
+      "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/cdifProperties/cdifDataCube/rules.shacl"
+    ],
+    "cdif.bbr.metadata.cdifProperties.cdifPhysicalMapping": [
+      "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/cdifProperties/cdifPhysicalMapping/rules.shacl"
+    ],
     "ada.bbr.metadata.geochemProperties.detailL2MS": [
       "https://usgin.github.io/geochemBuildingBlocks/_sources/geochemProperties/detailL2MS/rules.shacl"
     ]
   },
   "dependsOn": [
+    "cdif.bbr.metadata.cdifProperties.cdifDataCube",
     "ada.bbr.metadata.geochemProperties.detailL2MS"
   ],
   "ldContext": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/dataCube/context.jsonld",
@@ -47,7 +54,7 @@
   "resolvedSchemaProperties": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/dataCube/resolvedProperties.json",
   "sourceFiles": "https://usgin.github.io/geochemBuildingBlocks/_sources/geochemProperties/dataCube/",
   "rdfData": [],
-  "validationPassed": true,
+  "validationPassed": false,
   "testOutputs": "https://github.com/usgin/geochemBuildingBlocks/blob/main/build/tests/bbr/metadata/geochemProperties/dataCube/",
   "description": "# Data Cube Type\n\nDescribes multidimensional data structures in ADA metadata. Typed as `ada:dataCube` and `cdi:DimensionalDataStructure`. Supports DimensionComponent, MeasureComponent, and AttributeComponent with value domain specifications and value mappings.\n",
   "examples": [
@@ -78,7 +85,7 @@
       ]
     }
   ],
-  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: Data Cube Type\ndescription: Multi-dimensional data cube structure using DDI-CDI. Typed as ada:dataCube\n  and cdi:StructuredDataSet per CDIF 2026 alignment.\nallOf:\n- type: object\n  properties:\n    '@type':\n      type: array\n      items:\n        type: string\n      minItems: 2\n      allOf:\n      - contains:\n          const: ada:dataCube\n      - contains:\n          const: cdi:StructuredDataSet\n    ada:componentType:\n      anyOf:\n      - type: object\n        properties:\n          '@type':\n            enum:\n            - ada:GCMSCollection\n            - ada:GCMSCube\n            - ada:FTICRMSCube\n            - ada:LCMSCollection\n            - ada:SEMEBSDGrainImageMapCube\n            - ada:SEMEDSElementalMapsCube\n            - ada:SEMEDSPointDataCube\n            - ada:SEMHRCLCube\n            - ada:STEMEDSCube\n            - ada:STEMEDSTomo\n            - ada:STEMEELSCube\n            - ada:VNMIRSpectralMap\n        required:\n        - '@type'\n      - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailL2MS/schema.yaml\n    ada:dataComponentResource:\n      type: string\n- $ref: https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/cdifProperties/cdifDataCube/schema.yaml\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  ada: https://ada.astromat.org/metadata/\n  cdi: http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/\n",
+  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: Data Cube Type\ndescription: Multi-dimensional data cube structure using DDI-CDI. Typed as ada:dataCube\n  and cdi:StructuredDataSet per CDIF 2026 alignment.\nallOf:\n- type: object\n  properties:\n    '@type':\n      type: array\n      items:\n        type: string\n      minItems: 2\n      allOf:\n      - contains:\n          const: ada:dataCube\n      - contains:\n          const: cdi:StructuredDataSet\n    ada:componentType:\n      anyOf:\n      - type: object\n        properties:\n          '@type':\n            enum:\n            - ada:GCMSCollection\n            - ada:GCMSCube\n            - ada:FTICRMSCube\n            - ada:LCMSCollection\n            - ada:SEMEBSDGrainImageMapCube\n            - ada:SEMEDSElementalMapsCube\n            - ada:SEMEDSPointDataCube\n            - ada:SEMHRCLCube\n            - ada:STEMEDSCube\n            - ada:STEMEDSTomo\n            - ada:STEMEELSCube\n            - ada:VNMIRSpectralMap\n        required:\n        - '@type'\n      - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailL2MS/schema.yaml\n    ada:dataComponentResource:\n      type: string\n- $ref: https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/cdifProperties/cdifDataCube/schema.yaml\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  ada: https://ada.astromat.org/metadata/\n  cdi: http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/\n",
   "gitRepository": "https://github.com/usgin/geochemBuildingBlocks",
   "gitPath": "_sources/geochemProperties/dataCube"
 }

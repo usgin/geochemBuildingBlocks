@@ -10,7 +10,7 @@
   "itemClass": "schema",
   "register": "cdif-building-block-register",
   "version": "0.1",
-  "dateOfLastChange": "2026-03-22",
+  "dateOfLastChange": "2026-04-07",
   "link": "https://github.com/usgin/geochemBuildingBlocks",
   "maturity": "draft",
   "scope": "unstable",
@@ -29,8 +29,35 @@
   "shaclShapes": {
     "ada.bbr.metadata.geochemProperties.instrument": [
       "https://usgin.github.io/geochemBuildingBlocks/_sources/geochemProperties/instrument/rules.shacl"
+    ],
+    "cdif.bbr.metadata.schemaorgProperties.instrument": [
+      "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/instrument/rules.shacl"
+    ],
+    "cdif.bbr.metadata.schemaorgProperties.additionalProperty": [
+      "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/additionalProperty/rules.shacl"
+    ],
+    "cdif.bbr.metadata.schemaorgProperties.definedTerm": [
+      "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/definedTerm/rules.shacl"
+    ],
+    "cdif.bbr.metadata.schemaorgProperties.identifier": [
+      "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/identifier/rules.shacl"
+    ],
+    "cdif.bbr.metadata.schemaorgProperties.organization": [
+      "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/organization/rules.shacl"
+    ],
+    "cdif.bbr.metadata.schemaorgProperties.agentInRole": [
+      "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/agentInRole/rules.shacl"
+    ],
+    "cdif.bbr.metadata.schemaorgProperties.person": [
+      "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/person/rules.shacl"
+    ],
+    "cdif.bbr.metadata.schemaorgProperties.labeledLink": [
+      "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/labeledLink/rules.shacl"
     ]
   },
+  "dependsOn": [
+    "cdif.bbr.metadata.schemaorgProperties.instrument"
+  ],
   "ldContext": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/context.jsonld",
   "schema": {
     "application/yaml": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema.yaml",
@@ -41,7 +68,7 @@
   "resolvedSchemaProperties": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/resolvedProperties.json",
   "sourceFiles": "https://usgin.github.io/geochemBuildingBlocks/_sources/geochemProperties/instrument/",
   "rdfData": [],
-  "validationPassed": true,
+  "validationPassed": false,
   "testOutputs": "https://github.com/usgin/geochemBuildingBlocks/blob/main/build/tests/bbr/metadata/geochemProperties/instrument/",
   "description": "# ADA Analysis Instrument\n\nExtends the core CDIF [instrument](https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/instrument/) building block for ADA analytical instruments. Instruments are typed as `schema:Thing` + `schema:Product` (from core) with domain-specific classifications in `schema:additionalType` (e.g. `nxs:BaseClass/NXinstrument`, `ada:AMSInstrument`).\n\nInherits all core instrument properties: hierarchical sub-components via `schema:hasPart`, manufacturer, model, ownership, calibration properties, and linked resources.\n",
   "examples": [
@@ -71,7 +98,7 @@
       ]
     }
   ],
-  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: ADA Analysis Instrument\ndescription: ADA analytical instrument building block. Extends the core CDIF instrument\n  building block with NeXus NXinstrument classification via additionalType. Instruments\n  are typed as schema:Thing + schema:Product (from core) with domain-specific types\n  (e.g. nxs:BaseClass/NXinstrument, ada:AMSInstrument) in additionalType.\nallOf:\n- $ref: https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/instrument/schema.yaml\n- type: object\n  properties:\n    schema:additionalType:\n      description: Domain-specific instrument type classifications. Should include\n        a NeXus base class (e.g. nxs:BaseClass/NXinstrument) and/or technique-specific\n        identifier (e.g. ada:AMSInstrument, GCMD instrument identifier).\n      type: array\n      items:\n        type: string\n      minItems: 1\n  required:\n  - schema:additionalType\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  nxs: http://purl.org/nexusformat/definitions/\n",
+  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: ADA Analysis Instrument\ndescription: ADA analytical instrument building block. Extends the core CDIF instrument\n  building block with NeXus NXinstrument classification via additionalType. Instruments\n  are typed as schema:Thing + schema:Product (from core) with domain-specific types\n  (e.g. nxs:BaseClass/NXinstrument, ada:AMSInstrument) in additionalType.\nallOf:\n- $ref: https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/instrument/schema.yaml\n- type: object\n  properties:\n    schema:additionalType:\n      description: Domain-specific instrument type classifications. Should include\n        a NeXus base class (e.g. nxs:BaseClass/NXinstrument) and/or technique-specific\n        identifier (e.g. ada:AMSInstrument, GCMD instrument identifier).\n      type: array\n      items:\n        type: string\n      minItems: 1\n  required:\n  - schema:additionalType\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  nxs: http://purl.org/nexusformat/definitions/\n",
   "gitRepository": "https://github.com/usgin/geochemBuildingBlocks",
   "gitPath": "_sources/geochemProperties/instrument"
 }

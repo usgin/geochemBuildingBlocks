@@ -400,22 +400,25 @@ Mock data for validation and testing.
         "schema:dateModified": "2026-01-15",
         "dcterms:conformsTo": [
             {
-                "@id": "https://w3id.org/cdif/core/1.0/"
+                "@id": "https://w3id.org/cdif/core/1.0"
             },
             {
-                "@id": "https://w3id.org/cdif/discovery/1.0/"
+                "@id": "https://w3id.org/cdif/discovery/1.0"
             },
             {
-                "@id": "https://w3id.org/cdif/bbr/metadata/profiles/adaProfiles/adaNGNSMS"
+                "@id": "https://w3id.org/geochem/metadata/profiles/adaNGNSMS"
             },
             {
-                "@id": "https://w3id.org/cdif/dataDescription/1.0/"
+                "@id": "https://w3id.org/cdif/data_description/1.0"
             },
             {
-                "@id": "https://w3id.org/cdif/provenance/1.0/"
+                "@id": "https://w3id.org/cdif/provenance/1.0"
             },
             {
-                "@id": "https://w3id.org/cdif/manifest/1.0/"
+                "@id": "https://w3id.org/cdif/manifest/1.0"
+            },
+            {
+                "@id": "https://w3id.org/geochem/metadata/profiles/adaProduct"
             }
         ],
         "schema:maintainer": {
@@ -434,7 +437,6 @@ Mock data for validation and testing.
         }
     }
 }
-
 ```
 
 #### jsonld
@@ -799,22 +801,25 @@ Mock data for validation and testing.
     "schema:dateModified": "2026-01-15",
     "dcterms:conformsTo": [
       {
-        "@id": "https://w3id.org/cdif/core/1.0/"
+        "@id": "https://w3id.org/cdif/core/1.0"
       },
       {
-        "@id": "https://w3id.org/cdif/discovery/1.0/"
+        "@id": "https://w3id.org/cdif/discovery/1.0"
       },
       {
-        "@id": "https://w3id.org/cdif/bbr/metadata/profiles/adaProfiles/adaNGNSMS"
+        "@id": "https://w3id.org/geochem/metadata/profiles/adaNGNSMS"
       },
       {
-        "@id": "https://w3id.org/cdif/dataDescription/1.0/"
+        "@id": "https://w3id.org/cdif/data_description/1.0"
       },
       {
-        "@id": "https://w3id.org/cdif/provenance/1.0/"
+        "@id": "https://w3id.org/cdif/provenance/1.0"
       },
       {
-        "@id": "https://w3id.org/cdif/manifest/1.0/"
+        "@id": "https://w3id.org/cdif/manifest/1.0"
+      },
+      {
+        "@id": "https://w3id.org/geochem/metadata/profiles/adaProduct"
       }
     ],
     "schema:maintainer": {
@@ -968,12 +973,13 @@ ex:adaNGNSMS-file-002 a schema1:DigitalDocument,
     ada:componentType "ada:methodDescription" .
 
 ex:adaNGNSMS-metadata-001 a schema1:Dataset ;
-    dcterms:conformsTo <https://w3id.org/cdif/bbr/metadata/profiles/adaProfiles/adaNGNSMS>,
-        <https://w3id.org/cdif/core/1.0/>,
-        <https://w3id.org/cdif/dataDescription/1.0/>,
-        <https://w3id.org/cdif/discovery/1.0/>,
-        <https://w3id.org/cdif/manifest/1.0/>,
-        <https://w3id.org/cdif/provenance/1.0/> ;
+    dcterms:conformsTo <https://w3id.org/cdif/core/1.0>,
+        <https://w3id.org/cdif/data_description/1.0>,
+        <https://w3id.org/cdif/discovery/1.0>,
+        <https://w3id.org/cdif/manifest/1.0>,
+        <https://w3id.org/cdif/provenance/1.0>,
+        <https://w3id.org/geochem/metadata/profiles/adaNGNSMS>,
+        <https://w3id.org/geochem/metadata/profiles/adaProduct> ;
     schema1:about ex:adaNGNSMS-example-001 ;
     schema1:additionalType "dcat:CatalogRecord" ;
     schema1:dateModified "2026-01-15" ;
@@ -1045,6 +1051,14 @@ allOf:
                     - ada:NGNSMSRaw
                     - ada:NGNSMSProcessed
                   - '': ../adaProduct/schema.yaml#//universalComponentType
+    schema:subjectOf:
+      properties:
+        dcterms:conformsTo:
+          contains:
+            type: object
+            properties:
+              '@id':
+                const: https://w3id.org/geochem/metadata/profiles/adaNGNSMS
 x-jsonld-prefixes:
   schema: http://schema.org/
   ada: https://ada.astromat.org/metadata/
@@ -1070,14 +1084,20 @@ Links to the schema:
 {
   "@context": {
     "schema": "http://schema.org/",
+    "prov": "http://www.w3.org/ns/prov#",
+    "ex": "https://example.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "dcat": "http://www.w3.org/ns/dcat#",
     "ada": "https://ada.astromat.org/metadata/",
     "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
     "csvw": "http://www.w3.org/ns/csvw#",
-    "prov": "http://www.w3.org/ns/prov#",
     "spdx": "http://spdx.org/rdf/terms#",
     "nxs": "http://purl.org/nexusformat/definitions/",
-    "dcterms": "http://purl.org/dc/terms/",
     "geosparql": "http://www.opengis.net/ont/geosparql#",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "xas": "https://xas.org/dictionary/",
+    "time": "http://www.w3.org/2006/time#",
     "@version": 1.1
   }
 }

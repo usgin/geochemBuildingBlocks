@@ -1,6 +1,6 @@
 {
   "x-defs": {
-    "metadataBuildingBlocks__sources_schemaorgProperties_spatialExtent_schema": {
+    "cdif.bbr.metadata.schemaorgProperties.spatialExtent": {
       "description": "Spatial Extent description for CDIF discovery profile.  Note required prefix declaration for geoSparql ( http://www.opengis.net/ont/geosparql#) and OGC simple features (sf: http://www.opengis.net/ont/sf#)",
       "type": "object",
       "properties": {
@@ -18,14 +18,7 @@
           "minItems": 1
         },
         "schema:additionalType": {
-          "description": "Domain-specific type classifications for this place (e.g. facility type, laboratory classification).",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "schema:name": {
-          "description": "multiple place names or DefinedTerms that have a place name and URI for the location",
+          "description": "Domain-specific type classifications for this place (e.g. facility type,laboratory classification, feature type).",
           "type": "array",
           "items": {
             "anyOf": [
@@ -33,10 +26,21 @@
                 "type": "string"
               },
               {
-                "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/laboratory/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_spatialExtent_schema/$defs/DefinedTerm"
+                "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/laboratory/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.spatialExtent/$defs/DefinedTerm"
               }
             ]
           }
+        },
+        "schema:name": {
+          "description": "A place name for the location, either as a string or a DefinedTerm from a gazetteer.",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/laboratory/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.spatialExtent/$defs/DefinedTerm"
+            }
+          ]
         },
         "schema:identifier": {
           "description": "Formal identifier for this place (e.g. ROR identifier for a facility).",
@@ -45,26 +49,23 @@
               "type": "string"
             },
             {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
+              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/laboratory/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.spatialExtent/$defs/Identifier"
             }
           ]
         },
         "schema:alternateName": {
           "description": "Alternate or abbreviated name(s) for this place.",
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "array",
-              "items": {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
                 "type": "string"
+              },
+              {
+                "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/laboratory/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.spatialExtent/$defs/DefinedTerm"
               }
-            }
-          ]
+            ]
+          }
         },
         "schema:geo": {
           "description": "Either a bounding box or a point location.",
@@ -204,15 +205,43 @@
           }
         }
       },
+      "anyOf": [
+        {
+          "required": [
+            "schema:name"
+          ]
+        },
+        {
+          "required": [
+            "schema:identifier"
+          ]
+        },
+        {
+          "required": [
+            "schema:geo"
+          ]
+        },
+        {
+          "required": [
+            "geosparql:hasGeometry"
+          ]
+        }
+      ],
       "$defs": {
         "DefinedTerm": {
-          "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/laboratory/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_definedTerm_schema"
+          "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/laboratory/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.definedTerm"
+        },
+        "Identifier": {
+          "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/laboratory/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.identifier"
         }
       },
-      "x-schema-source": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/spatialExtent/schema.yaml",
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/"
+      },
+      "x-schema-source": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/spatialExtent/schema.json",
       "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
     },
-    "metadataBuildingBlocks__sources_schemaorgProperties_definedTerm_schema": {
+    "cdif.bbr.metadata.schemaorgProperties.definedTerm": {
       "description": "schema.org Defined Term schema",
       "type": "object",
       "properties": {
@@ -238,17 +267,17 @@
               "type": "string"
             },
             {
-              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/laboratory/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_identifier_schema"
+              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/laboratory/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.identifier"
             }
           ]
         },
         "schema:inDefinedTermSet": {
           "type": "string",
-          "description": "Identifier for the controlled vocabulary responsible for this keyword."
+          "description": "Name for the controlled vocabulary responsible for this keyword."
         },
         "schema:termCode": {
           "type": "string",
-          "description": "A representative code for this keyword in the controlled vocabulary (Optional).  Analogous to skos:Notation"
+          "description": "A representative code for this keyword in the controlled vocabulary. Analogous to skos:Notation"
         }
       },
       "allOf": [
@@ -277,10 +306,13 @@
           ]
         }
       ],
-      "x-schema-source": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/definedTerm/schema.yaml",
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/"
+      },
+      "x-schema-source": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/definedTerm/schema.json",
       "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
     },
-    "metadataBuildingBlocks__sources_schemaorgProperties_identifier_schema": {
+    "cdif.bbr.metadata.schemaorgProperties.identifier": {
       "description": "Properties for a schema.org identifier",
       "type": "object",
       "properties": {
@@ -331,7 +363,10 @@
           ]
         }
       ],
-      "x-schema-source": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/identifier/schema.yaml",
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/"
+      },
+      "x-schema-source": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/identifier/schema.json",
       "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
     }
   },
@@ -339,7 +374,7 @@
   "description": "ADA laboratory or facility building block. Extends the core CDIF spatialExtent (schema:Place) with NeXus NXsource classification via additionalType. Inherits place name, identifier, alternateName, geo coordinates, and geosparql geometry from spatialExtent.",
   "allOf": [
     {
-      "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/laboratory/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_spatialExtent_schema"
+      "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/laboratory/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.spatialExtent"
     },
     {
       "type": "object",

@@ -1,6 +1,6 @@
 {
   "x-defs": {
-    "metadataBuildingBlocks__sources_schemaorgProperties_instrument_schema": {
+    "cdif.bbr.metadata.schemaorgProperties.instrument": {
       "title": "Instrument Description",
       "description": "Schema for describing laboratory instruments and instrument systems. Supports ownership, manufacturer, model, commissioning dates, hierarchical sub-components via schema:hasPart, and domain-specific typing. Instruments may be standalone devices or complex systems with sub-components.",
       "type": "object",
@@ -71,41 +71,24 @@
         },
         "schema:alternateName": {
           "description": "Alternate name(s), e.g. specific make/model designation, common abbreviation.",
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            }
-          ]
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "schema:identifier": {
           "description": "Formal identifier(s) for this instrument. Use PropertyValue for structured identifiers (e.g. PIDINST, serial number, inventory number).",
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_instrument_schema/$defs/Identifier"
-            },
-            {
-              "type": "array",
-              "items": {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_instrument_schema/$defs/Identifier"
-                  }
-                ]
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.instrument/$defs/Identifier"
               }
-            }
-          ]
+            ]
+          }
         },
         "schema:url": {
           "type": "string",
@@ -116,7 +99,7 @@
           "description": "Organization that manufactured this instrument.",
           "allOf": [
             {
-              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_instrument_schema/$defs/Organization"
+              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.instrument/$defs/Organization"
             }
           ]
         },
@@ -147,7 +130,7 @@
                   "type": "string"
                 },
                 {
-                  "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_instrument_schema/$defs/Identifier"
+                  "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.instrument/$defs/Identifier"
                 }
               ]
             }
@@ -160,14 +143,14 @@
           "description": "Instrument type classification(s) from a controlled vocabulary.",
           "type": "array",
           "items": {
-            "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_instrument_schema/$defs/DefinedTerm"
+            "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.instrument/$defs/DefinedTerm"
           }
         },
         "schema:owner": {
           "description": "Organization that owns this instrument.",
           "allOf": [
             {
-              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_instrument_schema/$defs/Organization"
+              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.instrument/$defs/Organization"
             }
           ]
         },
@@ -175,14 +158,14 @@
           "description": "Agents associated with this instrument in specific roles (e.g. operator, custodian, principal investigator). Use schema:owner for the owning organization.",
           "type": "array",
           "items": {
-            "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_instrument_schema/$defs/AgentInRole"
+            "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.instrument/$defs/AgentInRole"
           }
         },
         "schema:additionalProperty": {
           "type": "array",
           "description": "Instrument-specific properties (measured variables, detection limits, calibration information, operating parameters, etc.).",
           "items": {
-            "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_instrument_schema/$defs/AdditionalProperty"
+            "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.instrument/$defs/AdditionalProperty"
           }
         },
         "schema:validFrom": {
@@ -199,7 +182,7 @@
           "items": {
             "anyOf": [
               {
-                "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_instrument_schema/$defs/InstrumentComponent"
+                "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.instrument/$defs/InstrumentComponent"
               },
               {
                 "type": "object",
@@ -220,7 +203,7 @@
           "type": "array",
           "description": "Links to related resources (manuals, datasheets, calibration records, related instruments).",
           "items": {
-            "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_instrument_schema/$defs/LabeledLink"
+            "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.instrument/$defs/LabeledLink"
           }
         },
         "schema:subjectOf": {
@@ -278,25 +261,25 @@
       ],
       "$defs": {
         "Identifier": {
-          "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_identifier_schema"
+          "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.identifier"
         },
         "Organization": {
-          "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_organization_schema"
+          "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.organization"
         },
         "Person": {
-          "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_person_schema"
+          "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.person"
         },
         "DefinedTerm": {
-          "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_definedTerm_schema"
+          "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.definedTerm"
         },
         "AgentInRole": {
-          "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_agentInRole_schema"
+          "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.agentInRole"
         },
         "AdditionalProperty": {
-          "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_additionalProperty_schema"
+          "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.additionalProperty"
         },
         "LabeledLink": {
-          "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_labeledLink_schema"
+          "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.labeledLink"
         },
         "InstrumentComponent": {
           "type": "object",
@@ -325,17 +308,10 @@
               "type": "string"
             },
             "schema:alternateName": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                }
-              ]
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             },
             "schema:identifier": {
               "anyOf": [
@@ -343,32 +319,25 @@
                   "type": "string"
                 },
                 {
-                  "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_instrument_schema/$defs/Identifier"
+                  "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.instrument/$defs/Identifier"
                 }
               ]
             },
             "schema:additionalType": {
               "description": "Component type classification.",
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                }
-              ]
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             },
             "schema:additionalProperty": {
               "type": "array",
               "items": {
-                "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_instrument_schema/$defs/AdditionalProperty"
+                "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.instrument/$defs/AdditionalProperty"
               }
             },
             "schema:manufacturer": {
-              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_instrument_schema/$defs/Organization"
+              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.instrument/$defs/Organization"
             },
             "schema:model": {
               "type": "object",
@@ -394,7 +363,7 @@
                       "type": "string"
                     },
                     {
-                      "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_instrument_schema/$defs/Identifier"
+                      "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.instrument/$defs/Identifier"
                     }
                   ]
                 }
@@ -406,10 +375,13 @@
           ]
         }
       },
-      "x-schema-source": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/instrument/schema.yaml",
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/"
+      },
+      "x-schema-source": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/instrument/schema.json",
       "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
     },
-    "metadataBuildingBlocks__sources_schemaorgProperties_identifier_schema": {
+    "cdif.bbr.metadata.schemaorgProperties.identifier": {
       "description": "Properties for a schema.org identifier",
       "type": "object",
       "properties": {
@@ -460,10 +432,13 @@
           ]
         }
       ],
-      "x-schema-source": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/identifier/schema.yaml",
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/"
+      },
+      "x-schema-source": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/identifier/schema.json",
       "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
     },
-    "metadataBuildingBlocks__sources_schemaorgProperties_organization_schema": {
+    "cdif.bbr.metadata.schemaorgProperties.organization": {
       "type": "object",
       "properties": {
         "@id": {
@@ -473,7 +448,23 @@
           "default": "schema:Organization",
           "type": "array",
           "items": {
-            "type": "string"
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "schema:Organization",
+                  "schema:FundingAgency",
+                  "schema:Consortium",
+                  "schema:Corporation",
+                  "schema:EducationalOrganization",
+                  "schema:FundingScheme",
+                  "schema:GovernmentOrganization",
+                  "schema:NGO",
+                  "schema:Project",
+                  "schema:ResearchOrganization"
+                ]
+              }
+            ]
           },
           "contains": {
             "enum": [
@@ -487,21 +478,7 @@
           "items": {
             "anyOf": [
               {
-                "type": "string",
-                "enum": [
-                  "schema:FundingAgency",
-                  "schema:Consortium",
-                  "schema:Corporation",
-                  "schema:EducationalOrganization",
-                  "schema:FundingScheme",
-                  "schema:GovernmentOrganization",
-                  "schema:NGO",
-                  "schema:Project",
-                  "schema:ResearchOrganization"
-                ]
-              },
-              {
-                "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_definedTerm_schema"
+                "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.definedTerm"
               },
               {
                 "type": "string"
@@ -524,7 +501,7 @@
           "description": "identifier for organization",
           "anyOf": [
             {
-              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_identifier_schema"
+              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.identifier"
             },
             {
               "type": "string"
@@ -546,9 +523,6 @@
                     "type": "string"
                   }
                 }
-              },
-              {
-                "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_identifier_schema"
               }
             ]
           }
@@ -575,10 +549,13 @@
           ]
         }
       ],
-      "x-schema-source": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/organization/schema.yaml",
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/"
+      },
+      "x-schema-source": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/organization/schema.json",
       "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
     },
-    "metadataBuildingBlocks__sources_schemaorgProperties_person_schema": {
+    "cdif.bbr.metadata.schemaorgProperties.person": {
       "description": "schema for cdif profile of schema.org/Person",
       "type": "object",
       "properties": {
@@ -599,7 +576,7 @@
         },
         "schema:name": {
           "type": "string",
-          "description": "string label for person that is meaningful for human users"
+          "description": "string label for person that is meaningful for human users, should format consistently. Recommend 'Family Name, Given name' format."
         },
         "schema:description": {
           "type": "string"
@@ -608,7 +585,7 @@
           "description": "identifier for person, recommend ORCID",
           "anyOf": [
             {
-              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_identifier_schema"
+              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.identifier"
             },
             {
               "type": "string"
@@ -623,12 +600,13 @@
           "description": "if affiliation is present, value must be a schema:Organization.",
           "allOf": [
             {
-              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_organization_schema"
+              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.organization"
             }
           ]
         },
         "schema:contactPoint": {
           "type": "object",
+          "description": "restrict to email only. Schema.org allows telephone and postal contacts as well",
           "properties": {
             "@type": {
               "default": "schema:ContactPoint",
@@ -647,7 +625,9 @@
               "type": "string"
             }
           },
-          "description": "restrict to email only. Schema.org allows telephone and postal contacts as well"
+          "required": [
+            "schema:email"
+          ]
         },
         "schema:sameAs": {
           "type": "array",
@@ -664,9 +644,6 @@
                     "type": "string"
                   }
                 }
-              },
-              {
-                "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_identifier_schema"
               }
             ]
           }
@@ -693,10 +670,13 @@
           ]
         }
       ],
-      "x-schema-source": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/person/schema.yaml",
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/"
+      },
+      "x-schema-source": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/person/schema.json",
       "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
     },
-    "metadataBuildingBlocks__sources_schemaorgProperties_definedTerm_schema": {
+    "cdif.bbr.metadata.schemaorgProperties.definedTerm": {
       "description": "schema.org Defined Term schema",
       "type": "object",
       "properties": {
@@ -722,17 +702,17 @@
               "type": "string"
             },
             {
-              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_identifier_schema"
+              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.identifier"
             }
           ]
         },
         "schema:inDefinedTermSet": {
           "type": "string",
-          "description": "Identifier for the controlled vocabulary responsible for this keyword."
+          "description": "Name for the controlled vocabulary responsible for this keyword."
         },
         "schema:termCode": {
           "type": "string",
-          "description": "A representative code for this keyword in the controlled vocabulary (Optional).  Analogous to skos:Notation"
+          "description": "A representative code for this keyword in the controlled vocabulary. Analogous to skos:Notation"
         }
       },
       "allOf": [
@@ -761,10 +741,13 @@
           ]
         }
       ],
-      "x-schema-source": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/definedTerm/schema.yaml",
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/"
+      },
+      "x-schema-source": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/definedTerm/schema.json",
       "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
     },
-    "metadataBuildingBlocks__sources_schemaorgProperties_agentInRole_schema": {
+    "cdif.bbr.metadata.schemaorgProperties.agentInRole": {
       "description": "For more granularity on how a person contributed to a Dataset, use schema:Role. The schema.org documentation does not state that the Role type is an expected data type of author, creator and contributor, but that is addressed in this blog post (http://blog.schema.org/2014/06/introducing-role.html). see https://github.com/ESIPFed/science-on-schema.org/blob/develop/guides/Dataset.md#roles-of-people",
       "type": "object",
       "properties": {
@@ -787,7 +770,7 @@
               "type": "string"
             },
             {
-              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_definedTerm_schema"
+              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.definedTerm"
             }
           ]
         },
@@ -806,22 +789,26 @@
               ]
             },
             {
-              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_person_schema"
+              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.person"
             },
             {
-              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_organization_schema"
+              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.organization"
             }
           ]
         }
       },
       "required": [
+        "@type",
         "schema:roleName",
         "schema:contributor"
       ],
-      "x-schema-source": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/agentInRole/schema.yaml",
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/"
+      },
+      "x-schema-source": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/agentInRole/schema.json",
       "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
     },
-    "metadataBuildingBlocks__sources_schemaorgProperties_additionalProperty_schema": {
+    "cdif.bbr.metadata.schemaorgProperties.additionalProperty": {
       "type": "object",
       "title": "additionalProperty PropertyValue",
       "description": "PropertyValue values required to define a soft-typed property with a value. ",
@@ -841,7 +828,7 @@
         "schema:propertyID": {
           "type": "array",
           "items": {
-            "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_additionalProperty_schema/$defs/propertyID_item"
+            "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.additionalProperty/$defs/propertyID_item"
           },
           "minItems": 1,
           "description": "identifier or name for the property concept quantified by the values in this variable slot. Multiple values can specify the property at different levels of granularity."
@@ -871,7 +858,7 @@
               "type": "string"
             },
             {
-              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_additionalProperty_schema/$defs/DefinedTerm"
+              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.additionalProperty/$defs/DefinedTerm"
             }
           ]
         },
@@ -885,7 +872,7 @@
       ],
       "$defs": {
         "DefinedTerm": {
-          "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_definedTerm_schema"
+          "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.definedTerm"
         },
         "propertyID_item": {
           "anyOf": [
@@ -901,15 +888,19 @@
               }
             },
             {
-              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_additionalProperty_schema/$defs/DefinedTerm"
+              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.additionalProperty/$defs/DefinedTerm"
             }
           ]
         }
       },
-      "x-schema-source": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/additionalProperty/schema.yaml",
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/",
+        "nxs": "http://purl.org/nexusformat/definitions/"
+      },
+      "x-schema-source": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/additionalProperty/schema.json",
       "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
     },
-    "metadataBuildingBlocks__sources_schemaorgProperties_labeledLink_schema": {
+    "cdif.bbr.metadata.schemaorgProperties.labeledLink": {
       "description": "schema for a labeled link, a profile of schema.org/CreativeWork",
       "type": "object",
       "properties": {
@@ -941,7 +932,10 @@
         "@type",
         "schema:url"
       ],
-      "x-schema-source": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/labeledLink/schema.yaml",
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/"
+      },
+      "x-schema-source": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/labeledLink/schema.json",
       "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
     }
   },
@@ -949,7 +943,7 @@
   "description": "ADA analytical instrument building block. Extends the core CDIF instrument building block with NeXus NXinstrument classification via additionalType. Instruments are typed as schema:Thing + schema:Product (from core) with domain-specific types (e.g. nxs:BaseClass/NXinstrument, ada:AMSInstrument) in additionalType.",
   "allOf": [
     {
-      "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_instrument_schema"
+      "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.instrument"
     },
     {
       "type": "object",

@@ -10,7 +10,7 @@
   "itemClass": "schema",
   "register": "cdif-building-block-register",
   "version": "0.1",
-  "dateOfLastChange": "2026-03-22",
+  "dateOfLastChange": "2026-04-07",
   "link": "https://github.com/usgin/geochemBuildingBlocks",
   "maturity": "draft",
   "scope": "unstable",
@@ -40,7 +40,7 @@
   "resolvedSchemaProperties": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/creativeWork/resolvedProperties.json",
   "sourceFiles": "https://usgin.github.io/geochemBuildingBlocks/_sources/geochemProperties/creativeWork/",
   "rdfData": [],
-  "validationPassed": true,
+  "validationPassed": false,
   "testOutputs": "https://github.com/usgin/geochemBuildingBlocks/blob/main/build/tests/bbr/metadata/geochemProperties/creativeWork/",
   "description": "# Creative Work Type\n\nA shell type used mostly for labeled links to other resources. Implements `schema:CreativeWork` with name, description, and URL properties. Used in ADA metadata for license references and related resource links.\n",
   "examples": [
@@ -69,7 +69,7 @@
       ]
     }
   ],
-  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: Creative Work Type\ndescription: Shell type for labeled links to other resources. Any schema.org CreativeWork\n  property could be included.\ntype: object\nproperties:\n  '@type':\n    type: string\n    default: schema:CreativeWork\n    const: schema:CreativeWork\n  schema:name:\n    type: string\n  schema:description:\n    type: string\n  schema:url:\n    type: string\nrequired:\n- '@type'\nx-jsonld-prefixes:\n  schema: http://schema.org/\n",
+  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: Creative Work Type\ndescription: Shell type for labeled links to other resources. Any schema.org CreativeWork\n  property could be included.\ntype: object\nproperties:\n  '@type':\n    type: array\n    contains:\n      const: schema:CreativeWork\n    minItems: 1\n  schema:name:\n    type: string\n  schema:description:\n    type: string\n  schema:url:\n    type: string\nrequired:\n- '@type'\nx-jsonld-prefixes:\n  schema: http://schema.org/\n",
   "gitRepository": "https://github.com/usgin/geochemBuildingBlocks",
   "gitPath": "_sources/geochemProperties/creativeWork"
 }

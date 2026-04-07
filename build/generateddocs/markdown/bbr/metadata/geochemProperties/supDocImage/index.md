@@ -3,7 +3,7 @@
 
 `ada.bbr.metadata.geochemProperties.supDocImage` *v0.1*
 
-Supplemental document images including analysis locations and context photos. Defines properties: @type, componentType, numPixelsX, numPixelsY, _original_name.
+Supplemental document images including analysis locations and context photos. Defines properties: @type, componentType, numPixelsX, numPixelsY, schema:isBasedOn.
 
 [*Status*](http://www.opengis.net/def/status): Under development
 
@@ -26,7 +26,7 @@ A context photography image used as supplemental documentation.
   },
   "ada:numPixelsX": 2048,
   "ada:numPixelsY": 1536,
-  "_original_name": "sample_context_photo_001.jpg"
+  "schema:isBasedOn": "sample_context_photo_001.jpg"
 }
 
 ```
@@ -50,7 +50,7 @@ A context photography image used as supplemental documentation.
   },
   "ada:numPixelsX": 2048,
   "ada:numPixelsY": 1536,
-  "_original_name": "sample_context_photo_001.jpg"
+  "schema:isBasedOn": "sample_context_photo_001.jpg"
 }
 ```
 
@@ -62,6 +62,7 @@ A context photography image used as supplemental documentation.
 
 [] a schema1:DigitalDocument,
         ada:image ;
+    schema1:isBasedOn "sample_context_photo_001.jpg" ;
     ada:componentType [ a ada:contextPhotography ] ;
     ada:numPixelsX 2048 ;
     ada:numPixelsY 1536 .
@@ -111,8 +112,9 @@ properties:
     type: integer
   ada:numPixelsY:
     type: integer
-  _original_name:
+  schema:isBasedOn:
     type: string
+    description: Original file name before PDS4-compliant renaming
 required:
 - '@type'
 - ada:componentType

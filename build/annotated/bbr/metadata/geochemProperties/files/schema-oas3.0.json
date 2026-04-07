@@ -1,118 +1,5 @@
 {
   "x-defs": {
-    "metadataBuildingBlocks__sources_schemaorgProperties_dataDownload_schema": {
-      "description": "schema to document file-based access to a resoruce via URL, based on schema.org/DataDownload",
-      "type": "object",
-      "properties": {
-        "@id": {
-          "type": "string"
-        },
-        "@type": {
-          "type": "array",
-          "description": "implement as array because extensions might need to add additional types",
-          "items": {
-            "type": "string"
-          },
-          "contains": {
-            "enum": [
-              "schema:DataDownload"
-            ]
-          },
-          "minItems": 1
-        },
-        "schema:name": {
-          "type": "string"
-        },
-        "schema:description": {
-          "type": "string",
-          "description": "Description of this distribution, e.g. what format, access constraints, etc."
-        },
-        "schema:contentUrl": {
-          "type": "string",
-          "format": "uri"
-        },
-        "schema:encodingFormat": {
-          "type": "array",
-          "description": "MIME type with extension; should indicate the serialization scheme in sufficient detail that machine can know how to parse.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "spdx:checksum": {
-          "type": "object",
-          "description": "A string value calculated from the content of the resource representation, used to test if content has been modified. The checksum is a property of a particular distribution/DataDownload.",
-          "properties": {
-            "@type": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "contains": {
-                "enum": [
-                  "spdx:Checksum"
-                ]
-              },
-              "minItems": 1
-            },
-            "spdx:algorithm": {
-              "type": "string"
-            },
-            "spdx:checksumValue": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "@type"
-          ]
-        },
-        "dcterms:conformsTo": {
-          "description": "An identifier for a standard or specification that the distribution conforms to. Recommended to enable machine-actionable data access.",
-          "type": "array",
-          "minItems": 1,
-          "items": {
-            "type": "object",
-            "properties": {
-              "@id": {
-                "type": "string",
-                "description": "uri for specification that this distribution conforms to"
-              }
-            }
-          }
-        },
-        "schema:provider": {
-          "type": "array",
-          "description": "Party who maintains this particular distribution option for the dataset. Use this property if there are multiple distributions from different providers",
-          "items": {
-            "anyOf": [
-              {
-                "type": "object",
-                "properties": {
-                  "@id": {
-                    "type": "string",
-                    "description": "a identifier for an agent defined in this metadata, or externally; must be dereferenceable"
-                  }
-                },
-                "required": [
-                  "@id"
-                ]
-              },
-              {
-                "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/files/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_person_schema"
-              },
-              {
-                "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/files/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_organization_schema"
-              }
-            ]
-          }
-        }
-      },
-      "required": [
-        "schema:contentUrl",
-        "@type"
-      ],
-      "x-schema-source": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/dataDownload/schema.yaml",
-      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
-    },
     "ada.bbr.metadata.geochemProperties.stringArray": {
       "title": "String Array Type",
       "description": "Simple reusable array of strings",
@@ -447,7 +334,7 @@
           ]
         },
         {
-          "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/files/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_cdifProperties_cdifTabularData_schema"
+          "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/files/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.cdifProperties.cdifTabularData"
         }
       ],
       "x-jsonld-prefixes": {
@@ -648,7 +535,7 @@
           }
         },
         {
-          "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/files/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_cdifProperties_cdifDataCube_schema"
+          "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/files/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.cdifProperties.cdifDataCube"
         }
       ],
       "x-jsonld-prefixes": {
@@ -794,8 +681,9 @@
         "ada:numPixelsY": {
           "type": "integer"
         },
-        "_original_name": {
-          "type": "string"
+        "schema:isBasedOn": {
+          "type": "string",
+          "description": "Original file name before PDS4-compliant renaming"
         }
       },
       "required": [
@@ -870,239 +758,6 @@
         "ada": "https://ada.astromat.org/metadata/"
       },
       "x-schema-source": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/otherFile/schema.json",
-      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
-    },
-    "metadataBuildingBlocks__sources_schemaorgProperties_person_schema": {
-      "description": "schema for cdif profile of schema.org/Person",
-      "type": "object",
-      "properties": {
-        "@id": {
-          "type": "string"
-        },
-        "@type": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "contains": {
-            "enum": [
-              "schema:Person"
-            ]
-          },
-          "minItems": 1
-        },
-        "schema:name": {
-          "type": "string",
-          "description": "string label for person that is meaningful for human users"
-        },
-        "schema:description": {
-          "type": "string"
-        },
-        "schema:identifier": {
-          "description": "identifier for person, recommend ORCID",
-          "anyOf": [
-            {
-              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/files/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_identifier_schema"
-            },
-            {
-              "type": "string"
-            }
-          ]
-        },
-        "schema:alternateName": {
-          "type": "string",
-          "description": "other labels by which the person might be known"
-        },
-        "schema:affiliation": {
-          "description": "if affiliation is present, value must be a schema:Organization.",
-          "allOf": [
-            {
-              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/files/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_organization_schema"
-            }
-          ]
-        },
-        "schema:contactPoint": {
-          "type": "object",
-          "properties": {
-            "@type": {
-              "default": "schema:ContactPoint",
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "contains": {
-                "enum": [
-                  "schema:ContactPoint"
-                ]
-              },
-              "minItems": 1
-            },
-            "schema:email": {
-              "type": "string"
-            }
-          },
-          "description": "restrict to email only. Schema.org allows telephone and postal contacts as well"
-        },
-        "schema:sameAs": {
-          "type": "array",
-          "description": "other identifiers for the person",
-          "items": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "object",
-                "properties": {
-                  "@id": {
-                    "type": "string"
-                  }
-                }
-              },
-              {
-                "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/files/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_identifier_schema"
-              }
-            ]
-          }
-        }
-      },
-      "allOf": [
-        {
-          "required": [
-            "@type"
-          ]
-        },
-        {
-          "anyOf": [
-            {
-              "required": [
-                "schema:name"
-              ]
-            },
-            {
-              "required": [
-                "schema:identifier"
-              ]
-            }
-          ]
-        }
-      ],
-      "x-schema-source": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/person/schema.yaml",
-      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
-    },
-    "metadataBuildingBlocks__sources_schemaorgProperties_organization_schema": {
-      "type": "object",
-      "properties": {
-        "@id": {
-          "type": "string"
-        },
-        "@type": {
-          "default": "schema:Organization",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "contains": {
-            "enum": [
-              "schema:Organization"
-            ]
-          },
-          "minItems": 1
-        },
-        "schema:additionalType": {
-          "type": "array",
-          "items": {
-            "anyOf": [
-              {
-                "type": "string",
-                "enum": [
-                  "schema:FundingAgency",
-                  "schema:Consortium",
-                  "schema:Corporation",
-                  "schema:EducationalOrganization",
-                  "schema:FundingScheme",
-                  "schema:GovernmentOrganization",
-                  "schema:NGO",
-                  "schema:Project",
-                  "schema:ResearchOrganization"
-                ]
-              },
-              {
-                "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/files/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_definedTerm_schema"
-              },
-              {
-                "type": "string"
-              }
-            ]
-          }
-        },
-        "schema:name": {
-          "type": "string",
-          "description": "string label for organization that is meaningful for human users"
-        },
-        "schema:alternateName": {
-          "type": "string",
-          "description": "other labels by which the organization might be known"
-        },
-        "schema:description": {
-          "type": "string"
-        },
-        "schema:identifier": {
-          "description": "identifier for organization",
-          "anyOf": [
-            {
-              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/files/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_identifier_schema"
-            },
-            {
-              "type": "string"
-            }
-          ]
-        },
-        "schema:sameAs": {
-          "type": "array",
-          "description": "other identifiers for the organization",
-          "items": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "object",
-                "properties": {
-                  "@id": {
-                    "type": "string"
-                  }
-                }
-              },
-              {
-                "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/files/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_identifier_schema"
-              }
-            ]
-          }
-        }
-      },
-      "allOf": [
-        {
-          "required": [
-            "@type"
-          ]
-        },
-        {
-          "anyOf": [
-            {
-              "required": [
-                "schema:name"
-              ]
-            },
-            {
-              "required": [
-                "schema:identifier"
-              ]
-            }
-          ]
-        }
-      ],
-      "x-schema-source": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/organization/schema.yaml",
       "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
     },
     "ada.bbr.metadata.geochemProperties.detailEMPA": {
@@ -1493,7 +1148,7 @@
       "x-schema-source": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailXRD/schema.yaml",
       "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
     },
-    "metadataBuildingBlocks__sources_cdifProperties_cdifTabularData_schema": {
+    "cdif.bbr.metadata.cdifProperties.cdifTabularData": {
       "type": "object",
       "title": "Tabular Data Type",
       "description": "Tabular data type aligned with CDIF 2026 schema using DDI-CDI and CSVW properties. Typed as cdi:TabularTextDataSet and ada:tabularData.",
@@ -1622,7 +1277,7 @@
           "type": "array",
           "description": "Links variables to their physical representation in this dataset.",
           "items": {
-            "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/files/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_cdifProperties_cdifPhysicalMapping_schema"
+            "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/files/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.cdifProperties.cdifPhysicalMapping"
           }
         },
         "countRows": {
@@ -1663,7 +1318,12 @@
       "required": [
         "@type"
       ],
-      "x-schema-source": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/cdifProperties/cdifTabularData/schema.yaml",
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/",
+        "ada": "https://ada.astromat.org/metadata/",
+        "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/"
+      },
+      "x-schema-source": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/cdifProperties/cdifTabularData/schema.yaml",
       "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
     },
     "ada.bbr.metadata.geochemProperties.stringArray_1": {
@@ -1716,7 +1376,7 @@
       "x-schema-source": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailL2MS/schema.yaml",
       "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
     },
-    "metadataBuildingBlocks__sources_cdifProperties_cdifDataCube_schema": {
+    "cdif.bbr.metadata.cdifProperties.cdifDataCube": {
       "title": "Data Cube Type",
       "description": "Multi-dimensional data cube structure using DDI-CDI. Typed as ada:dataCube and cdi:StructuredDataSet per CDIF 2026 alignment.",
       "type": "object",
@@ -1742,7 +1402,7 @@
           "items": {
             "allOf": [
               {
-                "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/files/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_cdifProperties_cdifPhysicalMapping_schema"
+                "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/files/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.cdifProperties.cdifPhysicalMapping"
               },
               {
                 "type": "object",
@@ -1757,7 +1417,12 @@
           }
         }
       },
-      "x-schema-source": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/cdifProperties/cdifDataCube/schema.yaml",
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/",
+        "ada": "https://ada.astromat.org/metadata/",
+        "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/"
+      },
+      "x-schema-source": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/cdifProperties/cdifDataCube/schema.yaml",
       "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
     },
     "ada.bbr.metadata.geochemProperties.detailARGT": {
@@ -1829,129 +1494,7 @@
       "x-schema-source": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/detailSLS/schema.yaml",
       "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
     },
-    "metadataBuildingBlocks__sources_schemaorgProperties_identifier_schema": {
-      "description": "Properties for a schema.org identifier",
-      "type": "object",
-      "properties": {
-        "@type": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "contains": {
-            "enum": [
-              "schema:PropertyValue"
-            ]
-          },
-          "minItems": 1
-        },
-        "schema:propertyID": {
-          "type": "string",
-          "description": "In this context for the schema:PropertyValue, this field is an identifier for the identifier schema, e.g. DOI, ARK.  Get values from https://registry.identifiers.org/registry/ for interoperability"
-        },
-        "schema:value": {
-          "type": "string",
-          "description": "the identifier string. E.g. 10.5066/F7VX0DMQ"
-        },
-        "schema:url": {
-          "type": "string",
-          "format": "uri",
-          "description": "web-resolveable string for the identifier; host name part is location of a resolver that will return some representation for the given identifier value. E.g. https://doi.org/10.5066/F7VX0DMQ "
-        }
-      },
-      "allOf": [
-        {
-          "required": [
-            "@type"
-          ]
-        },
-        {
-          "anyOf": [
-            {
-              "required": [
-                "schema:value"
-              ]
-            },
-            {
-              "required": [
-                "schema:url"
-              ]
-            }
-          ]
-        }
-      ],
-      "x-schema-source": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/identifier/schema.yaml",
-      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
-    },
-    "metadataBuildingBlocks__sources_schemaorgProperties_definedTerm_schema": {
-      "description": "schema.org Defined Term schema",
-      "type": "object",
-      "properties": {
-        "@type": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "contains": {
-            "enum": [
-              "schema:DefinedTerm"
-            ]
-          },
-          "minItems": 1
-        },
-        "schema:name": {
-          "type": "string",
-          "description": "text label for the term that is useful to human user"
-        },
-        "schema:identifier": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/files/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_identifier_schema"
-            }
-          ]
-        },
-        "schema:inDefinedTermSet": {
-          "type": "string",
-          "description": "Identifier for the controlled vocabulary responsible for this keyword."
-        },
-        "schema:termCode": {
-          "type": "string",
-          "description": "A representative code for this keyword in the controlled vocabulary (Optional).  Analogous to skos:Notation"
-        }
-      },
-      "allOf": [
-        {
-          "required": [
-            "@type"
-          ]
-        },
-        {
-          "anyOf": [
-            {
-              "required": [
-                "schema:name"
-              ]
-            },
-            {
-              "required": [
-                "schema:identifier"
-              ]
-            },
-            {
-              "required": [
-                "schema:termCode"
-              ]
-            }
-          ]
-        }
-      ],
-      "x-schema-source": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/definedTerm/schema.yaml",
-      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
-    },
-    "metadataBuildingBlocks__sources_cdifProperties_cdifPhysicalMapping_schema": {
+    "cdif.bbr.metadata.cdifProperties.cdifPhysicalMapping": {
       "title": "Physical Mapping Type",
       "description": "Defines implementation-specific properties for the representation of a variable in a dataset. Aligned with CDIF 2026 schema using DDI-CDI flat per-column mapping structure.",
       "type": "object",
@@ -2007,37 +1550,75 @@
           }
         }
       },
-      "x-schema-source": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/cdifProperties/cdifPhysicalMapping/schema.yaml",
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/",
+        "ada": "https://ada.astromat.org/metadata/",
+        "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/"
+      },
+      "x-schema-source": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/cdifProperties/cdifPhysicalMapping/schema.yaml",
       "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
     }
   },
   "title": "Files Type",
-  "description": "Properties for any file in an ADA product distribution. GeneralType provides info based on broad categories of file format (tabular, image, dataCube, document). Type constraints (e.g. DataDownload) are applied at the composition level in profiles.",
+  "description": "Properties for any file in an ADA product distribution hasPart. These are component files within an archive \u2014 they are NOT individually downloadable (no schema:contentUrl). The @type must NOT include schema:DataDownload. GeneralType provides info based on broad categories of file format (tabular, image, dataCube, document).",
   "allOf": [
     {
-      "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/files/schema-oas3.0.json#/x-defs/metadataBuildingBlocks__sources_schemaorgProperties_dataDownload_schema"
-    },
-    {
       "type": "object",
-      "description": "properties added for geochemical datasets",
+      "description": "Base properties common to all file types in hasPart",
       "properties": {
+        "@id": {
+          "type": "string"
+        },
+        "@type": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "not": {
+            "contains": {
+              "enum": [
+                "schema:DataDownload"
+              ]
+            }
+          },
+          "minItems": 1
+        },
         "schema:additionalType": {
           "type": "array",
-          "description": "other classifier for the file. ada componentTypes are specified in the specific file type schema attached by $refs",
+          "description": "Other classifiers for the file. ADA componentTypes are specified in the specific file type schemas attached by $refs.",
           "items": {
             "type": "string"
           }
         },
+        "schema:name": {
+          "type": "string",
+          "description": "String name of file, must be unique within the containing package."
+        },
         "schema:description": {
           "type": "string"
+        },
+        "spdx:checksum": {
+          "type": "object",
+          "properties": {
+            "spdx:algorithm": {
+              "type": "string"
+            },
+            "spdx:checksumValue": {
+              "type": "string"
+            }
+          }
         },
         "schema:size": {
           "type": "object",
           "properties": {
             "@type": {
-              "enum": [
-                "schema:QuantitativeValue"
-              ]
+              "type": "array",
+              "contains": {
+                "enum": [
+                  "schema:QuantitativeValue"
+                ]
+              },
+              "minItems": 1
             },
             "schema:value": {
               "type": "integer"
@@ -2046,6 +1627,12 @@
               "type": "string",
               "default": "byte"
             }
+          }
+        },
+        "schema:encodingFormat": {
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         },
         "ada:resultTarget": {
@@ -2058,10 +1645,13 @@
             "type": "object",
             "properties": {
               "@type": {
-                "type": "string",
-                "enum": [
-                  "schema:LinkRole"
-                ]
+                "type": "array",
+                "contains": {
+                  "enum": [
+                    "schema:LinkRole"
+                  ]
+                },
+                "minItems": 1
               },
               "schema:linkRelationship": {
                 "type": "string"
@@ -2070,10 +1660,13 @@
                 "type": "object",
                 "properties": {
                   "@type": {
-                    "type": "string",
-                    "enum": [
-                      "schema:EntryPoint"
-                    ]
+                    "type": "array",
+                    "contains": {
+                      "enum": [
+                        "schema:EntryPoint"
+                      ]
+                    },
+                    "minItems": 1
                   },
                   "schema:encodingFormat": {
                     "type": "string"
@@ -2121,11 +1714,12 @@
           "type": "object",
           "properties": {
             "@type": {
-              "enum": [
-                [
+              "type": "array",
+              "contains": {
+                "enum": [
                   "Metadata"
                 ]
-              ]
+              }
             }
           },
           "required": [
@@ -2134,13 +1728,13 @@
         },
         {
           "type": "object",
-          "description": "DataDownload distribution (archive or direct download without specific file type)",
+          "description": "Generic media object (fallback for unrecognized file types)",
           "properties": {
             "@type": {
               "type": "array",
               "contains": {
                 "enum": [
-                  "schema:DataDownload"
+                  "schema:MediaObject"
                 ]
               }
             }

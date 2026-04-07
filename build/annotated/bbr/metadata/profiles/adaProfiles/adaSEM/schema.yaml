@@ -20,6 +20,7 @@ allOf:
         - Scanning Electron Microscopy High Resolution Cathodoluminescence (SEMHRCL)
           image
         - Scanning electron microscopy
+        - Focused ion beam-scanning electron microscopy
     schema:distribution:
       description: Distribution items for adaSEM. Archive hasPart items must have
         ada:componentType from technique-specific or universal values.
@@ -49,6 +50,14 @@ allOf:
                     - ada:SEMHRCLMap
                     - ada:SEMHRCLCube
                   - '': ../adaProduct/schema.yaml#//universalComponentType
+    schema:subjectOf:
+      properties:
+        dcterms:conformsTo:
+          contains:
+            type: object
+            properties:
+              '@id':
+                const: https://w3id.org/geochem/metadata/profiles/adaSEM
 x-jsonld-prefixes:
   schema: http://schema.org/
   ada: https://ada.astromat.org/metadata/

@@ -127,32 +127,60 @@ An ADA product file with size, encoding format, and a link to its metadata sidec
 ```yaml
 $schema: https://json-schema.org/draft/2020-12/schema
 title: Files Type
-description: Properties for any file in an ADA product distribution. GeneralType provides
-  info based on broad categories of file format (tabular, image, dataCube, document).
-  Type constraints (e.g. DataDownload) are applied at the composition level in profiles.
+description: "Properties for any file in an ADA product distribution hasPart. These
+  are component files within an archive \u2014 they are NOT individually downloadable
+  (no schema:contentUrl). The @type must NOT include schema:DataDownload. GeneralType
+  provides info based on broad categories of file format (tabular, image, dataCube,
+  document)."
 allOf:
-- $ref: https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/dataDownload/schema.yaml
 - type: object
-  description: properties added for geochemical datasets
+  description: Base properties common to all file types in hasPart
   properties:
-    schema:additionalType:
+    '@id':
+      type: string
+    '@type':
       type: array
-      description: other classifier for the file. ada componentTypes are specified
-        in the specific file type schema attached by $refs
       items:
         type: string
+      not:
+        contains:
+          const: schema:DataDownload
+      minItems: 1
+    schema:additionalType:
+      type: array
+      description: Other classifiers for the file. ADA componentTypes are specified
+        in the specific file type schemas attached by $refs.
+      items:
+        type: string
+    schema:name:
+      type: string
+      description: String name of file, must be unique within the containing package.
     schema:description:
       type: string
+    spdx:checksum:
+      type: object
+      properties:
+        spdx:algorithm:
+          type: string
+        spdx:checksumValue:
+          type: string
     schema:size:
       type: object
       properties:
         '@type':
-          const: schema:QuantitativeValue
+          type: array
+          contains:
+            const: schema:QuantitativeValue
+          minItems: 1
         schema:value:
           type: integer
         schema:unitText:
           type: string
           default: byte
+    schema:encodingFormat:
+      type: array
+      items:
+        type: string
     ada:resultTarget:
       $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/stringArray/schema.yaml
     schema:relatedLink:
@@ -164,16 +192,20 @@ allOf:
         type: object
         properties:
           '@type':
-            type: string
-            const: schema:LinkRole
+            type: array
+            contains:
+              const: schema:LinkRole
+            minItems: 1
           schema:linkRelationship:
             type: string
           schema:target:
             type: object
             properties:
               '@type':
-                type: string
-                const: schema:EntryPoint
+                type: array
+                contains:
+                  const: schema:EntryPoint
+                minItems: 1
               schema:encodingFormat:
                 type: string
               schema:name:
@@ -192,18 +224,18 @@ allOf:
   - type: object
     properties:
       '@type':
-        const:
-        - Metadata
+        type: array
+        contains:
+          const: Metadata
     required:
     - '@type'
   - type: object
-    description: DataDownload distribution (archive or direct download without specific
-      file type)
+    description: Generic media object (fallback for unrecognized file types)
     properties:
       '@type':
         type: array
         contains:
-          const: schema:DataDownload
+          const: schema:MediaObject
     required:
     - '@type'
 x-jsonld-prefixes:

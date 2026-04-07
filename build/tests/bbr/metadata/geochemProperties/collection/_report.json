@@ -2,8 +2,8 @@
   "title": "Validation report for ada.bbr.metadata.geochemProperties.collection - Collection Type",
   "bblockName": "Collection Type",
   "bblockId": "ada.bbr.metadata.geochemProperties.collection",
-  "generated": "2026-03-22T04:24:30.621607+00:00",
-  "result": true,
+  "generated": "2026-04-07T15:51:36.140843+00:00",
+  "result": false,
   "items": [
     {
       "source": {
@@ -15,7 +15,7 @@
         "snippetIndex": 1,
         "language": "application/json"
       },
-      "result": true,
+      "result": false,
       "sections": [
         {
           "name": "FILES",
@@ -65,9 +65,9 @@
             {
               "op": "shacl-report",
               "shaclFile": "_sources/geochemProperties/collection/rules.shacl",
-              "graph": "@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms true .\n\n",
-              "isError": false,
-              "message": "Validation result for _sources/geochemProperties/collection/rules.shacl:\n  Validation Report\n  Conforms: True\n  "
+              "graph": "@prefix ada: <https://ada.astromat.org/metadata/> .\n@prefix schema: <https://schema.org/> .\n@prefix schema1: <http://schema.org/> .\n@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms false ;\n    sh:result [ a sh:ValidationResult ;\n            sh:focusNode [ a ada:collection,\n                        schema:Collection ;\n                    ada:componentType [ a ada:SEMEDSElementalMaps ] ;\n                    ada:filelist [ schema1:encodingFormat \"image/tiff\" ;\n                            ada:componentType \"ada:SEMEDSElementalMap\" ;\n                            ada:fileName \"map_Fe_Ka.tif\" ],\n                        [ schema1:encodingFormat \"image/tiff\" ;\n                            ada:componentType \"ada:SEMEDSElementalMap\" ;\n                            ada:fileName \"map_Si_Ka.tif\" ] ;\n                    ada:memberTypes \"ada:SEMEDSElementalMap\" ;\n                    ada:nFiles 5 ] ;\n            sh:resultMessage \"Collection should specify componentType.\" ;\n            sh:resultPath ada:componentType ;\n            sh:resultSeverity sh:Warning ;\n            sh:sourceConstraintComponent sh:DatatypeConstraintComponent ;\n            sh:sourceShape [ sh:datatype xsd:string ;\n                    sh:message \"Collection should specify componentType.\" ;\n                    sh:path ada:componentType ;\n                    sh:severity sh:Warning ] ;\n            sh:value [ a ada:SEMEDSElementalMaps ] ] .\n\n",
+              "isError": true,
+              "message": "Validation result for _sources/geochemProperties/collection/rules.shacl:\n  Validation Report\n  Conforms: False\n  Results (1):\n  Validation Result in DatatypeConstraintComponent (http://www.w3.org/ns/shacl#DatatypeConstraintComponent):\n  \tSeverity: sh:Warning\n  \tSource Shape: [ sh:datatype xsd:string ; sh:message Literal(\"Collection should specify componentType.\") ; sh:path ada:componentType ; sh:severity sh:Warning ]\n  \tFocus Node: [ ada:componentType [ rdf:type ada:SEMEDSElementalMaps ] ; ada:filelist [ ada:componentType Literal(\"ada:SEMEDSElementalMap\") ; ada:fileName Literal(\"map_Fe_Ka.tif\") ; schema1:encodingFormat Literal(\"image/tiff\") ], [ ada:componentType Literal(\"ada:SEMEDSElementalMap\") ; ada:fileName Literal(\"map_Si_Ka.tif\") ; schema1:encodingFormat Literal(\"image/tiff\") ] ; ada:memberTypes Literal(\"ada:SEMEDSElementalMap\") ; ada:nFiles Literal(\"5\", datatype=xsd:integer) ; rdf:type ada:collection, schema:Collection ]\n  \tValue Node: [ rdf:type ada:SEMEDSElementalMaps ]\n  \tResult Path: ada:componentType\n  \tMessage: Collection should specify componentType.\n  "
             },
             {
               "shaclFile": "_sources/geochemProperties/collection/rules.shacl",
@@ -94,7 +94,7 @@
   "globalErrors": {},
   "counts": {
     "total": 1,
-    "passed": 1,
-    "failed": 0
+    "passed": 0,
+    "failed": 1
   }
 }

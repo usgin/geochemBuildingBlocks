@@ -66,9 +66,10 @@ description: Shell type for labeled links to other resources. Any schema.org Cre
 type: object
 properties:
   '@type':
-    type: string
-    default: schema:CreativeWork
-    const: schema:CreativeWork
+    type: array
+    contains:
+      const: schema:CreativeWork
+    minItems: 1
   schema:name:
     type: string
   schema:description:

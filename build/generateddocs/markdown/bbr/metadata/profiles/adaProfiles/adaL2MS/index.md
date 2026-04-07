@@ -1052,7 +1052,7 @@ allOf:
                   - enum:
                     - ada:L2MSCube
                     - ada:L2MSOverviewImage
-                  - '': ../adaProduct/schema.yaml#//universalComponentType
+                  - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaProduct/schema.yaml#/$defs/universalComponentType
     schema:subjectOf:
       properties:
         dcterms:conformsTo:

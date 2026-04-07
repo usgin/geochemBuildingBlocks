@@ -65,21 +65,19 @@ def extract_shacl_paths(shacl_text):
     """Extract sh:path values and their severity from SHACL Turtle text."""
     shapes = {}
 
-    # Find property shape blocks
-    # Pattern: cdifd:someName ... sh:path schema:something ...
-    # This is a rough parser — looks for sh:path and sh:severity in nearby context
+    # Extract individual sh:property [...] blocks using bracket matching.
+    # Each block contains exactly one sh:path and its own severity/minCount.
+    prop_blocks = re.findall(r'sh:property\s*\[(.*?)\]\s*;', shacl_text, re.DOTALL)
 
-    # Split into shape blocks (separated by blank lines or .)
-    blocks = re.split(r'\n\s*\.\s*\n', shacl_text)
-
-    for block in blocks:
+    for block in prop_blocks:
         # Find sh:path
         path_matches = re.findall(
             r'sh:path\s+(?:\[\s*sh:alternativePath\s*\(\s*(.*?)\s*\)\s*\]|(\S+))',
             block, re.DOTALL
         )
 
-        severity = "Violation"  # default
+        # Severity is per-property-block, defaulting to Violation
+        severity = "Violation"
         if "sh:severity sh:Warning" in block:
             severity = "Warning"
         elif "sh:severity sh:Info" in block:
@@ -92,7 +90,6 @@ def extract_shacl_paths(shacl_text):
 
         for alt_paths, single_path in path_matches:
             if alt_paths:
-                # alternativePath — extract individual paths
                 paths = re.findall(r'(\w+:\w+)', alt_paths)
                 for p in paths:
                     shapes[p] = {"severity": severity, "minCount": min_count,

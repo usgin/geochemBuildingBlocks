@@ -230,9 +230,7 @@ Mock data for validation and testing.
                 "@type": [
                     "schema:Place"
                 ],
-                "schema:name": [
-                    "Analytical Sciences Laboratory"
-                ],
+                "schema:name": "Analytical Sciences Laboratory",
                 "schema:identifier": "https://ror.org/00hx57361",
                 "schema:additionalType": [
                     "nxs:BaseClass/NXsource"
@@ -442,6 +440,7 @@ Mock data for validation and testing.
         }
     }
 }
+
 ```
 
 #### jsonld
@@ -631,9 +630,7 @@ Mock data for validation and testing.
         "@type": [
           "schema:Place"
         ],
-        "schema:name": [
-          "Analytical Sciences Laboratory"
-        ],
+        "schema:name": "Analytical Sciences Laboratory",
         "schema:identifier": "https://ror.org/00hx57361",
         "schema:additionalType": [
           "nxs:BaseClass/NXsource"

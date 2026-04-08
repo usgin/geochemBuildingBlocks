@@ -36,26 +36,20 @@
     "ada.bbr.metadata.geochemProperties.methodDefinition": [
       "https://usgin.github.io/geochemBuildingBlocks/_sources/geochemProperties/methodDefinition/rules.shacl"
     ],
-    "cdif.bbr.metadata.schemaorgProperties.labeledLink": [
-      "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/labeledLink/rules.shacl"
-    ],
-    "cdif.bbr.metadata.schemaorgProperties.person": [
-      "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/person/rules.shacl"
+    "cdif.bbr.metadata.schemaorgProperties.definedTerm": [
+      "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/definedTerm/rules.shacl"
     ],
     "cdif.bbr.metadata.schemaorgProperties.identifier": [
       "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/identifier/rules.shacl"
     ],
+    "cdif.bbr.metadata.schemaorgProperties.person": [
+      "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/person/rules.shacl"
+    ],
     "cdif.bbr.metadata.schemaorgProperties.organization": [
       "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/organization/rules.shacl"
     ],
-    "cdif.bbr.metadata.schemaorgProperties.definedTerm": [
-      "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/definedTerm/rules.shacl"
-    ],
-    "ada.bbr.metadata.geochemProperties.laboratory": [
-      "https://usgin.github.io/geochemBuildingBlocks/_sources/geochemProperties/laboratory/rules.shacl"
-    ],
-    "cdif.bbr.metadata.schemaorgProperties.spatialExtent": [
-      "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/spatialExtent/rules.shacl"
+    "cdif.bbr.metadata.schemaorgProperties.monetaryGrant": [
+      "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/monetaryGrant/rules.shacl"
     ],
     "ada.bbr.metadata.geochemProperties.instrument": [
       "https://usgin.github.io/geochemBuildingBlocks/_sources/geochemProperties/instrument/rules.shacl"
@@ -69,18 +63,24 @@
     "cdif.bbr.metadata.schemaorgProperties.agentInRole": [
       "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/agentInRole/rules.shacl"
     ],
-    "cdif.bbr.metadata.schemaorgProperties.monetaryGrant": [
-      "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/monetaryGrant/rules.shacl"
+    "cdif.bbr.metadata.schemaorgProperties.labeledLink": [
+      "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/labeledLink/rules.shacl"
+    ],
+    "ada.bbr.metadata.geochemProperties.laboratory": [
+      "https://usgin.github.io/geochemBuildingBlocks/_sources/geochemProperties/laboratory/rules.shacl"
+    ],
+    "cdif.bbr.metadata.schemaorgProperties.spatialExtent": [
+      "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/spatialExtent/rules.shacl"
     ]
   },
   "dependsOn": [
-    "cdif.bbr.metadata.schemaorgProperties.labeledLink",
-    "cdif.bbr.metadata.schemaorgProperties.person",
-    "ada.bbr.metadata.geochemProperties.laboratory",
-    "cdif.bbr.metadata.schemaorgProperties.identifier",
     "cdif.bbr.metadata.schemaorgProperties.definedTerm",
+    "cdif.bbr.metadata.schemaorgProperties.identifier",
+    "cdif.bbr.metadata.schemaorgProperties.person",
+    "cdif.bbr.metadata.schemaorgProperties.monetaryGrant",
     "ada.bbr.metadata.geochemProperties.instrument",
-    "cdif.bbr.metadata.schemaorgProperties.monetaryGrant"
+    "cdif.bbr.metadata.schemaorgProperties.labeledLink",
+    "ada.bbr.metadata.geochemProperties.laboratory"
   ],
   "ldContext": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/context.jsonld",
   "schema": {
@@ -116,7 +116,7 @@
         },
         {
           "language": "ttl",
-          "code": "@prefix ada: <https://ada.astromat.org/metadata/> .\n@prefix schema1: <http://schema.org/> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n<https://registry.onegeochemistry.org/methods/nmnh-spinel-oxybar-v1> a schema1:HowTo,\n        ada:MethodDefinition ;\n    schema1:datePublished \"2013-11-08\" ;\n    schema1:instrument [ a schema1:Product,\n                schema1:Thing ;\n            schema1:manufacturer [ a schema1:Organization ;\n                    schema1:name \"JEOL\" ] ;\n            schema1:model [ a schema1:ProductModel ;\n                    schema1:name \"JXA-8900\" ] ;\n            schema1:name \"JEOL JXA-8900 Superprobe\" ] ;\n    schema1:measurementTechnique [ a schema1:DefinedTerm ;\n            schema1:inDefinedTermSet \"https://vocab.onegeochemistry.org/techniques\" ;\n            schema1:name \"EPMA-WDS\" ] ;\n    schema1:name \"Spinel oxybarometry version 1\" ;\n    schema1:version \"1.0\" ;\n    ada:analyteTemplate [ ada:analyteColumns [ schema1:alternateName \"Diffracting Crystal\" ;\n                    schema1:name \"diffractingCrystal\" ;\n                    ada:cdifPropertyPath \"schema:additionalProperty\" ;\n                    ada:dataType \"string\" ;\n                    ada:enumeration \"LIF\",\n                        \"LIFH\",\n                        \"PET\",\n                        \"PETJ\",\n                        \"RAP\",\n                        \"TAP\" ;\n                    ada:scope \"default\" ;\n                    ada:tier \"M\" ],\n                [ schema1:alternateName \"Analysed Oxide/Element\" ;\n                    schema1:name \"analysedOxide\" ;\n                    ada:cdifPropertyPath \"cdifVariableMeasured: cdi:name\" ;\n                    ada:dataType \"string\" ;\n                    ada:scope \"default\" ;\n                    ada:tier \"M\" ],\n                [ schema1:alternateName \"Calibration Standard Name\" ;\n                    schema1:name \"calibrationStandardName\" ;\n                    ada:cdifPropertyPath \"schema:additionalProperty\" ;\n                    ada:dataType \"string\" ;\n                    ada:scope \"default\" ;\n                    ada:tier \"M\" ],\n                [ schema1:alternateName \"Peak Counting Time\" ;\n                    schema1:name \"peakCountingTime\" ;\n                    schema1:unitText \"seconds\" ;\n                    ada:cdifPropertyPath \"schema:additionalProperty\" ;\n                    ada:dataType \"number\" ;\n                    ada:scope \"default\" ;\n                    ada:tier \"M\" ],\n                [ schema1:alternateName \"X-ray Line\" ;\n                    schema1:name \"xrayLine\" ;\n                    ada:cdifPropertyPath \"schema:additionalProperty\" ;\n                    ada:dataType \"string\" ;\n                    ada:enumeration \"Ka\",\n                        \"Kb\",\n                        \"La\",\n                        \"Lb\",\n                        \"Ma\",\n                        \"Mb\" ;\n                    ada:scope \"default\" ;\n                    ada:tier \"M\" ] ;\n            ada:defaultAnalytes [ ],\n                [ ] ] ;\n    ada:methodParameters [ schema1:alternateName \"Analytical Software\" ;\n            schema1:name \"analyticalSoftware\" ;\n            schema1:value \"Probe for EPMA\" ;\n            ada:category \"Instrument & Software\" ;\n            ada:cdifPropertyPath \"cdifProvActivity: prov:used\" ;\n            ada:dataType \"string\" ;\n            ada:scope \"default\" ;\n            ada:tier \"M\" ],\n        [ schema1:alternateName \"Sample Preparation Method\" ;\n            schema1:name \"samplePreparationMethod\" ;\n            ada:category \"Samples\" ;\n            ada:cdifPropertyPath \"cdifProvActivity: schema:actionProcess\" ;\n            ada:dataType \"string\" ;\n            ada:scope \"optional\" ;\n            ada:tier \"R\" ],\n        [ schema1:alternateName \"Beam Current\" ;\n            schema1:name \"beamCurrent\" ;\n            schema1:unitText \"nA\" ;\n            schema1:value 40 ;\n            ada:category \"Beam Conditions\" ;\n            ada:cdifPropertyPath \"cdifProvActivity: schema:additionalProperty\" ;\n            ada:dataType \"number\" ;\n            ada:scope \"constant\" ;\n            ada:tier \"M\" ],\n        [ schema1:alternateName \"X-ray Matrix Corrections\" ;\n            schema1:name \"matrixCorrectionModel\" ;\n            schema1:value \"CITZAF\" ;\n            ada:category \"Data Processing\" ;\n            ada:cdifPropertyPath \"cdifProvActivity: schema:actionProcess\" ;\n            ada:dataType \"string\" ;\n            ada:scope \"constant\" ;\n            ada:tier \"M\" ],\n        [ schema1:alternateName \"Accelerating Voltage\" ;\n            schema1:name \"acceleratingVoltage\" ;\n            schema1:unitText \"kV\" ;\n            schema1:value 15 ;\n            ada:category \"Beam Conditions\" ;\n            ada:cdifPropertyPath \"cdifProvActivity: schema:additionalProperty\" ;\n            ada:dataType \"number\" ;\n            ada:scope \"constant\" ;\n            ada:tier \"M\" ] .\n\n",
+          "code": "@prefix ada: <https://ada.astromat.org/metadata/> .\n@prefix schema1: <http://schema.org/> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n<https://registry.onegeochemistry.org/methods/nmnh-spinel-oxybar-v1> a schema1:HowTo,\n        ada:MethodDefinition ;\n    schema1:datePublished \"2013-11-08\" ;\n    schema1:instrument [ a schema1:Product,\n                schema1:Thing ;\n            schema1:manufacturer [ a schema1:Organization ;\n                    schema1:name \"JEOL\" ] ;\n            schema1:model [ a schema1:ProductModel ;\n                    schema1:name \"JXA-8900\" ] ;\n            schema1:name \"JEOL JXA-8900 Superprobe\" ] ;\n    schema1:measurementTechnique [ a schema1:DefinedTerm ;\n            schema1:inDefinedTermSet \"https://vocab.onegeochemistry.org/techniques\" ;\n            schema1:name \"EPMA-WDS\" ] ;\n    schema1:name \"Spinel oxybarometry version 1\" ;\n    schema1:version \"1.0\" ;\n    ada:analyteTemplate [ ada:analyteColumns [ schema1:alternateName \"X-ray Line\" ;\n                    schema1:name \"xrayLine\" ;\n                    ada:cdifPropertyPath \"schema:additionalProperty\" ;\n                    ada:dataType \"string\" ;\n                    ada:enumeration \"Ka\",\n                        \"Kb\",\n                        \"La\",\n                        \"Lb\",\n                        \"Ma\",\n                        \"Mb\" ;\n                    ada:scope \"default\" ;\n                    ada:tier \"M\" ],\n                [ schema1:alternateName \"Calibration Standard Name\" ;\n                    schema1:name \"calibrationStandardName\" ;\n                    ada:cdifPropertyPath \"schema:additionalProperty\" ;\n                    ada:dataType \"string\" ;\n                    ada:scope \"default\" ;\n                    ada:tier \"M\" ],\n                [ schema1:alternateName \"Analysed Oxide/Element\" ;\n                    schema1:name \"analysedOxide\" ;\n                    ada:cdifPropertyPath \"cdifVariableMeasured: cdi:name\" ;\n                    ada:dataType \"string\" ;\n                    ada:scope \"default\" ;\n                    ada:tier \"M\" ],\n                [ schema1:alternateName \"Diffracting Crystal\" ;\n                    schema1:name \"diffractingCrystal\" ;\n                    ada:cdifPropertyPath \"schema:additionalProperty\" ;\n                    ada:dataType \"string\" ;\n                    ada:enumeration \"LIF\",\n                        \"LIFH\",\n                        \"PET\",\n                        \"PETJ\",\n                        \"RAP\",\n                        \"TAP\" ;\n                    ada:scope \"default\" ;\n                    ada:tier \"M\" ],\n                [ schema1:alternateName \"Peak Counting Time\" ;\n                    schema1:name \"peakCountingTime\" ;\n                    schema1:unitText \"seconds\" ;\n                    ada:cdifPropertyPath \"schema:additionalProperty\" ;\n                    ada:dataType \"number\" ;\n                    ada:scope \"default\" ;\n                    ada:tier \"M\" ] ;\n            ada:defaultAnalytes [ ],\n                [ ] ] ;\n    ada:methodParameters [ schema1:alternateName \"X-ray Matrix Corrections\" ;\n            schema1:name \"matrixCorrectionModel\" ;\n            schema1:value \"CITZAF\" ;\n            ada:category \"Data Processing\" ;\n            ada:cdifPropertyPath \"cdifProvActivity: schema:actionProcess\" ;\n            ada:dataType \"string\" ;\n            ada:scope \"constant\" ;\n            ada:tier \"M\" ],\n        [ schema1:alternateName \"Accelerating Voltage\" ;\n            schema1:name \"acceleratingVoltage\" ;\n            schema1:unitText \"kV\" ;\n            schema1:value 15 ;\n            ada:category \"Beam Conditions\" ;\n            ada:cdifPropertyPath \"cdifProvActivity: schema:additionalProperty\" ;\n            ada:dataType \"number\" ;\n            ada:scope \"constant\" ;\n            ada:tier \"M\" ],\n        [ schema1:alternateName \"Sample Preparation Method\" ;\n            schema1:name \"samplePreparationMethod\" ;\n            ada:category \"Samples\" ;\n            ada:cdifPropertyPath \"cdifProvActivity: schema:actionProcess\" ;\n            ada:dataType \"string\" ;\n            ada:scope \"optional\" ;\n            ada:tier \"R\" ],\n        [ schema1:alternateName \"Analytical Software\" ;\n            schema1:name \"analyticalSoftware\" ;\n            schema1:value \"Probe for EPMA\" ;\n            ada:category \"Instrument & Software\" ;\n            ada:cdifPropertyPath \"cdifProvActivity: prov:used\" ;\n            ada:dataType \"string\" ;\n            ada:scope \"default\" ;\n            ada:tier \"M\" ],\n        [ schema1:alternateName \"Beam Current\" ;\n            schema1:name \"beamCurrent\" ;\n            schema1:unitText \"nA\" ;\n            schema1:value 40 ;\n            ada:category \"Beam Conditions\" ;\n            ada:cdifPropertyPath \"cdifProvActivity: schema:additionalProperty\" ;\n            ada:dataType \"number\" ;\n            ada:scope \"constant\" ;\n            ada:tier \"M\" ] .\n\n",
           "url": "https://usgin.github.io/geochemBuildingBlocks/build/tests/bbr/metadata/geochemProperties/methodDefinition/example_1_1.ttl"
         }
       ]

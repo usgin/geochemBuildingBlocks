@@ -96,17 +96,16 @@ Profiles additionally compose base schemas via `allOf` references.
 - **ada_metadata_forms** (amds-ldeo) -- Django app that validates ADA metadata. Uses a standalone monolithic JSON Schema (`adaMetadata-SchemaOrgSchema-v3.json`), NOT the modular building blocks. No direct dependency on this repo's build outputs.
 - **w3id.org/cdif** -- persistent identifier redirects for CDIF building blocks and conformance URIs. Maintained in smrgeoinfo/w3id.org fork.
 
-## Planned: methodDefinition building block
+## methodDefinition building block (v3)
 
-A new building block at `geochemProperties/methodDefinition/` will define a registry-backed analytical method definition schema. Key design points:
+The `geochemProperties/methodDefinition/` building block defines analytical method definitions as `cdi:Activity` + `schema:Action` + `ada:MethodDefinition` + `bios:LabProtocol`.
 
-- **Type:** `ada:MethodDefinition` + `schema:HowTo`
-- **Structure:** identity, instrument spec (via CDIF instrument BB), `ada:methodParameters` array (with `ada:scope` = constant/default/optional), `ada:analyteTemplate` (per-element column definitions + default analyte rows)
-- **Form integration:** selecting a method on Tab 3 of ada_metadata_forms pre-populates constants (read-only), defaults (editable), and analyte table. JSON-LD export references method @id in `schema:actionProcess`.
-- **Registry:** PostgreSQL `method_definitions` table with JSONB column, REST API for CRUD/filtering by technique.
-- **Full design doc:** `G:\My Drive\OneGeochemistry\MethodDefinitionDesign.md`
-
-When implementing, the schema.yaml should follow the same pattern as existing detail* blocks but with richer structure: `$defs` for `MethodParameter` and `AnalyteColumn` sub-schemas, `$ref` to CDIF instrument/person/organization/identifier blocks.
+- **Workflow:** `schema:actionProcess` contains a `schema:HowTo` with ordered `cdi:Activity` + `schema:Action` steps (sample prep, calibration, acquisition, data processing, QC)
+- **Parameters:** typed as `schema:PropertyValueSpecification` with `readonlyValue`, `valueRequired`, `defaultValue`, `minValue`/`maxValue`, `inDefinedTermSet` (SKOS vocabulary), `ada:fieldScope` (method/session/element). Parameters live on their workflow steps; method-wide parameters at top level.
+- **Analyte template:** `ada:analyteTemplate` with `PropertyValueSpecification`-typed columns and default analyte rows
+- **Vocabularies:** Bioschemas (`bios:computationalTool`, `bios:reagent`, `bios:LabProcess`), DDI-CDI (`cdi:Activity`), DQV (`dqv:hasQualityMeasurement`), SKOS (vocabulary references)
+- **Examples:** EPMA glass (Concord), EPMA spinel oxybarometry (NMNH Smithsonian), LA-ICP-MS glass trace elements (U. Cologne)
+- **Form integration:** Tab 3 of ada_metadata_forms consumes method definitions from the registry
 
 ## Common tasks
 

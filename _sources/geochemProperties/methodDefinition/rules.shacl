@@ -4,6 +4,10 @@
 @prefix xsd:         <http://www.w3.org/2001/XMLSchema#> .
 @prefix schema:      <http://schema.org/> .
 @prefix ada:         <https://ada.astromat.org/metadata/> .
+@prefix bios:        <https://bioschemas.org/> .
+@prefix dqv:         <http://www.w3.org/ns/dqv#> .
+@prefix prov:        <http://www.w3.org/ns/prov#> .
+@prefix cdi:         <http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/> .
 @prefix cdifd: <https://cdif.org/validation/0.1/shacl#> .
 @base <https://www.ogc.org/rules/template/> .
 
@@ -34,10 +38,10 @@ cdifd:methodDefinitionShape
         sh:message "Method definition must specify a schema:measurementTechnique." ;
     ] ;
     sh:property [
-        sh:path ada:methodParameters ;
-        sh:minCount 1 ;
-        sh:severity sh:Violation ;
-        sh:message "Method definition must have at least one ada:methodParameters entry." ;
+        sh:path schema:actionProcess ;
+        sh:maxCount 1 ;
+        sh:severity sh:Warning ;
+        sh:message "Method definition should include a schema:actionProcess workflow." ;
     ] ;
     sh:property [
         sh:path schema:version ;
@@ -57,13 +61,13 @@ cdifd:methodDefinitionShape
         sh:path schema:instrument ;
         sh:maxCount 1 ;
         sh:severity sh:Warning ;
-        sh:message "Method definition should specify an instrument." ;
+        sh:message "Method definition should specify a primary instrument." ;
     ] ;
     sh:property [
         sh:path ada:analyteTemplate ;
         sh:maxCount 1 ;
         sh:severity sh:Info ;
-        sh:message "Method definition may include an ada:analyteTemplate for per-analyte parameters." ;
+        sh:message "Method definition may include an ada:analyteTemplate." ;
     ] ;
-    sh:message "Method definition nodes (ada:MethodDefinition) must have name, technique, and parameters." ;
+    sh:message "Method definition nodes (ada:MethodDefinition) must have name and technique." ;
     .

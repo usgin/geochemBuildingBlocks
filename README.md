@@ -62,59 +62,30 @@ Browse the building blocks at: https://usgin.github.io/geochemBuildingBlocks/
 
 `resolve_schema.py` and `regenerate_schema_json.py` are synced from the canonical copies in [metadataBuildingBlocks/tools/](https://github.com/Cross-Domain-Interoperability-Framework/metadataBuildingBlocks/tree/main/tools). Do not edit locally — update the canonical copy and run `python tools/sync_resolve_schema.py --apply` from the metadataBuildingBlocks repo. The audit, validation, and report tools were also sourced from that repository.
 
-## Planned: Method Definition Building Block
+## Method Definition Building Block
 
-A new `methodDefinition` building block is planned to support a **registry of analytical method definitions** that metadata forms can consume at runtime. The full design is in [`G:\My Drive\OneGeochemistry\MethodDefinitionDesign.md`](MethodDefinitionDesign.md) and summarized here.
+The `methodDefinition` building block at `geochemProperties/methodDefinition/` defines a registry-backed analytical method definition schema (v3). A method definition is modeled as a `cdi:Activity` + `schema:Action` + `ada:MethodDefinition` + `bios:LabProtocol`.
 
-### Problem
+### Structure
 
-Analytical methods (EPMA, LA-ICP-MS, XRD, etc.) have dozens of operating parameters. Today these live in Excel templates and prose documents. The existing `detail*` blocks (e.g. `detailEMPA` with only `ada:spectrometersUsed` and `ada:signalUsed`) describe file-type metadata, not method configuration. There is no machine-actionable method definition that a form can consume.
+- **Method identity** (top level) — name, DOI, version, `schema:measurementTechnique`, `schema:object` (target materials), instrument, laboratory, software (`bios:computationalTool`), reagents (`bios:reagent`), agent
+- **Standard workflow** (`schema:actionProcess`) — a `schema:HowTo` containing ordered `cdi:Activity` + `schema:Action` steps: sample preparation, calibration, data acquisition, data processing, quality control
+- **Parameters** — typed as `schema:PropertyValueSpecification` with `schema:readonlyValue`, `schema:valueRequired`, `schema:defaultValue`, `schema:minValue`/`maxValue`, `schema:inDefinedTermSet` (SKOS vocabulary link), and `ada:fieldScope` (method/session/element)
+- **Analyte template** (`ada:analyteTemplate`) — per-element column definitions (also `PropertyValueSpecification`) and default analyte rows
+- **Quality metrics** (`dqv:hasQualityMeasurement`) — at method level and on workflow steps
 
-### Design
+### Examples
 
-A `methodDefinition` building block typed as `ada:MethodDefinition` + `schema:HowTo` containing:
+- `concord-glass-v1-0-6.json` — EPMA WDS tephra glass (Concord University)
+- `nmnh-spinel-oxybar-v1.json` — EPMA WDS spinel oxybarometry (Smithsonian NMNH)
+- `uoc-laicpms-glass-v1.json` — LA-ICP-MS volcanic glass trace elements (University of Cologne)
 
-1. **Identity** — name, DOI, version, `schema:measurementTechnique` (DefinedTerm), instrument spec (reusing CDIF instrument BB), laboratory.
+### Vocabularies used
 
-2. **`ada:methodParameters`** — array of parameter objects, each carrying:
-   - `ada:scope`: `constant` | `default` | `optional` — controls form rendering
-   - `ada:category` — grouping label for form layout
-   - `schema:value` — constant or default value
-   - `schema:minValue`/`schema:maxValue`/`ada:enumeration` — constraints
-   - `ada:cdifPropertyPath` — mapping to CDIF JSON-LD output path
-   - `ada:tier` — M/R/O validation strictness
-
-3. **`ada:analyteTemplate`** — per-element column definitions and pre-populated analyte rows. These become `schema:variableMeasured` entries in metadata records.
-
-### Scope tiers
-
-| Scope | Form behaviour |
-|-------|---------------|
-| `constant` | Read-only summary text, fixed for all sessions |
-| `default` | Editable field, pre-filled with default, validated against min/max/enum |
-| `optional` | Available via "Add property" picker, not shown by default |
-
-### Integration with ada_metadata_forms
-
-Selecting a technique on Tab 3 populates a Method dropdown from the registry. Selecting a method auto-generates: a read-only summary of constants, editable fields for defaults, an analyte table from the template. JSON-LD export references the method by `@id` in `schema:actionProcess`.
-
-### Implementation phases
-
-1. **Building block schema** — `geochemProperties/methodDefinition/` in this repo
-2. **Registry backend** — PostgreSQL table + API in amds-ldeo/metadata
-3. **Form integration** — Tab 3 updates in ada_metadata_forms
-4. **Seed data** — Convert OneGeochemistry EPMA workbooks to method definition instances
-
-### Source analysis
-
-The design was informed by analysis of:
-- OneGeochemistry EPMA-SEM Excel templates (40+ filled method workbooks)
-- EPMA Metadata Profile v1.0 (docx, 73-field reference profile with M/R/O tiers)
-- SMRTable (xlsx, scope annotations per field: technique/method/session/event)
-- CDIF metadataBuildingBlocks (cdifProvActivity, instrument, qualityMeasure, etc.)
-- Existing geochemBuildingBlocks detail* schemas
-
-An integrated EPMA template (`EPMA_Integrated_Method_Template_v1.xlsx`) with CDIF/geochem BB mapping columns was produced as part of this analysis; it lives in `G:\My Drive\OneGeochemistry\AnalyticalMethodTemplates\`.
+- [Bioschemas](https://bioschemas.org/) — `bios:LabProtocol`, `bios:LabProcess`, `bios:computationalTool`, `bios:reagent`
+- [DDI-CDI](https://ddialliance.org/Specification/DDI-CDI/1.0/) — `cdi:Activity` for workflow steps
+- [W3C DQV](https://www.w3.org/TR/vocab-dqv/) — `dqv:hasQualityMeasurement` for quality metrics
+- [schema.org](https://schema.org/) — `PropertyValueSpecification` for parameter definitions, `Action`/`HowTo`/`HowToStep` for workflow
 
 ## License
 

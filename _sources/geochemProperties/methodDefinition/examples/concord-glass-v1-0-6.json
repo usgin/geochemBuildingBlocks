@@ -1,287 +1,424 @@
 {
   "@id": "https://registry.onegeochemistry.org/methods/concord-glass-v1-0-6",
   "@type": [
+    "cdi:Activity",
+    "schema:Action",
     "ada:MethodDefinition",
-    "schema:HowTo"
+    "bios:LabProtocol"
   ],
   "schema:name": "CU routine tephra glass version 1.0 with 6nA",
   "schema:version": "1.0.6",
   "schema:datePublished": "2011-10-20",
   "schema:measurementTechnique": {
-    "@type": [
-      "schema:DefinedTerm"
-    ],
+    "@type": ["schema:DefinedTerm"],
     "schema:name": "EPMA-WDS",
     "schema:inDefinedTermSet": "https://vocab.onegeochemistry.org/techniques"
   },
+  "schema:object": [
+    {
+      "@type": ["schema:DefinedTerm"],
+      "schema:name": "silicate glass",
+      "schema:inDefinedTermSet": "https://vocab.onegeochemistry.org/materials"
+    }
+  ],
   "schema:instrument": {
-    "@type": [
-      "schema:Product",
-      "schema:Thing"
-    ],
+    "@type": ["schema:Product", "schema:Thing"],
     "schema:name": "ARL SEMQ",
     "schema:manufacturer": {
-      "@type": [
-        "schema:Organization"
-      ],
+      "@type": ["schema:Organization"],
       "schema:name": "ARL"
     },
     "schema:model": {
-      "@type": [
-        "schema:ProductModel"
-      ],
+      "@type": ["schema:ProductModel"],
       "schema:name": "SEMQ"
     },
     "schema:hasPart": [
       {
-        "@type": [
-          "schema:Thing"
-        ],
+        "@type": ["schema:Thing"],
         "schema:name": "WDS Spectrometer Array",
-        "schema:description": "4 WDS spectrometers configured as #1 PET with sealed xenon detector, #2 RAP with P-10 flow detector, #3 LIF with sealed xenon detector, #4 TAP with P-10 flow detector; Flow detectors are equipped with polypropylene windows"
+        "schema:description": "4 WDS spectrometers: #1 PET/xenon, #2 RAP/P-10, #3 LIF/xenon, #4 TAP/P-10; flow detectors with polypropylene windows"
       }
     ]
   },
   "ada:laboratory": {
-    "@type": [
-      "schema:Place"
-    ],
+    "@type": ["schema:Place"],
     "schema:name": "Concord University, Athens, West Virginia, USA"
   },
-  "ada:methodParameters": [
+  "schema:agent": {
+    "@type": ["schema:Organization"],
+    "schema:name": "Concord University"
+  },
+  "bios:computationalTool": [
     {
-      "schema:name": "acceleratingVoltage",
-      "schema:alternateName": "Accelerating Voltage",
-      "ada:scope": "constant",
-      "ada:category": "Beam Conditions",
-      "ada:dataType": "number",
-      "schema:value": 15,
-      "schema:unitText": "kV",
-      "ada:tier": "M",
-      "ada:cdifPropertyPath": "cdifProvActivity: schema:additionalProperty"
-    },
-    {
-      "schema:name": "beamCurrent",
-      "schema:alternateName": "Beam Current",
-      "ada:scope": "constant",
-      "ada:category": "Beam Conditions",
-      "ada:dataType": "number",
-      "schema:value": 6,
-      "schema:unitText": "nA",
-      "ada:tier": "M",
-      "ada:cdifPropertyPath": "cdifProvActivity: schema:additionalProperty"
-    },
-    {
-      "schema:name": "beamDiameter",
-      "schema:alternateName": "Beam Diameter",
-      "ada:scope": "default",
-      "ada:category": "Beam Conditions",
-      "ada:dataType": "string",
-      "schema:value": "4 to 10 microns typical",
-      "ada:tier": "M",
-      "ada:cdifPropertyPath": "cdifProvActivity: schema:additionalProperty"
-    },
-    {
-      "schema:name": "matrixCorrectionModel",
-      "schema:alternateName": "X-ray Matrix Corrections",
-      "ada:scope": "constant",
-      "ada:category": "Data Processing",
-      "ada:dataType": "string",
-      "schema:value": "Probe for EPMA default settings with CITZMU mass absorption coefficients: \nPhi(pz) Absorption of Armstrong/Packwood-Brown 1981 MAS\nStopping Power of Love-Scott\nBackscatter Coefficient of Love-Scott\nBa",
-      "ada:tier": "M",
-      "ada:cdifPropertyPath": "cdifProvActivity: schema:actionProcess"
-    },
-    {
-      "schema:name": "analyticalSoftware",
-      "schema:alternateName": "Analytical Software",
-      "ada:scope": "default",
-      "ada:category": "Instrument & Software",
-      "ada:dataType": "string",
-      "schema:value": "Probe for EPMA 9.6.4",
-      "ada:tier": "M",
-      "ada:cdifPropertyPath": "cdifProvActivity: prov:used"
-    },
-    {
-      "schema:name": "beamDamageMinimization",
-      "schema:alternateName": "Beam Damage Minimization",
-      "ada:scope": "constant",
-      "ada:category": "Beam Conditions",
-      "ada:dataType": "string",
-      "schema:value": "Si, Al, and Na acquired first in analytical sequence; Si, Al, and Na acquired in 6 or 7 time intervals to allow an explicit Time-Dependent-Intensity (TDI) correction for changing X-ray intensities; For quantification, the TDI correction is enabled/disabled on a sample basis as needed; Most TDI corre",
-      "ada:tier": "R",
-      "ada:cdifPropertyPath": "cdifProvActivity: schema:additionalProperty"
-    },
-    {
-      "schema:name": "driftCorrection",
-      "schema:alternateName": "Drift Correction",
-      "ada:scope": "default",
-      "ada:category": "Quality Control",
-      "ada:dataType": "string",
-      "schema:value": "Primary major element reference materials are run at beginning and end of every analytical session and the calibration is interpolated",
-      "ada:tier": "R",
-      "ada:cdifPropertyPath": "cdifProvActivity: schema:additionalProperty"
-    },
-    {
-      "schema:name": "secondaryReferenceStandards",
-      "schema:alternateName": "Secondary Reference Materials",
-      "ada:scope": "constant",
-      "ada:category": "Quality Control",
-      "ada:dataType": "string",
-      "schema:value": "Lipari obsidian ID3506, USGS BHVO-2g, and USGS NKT-1g are run in every analytical session (beginning and end); Method additionally tested with Old Crow tephra, Edziza Sheep Track tephra, and others in one or more analytical sessions",
-      "ada:tier": "M",
-      "ada:cdifPropertyPath": "cdifProvActivity: prov:used"
-    },
-    {
-      "schema:name": "additionalNotes",
-      "schema:alternateName": "Additional Notes",
-      "ada:scope": "constant",
-      "ada:category": "General",
-      "ada:dataType": "string",
-      "schema:value": "Water by difference included in the x-ray matrix corrections for improved accuracy on hydrated glasses; Offline multi-standard blank correction for improved trace-element accuracy; Offline standards-based normalization to match reference material target concentrations on a multi-standard, whole session, weighted means basis to maximize session-to-session reproducibility - First version of routine tephra glass analysis (used with 6 nA current), preceeded only by experimental methods",
-      "ada:tier": "O",
-      "ada:cdifPropertyPath": "cdifProvActivity: schema:additionalProperty"
+      "@type": ["schema:SoftwareApplication"],
+      "schema:name": "Probe for EPMA",
+      "schema:version": "9.6.4",
+      "ada:toolRole": "acquisition"
     }
   ],
+  "ada:methodParameters": [
+    {
+      "@type": ["schema:PropertyValueSpecification"],
+      "schema:name": "Additional Notes",
+      "schema:valueName": "additionalNotes",
+      "ada:fieldScope": "method",
+      "ada:category": "General",
+      "ada:dataType": "string",
+      "schema:readonlyValue": true,
+      "schema:valueRequired": false,
+      "schema:defaultValue": "Water by difference included in x-ray matrix corrections for improved accuracy on hydrated glasses; offline multi-standard blank correction; offline standards-based normalization",
+      "ada:tier": "O"
+    }
+  ],
+  "schema:actionProcess": {
+    "@type": ["schema:HowTo"],
+    "schema:name": "EPMA WDS tephra glass analytical workflow",
+    "schema:step": [
+      {
+        "@type": ["cdi:Activity", "schema:Action"],
+        "schema:name": "Sample preparation",
+        "schema:position": 1,
+        "schema:additionalType": ["bios:LabProcess"],
+        "schema:description": "Tephra glass grains mounted, polished, and carbon coated for EPMA.",
+        "bios:reagent": [
+          {
+            "@type": ["schema:Thing"],
+            "schema:name": "Carbon",
+            "ada:reagentRole": "coatingMaterial"
+          }
+        ],
+        "schema:result": {
+          "@id": "#preparedMount"
+        }
+      },
+      {
+        "@type": ["cdi:Activity", "schema:Action"],
+        "schema:name": "Instrument calibration",
+        "schema:position": 2,
+        "schema:description": "Calibrate WDS spectrometers on primary standards. Verify on secondary standards at start and end of session.",
+        "schema:object": {"@id": "#preparedMount"},
+        "bios:reagent": [
+          {
+            "@type": ["schema:Thing"],
+            "schema:name": "Albite",
+            "ada:reagentRole": "primaryStandard"
+          },
+          {
+            "@type": ["schema:Thing"],
+            "schema:name": "Kaersutite amphibole",
+            "ada:reagentRole": "primaryStandard"
+          },
+          {
+            "@type": ["schema:Thing"],
+            "schema:name": "Lipari obsidian ID3506",
+            "ada:reagentRole": "secondaryStandard"
+          },
+          {
+            "@type": ["schema:Thing"],
+            "schema:name": "USGS BHVO-2g",
+            "ada:reagentRole": "secondaryStandard"
+          },
+          {
+            "@type": ["schema:Thing"],
+            "schema:name": "USGS NKT-1g",
+            "ada:reagentRole": "secondaryStandard"
+          }
+        ]
+      },
+      {
+        "@type": ["cdi:Activity", "schema:Action"],
+        "schema:name": "WDS data acquisition",
+        "schema:position": 3,
+        "schema:description": "Quantitative WDS analysis at 15 kV / 6 nA. Si, Al, Na acquired first to minimize beam damage with TDI correction.",
+        "ada:methodParameters": [
+          {
+            "@type": ["schema:PropertyValueSpecification"],
+            "schema:name": "Accelerating Voltage",
+            "schema:valueName": "acceleratingVoltage",
+            "ada:fieldScope": "method",
+            "ada:category": "Beam Conditions",
+            "ada:dataType": "number",
+            "schema:readonlyValue": true,
+            "schema:valueRequired": true,
+            "schema:defaultValue": 15,
+            "schema:unitText": "kV",
+            "ada:tier": "M"
+          },
+          {
+            "@type": ["schema:PropertyValueSpecification"],
+            "schema:name": "Beam Current",
+            "schema:valueName": "beamCurrent",
+            "ada:fieldScope": "method",
+            "ada:category": "Beam Conditions",
+            "ada:dataType": "number",
+            "schema:readonlyValue": true,
+            "schema:valueRequired": true,
+            "schema:defaultValue": 6,
+            "schema:minValue": 1,
+            "schema:maxValue": 200,
+            "schema:unitText": "nA",
+            "ada:tier": "M"
+          },
+          {
+            "@type": ["schema:PropertyValueSpecification"],
+            "schema:name": "Beam Diameter",
+            "schema:valueName": "beamDiameter",
+            "ada:fieldScope": "session",
+            "ada:category": "Beam Conditions",
+            "ada:dataType": "number",
+            "schema:readonlyValue": false,
+            "schema:valueRequired": true,
+            "schema:defaultValue": 10,
+            "schema:minValue": 0,
+            "schema:maxValue": 50,
+            "schema:unitText": "um",
+            "ada:tier": "M"
+          },
+          {
+            "@type": ["schema:PropertyValueSpecification"],
+            "schema:name": "Beam Damage Minimization",
+            "schema:valueName": "beamDamageMinimization",
+            "schema:inDefinedTermSet": {
+              "@id": "https://vocab.onegeochemistry.org/epma/beam-damage-methods"
+            },
+            "ada:fieldScope": "method",
+            "ada:category": "Beam Conditions",
+            "ada:dataType": "string",
+            "schema:readonlyValue": true,
+            "schema:valueRequired": false,
+            "schema:defaultValue": "Si, Al, Na acquired first; 6-7 time intervals for TDI correction",
+            "ada:tier": "R"
+          }
+        ],
+        "schema:result": {
+          "@id": "#rawAnalyses"
+        }
+      },
+      {
+        "@type": ["cdi:Activity", "schema:Action"],
+        "schema:name": "Data processing",
+        "schema:position": 4,
+        "schema:description": "Matrix correction, blank correction, and standards-based normalization using Probe for EPMA.",
+        "schema:object": {"@id": "#rawAnalyses"},
+        "bios:computationalTool": [
+          {
+            "@type": ["schema:SoftwareApplication"],
+            "schema:name": "Probe for EPMA",
+            "schema:version": "9.6.4",
+            "ada:toolRole": "reduction"
+          }
+        ],
+        "ada:methodParameters": [
+          {
+            "@type": ["schema:PropertyValueSpecification"],
+            "schema:name": "Matrix Correction Model",
+            "schema:valueName": "matrixCorrectionModel",
+            "schema:propertyID": "https://vocab.onegeochemistry.org/epma/matrix-correction",
+            "schema:inDefinedTermSet": {
+              "@id": "https://vocab.onegeochemistry.org/epma/matrix-correction-models"
+            },
+            "ada:fieldScope": "method",
+            "ada:category": "Data Processing",
+            "ada:dataType": "string",
+            "schema:readonlyValue": true,
+            "schema:valueRequired": true,
+            "schema:defaultValue": "Armstrong/Packwood-Brown 1981 MAS Phi(pz) with CITZMU MACs",
+            "ada:enumeration": ["PAP", "XPP", "PhiRhoZ", "ZAF", "CITZAF", "Armstrong", "Other"],
+            "ada:tier": "M"
+          }
+        ],
+        "schema:result": {
+          "@id": "#quantifiedResults"
+        }
+      },
+      {
+        "@type": ["cdi:Activity", "schema:Action"],
+        "schema:name": "Quality control",
+        "schema:position": 5,
+        "schema:description": "Secondary standards analysed at start and end of every session. Drift correction by interpolation of primary standard calibrations.",
+        "schema:object": {"@id": "#quantifiedResults"},
+        "ada:methodParameters": [
+          {
+            "@type": ["schema:PropertyValueSpecification"],
+            "schema:name": "Drift Correction",
+            "schema:valueName": "driftCorrection",
+            "ada:fieldScope": "session",
+            "ada:category": "Quality Control",
+            "ada:dataType": "string",
+            "schema:readonlyValue": false,
+            "schema:valueRequired": false,
+            "schema:defaultValue": "Primary reference materials at start/end of session; calibration interpolated",
+            "ada:tier": "R"
+          }
+        ],
+        "dqv:hasQualityMeasurement": [
+          {
+            "@type": ["dqv:QualityMeasurement"],
+            "dqv:isMeasurementOf": "analytical precision (1-sigma)",
+            "dqv:value": "Reported per element on secondary standards; see relatedLink publications"
+          }
+        ]
+      }
+    ]
+  },
   "ada:analyteTemplate": {
     "ada:analyteColumns": [
       {
-        "schema:name": "analysedOxide",
-        "schema:alternateName": "Analysed Oxide/Element",
-        "ada:scope": "default",
+        "@type": ["schema:PropertyValueSpecification"],
+        "schema:name": "Analysed Oxide/Element",
+        "schema:valueName": "analysedOxide",
         "ada:dataType": "string",
+        "schema:valueRequired": true,
         "ada:tier": "M",
         "ada:cdifPropertyPath": "cdifVariableMeasured: cdi:name"
       },
       {
-        "schema:name": "beamCurrent",
-        "schema:alternateName": "Beam Current (nA)",
-        "ada:scope": "default",
+        "@type": ["schema:PropertyValueSpecification"],
+        "schema:name": "Beam Current (nA)",
+        "schema:valueName": "beamCurrent",
         "ada:dataType": "number",
+        "schema:valueRequired": true,
+        "schema:minValue": 1,
+        "schema:maxValue": 200,
         "schema:unitText": "nA",
-        "ada:tier": "M",
-        "ada:cdifPropertyPath": "schema:additionalProperty"
+        "ada:tier": "M"
       },
       {
-        "schema:name": "spectrometer",
-        "schema:alternateName": "Spectrometer",
-        "ada:scope": "default",
+        "@type": ["schema:PropertyValueSpecification"],
+        "schema:name": "Spectrometer",
+        "schema:valueName": "spectrometer",
         "ada:dataType": "string",
-        "ada:tier": "R",
-        "ada:cdifPropertyPath": "schema:additionalProperty"
+        "schema:valueRequired": false,
+        "ada:tier": "R"
       },
       {
-        "schema:name": "sequence",
-        "schema:alternateName": "Sequence",
-        "ada:scope": "default",
+        "@type": ["schema:PropertyValueSpecification"],
+        "schema:name": "Sequence",
+        "schema:valueName": "sequence",
         "ada:dataType": "integer",
-        "ada:tier": "R",
-        "ada:cdifPropertyPath": "schema:additionalProperty"
+        "schema:valueRequired": false,
+        "ada:tier": "R"
       },
       {
-        "schema:name": "diffractingCrystal",
-        "schema:alternateName": "Diffracting Crystal",
-        "ada:scope": "default",
+        "@type": ["schema:PropertyValueSpecification"],
+        "schema:name": "Diffracting Crystal",
+        "schema:valueName": "diffractingCrystal",
+        "schema:inDefinedTermSet": {
+          "@id": "https://vocab.onegeochemistry.org/epma/diffracting-crystals"
+        },
         "ada:dataType": "string",
-        "ada:tier": "M",
-        "ada:cdifPropertyPath": "schema:additionalProperty"
+        "schema:valueRequired": true,
+        "ada:enumeration": ["PET", "PETJ", "LIF", "LIFH", "TAP", "RAP"],
+        "ada:tier": "M"
       },
       {
-        "schema:name": "detectorType",
-        "schema:alternateName": "Detector Type",
-        "ada:scope": "default",
+        "@type": ["schema:PropertyValueSpecification"],
+        "schema:name": "Detector Type",
+        "schema:valueName": "detectorType",
         "ada:dataType": "string",
-        "ada:tier": "R",
-        "ada:cdifPropertyPath": "schema:additionalProperty"
+        "schema:valueRequired": false,
+        "ada:enumeration": ["xenon", "P-10", "SDD", "Si(Li)", "Other"],
+        "ada:tier": "R"
       },
       {
-        "schema:name": "xrayLine",
-        "schema:alternateName": "X-ray Line",
-        "ada:scope": "default",
+        "@type": ["schema:PropertyValueSpecification"],
+        "schema:name": "X-ray Line",
+        "schema:valueName": "xrayLine",
+        "schema:inDefinedTermSet": {
+          "@id": "https://vocab.onegeochemistry.org/epma/xray-lines"
+        },
         "ada:dataType": "string",
-        "ada:tier": "M",
-        "ada:cdifPropertyPath": "schema:additionalProperty"
+        "schema:valueRequired": true,
+        "ada:enumeration": ["Ka", "Kb", "La", "Lb", "Ma"],
+        "ada:tier": "M"
       },
       {
-        "schema:name": "peakCountingTime",
-        "schema:alternateName": "Peak Counting Time (s)",
-        "ada:scope": "default",
-        "ada:dataType": "string",
-        "schema:unitText": "seconds",
-        "ada:tier": "M",
-        "ada:cdifPropertyPath": "schema:additionalProperty"
-      },
-      {
-        "schema:name": "backgroundMethod",
-        "schema:alternateName": "Background Method",
-        "ada:scope": "default",
-        "ada:dataType": "string",
-        "ada:tier": "M",
-        "ada:cdifPropertyPath": "schema:additionalProperty"
-      },
-      {
-        "schema:name": "backgroundCountingTime",
-        "schema:alternateName": "Background Counting Time (s)",
-        "ada:scope": "default",
+        "@type": ["schema:PropertyValueSpecification"],
+        "schema:name": "Peak Counting Time (s)",
+        "schema:valueName": "peakCountingTime",
         "ada:dataType": "number",
+        "schema:valueRequired": true,
+        "schema:minValue": 1,
         "schema:unitText": "seconds",
-        "ada:tier": "M",
-        "ada:cdifPropertyPath": "schema:additionalProperty"
+        "ada:tier": "M"
       },
       {
-        "schema:name": "phaSettings",
-        "schema:alternateName": "WDS PHA Setting",
-        "ada:scope": "default",
+        "@type": ["schema:PropertyValueSpecification"],
+        "schema:name": "Background Method",
+        "schema:valueName": "backgroundMethod",
+        "schema:inDefinedTermSet": {
+          "@id": "https://vocab.onegeochemistry.org/epma/background-methods"
+        },
         "ada:dataType": "string",
-        "ada:tier": "R",
-        "ada:cdifPropertyPath": "schema:additionalProperty"
+        "schema:valueRequired": true,
+        "ada:tier": "M"
       },
       {
-        "schema:name": "calibrationStandardName",
-        "schema:alternateName": "Calibration Standard Name",
-        "ada:scope": "default",
-        "ada:dataType": "string",
-        "ada:tier": "M",
-        "ada:cdifPropertyPath": "schema:additionalProperty"
-      },
-      {
-        "schema:name": "normalizationMethod",
-        "schema:alternateName": "Normalization Method",
-        "ada:scope": "optional",
-        "ada:dataType": "string",
-        "ada:tier": "O",
-        "ada:cdifPropertyPath": "schema:additionalProperty"
-      },
-      {
-        "schema:name": "normalizationStandards",
-        "schema:alternateName": "Normalization Standards",
-        "ada:scope": "optional",
-        "ada:dataType": "string",
-        "ada:tier": "O",
-        "ada:cdifPropertyPath": "schema:additionalProperty"
-      },
-      {
-        "schema:name": "detectionLimit",
-        "schema:alternateName": "Detection Limit",
-        "ada:scope": "optional",
+        "@type": ["schema:PropertyValueSpecification"],
+        "schema:name": "Background Counting Time (s)",
+        "schema:valueName": "backgroundCountingTime",
         "ada:dataType": "number",
-        "ada:tier": "R",
-        "ada:cdifPropertyPath": "qualityMeasure: dqv:QualityMeasurement"
+        "schema:valueRequired": true,
+        "schema:minValue": 1,
+        "schema:unitText": "seconds",
+        "ada:tier": "M"
       },
       {
-        "schema:name": "detectionLimitUnit",
-        "schema:alternateName": "Detection Limit Unit",
-        "ada:scope": "optional",
+        "@type": ["schema:PropertyValueSpecification"],
+        "schema:name": "WDS PHA Setting",
+        "schema:valueName": "phaSettings",
         "ada:dataType": "string",
-        "ada:tier": "R",
-        "ada:cdifPropertyPath": "schema:additionalProperty"
+        "schema:valueRequired": false,
+        "ada:enumeration": ["Integral", "Differential"],
+        "ada:tier": "R"
       },
       {
-        "schema:name": "detectionLimitMethod",
-        "schema:alternateName": "Detection Limit Method",
-        "ada:scope": "optional",
+        "@type": ["schema:PropertyValueSpecification"],
+        "schema:name": "Calibration Standard Name",
+        "schema:valueName": "calibrationStandardName",
         "ada:dataType": "string",
-        "ada:tier": "R",
-        "ada:cdifPropertyPath": "schema:additionalProperty"
+        "schema:valueRequired": true,
+        "ada:tier": "M"
+      },
+      {
+        "@type": ["schema:PropertyValueSpecification"],
+        "schema:name": "Normalization Method",
+        "schema:valueName": "normalizationMethod",
+        "ada:dataType": "string",
+        "schema:valueRequired": false,
+        "ada:tier": "O"
+      },
+      {
+        "@type": ["schema:PropertyValueSpecification"],
+        "schema:name": "Normalization Standards",
+        "schema:valueName": "normalizationStandards",
+        "ada:dataType": "string",
+        "schema:valueRequired": false,
+        "ada:tier": "O"
+      },
+      {
+        "@type": ["schema:PropertyValueSpecification"],
+        "schema:name": "Detection Limit",
+        "schema:valueName": "detectionLimit",
+        "ada:dataType": "number",
+        "schema:valueRequired": false,
+        "ada:tier": "R"
+      },
+      {
+        "@type": ["schema:PropertyValueSpecification"],
+        "schema:name": "Detection Limit Unit",
+        "schema:valueName": "detectionLimitUnit",
+        "ada:dataType": "string",
+        "schema:valueRequired": false,
+        "ada:tier": "R"
+      },
+      {
+        "@type": ["schema:PropertyValueSpecification"],
+        "schema:name": "Detection Limit Method",
+        "schema:valueName": "detectionLimitMethod",
+        "ada:dataType": "string",
+        "schema:valueRequired": false,
+        "ada:tier": "R"
       }
     ],
     "ada:defaultAnalytes": [
@@ -300,9 +437,9 @@
         "calibrationStandardName": "Albite or Lipari obsidian ID3506 or BHVO-2g",
         "normalizationMethod": "multi-standard weighted mean",
         "normalizationStandards": "Lipari obsidian ID3506, BHVO-2g",
-        "detectionLimit": 0.0997354761904762,
+        "detectionLimit": 0.0997,
         "detectionLimitUnit": "weight percent (%m/m)",
-        "detectionLimitMethod": "Mean of WDS detection limits at 99% confidence as computed by Probe for EPMA"
+        "detectionLimitMethod": "Mean of WDS detection limits at 99% confidence"
       },
       {
         "analysedOxide": "TiO2",
@@ -319,180 +456,9 @@
         "calibrationStandardName": "Kaersutite amphibole",
         "normalizationMethod": "multi-standard weighted mean",
         "normalizationStandards": "Lipari obsidian ID3506, BHVO-2g",
-        "detectionLimit": 0.04389311111111112,
+        "detectionLimit": 0.0439,
         "detectionLimitUnit": "weight percent (%m/m)",
-        "detectionLimitMethod": "Mean of WDS detection limits at 99% confidence as computed by Probe for EPMA"
-      },
-      {
-        "analysedOxide": "Al2O3",
-        "beamCurrent": 6,
-        "spectrometer": "WDS 2",
-        "sequence": 1,
-        "diffractingCrystal": "RAP",
-        "detectorType": "P-10",
-        "xrayLine": "Ka",
-        "peakCountingTime": "42 or 30",
-        "backgroundMethod": "high only",
-        "backgroundCountingTime": 5,
-        "phaSettings": "integral",
-        "calibrationStandardName": "Albite or Lipari obsidian ID3506 or BHVO-2g or Sodalite",
-        "normalizationMethod": "multi-standard weighted mean",
-        "normalizationStandards": "Lipari obsidian ID3506, BHVO-2g",
-        "detectionLimit": 0.09477362601626019,
-        "detectionLimitUnit": "weight percent (%m/m)",
-        "detectionLimitMethod": "Mean of WDS detection limits at 99% confidence as computed by Probe for EPMA"
-      },
-      {
-        "analysedOxide": "FeO",
-        "beamCurrent": 6,
-        "spectrometer": "WDS 3",
-        "sequence": 2,
-        "diffractingCrystal": "LIF",
-        "detectorType": "xenon",
-        "xrayLine": "Ka",
-        "peakCountingTime": "40",
-        "backgroundMethod": "two backgrounds",
-        "backgroundCountingTime": 20,
-        "phaSettings": "integral",
-        "calibrationStandardName": "Kaersutite amphibole",
-        "normalizationMethod": "multi-standard weighted mean",
-        "normalizationStandards": "Lipari obsidian ID3506, BHVO-2g",
-        "detectionLimit": 0.06864219841269842,
-        "detectionLimitUnit": "weight percent (%m/m)",
-        "detectionLimitMethod": "Mean of WDS detection limits at 99% confidence as computed by Probe for EPMA"
-      },
-      {
-        "analysedOxide": "MnO",
-        "beamCurrent": 6,
-        "spectrometer": "WDS 3",
-        "sequence": 3,
-        "diffractingCrystal": "LIF",
-        "detectorType": "xenon",
-        "xrayLine": "Ka",
-        "peakCountingTime": "45",
-        "backgroundMethod": "two backgrounds",
-        "backgroundCountingTime": 44,
-        "phaSettings": "integral",
-        "calibrationStandardName": "synthetic MnO or Spessartine garnet",
-        "normalizationMethod": "multi-standard weighted mean",
-        "normalizationStandards": "BHVO-2g (average of computed correction ratio and 1)",
-        "detectionLimit": 0.04156199206349209,
-        "detectionLimitUnit": "weight percent (%m/m)",
-        "detectionLimitMethod": "Mean of WDS detection limits at 99% confidence as computed by Probe for EPMA"
-      },
-      {
-        "analysedOxide": "MgO",
-        "beamCurrent": 6,
-        "spectrometer": "WDS 2",
-        "sequence": 2,
-        "diffractingCrystal": "RAP",
-        "detectorType": "P-10",
-        "xrayLine": "Ka",
-        "peakCountingTime": "100 or 110",
-        "backgroundMethod": "two backgrounds",
-        "backgroundCountingTime": 86,
-        "phaSettings": "integral",
-        "calibrationStandardName": "Kaersutite amphibole",
-        "normalizationMethod": "single standard",
-        "normalizationStandards": "BHVO-2g",
-        "detectionLimit": 0.01896079200000001,
-        "detectionLimitUnit": "weight percent (%m/m)",
-        "detectionLimitMethod": "Mean of WDS detection limits at 99% confidence as computed by Probe for EPMA"
-      },
-      {
-        "analysedOxide": "CaO",
-        "beamCurrent": 6,
-        "spectrometer": "WDS 3",
-        "sequence": 1,
-        "diffractingCrystal": "LIF",
-        "detectorType": "xenon",
-        "xrayLine": "Ka",
-        "peakCountingTime": "50",
-        "backgroundMethod": "two backgrounds",
-        "backgroundCountingTime": 20,
-        "phaSettings": "integral",
-        "calibrationStandardName": "Kaersutite amphibole",
-        "normalizationMethod": "multi-standard weighted mean",
-        "normalizationStandards": "Lipari obsidian ID3506, BHVO-2g",
-        "detectionLimit": 0.054661666666666685,
-        "detectionLimitUnit": "weight percent (%m/m)",
-        "detectionLimitMethod": "Mean of WDS detection limits at 99% confidence as computed by Probe for EPMA"
-      },
-      {
-        "analysedOxide": "Na2O",
-        "beamCurrent": 6,
-        "spectrometer": "WDS 4",
-        "sequence": 1,
-        "diffractingCrystal": "TAP",
-        "detectorType": "P-10",
-        "xrayLine": "Ka",
-        "peakCountingTime": "42 or 30",
-        "backgroundMethod": "two backgrounds",
-        "backgroundCountingTime": 10,
-        "phaSettings": "integral",
-        "calibrationStandardName": "Albite or Lipari obsidian ID3506 or Sodalite",
-        "normalizationMethod": "multi-standard weighted mean",
-        "normalizationStandards": "Lipari obsidian ID3506, BHVO-2g",
-        "detectionLimit": 0.10627684126984126,
-        "detectionLimitUnit": "weight percent (%m/m)",
-        "detectionLimitMethod": "Mean of WDS detection limits at 99% confidence as computed by Probe for EPMA"
-      },
-      {
-        "analysedOxide": "K2O",
-        "beamCurrent": 6,
-        "spectrometer": "WDS 1",
-        "sequence": 2,
-        "diffractingCrystal": "PET",
-        "detectorType": "P-10",
-        "xrayLine": "Ka",
-        "peakCountingTime": "10",
-        "backgroundMethod": "two backgrounds",
-        "backgroundCountingTime": 6,
-        "phaSettings": "integral",
-        "calibrationStandardName": "Sanidine or Orthoclase OR-1A or Lipari obsidian ID3506",
-        "normalizationMethod": "multi-standard weighted mean",
-        "normalizationStandards": "Lipari obsidian ID3506, BHVO-2g",
-        "detectionLimit": 0.04630511200000001,
-        "detectionLimitUnit": "weight percent (%m/m)",
-        "detectionLimitMethod": "Mean of WDS detection limits at 99% confidence as computed by Probe for EPMA"
-      },
-      {
-        "analysedOxide": "P2O5",
-        "beamCurrent": 6,
-        "spectrometer": "WDS 1",
-        "sequence": 5,
-        "diffractingCrystal": "PET",
-        "detectorType": "P-10",
-        "xrayLine": "Ka",
-        "peakCountingTime": "28 or 40",
-        "backgroundMethod": "two backgrounds",
-        "backgroundCountingTime": "26 or 30",
-        "phaSettings": "integral",
-        "calibrationStandardName": "Apatite",
-        "normalizationMethod": "multi-standard weighted mean",
-        "normalizationStandards": "BHVO-2g (average of computed correction ratio and 1)",
-        "detectionLimit": 0.03051422764227641,
-        "detectionLimitUnit": "weight percent (%m/m)",
-        "detectionLimitMethod": "Mean of WDS detection limits at 99% confidence as computed by Probe for EPMA"
-      },
-      {
-        "analysedOxide": "Cl",
-        "beamCurrent": 6,
-        "spectrometer": "WDS 1",
-        "sequence": 4,
-        "diffractingCrystal": "PET",
-        "detectorType": "P-10",
-        "xrayLine": "Ka",
-        "peakCountingTime": "21",
-        "backgroundMethod": "two backgrounds",
-        "backgroundCountingTime": 12,
-        "phaSettings": "integral",
-        "calibrationStandardName": "Sodalite or Tugtupite",
-        "normalizationMethod": "single standard",
-        "normalizationStandards": "Lipari obsidian ID3506 (average of computed correction ratio and 1)",
-        "detectionLimit": 0.03287891269841269,
-        "detectionLimitUnit": "weight percent (%m/m)",
-        "detectionLimitMethod": "Mean of WDS detection limits at 99% confidence as computed by Probe for EPMA"
+        "detectionLimitMethod": "Mean of WDS detection limits at 99% confidence"
       }
     ]
   }

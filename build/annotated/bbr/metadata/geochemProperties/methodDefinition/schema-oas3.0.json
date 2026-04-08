@@ -312,6 +312,123 @@
       "x-schema-source": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/person/schema.json",
       "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
     },
+    "cdif.bbr.metadata.schemaorgProperties.organization": {
+      "type": "object",
+      "properties": {
+        "@id": {
+          "type": "string"
+        },
+        "@type": {
+          "default": "schema:Organization",
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "schema:Organization",
+                  "schema:FundingAgency",
+                  "schema:Consortium",
+                  "schema:Corporation",
+                  "schema:EducationalOrganization",
+                  "schema:FundingScheme",
+                  "schema:GovernmentOrganization",
+                  "schema:NGO",
+                  "schema:Project",
+                  "schema:ResearchOrganization"
+                ]
+              }
+            ]
+          },
+          "contains": {
+            "enum": [
+              "schema:Organization"
+            ]
+          },
+          "minItems": 1
+        },
+        "schema:additionalType": {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.definedTerm"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          }
+        },
+        "schema:name": {
+          "type": "string",
+          "description": "string label for organization that is meaningful for human users"
+        },
+        "schema:alternateName": {
+          "type": "string",
+          "description": "other labels by which the organization might be known"
+        },
+        "schema:description": {
+          "type": "string"
+        },
+        "schema:identifier": {
+          "description": "identifier for organization",
+          "anyOf": [
+            {
+              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.identifier"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "schema:sameAs": {
+          "type": "array",
+          "description": "other identifiers for the organization",
+          "items": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "@id": {
+                    "type": "string"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "required": [
+            "@type"
+          ]
+        },
+        {
+          "anyOf": [
+            {
+              "required": [
+                "schema:name"
+              ]
+            },
+            {
+              "required": [
+                "schema:identifier"
+              ]
+            }
+          ]
+        }
+      ],
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/"
+      },
+      "x-schema-source": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/organization/schema.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
     "cdif.bbr.metadata.schemaorgProperties.labeledLink": {
       "description": "schema for a labeled link, a profile of schema.org/CreativeWork",
       "type": "object",
@@ -442,6 +559,69 @@
         "schema": "http://schema.org/"
       },
       "x-schema-source": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/monetaryGrant/schema.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "cdif.bbr.metadata.qualityProperties.qualityMeasure": {
+      "title": "definitions for simple quality measure property",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "contains": {
+            "enum": [
+              "dqv:QualityMeasurement"
+            ]
+          },
+          "minItems": 1
+        },
+        "dqv:isMeasurementOf": {
+          "description": "specify the quality measure that is reported, by name, with an ID ref, or as a Defined Term",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "@id": {
+                  "type": "string",
+                  "description": "a resolvable reference to a representation of a quality measure"
+                }
+              }
+            },
+            {
+              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.qualityProperties.qualityMeasure/$defs/DefinedTerm"
+            }
+          ]
+        },
+        "dqv:value": {
+          "description": "the reported result of the quality measure, either as a string or a defined term from a vocabulary",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.qualityProperties.qualityMeasure/$defs/DefinedTerm"
+            }
+          ]
+        }
+      },
+      "required": [
+        "dqv:isMeasurementOf",
+        "dqv:value"
+      ],
+      "$defs": {
+        "DefinedTerm": {
+          "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.definedTerm"
+        }
+      },
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/"
+      },
+      "x-schema-source": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/qualityProperties/qualityMeasure/schema.json",
       "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
     },
     "cdif.bbr.metadata.schemaorgProperties.instrument": {
@@ -1066,123 +1246,6 @@
       "x-schema-source": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/spatialExtent/schema.yaml",
       "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
     },
-    "cdif.bbr.metadata.schemaorgProperties.organization": {
-      "type": "object",
-      "properties": {
-        "@id": {
-          "type": "string"
-        },
-        "@type": {
-          "default": "schema:Organization",
-          "type": "array",
-          "items": {
-            "anyOf": [
-              {
-                "type": "string",
-                "enum": [
-                  "schema:Organization",
-                  "schema:FundingAgency",
-                  "schema:Consortium",
-                  "schema:Corporation",
-                  "schema:EducationalOrganization",
-                  "schema:FundingScheme",
-                  "schema:GovernmentOrganization",
-                  "schema:NGO",
-                  "schema:Project",
-                  "schema:ResearchOrganization"
-                ]
-              }
-            ]
-          },
-          "contains": {
-            "enum": [
-              "schema:Organization"
-            ]
-          },
-          "minItems": 1
-        },
-        "schema:additionalType": {
-          "type": "array",
-          "items": {
-            "anyOf": [
-              {
-                "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.definedTerm"
-              },
-              {
-                "type": "string"
-              }
-            ]
-          }
-        },
-        "schema:name": {
-          "type": "string",
-          "description": "string label for organization that is meaningful for human users"
-        },
-        "schema:alternateName": {
-          "type": "string",
-          "description": "other labels by which the organization might be known"
-        },
-        "schema:description": {
-          "type": "string"
-        },
-        "schema:identifier": {
-          "description": "identifier for organization",
-          "anyOf": [
-            {
-              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.identifier"
-            },
-            {
-              "type": "string"
-            }
-          ]
-        },
-        "schema:sameAs": {
-          "type": "array",
-          "description": "other identifiers for the organization",
-          "items": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "object",
-                "properties": {
-                  "@id": {
-                    "type": "string"
-                  }
-                }
-              }
-            ]
-          }
-        }
-      },
-      "allOf": [
-        {
-          "required": [
-            "@type"
-          ]
-        },
-        {
-          "anyOf": [
-            {
-              "required": [
-                "schema:name"
-              ]
-            },
-            {
-              "required": [
-                "schema:identifier"
-              ]
-            }
-          ]
-        }
-      ],
-      "x-jsonld-prefixes": {
-        "schema": "http://schema.org/"
-      },
-      "x-schema-source": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/organization/schema.json",
-      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
-    },
     "cdif.bbr.metadata.schemaorgProperties.identifier_1": {
       "description": "Properties for a schema.org identifier",
       "type": "object",
@@ -1741,8 +1804,8 @@
       "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
     }
   },
-  "title": "Analytical Method Definition",
-  "description": "A registered analytical method description that can be referenced by metadata records. Contains constant parameters, required parameters with defaults and constraints, optional extension properties, and per-analyte parameter templates. Methods are typed as ada:MethodDefinition and schema:HowTo.",
+  "title": "Analytical Method Definition v3",
+  "description": "A registered analytical method definition modeled as a cdi:Activity and schema:Action. The method identity (name, technique, instrument, laboratory) lives at the top level. The standard workflow is encoded in schema:actionProcess as a schema:HowTo containing an ordered sequence of cdi:Activity + schema:Action steps (sample preparation, calibration, acquisition, data processing, quality control). Each workflow step carries its own parameters, reagents, and instruments. Method-level parameters that apply across all steps remain at the top level in ada:methodParameters. Integrates Bioschemas vocabulary for computational tools and reagents, DDI-CDI for activity sequence, and dqv:hasQualityMeasurement for quality metrics.",
   "type": "object",
   "properties": {
     "@id": {
@@ -1754,8 +1817,22 @@
       "items": {
         "type": "string"
       },
-      "minItems": 2,
+      "minItems": 4,
       "allOf": [
+        {
+          "contains": {
+            "enum": [
+              "cdi:Activity"
+            ]
+          }
+        },
+        {
+          "contains": {
+            "enum": [
+              "schema:Action"
+            ]
+          }
+        },
         {
           "contains": {
             "enum": [
@@ -1766,12 +1843,12 @@
         {
           "contains": {
             "enum": [
-              "schema:HowTo"
+              "bios:LabProtocol"
             ]
           }
         }
       ],
-      "description": "Must include ada:MethodDefinition and schema:HowTo."
+      "description": "Must include cdi:Activity, schema:Action, ada:MethodDefinition, and bios:LabProtocol."
     },
     "schema:name": {
       "type": "string",
@@ -1798,11 +1875,18 @@
     },
     "schema:datePublished": {
       "type": "string",
-      "description": "ISO 8601 date when this method definition was first registered."
+      "description": "ISO 8601 date when this method configuration was first used."
     },
     "schema:dateModified": {
       "type": "string",
       "description": "ISO 8601 date of last update to this definition."
+    },
+    "schema:additionalType": {
+      "description": "Further classification of the activity type (e.g. schema:CreateAction for a production method).",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     },
     "schema:measurementTechnique": {
       "description": "The analytical technique this method implements. Must be a DefinedTerm from a controlled vocabulary of techniques.",
@@ -1812,13 +1896,41 @@
         }
       ]
     },
+    "schema:object": {
+      "description": "Target material(s) this method is designed to analyse (e.g. silicate glass, olivine, spinel). Modeled as DefinedTerm(s) or free text.",
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.definedTerm"
+          },
+          {
+            "type": "string"
+          }
+        ]
+      }
+    },
     "schema:instrument": {
-      "description": "Instrument requirements/specification for this method.",
+      "description": "Primary instrument specification for this method. Use schema:hasPart for instrument sub-components (spectrometers, detectors).",
       "allOf": [
         {
           "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.json#/x-defs/ada.bbr.metadata.geochemProperties.instrument"
         }
       ]
+    },
+    "bios:computationalTool": {
+      "description": "Software tools used for data acquisition, reduction, and processing. Each tool carries name, version, and optional URL.",
+      "type": "array",
+      "items": {
+        "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.json#/$defs/ComputationalTool"
+      }
+    },
+    "bios:reagent": {
+      "description": "Reference materials, calibration standards, and chemical reagents used across this method. Reagents specific to a single workflow step should be placed on that step instead.",
+      "type": "array",
+      "items": {
+        "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.json#/$defs/Reagent"
+      }
     },
     "ada:laboratory": {
       "description": "Laboratory where this method was developed. Optional; omit for methods that are instrument-generic.",
@@ -1828,15 +1940,42 @@
         }
       ]
     },
+    "schema:agent": {
+      "description": "Person or organisation who defined or is responsible for this method.",
+      "anyOf": [
+        {
+          "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.person"
+        },
+        {
+          "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.organization"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "@id": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "schema:actionProcess": {
+      "description": "The standard workflow for this method, expressed as a schema:HowTo containing an ordered sequence of workflow steps. Each step is a cdi:Activity + schema:Action describing a distinct phase (sample preparation, calibration, acquisition, data processing, quality control). Steps carry their own parameters, reagents, instruments, and sub-steps.",
+      "allOf": [
+        {
+          "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.json#/$defs/WorkflowHowTo"
+        }
+      ]
+    },
     "ada:methodParameters": {
       "type": "array",
-      "description": "All operating, processing, and quality parameters for this method. Each parameter carries a scope tag (constant / default / optional) that controls form rendering behaviour.",
+      "description": "Method-level parameters that apply across all workflow steps (e.g. method-scoped constants like matrix correction model). Step-specific parameters should be placed on the appropriate workflow step instead.",
       "items": {
         "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.json#/$defs/MethodParameter"
       }
     },
     "ada:analyteTemplate": {
-      "description": "Template for per-analyte (element-specific) parameters. Defines the columns that appear in the element table, each with scope, datatype, and constraints. Analyte rows become schema:variableMeasured entries in metadata records.",
+      "description": "Template for per-analyte (element-specific) parameters. Defines the columns that appear in the element table, each with scope, datatype, and constraints. Analyte rows become schema:variableMeasured entries in metadata records. Typically associated with the acquisition workflow step.",
       "type": "object",
       "properties": {
         "ada:analyteColumns": {
@@ -1858,23 +1997,11 @@
         "ada:analyteColumns"
       ]
     },
-    "schema:creator": {
-      "description": "Person(s) who defined this method.",
+    "dqv:hasQualityMeasurement": {
+      "description": "Quality measurements that characterize the method's expected performance (e.g. analytical precision, accuracy, counting statistics error). Uses the CDIF qualityMeasure building block.",
       "type": "array",
       "items": {
-        "anyOf": [
-          {
-            "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.person"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "@id": {
-                "type": "string"
-              }
-            }
-          }
-        ]
+        "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.json#/$defs/QualityMeasure"
       }
     },
     "schema:relatedLink": {
@@ -1894,41 +2021,290 @@
   "required": [
     "@type",
     "schema:name",
-    "schema:measurementTechnique",
-    "ada:methodParameters"
+    "schema:measurementTechnique"
   ],
   "$defs": {
-    "MethodParameter": {
+    "WorkflowHowTo": {
       "type": "object",
-      "description": "A single parameter in the method definition. Carries metadata about how the parameter behaves across method instantiations.",
+      "description": "The method's standard workflow expressed as a schema:HowTo. Contains an ordered array of workflow steps in schema:step, where each step is a cdi:Activity + schema:Action.",
       "properties": {
+        "@type": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "contains": {
+            "enum": [
+              "schema:HowTo"
+            ]
+          },
+          "minItems": 1
+        },
+        "@id": {
+          "type": "string"
+        },
         "schema:name": {
           "type": "string",
-          "description": "Machine-readable parameter name (e.g. \"acceleratingVoltage\")."
+          "description": "Name of the workflow (e.g. \"EPMA WDS analytical workflow\")."
         },
-        "schema:alternateName": {
+        "schema:description": {
+          "type": "string",
+          "description": "Overview of the workflow."
+        },
+        "schema:url": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to a published protocol document."
+        },
+        "schema:step": {
+          "type": "array",
+          "description": "Ordered sequence of workflow steps. Each step is a cdi:Activity + schema:Action describing a distinct phase of the analytical procedure.",
+          "items": {
+            "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.json#/$defs/WorkflowStep"
+          }
+        }
+      },
+      "required": [
+        "@type",
+        "schema:step"
+      ]
+    },
+    "WorkflowStep": {
+      "type": "object",
+      "description": "A single step in the analytical workflow, modeled as a cdi:Activity + schema:Action. Each step describes a distinct phase such as sample preparation, instrument calibration, data acquisition, data processing, or quality control. Steps carry their own parameters, instruments, reagents, and may contain sub-steps via schema:actionProcess.",
+      "properties": {
+        "@type": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 2,
+          "allOf": [
+            {
+              "contains": {
+                "enum": [
+                  "cdi:Activity"
+                ]
+              }
+            },
+            {
+              "contains": {
+                "enum": [
+                  "schema:Action"
+                ]
+              }
+            }
+          ]
+        },
+        "@id": {
+          "type": "string"
+        },
+        "schema:name": {
+          "type": "string",
+          "description": "Name of this workflow step (e.g. \"Sample preparation\")."
+        },
+        "schema:description": {
+          "type": "string",
+          "description": "Detailed description of what this step involves."
+        },
+        "schema:position": {
+          "type": "integer",
+          "description": "Ordinal position in the workflow sequence (1-based)."
+        },
+        "schema:additionalType": {
+          "description": "Further classification of this step (e.g. bios:LabProcess for wet-lab steps, schema:CreateAction for production steps).",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "schema:instrument": {
+          "description": "Instrument or equipment used in this step.",
+          "anyOf": [
+            {
+              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.json#/x-defs/ada.bbr.metadata.geochemProperties.instrument"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "@id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "@id"
+              ]
+            }
+          ]
+        },
+        "bios:computationalTool": {
+          "description": "Software tools used in this step.",
+          "type": "array",
+          "items": {
+            "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.json#/$defs/ComputationalTool"
+          }
+        },
+        "bios:reagent": {
+          "description": "Reference materials, standards, or reagents used in this step.",
+          "type": "array",
+          "items": {
+            "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.json#/$defs/Reagent"
+          }
+        },
+        "prov:used": {
+          "description": "Input entities consumed or referenced by this step (e.g. prepared sample from a prior step).",
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "@id": {
+                    "type": "string"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "schema:result": {
+          "description": "Output entity produced by this step (can be referenced as input by a subsequent step).",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "@id": {
+                  "type": "string"
+                }
+              }
+            }
+          ]
+        },
+        "schema:object": {
+          "description": "Reference to a prior step whose result is the input for this step (action chaining).",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "@id": {
+                  "type": "string"
+                }
+              }
+            }
+          ]
+        },
+        "schema:additionalProperty": {
+          "description": "Step-specific parameters (e.g. beam conditions for the acquisition step, matrix correction settings for the data processing step).",
+          "type": "array",
+          "items": {
+            "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.json#/$defs/StepParameter"
+          }
+        },
+        "ada:methodParameters": {
+          "description": "Step-specific method parameters with scope and tier metadata. These are parameters that belong to this particular workflow phase.",
+          "type": "array",
+          "items": {
+            "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.json#/$defs/MethodParameter"
+          }
+        },
+        "schema:actionProcess": {
+          "description": "Sub-workflow for this step, expressed as a nested schema:HowTo with its own ordered steps. Use for steps that have a multi-phase internal procedure (e.g. sample preparation with mount, grind, polish, coat).",
+          "allOf": [
+            {
+              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.json#/$defs/WorkflowHowTo"
+            }
+          ]
+        },
+        "dqv:hasQualityMeasurement": {
+          "description": "Quality measurements specific to this workflow step.",
+          "type": "array",
+          "items": {
+            "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.json#/$defs/QualityMeasure"
+          }
+        }
+      },
+      "required": [
+        "@type",
+        "schema:name",
+        "schema:position"
+      ]
+    },
+    "MethodParameter": {
+      "type": "object",
+      "description": "A parameter specification for the method, typed as schema:PropertyValueSpecification. Uses schema.org properties for value constraints (defaultValue, minValue, maxValue, readonlyValue, valueRequired) and ada: extensions for analytical method semantics (fieldScope, category, tier). Link to a controlled vocabulary via schema:inDefinedTermSet.",
+      "properties": {
+        "@type": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "contains": {
+            "enum": [
+              "schema:PropertyValueSpecification"
+            ]
+          },
+          "minItems": 1
+        },
+        "schema:name": {
           "type": "string",
           "description": "Human-readable display label (e.g. \"Accelerating Voltage\")."
+        },
+        "schema:valueName": {
+          "type": "string",
+          "description": "Machine-readable parameter name for serialization (e.g. \"acceleratingVoltage\")."
         },
         "schema:description": {
           "type": "string",
           "description": "Guidance text shown to the user in the form."
         },
-        "ada:scope": {
-          "type": "string",
-          "enum": [
-            "constant",
-            "default",
-            "optional"
-          ],
-          "description": "constant = fixed for every session, shown as read-only. default = required, editable, pre-filled with default value. optional = available but not shown unless user adds it."
+        "schema:propertyID": {
+          "description": "URI identifying this parameter type in a formal vocabulary. Links to a skos:Concept or similar term definition.",
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "uri"
+            },
+            {
+              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.definedTerm"
+            }
+          ]
         },
-        "ada:category": {
-          "type": "string",
-          "description": "Grouping label for form layout (e.g. \"Beam Conditions\", \"Data Processing\", \"Quality Control\")."
+        "schema:inDefinedTermSet": {
+          "description": "SKOS ConceptScheme providing the controlled vocabulary for allowed values of this parameter. When present, form renders a dropdown/select populated from the vocabulary. Can be an object reference (@id URI), a labeled link (LinkRole with name and URL), or a plain URI string.",
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "uri"
+            },
+            {
+              "type": "object",
+              "description": "Object reference to a vocabulary defined elsewhere.",
+              "properties": {
+                "@id": {
+                  "type": "string",
+                  "format": "uri"
+                }
+              },
+              "required": [
+                "@id"
+              ]
+            },
+            {
+              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.labeledLink"
+            }
+          ]
         },
-        "schema:value": {
-          "description": "The constant value (scope=constant) or the default value (scope=default). Type matches ada:dataType.",
+        "schema:defaultValue": {
+          "description": "The default value for this parameter. For constant parameters (readonlyValue=true), this is the fixed value. For editable parameters, this is the pre-filled default.",
           "anyOf": [
             {
               "type": "string"
@@ -1938,6 +2314,54 @@
             },
             {
               "type": "boolean"
+            }
+          ]
+        },
+        "schema:readonlyValue": {
+          "type": "boolean",
+          "description": "true = constant, fixed for every session (read-only in form). false = editable (default or optional depending on valueRequired)."
+        },
+        "schema:valueRequired": {
+          "type": "boolean",
+          "description": "true = must be provided (mandatory). false = optional. Combined with readonlyValue: readonly+required = constant mandatory; !readonly+required = editable mandatory; !readonly+!required = optional."
+        },
+        "schema:minValue": {
+          "type": "number",
+          "description": "Minimum allowed numeric value. Defines the lower bound of a valid range at the method level; specific values within this range may be set per element in the analyteTemplate."
+        },
+        "schema:maxValue": {
+          "type": "number",
+          "description": "Maximum allowed numeric value. Upper bound of valid range."
+        },
+        "schema:stepValue": {
+          "type": "number",
+          "description": "Granularity expected of the value (e.g. 0.1 for nA)."
+        },
+        "schema:valuePattern": {
+          "type": "string",
+          "description": "Regex pattern for validating string values."
+        },
+        "schema:multipleValues": {
+          "type": "boolean",
+          "description": "Whether multiple values are allowed (default false)."
+        },
+        "ada:fieldScope": {
+          "type": "string",
+          "enum": [
+            "method",
+            "session",
+            "element"
+          ],
+          "description": "Whether this parameter is fixed at the method level, varies per analytical session, or is element-specific."
+        },
+        "ada:category": {
+          "description": "Grouping label for form layout (e.g. \"Beam Conditions\", \"Data Processing\", \"Quality Control\"). String for simple cases; DefinedTerm to link to a controlled vocabulary of parameter categories.",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.definedTerm"
             }
           ]
         },
@@ -1953,14 +2377,6 @@
           ],
           "description": "Expected data type for the parameter value."
         },
-        "schema:minValue": {
-          "type": "number",
-          "description": "Minimum allowed numeric value (scope=default only)."
-        },
-        "schema:maxValue": {
-          "type": "number",
-          "description": "Maximum allowed numeric value (scope=default only)."
-        },
         "ada:enumeration": {
           "type": "array",
           "items": {
@@ -1973,7 +2389,7 @@
               }
             ]
           },
-          "description": "Allowed values list. If present, the form renders a dropdown/select instead of free text."
+          "description": "Inline list of allowed values. Fallback when no SKOS vocabulary exists yet. If inDefinedTermSet is also present, this list is ignored in favour of the vocabulary."
         },
         "schema:unitText": {
           "type": "string",
@@ -1992,7 +2408,7 @@
         },
         "ada:cdifPropertyPath": {
           "type": "string",
-          "description": "The CDIF building block property path this parameter maps to (e.g. \"cdifProvActivity: schema:additionalProperty\"). Used for JSON-LD serialisation."
+          "description": "The CDIF building block property path this parameter maps to. Used for JSON-LD serialisation."
         },
         "ada:tier": {
           "type": "string",
@@ -2006,33 +2422,146 @@
       },
       "required": [
         "schema:name",
-        "ada:scope",
+        "ada:fieldScope",
         "ada:dataType"
+      ]
+    },
+    "StepParameter": {
+      "type": "object",
+      "description": "A schema:PropertyValue carrying a parameter setting for a workflow step. Simpler than MethodParameter \u2014 just name, value, and optional unit.",
+      "properties": {
+        "@type": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "contains": {
+            "enum": [
+              "schema:PropertyValue"
+            ]
+          },
+          "minItems": 1
+        },
+        "schema:name": {
+          "type": "string"
+        },
+        "schema:value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "boolean"
+            }
+          ]
+        },
+        "schema:unitText": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "@type",
+        "schema:name"
       ]
     },
     "AnalyteColumn": {
       "type": "object",
-      "description": "Definition of one column in the per-analyte parameter table. Controls what fields appear for each measured element/oxide. Each analyte row becomes a schema:variableMeasured entry; analyte columns become schema:additionalProperty within that variableMeasured entry.",
+      "description": "Definition of one column in the per-analyte parameter table, typed as schema:PropertyValueSpecification. Each column defines what values are expected per element/oxide row. Analyte rows become schema:variableMeasured entries; columns become schema:additionalProperty within each.",
       "properties": {
+        "@type": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "contains": {
+            "enum": [
+              "schema:PropertyValueSpecification"
+            ]
+          },
+          "minItems": 1
+        },
         "schema:name": {
           "type": "string",
-          "description": "Column identifier (e.g. \"diffractingCrystal\")."
+          "description": "Human-readable column label (e.g. \"Diffracting Crystal\")."
         },
-        "schema:alternateName": {
+        "schema:valueName": {
           "type": "string",
-          "description": "Display label (e.g. \"Diffracting Crystal\")."
+          "description": "Machine-readable column identifier (e.g. \"diffractingCrystal\")."
         },
         "schema:description": {
           "type": "string",
-          "description": "Guidance text."
+          "description": "Guidance text for this column."
         },
-        "ada:scope": {
-          "type": "string",
-          "enum": [
-            "constant",
-            "default",
-            "optional"
+        "schema:propertyID": {
+          "description": "URI identifying this column's parameter type in a formal vocabulary.",
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "uri"
+            },
+            {
+              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.definedTerm"
+            }
           ]
+        },
+        "schema:inDefinedTermSet": {
+          "description": "SKOS ConceptScheme providing the controlled vocabulary for allowed values in this column.",
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "uri"
+            },
+            {
+              "type": "object",
+              "description": "Object reference to a vocabulary defined elsewhere.",
+              "properties": {
+                "@id": {
+                  "type": "string",
+                  "format": "uri"
+                }
+              },
+              "required": [
+                "@id"
+              ]
+            },
+            {
+              "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.labeledLink"
+            }
+          ]
+        },
+        "schema:defaultValue": {
+          "description": "Default value for this column (pre-filled per row).",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "boolean"
+            }
+          ]
+        },
+        "schema:readonlyValue": {
+          "type": "boolean",
+          "description": "true = constant across all analytes (read-only column)."
+        },
+        "schema:valueRequired": {
+          "type": "boolean",
+          "description": "true = must be provided for every analyte row."
+        },
+        "schema:minValue": {
+          "type": "number"
+        },
+        "schema:maxValue": {
+          "type": "number"
+        },
+        "schema:valuePattern": {
+          "type": "string"
         },
         "ada:dataType": {
           "type": "string",
@@ -2056,7 +2585,8 @@
                 "type": "number"
               }
             ]
-          }
+          },
+          "description": "Inline allowed values list (fallback when no SKOS vocabulary exists)."
         },
         "schema:unitText": {
           "type": "string"
@@ -2071,21 +2601,167 @@
         },
         "ada:cdifPropertyPath": {
           "type": "string",
-          "description": "How this column maps into the variableMeasured JSON-LD structure (e.g. \"schema:additionalProperty\", \"schema:measurementTechnique\")."
+          "description": "How this column maps into the variableMeasured JSON-LD structure."
         }
       },
       "required": [
         "schema:name",
-        "ada:scope",
         "ada:dataType"
       ]
+    },
+    "ComputationalTool": {
+      "type": "object",
+      "description": "Software application used for data acquisition, reduction, or processing. Follows Bioschemas ComputationalTool pattern.",
+      "properties": {
+        "@type": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "contains": {
+            "enum": [
+              "schema:SoftwareApplication"
+            ]
+          }
+        },
+        "@id": {
+          "type": "string"
+        },
+        "schema:name": {
+          "type": "string",
+          "description": "Name of the software (e.g. \"Probe for EPMA\")."
+        },
+        "schema:version": {
+          "type": "string",
+          "description": "Software version string (e.g. \"12.9.5\")."
+        },
+        "schema:description": {
+          "type": "string",
+          "description": "Role or purpose of this tool in the method."
+        },
+        "schema:url": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to the software product or documentation."
+        },
+        "ada:toolRole": {
+          "type": "string",
+          "enum": [
+            "acquisition",
+            "reduction",
+            "processing",
+            "visualization"
+          ],
+          "description": "Role this software plays in the analytical workflow."
+        }
+      },
+      "required": [
+        "schema:name"
+      ]
+    },
+    "Reagent": {
+      "type": "object",
+      "description": "A reference material, calibration standard, or chemical reagent. Follows Bioschemas reagent pattern with extensions for geochemistry reference materials.",
+      "properties": {
+        "@type": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "@id": {
+          "type": "string",
+          "description": "Persistent identifier (e.g. IGSN, GeoReM URL)."
+        },
+        "schema:name": {
+          "type": "string",
+          "description": "Name of the material (e.g. \"San Carlos olivine\")."
+        },
+        "schema:description": {
+          "type": "string"
+        },
+        "schema:identifier": {
+          "description": "Formal identifier (IGSN, catalog number, GeoReM ID).",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "minItems": 1
+                },
+                "schema:propertyID": {
+                  "type": "string"
+                },
+                "schema:value": {
+                  "type": "string"
+                }
+              }
+            }
+          ]
+        },
+        "ada:reagentRole": {
+          "type": "string",
+          "enum": [
+            "primaryStandard",
+            "secondaryStandard",
+            "interferenceStandard",
+            "blankMaterial",
+            "coatingMaterial",
+            "reagent"
+          ],
+          "description": "Role of this material in the method."
+        },
+        "schema:citation": {
+          "description": "Publication reference for the standard's accepted values.",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "schema:name": {
+                  "type": "string"
+                },
+                "schema:url": {
+                  "type": "string",
+                  "format": "uri"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "required": [
+        "schema:name"
+      ]
+    },
+    "QualityMeasure": {
+      "$ref": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.qualityProperties.qualityMeasure"
     }
   },
   "x-jsonld-prefixes": {
     "schema": "http://schema.org/",
     "ada": "https://ada.astromat.org/metadata/",
     "prov": "http://www.w3.org/ns/prov#",
-    "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/"
+    "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
+    "bios": "https://bioschemas.org/",
+    "dqv": "http://www.w3.org/ns/dqv#",
+    "skos": "http://www.w3.org/2004/02/skos/core#"
   },
   "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
 }

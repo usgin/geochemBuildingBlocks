@@ -1,0 +1,518 @@
+Validation report for ada.bbr.metadata.geochemProperties.methodDefinition - Analytical Method Definition
+Generated 2026-04-08T21:55:11.068572+00:00
+=== Files ===
+Using examples/nmnh-spinel-oxybar-v1.json from examples
+JSON-LD context is present - uplifting
+Output JSON-LD example_2_1.jsonld created
+Output Turtle example_2_1.ttl created
+=== End Files ===
+
+=== JSON Schema ===
+
+** Validation error **
+ValidationError: 'schema:identifier' is a required property
+
+Failed validating 'required' in schema['properties']['schema:instrument']['allOf'][0]:
+    {'$defs': {'AdditionalProperty': {'$ref': 'https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/additionalProperty/schema.yaml'},
+               'AgentInRole': {'$ref': 'https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/agentInRole/schema.yaml'},
+               'DefinedTerm': {'$ref': 'https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/definedTerm/schema.yaml'},
+               'Identifier': {'$ref': 'https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/identifier/schema.yaml'},
+               'InstrumentComponent': {'description': 'A sub-component of '
+                                                      'an instrument '
+                                                      'system. Uses the '
+                                                      'same structure as '
+                                                      'the parent '
+                                                      'instrument but '
+                                                      'without nesting '
+                                                      '(single level of '
+                                                      'hasPart).',
+                                       'properties': {'@id': {'type': 'string'},
+                                                      '@type': {'contains': {'const': 'schema:Thing'},
+                                                                'items': {'type': 'string'},
+                                                                'minItems': 1,
+                                                                'type': 'array'},
+                                                      'schema:additionalProperty': {'items': {'$ref': '#/$defs/AdditionalProperty'},
+                                                                                    'type': 'array'},
+                                                      'schema:additionalType': {'description': 'Component '
+                                                                                               'type '
+                                                                                               'classification.',
+                                                                                'items': {'type': 'string'},
+                                                                                'type': 'array'},
+                                                      'schema:alternateName': {'items': {'type': 'string'},
+                                                                               'type': 'array'},
+                                                      'schema:description': {'type': 'string'},
+                                                      'schema:identifier': {'anyOf': [{'type': 'string'},
+                                                                                      {'$ref': '#/$defs/Identifier'}]},
+                                                      'schema:manufacturer': {'$ref': '#/$defs/Organization'},
+                                                      'schema:model': {'properties': {'@type': {'contains': {'const': 'schema:ProductModel'},
+                                                                                                'items': {'type': 'string'},
+                                                                                                'minItems': 1,
+                                                                                                'type': 'array'},
+                                                                                      'schema:identifier': {'anyOf': [{'type': 'string'},
+                                                                                                                      {'$ref': '#/$defs/Identifier'}]},
+                                                                                      'schema:name': {'type': 'string'}},
+                                                                       'type': 'object'},
+                                                      'schema:name': {'minLength': 3,
+                                                                      'type': 'string'}},
+                                       'required': ['schema:name'],
+                                       'type': 'object'},
+               'LabeledLink': {'$ref': 'https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/labeledLink/schema.yaml'},
+               'Organization': {'$ref': 'https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/organization/schema.yaml'},
+               'Person': {'$ref': 'https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/person/schema.yaml'}},
+     '$schema': 'https://json-schema.org/draft/2020-12/schema',
+     'description': 'Schema for describing laboratory instruments and '
+                    'instrument systems. Supports ownership, manufacturer, '
+                    'model, commissioning dates, hierarchical '
+                    'sub-components via schema:hasPart, and '
+                    'domain-specific typing. Instruments may be standalone '
+                    'devices or complex systems with sub-components.',
+     'properties': {'@context': {'description': 'JSON-LD context declaring '
+                                                'namespace prefixes.',
+                                 'properties': {'dcterms': {'const': 'http://purl.org/dc/terms/'},
+                                                'schema': {'const': 'http://schema.org/'}},
+                                 'required': ['schema'],
+                                 'type': 'object'},
+                    '@id': {'description': 'Persistent identifier URI for '
+                                           'this instrument metadata '
+                                           'record.',
+                            'type': 'string'},
+                    '@type': {'allOf': [{'contains': {'const': 'schema:Product'}},
+                                        {'contains': {'const': 'schema:Thing'}}],
+                              'description': 'Must include schema:Product '
+                                             'and schema:Thing. May '
+                                             'include additional types.',
+                              'items': {'type': 'string'},
+                              'minItems': 2,
+                              'type': 'array'},
+                    'schema:additionalProperty': {'description': 'Instrument-specific '
+                                                                 'properties '
+                                                                 '(measured '
+                                                                 'variables, '
+                                                                 'detection '
+                                                                 'limits, '
+                                                                 'calibration '
+                                                                 'information, '
+                                                                 'operating '
+                                                                 'parameters, '
+                                                                 'etc.).',
+                                                  'items': {'$ref': '#/$defs/AdditionalProperty'},
+                                                  'type': 'array'},
+                    'schema:additionalType': {'description': 'Domain-specific '
+                                                             'type '
+                                                             'classifications. '
+                                                             'Should '
+                                                             'include a '
+                                                             'scientific '
+                                                             'instrument '
+                                                             'type URI '
+                                                             '(e.g. '
+                                                             'wd:Q3099911 '
+                                                             'for Wikidata '
+                                                             'scientific '
+                                                             'instrument).',
+                                              'items': {'type': 'string'},
+                                              'minItems': 1,
+                                              'type': 'array'},
+                    'schema:alternateName': {'description': 'Alternate '
+                                                            'name(s), e.g. '
+                                                            'specific '
+                                                            'make/model '
+                                                            'designation, '
+                                                            'common '
+                                                            'abbreviation.',
+                                             'items': {'type': 'string'},
+                                             'type': 'array'},
+                    'schema:category': {'description': 'Instrument type '
+                                                       'classification(s) '
+                                                       'from a controlled '
+                                                       'vocabulary.',
+                                        'items': {'$ref': '#/$defs/DefinedTerm'},
+                                        'type': 'array'},
+                    'schema:contributor': {'description': 'Agents '
+                                                          'associated with '
+                                                          'this instrument '
+                                                          'in specific '
+                                                          'roles (e.g. '
+                                                          'operator, '
+                                                          'custodian, '
+                                                          'principal '
+                                                          'investigator). '
+                                                          'Use '
+                                                          'schema:owner '
+                                                          'for the owning '
+                                                          'organization.',
+                                           'items': {'$ref': '#/$defs/AgentInRole'},
+                                           'type': 'array'},
+                    'schema:description': {'description': 'Text '
+                                                          'description of '
+                                                          'this '
+                                                          'instrument, its '
+                                                          'purpose, and '
+                                                          'capabilities.',
+                                           'type': 'string'},
+                    'schema:hasPart': {'description': 'Sub-components of '
+                                                      'this instrument '
+                                                      'system. Each item '
+                                                      'is either an inline '
+                                                      'instrument '
+                                                      'description or an '
+                                                      '@id reference.',
+                                       'items': {'anyOf': [{'$ref': '#/$defs/InstrumentComponent'},
+                                                           {'properties': {'@id': {'description': 'Reference '
+                                                                                                  'to '
+                                                                                                  'a '
+                                                                                                  'sub-component '
+                                                                                                  'defined '
+                                                                                                  'elsewhere.',
+                                                                                   'type': 'string'}},
+                                                            'required': ['@id'],
+                                                            'type': 'object'}]},
+                                       'type': 'array'},
+                    'schema:identifier': {'description': 'Formal '
+                                                         'identifier(s) '
+                                                         'for this '
+                                                         'instrument. Use '
+                                                         'PropertyValue '
+                                                         'for structured '
+                                                         'identifiers '
+                                                         '(e.g. PIDINST, '
+                                                         'serial number, '
+                                                         'inventory '
+                                                         'number).',
+                                          'items': {'anyOf': [{'type': 'string'},
+                                                              {'$ref': '#/$defs/Identifier'}]},
+                                          'type': 'array'},
+                    'schema:manufacturer': {'$ref': '#/$defs/Organization',
+                                            'description': 'Organization '
+                                                           'that '
+                                                           'manufactured '
+                                                           'this '
+                                                           'instrument.'},
+                    'schema:model': {'description': 'Product model '
+                                                    'information for this '
+                                                    'instrument.',
+                                     'properties': {'@type': {'contains': {'const': 'schema:ProductModel'},
+                                                              'items': {'type': 'string'},
+                                                              'minItems': 1,
+                                                              'type': 'array'},
+                                                    'schema:identifier': {'anyOf': [{'type': 'string'},
+                                                                                    {'$ref': '#/$defs/Identifier'}],
+                                                                          'description': 'Model '
+                                                                                         'identifier.'},
+                                                    'schema:name': {'description': 'Model '
+                                                                                   'name '
+                                                                                   'or '
+                                                                                   'number.',
+                                                                    'type': 'string'}},
+                                     'required': ['schema:name'],
+                                     'type': 'object'},
+                    'schema:name': {'description': 'Human-readable name '
+                                                   'for this instrument.',
+                                    'minLength': 3,
+                                    'type': 'string'},
+                    'schema:owner': {'$ref': '#/$defs/Organization',
+                                     'description': 'Organization that '
+                                                    'owns this '
+                                                    'instrument.'},
+                    'schema:relatedLink': {'description': 'Links to '
+                                                          'related '
+                                                          'resources '
+                                                          '(manuals, '
+                                                          'datasheets, '
+                                                          'calibration '
+                                                          'records, '
+                                                          'related '
+                                                          'instruments).',
+                                           'items': {'$ref': '#/$defs/LabeledLink'},
+                                           'type': 'array'},
+                    'schema:subjectOf': {'description': 'Catalog record '
+                                                        'metadata-about-metadata '
+                                                        'for this '
+                                                        'instrument '
+                                                        'description.',
+                                         'properties': {'@id': {'type': 'string'},
+                                                        '@type': {'items': {'type': 'string'},
+                                                                  'type': 'array'},
+                                                        'dcterms:conformsTo': {'description': 'Schema '
+                                                                                              'or '
+                                                                                              'profile '
+                                                                                              'this '
+                                                                                              'metadata '
+                                                                                              'record '
+                                                                                              'conforms '
+                                                                                              'to.',
+                                                                               'items': {'anyOf': [{'type': 'string'},
+                                                                                                   {'properties': {'@id': {'type': 'string'}},
+                                                                                                    'type': 'object'}]},
+                                                                               'type': 'array'},
+                                                        'schema:about': {'properties': {'@id': {'description': 'Reference '
+                                                                                                               'back '
+                                                                                                               'to '
+                                                                                                               'the '
+                                                                                                               'instrument '
+                                                                                                               '@id.',
+                                                                                                'type': 'string'}},
+                                                                         'type': 'object'},
+                                                        'schema:dateModified': {'description': 'Date '
+                                                                                               'this '
+                                                                                               'metadata '
+                                                                                               'record '
+                                                                                               'was '
+                                                                                               'last '
+                                                                                               'modified '
+                                                                                               '(ISO '
+                                                                                               '8601).',
+                                                                                'type': 'string'}},
+                                         'type': 'object'},
+                    'schema:url': {'description': 'Landing page URL for '
+                                                  'this instrument.',
+                                   'format': 'uri',
+                                   'type': 'string'},
+                    'schema:validFrom': {'description': 'Date the '
+                                                        'instrument was '
+                                                        'commissioned (ISO '
+                                                        '8601).',
+                                         'type': 'string'},
+                    'schema:validThrough': {'description': 'Date the '
+                                                           'instrument was '
+                                                           'decommissioned '
+                                                           '(ISO 8601). '
+                                                           'Absent if '
+                                                           'still '
+                                                           'operational.',
+                                            'type': 'string'}},
+     'required': ['@type', 'schema:name', 'schema:identifier'],
+     'title': 'Instrument Description',
+     'type': 'object',
+     'x-jsonld-prefixes': {'schema': 'http://schema.org/'}}
+
+On instance['schema:instrument']:
+    {'@type': ['schema:Product', 'schema:Thing'],
+     'schema:hasPart': [{'@type': ['schema:Thing'],
+                         'schema:description': '5 WDS spectrometers with '
+                                               'TAPx2, LiFx2, PETJ, LiFH.',
+                         'schema:name': 'WDS Spectrometer Array'}],
+     'schema:manufacturer': {'@type': ['schema:Organization'],
+                             'schema:name': 'JEOL'},
+     'schema:model': {'@type': ['schema:ProductModel'],
+                      'schema:name': 'JXA-8900'},
+     'schema:name': 'JEOL JXA-8900 Superprobe; JEOL JXA-8530F Hyperprobe'}
+=== End JSON Schema ===
+
+=== SHACL ===
+Validation result for _sources/geochemProperties/methodDefinition/rules.shacl:
+  Validation Report
+  Conforms: True
+  
+Focus nodes for _sources/geochemProperties/methodDefinition/rules.shacl:
+ - Shape cdifd:methodDefinitionShape: *none*
+
+Validation result for https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/labeledLink/rules.shacl:
+  Validation Report
+  Conforms: True
+  
+Focus nodes for https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/labeledLink/rules.shacl:
+ - Shape cdifd:CDIFLabeledLinkShape: *none*
+
+Validation result for https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/definedTerm/rules.shacl:
+  Validation Report
+  Conforms: True
+  
+Focus nodes for https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/definedTerm/rules.shacl:
+ - Shape _:n93da7ace041640709b419f4665ff7ca7b5: *none*
+ - Shape _:n93da7ace041640709b419f4665ff7ca7b6: *none*
+ - Shape cdifd:CDIFDefinedTermShape/sh:or/rdf:first: *none*
+ - Shape cdifd:CDIFDefinedTermShape/sh:property/sh:or/rdf:first: *none*
+ - Shape _:n93da7ace041640709b419f4665ff7ca7b4: *none*
+ - Shape _:n93da7ace041640709b419f4665ff7ca7b10: *none*
+ - Shape _:n93da7ace041640709b419f4665ff7ca7b8: *none*
+ - Shape cdifd:CDIFDefinedTermShape/sh:or/rdf:rest/rdf:first: *none*
+ - Shape _:n93da7ace041640709b419f4665ff7ca7b19: *none*
+ - Shape _:n93da7ace041640709b419f4665ff7ca7b7: *none*
+ - Shape _:n93da7ace041640709b419f4665ff7ca7b26: *none*
+ - Shape cdifd:CDIFDefinedTermShape: *none*
+
+Validation result for https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/identifier/rules.shacl:
+  Validation Report
+  Conforms: True
+  
+Focus nodes for https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/identifier/rules.shacl:
+ - Shape _:na7385942d86840c6b3d6b2d6fd96b9d4b10: *none*
+ - Shape cdifd:CDIFIdentifierTypeTermShape: *none*
+ - Shape cdifd:CDIFIdentifierShape/sh:or/rdf:rest/rdf:first: *none*
+ - Shape _:na7385942d86840c6b3d6b2d6fd96b9d4b25: *none*
+ - Shape _:na7385942d86840c6b3d6b2d6fd96b9d4b23: *none*
+ - Shape cdifd:CDIFIdentifierShape: *none*
+ - Shape cdifd:CDIFIdentifierShape/sh:property/sh:or/rdf:first: *none*
+ - Shape _:na7385942d86840c6b3d6b2d6fd96b9d4b11: *none*
+ - Shape cdifd:CDIFIdentifierTypeTermShape/sh:property/sh:or/rdf:first: *none*
+ - Shape _:na7385942d86840c6b3d6b2d6fd96b9d4b22: *none*
+ - Shape _:na7385942d86840c6b3d6b2d6fd96b9d4b20: *none*
+ - Shape cdifd:CDIFIdentifierShape/sh:or/rdf:first: *none*
+ - Shape _:na7385942d86840c6b3d6b2d6fd96b9d4b21: *none*
+
+Validation result for _sources/geochemProperties/instrument/rules.shacl:
+  Validation Report
+  Conforms: True
+  
+Focus nodes for _sources/geochemProperties/instrument/rules.shacl:
+ - Shape cdifd:adaInstrumentShape: *none*
+
+
+** Validation error **
+Validation result for https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/instrument/rules.shacl:
+  Validation Report
+  Conforms: False
+  Results (1):
+  Validation Result in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+  	Severity: sh:Warning
+  	Source Shape: [ sh:message Literal("An instrument should have a category classification from a controlled vocabulary (schema:category).") ; sh:minCount Literal("1", datatype=xsd:integer) ; sh:path schema1:category ; sh:severity sh:Warning ]
+  	Focus Node: [ rdf:type schema1:Product, schema1:Thing ; schema1:hasPart [ rdf:type schema1:Thing ; schema1:description Literal("5 WDS spectrometers with TAPx2, LiFx2, PETJ, LiFH.") ; schema1:name Literal("WDS Spectrometer Array") ] ; schema1:manufacturer [ rdf:type schema1:Organization ; schema1:name Literal("JEOL") ] ; schema1:model [ rdf:type schema1:ProductModel ; schema1:name Literal("JXA-8900") ] ; schema1:name Literal("JEOL JXA-8900 Superprobe; JEOL JXA-8530F Hyperprobe") ]
+  	Result Path: schema1:category
+  	Message: An instrument should have a category classification from a controlled vocabulary (schema:category).
+  
+Focus nodes for https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/instrument/rules.shacl:
+ - Shape cdifd:instrumentNode: *none*
+
+
+** Validation error **
+Validation result for https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/organization/rules.shacl:
+  Validation Report
+  Conforms: False
+  Results (1):
+  Constraint Violation in OrConstraintComponent (http://www.w3.org/ns/shacl#OrConstraintComponent):
+  	Severity: sh:Violation
+  	Source Shape: cdifd:CDIFOrganizationShape
+  	Focus Node: [ rdf:type schema1:Organization ; schema1:name Literal("JEOL") ]
+  	Value Node: [ rdf:type schema1:Organization ; schema1:name Literal("JEOL") ]
+  	Message: Organization must have an @id IRI, a name or an identifier that is a string
+  
+Focus nodes for https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/organization/rules.shacl:
+ - Shape cdifd:CDIFOrganizationShape/sh:or/rdf:rest/rdf:first: *none*
+ - Shape cdifd:CDIFOrganizationShape/sh:or/rdf:first: *none*
+ - Shape cdifd:CDIFOrganizationShape: <https://registry.onegeochemistry.org/methods/nmnh-spinel-oxybar-v1>/schema1:instrument/schema1:manufacturer,<https://registry.onegeochemistry.org/methods/nmnh-spinel-oxybar-v1>/schema1:agent
+
+Validation result for https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/additionalProperty/rules.shacl:
+  Validation Report
+  Conforms: True
+  
+Focus nodes for https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/additionalProperty/rules.shacl:
+ - Shape _:n4109624bd04d4650a8efd48d25f0ebb0b14: *none*
+ - Shape _:n4109624bd04d4650a8efd48d25f0ebb0b19: *none*
+ - Shape cdifd:CDIFAddPropertyTermShape/sh:property/sh:or/rdf:first: *none*
+ - Shape cdifd:CDIFadditionalPropertyShape: *none*
+ - Shape _:n4109624bd04d4650a8efd48d25f0ebb0b6: *none*
+ - Shape cdifd:CDIFadditionalPropertyShape/sh:property/sh:or/rdf:first: *none*
+ - Shape _:n4109624bd04d4650a8efd48d25f0ebb0b7: *none*
+ - Shape _:n4109624bd04d4650a8efd48d25f0ebb0b17: *none*
+ - Shape cdifd:CDIFAddPropertyTermShape: *none*
+ - Shape _:n4109624bd04d4650a8efd48d25f0ebb0b16: *none*
+ - Shape _:n4109624bd04d4650a8efd48d25f0ebb0b15: *none*
+
+Validation result for https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/agentInRole/rules.shacl:
+  Validation Report
+  Conforms: True
+  
+Focus nodes for https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/agentInRole/rules.shacl:
+ - Shape cdifd:CDIFRoleShape: *none*
+ - Shape cdifd:CDIFRoleShape/sh:property/sh:or/rdf:first: *none*
+ - Shape cdifd:CDIFDefinedTermShape/sh:or/rdf:rest/rdf:first: *none*
+ - Shape _:n5f0c373fee8f4087bc8c80b2434b6831b4: *none*
+ - Shape _:n5f0c373fee8f4087bc8c80b2434b6831b3: *none*
+ - Shape _:n5f0c373fee8f4087bc8c80b2434b6831b16: *none*
+ - Shape _:n5f0c373fee8f4087bc8c80b2434b6831b18: *none*
+ - Shape _:n5f0c373fee8f4087bc8c80b2434b6831b20: *none*
+ - Shape _:n5f0c373fee8f4087bc8c80b2434b6831b14: *none*
+ - Shape cdifd:CDIFDefinedTermShape/sh:or/rdf:first: *none*
+ - Shape cdifd:roleNameProperty/sh:or/rdf:first: *none*
+ - Shape _:n5f0c373fee8f4087bc8c80b2434b6831b17: *none*
+ - Shape _:n5f0c373fee8f4087bc8c80b2434b6831b15: *none*
+ - Shape cdifd:roleNameProperty/sh:or/rdf:rest/rdf:first: *none*
+ - Shape cdifd:CDIFDefinedTermShape: <https://registry.onegeochemistry.org/methods/nmnh-spinel-oxybar-v1>/schema1:object,<https://registry.onegeochemistry.org/methods/nmnh-spinel-oxybar-v1>/schema1:object,<https://registry.onegeochemistry.org/methods/nmnh-spinel-oxybar-v1>/schema1:measurementTechnique,<https://registry.onegeochemistry.org/methods/nmnh-spinel-oxybar-v1>/schema1:object
+
+Validation result for https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/person/rules.shacl:
+  Validation Report
+  Conforms: True
+  
+Focus nodes for https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/person/rules.shacl:
+ - Shape _:n95dd269f8ec14c6bb6d9186fa3037fafb14: *none*
+ - Shape cdifd:affiliationProperty/sh:or/rdf:rest/rdf:first: *none*
+ - Shape cdifd:CDIFPersonShape/sh:or/rdf:rest/rdf:first: *none*
+ - Shape cdifd:CDIFPersonShape/sh:or/rdf:first: *none*
+ - Shape cdifd:maintainerOrProviderContactPointShape: *none*
+ - Shape cdifd:contactPointProperty/sh:or/rdf:first: *none*
+ - Shape cdifd:CDIFPersonShape: *none*
+ - Shape cdifd:CDIFContactPointShape: *none*
+ - Shape cdifd:contactPointProperty/sh:or/rdf:rest/rdf:first: *none*
+ - Shape cdifd:affiliationProperty/sh:or/rdf:first: *none*
+ - Shape cdifd:maintainerOrProviderContactPointShape/sh:property/sh:or/rdf:first: *none*
+
+Validation result for _sources/geochemProperties/laboratory/rules.shacl:
+  Validation Report
+  Conforms: True
+  
+Focus nodes for _sources/geochemProperties/laboratory/rules.shacl:
+ - Shape cdifd:laboratoryShape: *none*
+
+Validation result for https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/spatialExtent/rules.shacl:
+  Validation Report
+  Conforms: True
+  
+Focus nodes for https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/spatialExtent/rules.shacl:
+ - Shape _:n43b952597d2e48639ca73c5ef141acafb3: *none*
+ - Shape _:n43b952597d2e48639ca73c5ef141acafb22: *none*
+ - Shape _:n43b952597d2e48639ca73c5ef141acafb10: *none*
+ - Shape _:n43b952597d2e48639ca73c5ef141acafb4: *none*
+ - Shape cdifd:CDIFDefinedTermShape/sh:or/rdf:rest/rdf:first: *none*
+ - Shape _:n43b952597d2e48639ca73c5ef141acafb9: *none*
+ - Shape _:n43b952597d2e48639ca73c5ef141acafb31: *none*
+ - Shape cdifd:spatialExtentProperty/sh:or/rdf:first: *none*
+ - Shape cdifd:geoCoordinatesNode: *none*
+ - Shape cdifd:CDIFDefinedTermShape: <https://registry.onegeochemistry.org/methods/nmnh-spinel-oxybar-v1>/schema1:object,<https://registry.onegeochemistry.org/methods/nmnh-spinel-oxybar-v1>/schema1:object,<https://registry.onegeochemistry.org/methods/nmnh-spinel-oxybar-v1>/schema1:measurementTechnique,<https://registry.onegeochemistry.org/methods/nmnh-spinel-oxybar-v1>/schema1:object
+ - Shape _:n43b952597d2e48639ca73c5ef141acafb37: *none*
+ - Shape cdifd:spatialExtentProperty: <https://registry.onegeochemistry.org/methods/nmnh-spinel-oxybar-v1>/ada:laboratory
+ - Shape cdifd:geoCoordinatesNode/sh:property/sh:or/rdf:first: *none*
+ - Shape cdifd:spatialExtentProperty/sh:or/rdf:rest/rdf:first: *none*
+ - Shape cdifd:CDIFDefinedTermShape/sh:or/rdf:first: *none*
+ - Shape _:n43b952597d2e48639ca73c5ef141acafb34: *none*
+ - Shape _:n43b952597d2e48639ca73c5ef141acafb17: *none*
+ - Shape _:n43b952597d2e48639ca73c5ef141acafb35: *none*
+ - Shape _:n43b952597d2e48639ca73c5ef141acafb32: *none*
+ - Shape cdifd:geoCoordinatesNode/sh:property/sh:or/rdf:first: *none*
+ - Shape cdifd:geoShapeNode: *none*
+ - Shape _:n43b952597d2e48639ca73c5ef141acafb33: *none*
+
+Validation result for https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/qualityProperties/qualityMeasure/rules.shacl:
+  Validation Report
+  Conforms: True
+  
+Focus nodes for https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/qualityProperties/qualityMeasure/rules.shacl:
+ - Shape cdifd:qualityMeasurementNode/sh:property/sh:or/rdf:first: *none*
+ - Shape _:n437c458e9a494a52b4a5d1018b8b609ab11: *none*
+ - Shape _:n437c458e9a494a52b4a5d1018b8b609ab5: *none*
+ - Shape cdifd:qualityMeasurementNode/sh:property/sh:or/rdf:first: *none*
+ - Shape _:n437c458e9a494a52b4a5d1018b8b609ab4: *none*
+ - Shape cdifd:qualityMeasurementNode: <https://registry.onegeochemistry.org/methods/nmnh-spinel-oxybar-v1>/schema1:actionProcess/schema1:step/dqv:hasQualityMeasurement
+
+Validation result for https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/monetaryGrant/rules.shacl:
+  Validation Report
+  Conforms: True
+  
+Focus nodes for https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/monetaryGrant/rules.shacl:
+ - Shape _:n00939a7b0b1a4242948b8bda06c1582db25: *none*
+ - Shape _:n00939a7b0b1a4242948b8bda06c1582db15: *none*
+ - Shape cdifd:fundingShape/sh:or/rdf:rest/rdf:first: *none*
+ - Shape _:n00939a7b0b1a4242948b8bda06c1582db26: *none*
+ - Shape _:n00939a7b0b1a4242948b8bda06c1582db11: *none*
+ - Shape _:n00939a7b0b1a4242948b8bda06c1582db4: *none*
+ - Shape _:n00939a7b0b1a4242948b8bda06c1582db12: *none*
+ - Shape _:n00939a7b0b1a4242948b8bda06c1582db13: *none*
+ - Shape _:n00939a7b0b1a4242948b8bda06c1582db17: *none*
+ - Shape cdifd:fundingShape: *none*
+ - Shape _:n00939a7b0b1a4242948b8bda06c1582db3: *none*
+ - Shape _:n00939a7b0b1a4242948b8bda06c1582db14: *none*
+ - Shape cdifd:fundingShape/sh:or/rdf:first: *none*
+ - Shape _:n00939a7b0b1a4242948b8bda06c1582db5: *none*
+
+=== End SHACL ===
+

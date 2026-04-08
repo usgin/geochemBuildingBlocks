@@ -1,0 +1,748 @@
+{
+  "@context": "https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/context.jsonld",
+  "@id": "https://registry.onegeochemistry.org/methods/uoc-laicpms-glass-v1",
+  "@type": [
+    "cdi:Activity",
+    "schema:Action",
+    "ada:MethodDefinition",
+    "bios:LabProtocol"
+  ],
+  "schema:name": "UoC volcanic glass trace elements v.1",
+  "schema:identifier": "http://doi.org/10.60520/IEDA/114187",
+  "schema:version": "1.0",
+  "schema:datePublished": "2022-04-22",
+  "schema:measurementTechnique": {
+    "@type": [
+      "schema:DefinedTerm"
+    ],
+    "schema:name": "LA-ICP-MS",
+    "schema:description": "Laser Ablation Inductively Coupled Plasma Mass Spectrometry",
+    "schema:inDefinedTermSet": "https://vocab.onegeochemistry.org/techniques"
+  },
+  "schema:object": [
+    {
+      "@type": [
+        "schema:DefinedTerm"
+      ],
+      "schema:name": "volcanic glass",
+      "schema:inDefinedTermSet": "https://vocab.onegeochemistry.org/materials"
+    }
+  ],
+  "schema:instrument": {
+    "@type": [
+      "schema:Product",
+      "schema:Thing"
+    ],
+    "schema:name": "ESI imageGEO193 laser + Thermo Fischer iCAP Q ICP-MS",
+    "schema:hasPart": [
+      {
+        "@type": [
+          "schema:Thing"
+        ],
+        "schema:name": "ESI imageGEO193",
+        "schema:description": "193 nm ArF excimer laser ablation system",
+        "schema:manufacturer": {
+          "@type": [
+            "schema:Organization"
+          ],
+          "schema:name": "Elemental Scientific Lasers (ESI)"
+        }
+      },
+      {
+        "@type": [
+          "schema:Thing"
+        ],
+        "schema:name": "Thermo Fischer iCAP Q",
+        "schema:description": "Single-quadrupole ICP-MS",
+        "schema:manufacturer": {
+          "@type": [
+            "schema:Organization"
+          ],
+          "schema:name": "Thermo Fisher Scientific"
+        }
+      }
+    ]
+  },
+  "ada:laboratory": {
+    "@type": [
+      "schema:Place"
+    ],
+    "schema:name": "Geo-/Cosmochemistry lab, Institute of Geology and Mineralogy, University of Cologne, Germany"
+  },
+  "schema:agent": {
+    "@type": [
+      "schema:Organization"
+    ],
+    "schema:name": "University of Cologne, Institute of Geology and Mineralogy"
+  },
+  "bios:computationalTool": [
+    {
+      "@type": [
+        "schema:SoftwareApplication"
+      ],
+      "schema:name": "Iolite",
+      "schema:version": "4",
+      "schema:url": "https://iolite-software.com/",
+      "ada:toolRole": "reduction"
+    }
+  ],
+  "ada:methodParameters": [
+    {
+      "@type": [
+        "schema:PropertyValueSpecification"
+      ],
+      "schema:name": "Internal Standard",
+      "schema:valueName": "internalStandard",
+      "ada:fieldScope": "method",
+      "ada:category": "Calibration",
+      "ada:dataType": "string",
+      "schema:readonlyValue": true,
+      "schema:valueRequired": true,
+      "schema:defaultValue": "Si analyzed by EPMA or EDS",
+      "schema:description": "Internal standard element and how its concentration is derived for each unknown.",
+      "ada:tier": "M"
+    },
+    {
+      "@type": [
+        "schema:PropertyValueSpecification"
+      ],
+      "schema:name": "Element Fractionation Correction",
+      "schema:valueName": "elementFractionationCorrection",
+      "ada:fieldScope": "method",
+      "ada:category": "Data Processing",
+      "ada:dataType": "string",
+      "schema:readonlyValue": true,
+      "schema:valueRequired": false,
+      "schema:defaultValue": "No correction other than measurement relative to NIST612 and use of Si as internal standard",
+      "ada:tier": "R"
+    },
+    {
+      "@type": [
+        "schema:PropertyValueSpecification"
+      ],
+      "schema:name": "Calibration/QC/Unknown Sequence",
+      "schema:valueName": "analysisSequenceRatio",
+      "schema:description": "Ratio of calibration standard / QC standard / unknown analyses in a repeating block.",
+      "ada:fieldScope": "session",
+      "ada:category": "Quality Control",
+      "ada:dataType": "string",
+      "schema:readonlyValue": false,
+      "schema:valueRequired": false,
+      "schema:defaultValue": "2/4/15",
+      "ada:tier": "R"
+    },
+    {
+      "@type": [
+        "schema:PropertyValueSpecification"
+      ],
+      "schema:name": "Detection Limit Method",
+      "schema:valueName": "detectionLimitMethod",
+      "ada:fieldScope": "method",
+      "ada:category": "Quality Control",
+      "ada:dataType": "string",
+      "schema:readonlyValue": true,
+      "schema:valueRequired": false,
+      "schema:defaultValue": "Sample individual LOD calculation according to Pettke et al. (2012)",
+      "ada:tier": "R"
+    }
+  ],
+  "schema:funding": [
+    {
+      "@type": [
+        "schema:MonetaryGrant"
+      ],
+      "schema:identifier": "DFG INST 216/1019-1 FUGG no. 665508",
+      "schema:funder": {
+        "@type": [
+          "schema:Organization"
+        ],
+        "schema:name": "Deutsche Forschungsgemeinschaft (DFG)"
+      }
+    }
+  ],
+  "schema:relatedLink": [
+    {
+      "@type": [
+        "schema:LinkRole"
+      ],
+      "schema:linkRelationship": "methodology",
+      "schema:target": {
+        "@type": [
+          "schema:EntryPoint"
+        ],
+        "schema:name": "Pettke et al. (2012)",
+        "schema:url": "https://doi.org/10.1016/j.oregeorev.2011.11.001"
+      }
+    }
+  ],
+  "schema:actionProcess": {
+    "@type": [
+      "schema:HowTo"
+    ],
+    "schema:name": "LA-ICP-MS volcanic glass trace element workflow",
+    "schema:step": [
+      {
+        "@type": [
+          "cdi:Activity",
+          "schema:Action"
+        ],
+        "schema:name": "Sample preparation",
+        "schema:position": 1,
+        "schema:additionalType": [
+          "bios:LabProcess"
+        ],
+        "schema:description": "Volcanic glass shards or tephra grains mounted in epoxy, polished to expose flat surfaces, and carbon coated for prior EPMA analysis of major elements (Si used as internal standard).",
+        "schema:result": {
+          "@id": "#preparedMount"
+        }
+      },
+      {
+        "@type": [
+          "cdi:Activity",
+          "schema:Action"
+        ],
+        "schema:name": "ICP-MS tuning and optimization",
+        "schema:position": 2,
+        "schema:description": "Tune ICP-MS using auto-tune function on line scan of NIST612. Optimize for maximum sensitivity while minimizing oxide production (ThO/Th ~0.7%).",
+        "ada:methodParameters": [
+          {
+            "@type": [
+              "schema:PropertyValueSpecification"
+            ],
+            "schema:name": "RF Power",
+            "schema:valueName": "rfPower",
+            "ada:fieldScope": "session",
+            "ada:category": "ICP-MS Conditions",
+            "ada:dataType": "number",
+            "schema:readonlyValue": false,
+            "schema:valueRequired": true,
+            "schema:defaultValue": 1200,
+            "schema:unitText": "W",
+            "ada:tier": "M"
+          },
+          {
+            "@type": [
+              "schema:PropertyValueSpecification"
+            ],
+            "schema:name": "Carrier Gas (He) Flow Rate",
+            "schema:valueName": "carrierGasHeFlowRate",
+            "ada:fieldScope": "session",
+            "ada:category": "ICP-MS Conditions",
+            "ada:dataType": "number",
+            "schema:readonlyValue": false,
+            "schema:valueRequired": true,
+            "schema:defaultValue": 0.9,
+            "schema:unitText": "L/min",
+            "ada:tier": "M"
+          },
+          {
+            "@type": [
+              "schema:PropertyValueSpecification"
+            ],
+            "schema:name": "Carrier Gas (Ar) Flow Rate",
+            "schema:valueName": "carrierGasArFlowRate",
+            "ada:fieldScope": "session",
+            "ada:category": "ICP-MS Conditions",
+            "ada:dataType": "number",
+            "schema:readonlyValue": false,
+            "schema:valueRequired": true,
+            "schema:defaultValue": 0.8,
+            "schema:unitText": "L/min",
+            "ada:tier": "M"
+          },
+          {
+            "@type": [
+              "schema:PropertyValueSpecification"
+            ],
+            "schema:name": "Signal Smoothing",
+            "schema:valueName": "signalSmoothing",
+            "ada:fieldScope": "method",
+            "ada:category": "ICP-MS Conditions",
+            "ada:dataType": "string",
+            "schema:readonlyValue": true,
+            "schema:valueRequired": false,
+            "schema:defaultValue": "Glass smoothing device",
+            "ada:tier": "R"
+          },
+          {
+            "@type": [
+              "schema:PropertyValueSpecification"
+            ],
+            "schema:name": "Oxide Production (ThO/Th)",
+            "schema:valueName": "oxideProduction",
+            "ada:fieldScope": "session",
+            "ada:category": "ICP-MS Conditions",
+            "ada:dataType": "string",
+            "schema:readonlyValue": false,
+            "schema:valueRequired": true,
+            "schema:defaultValue": "ca. 0.7%",
+            "ada:tier": "M"
+          }
+        ]
+      },
+      {
+        "@type": [
+          "cdi:Activity",
+          "schema:Action"
+        ],
+        "schema:name": "Laser ablation calibration",
+        "schema:position": 3,
+        "schema:description": "Calibrate using NIST612 as primary reference material. Verify with secondary standards NIST610, ATHO-G, and StHs6/80-G.",
+        "bios:reagent": [
+          {
+            "@type": [
+              "schema:Thing"
+            ],
+            "schema:name": "NIST SRM 612",
+            "schema:description": "Trace Elements in Glass (nominal 50 ppm)",
+            "ada:reagentRole": "primaryStandard",
+            "schema:citation": "Jochum et al. (2011), Geostandards and Geoanalytical Research, 35(4): 397\u2013429."
+          },
+          {
+            "@type": [
+              "schema:Thing"
+            ],
+            "schema:name": "NIST SRM 610",
+            "schema:description": "Trace Elements in Glass (nominal 500 ppm)",
+            "ada:reagentRole": "secondaryStandard",
+            "schema:citation": "Jochum et al. (2011), Geostandards and Geoanalytical Research, 35(4): 397\u2013429."
+          },
+          {
+            "@type": [
+              "schema:Thing"
+            ],
+            "schema:name": "ATHO-G",
+            "schema:description": "MPI-DING Icelandic rhyolite glass",
+            "ada:reagentRole": "secondaryStandard",
+            "schema:citation": "Jochum et al. (2006), Geochemistry Geophysics Geosystems, 7(2)."
+          },
+          {
+            "@type": [
+              "schema:Thing"
+            ],
+            "schema:name": "StHs6/80-G",
+            "schema:description": "MPI-DING St. Helens dacite glass",
+            "ada:reagentRole": "secondaryStandard",
+            "schema:citation": "Jochum et al. (2006), Geochemistry Geophysics Geosystems, 7(2)."
+          }
+        ]
+      },
+      {
+        "@type": [
+          "cdi:Activity",
+          "schema:Action"
+        ],
+        "schema:name": "Laser ablation data acquisition",
+        "schema:position": 4,
+        "schema:description": "Ablate sample in point mode with 15\u201320 um spot. 30 s gas blank followed by 40 s ablation. Helium carrier gas transports aerosol to ICP-MS via signal smoothing device.",
+        "schema:object": {
+          "@id": "#preparedMount"
+        },
+        "ada:methodParameters": [
+          {
+            "@type": [
+              "schema:PropertyValueSpecification"
+            ],
+            "schema:name": "Laser Wavelength",
+            "schema:valueName": "laserWavelength",
+            "ada:fieldScope": "method",
+            "ada:category": "Laser Conditions",
+            "ada:dataType": "string",
+            "schema:readonlyValue": true,
+            "schema:valueRequired": true,
+            "schema:defaultValue": "193 nm (ArF excimer)",
+            "ada:tier": "M"
+          },
+          {
+            "@type": [
+              "schema:PropertyValueSpecification"
+            ],
+            "schema:name": "Laser Spot Width",
+            "schema:valueName": "laserSpotWidth",
+            "ada:fieldScope": "session",
+            "ada:category": "Laser Conditions",
+            "ada:dataType": "string",
+            "schema:readonlyValue": false,
+            "schema:valueRequired": true,
+            "schema:defaultValue": "15; 20",
+            "schema:description": "Spot width in um; multiple values if varied during session.",
+            "schema:unitText": "um",
+            "ada:tier": "M"
+          },
+          {
+            "@type": [
+              "schema:PropertyValueSpecification"
+            ],
+            "schema:name": "Laser Spot Path Geometry",
+            "schema:valueName": "laserSpotPathGeometry",
+            "schema:inDefinedTermSet": {
+              "@id": "https://vocab.onegeochemistry.org/laicpms/spot-geometries"
+            },
+            "ada:fieldScope": "session",
+            "ada:category": "Laser Conditions",
+            "ada:dataType": "string",
+            "schema:readonlyValue": false,
+            "schema:valueRequired": true,
+            "schema:defaultValue": "point",
+            "ada:enumeration": [
+              "Point",
+              "Transect",
+              "Area",
+              "Map"
+            ],
+            "ada:tier": "M"
+          },
+          {
+            "@type": [
+              "schema:PropertyValueSpecification"
+            ],
+            "schema:name": "Laser Energy",
+            "schema:valueName": "laserEnergy",
+            "ada:fieldScope": "session",
+            "ada:category": "Laser Conditions",
+            "ada:dataType": "number",
+            "schema:readonlyValue": false,
+            "schema:valueRequired": true,
+            "schema:defaultValue": 0.001,
+            "schema:unitText": "mJ",
+            "ada:tier": "M"
+          },
+          {
+            "@type": [
+              "schema:PropertyValueSpecification"
+            ],
+            "schema:name": "Laser Pulse Time",
+            "schema:valueName": "laserPulseTime",
+            "ada:fieldScope": "method",
+            "ada:category": "Laser Conditions",
+            "ada:dataType": "string",
+            "schema:readonlyValue": true,
+            "schema:valueRequired": true,
+            "schema:defaultValue": "7 ns",
+            "ada:tier": "M"
+          },
+          {
+            "@type": [
+              "schema:PropertyValueSpecification"
+            ],
+            "schema:name": "Repetition Rate",
+            "schema:valueName": "repetitionRate",
+            "ada:fieldScope": "session",
+            "ada:category": "Laser Conditions",
+            "ada:dataType": "number",
+            "schema:readonlyValue": false,
+            "schema:valueRequired": true,
+            "schema:defaultValue": 5,
+            "schema:unitText": "Hz",
+            "ada:tier": "M"
+          }
+        ],
+        "schema:result": {
+          "@id": "#rawSignals"
+        }
+      },
+      {
+        "@type": [
+          "cdi:Activity",
+          "schema:Action"
+        ],
+        "schema:name": "Data reduction",
+        "schema:position": 5,
+        "schema:description": "Process raw time-resolved signals in Iolite 4. Background subtraction using 30 s pre-ablation gas blank. Normalize to NIST612 with Si as internal standard. Calculate concentrations and sample-individual detection limits per Pettke et al. (2012).",
+        "schema:object": {
+          "@id": "#rawSignals"
+        },
+        "bios:computationalTool": [
+          {
+            "@type": [
+              "schema:SoftwareApplication"
+            ],
+            "schema:name": "Iolite",
+            "schema:version": "4",
+            "ada:toolRole": "reduction"
+          }
+        ],
+        "schema:result": {
+          "@id": "#quantifiedConcentrations"
+        }
+      },
+      {
+        "@type": [
+          "cdi:Activity",
+          "schema:Action"
+        ],
+        "schema:name": "Quality control",
+        "schema:position": 6,
+        "schema:description": "Secondary standards (NIST610, ATHO-G, StHs6/80-G) analysed interspersed with unknowns in ratio 2 calibration / 4 QC / 15 unknowns. Drift monitored via repeated NIST612 analyses throughout session.",
+        "schema:object": {
+          "@id": "#quantifiedConcentrations"
+        },
+        "dqv:hasQualityMeasurement": [
+          {
+            "@type": [
+              "dqv:QualityMeasurement"
+            ],
+            "dqv:isMeasurementOf": "oxide production",
+            "dqv:value": "ThO/Th ca. 0.7%"
+          },
+          {
+            "@type": [
+              "dqv:QualityMeasurement"
+            ],
+            "dqv:isMeasurementOf": "detection limit method",
+            "dqv:value": "Sample-individual LOD per Pettke et al. (2012)"
+          }
+        ]
+      }
+    ]
+  },
+  "ada:analyteTemplate": {
+    "ada:analyteColumns": [
+      {
+        "@type": [
+          "schema:PropertyValueSpecification"
+        ],
+        "schema:name": "Measured Isotope",
+        "schema:valueName": "measuredIsotope",
+        "ada:dataType": "string",
+        "schema:valueRequired": true,
+        "schema:description": "Element symbol with mass number (e.g. Si29, Ba138, U238).",
+        "ada:tier": "M"
+      },
+      {
+        "@type": [
+          "schema:PropertyValueSpecification"
+        ],
+        "schema:name": "Spectrometer Dwell Time",
+        "schema:valueName": "spectrometerDwellTime",
+        "ada:dataType": "string",
+        "schema:valueRequired": true,
+        "schema:description": "Dwell time per isotope per sweep in seconds.",
+        "schema:unitText": "seconds",
+        "ada:tier": "M"
+      },
+      {
+        "@type": [
+          "schema:PropertyValueSpecification"
+        ],
+        "schema:name": "Analysis Count Time",
+        "schema:valueName": "analysisCountTime",
+        "ada:dataType": "number",
+        "schema:valueRequired": true,
+        "schema:minValue": 1,
+        "schema:description": "Total signal integration time during ablation in seconds.",
+        "schema:unitText": "seconds",
+        "ada:tier": "M"
+      },
+      {
+        "@type": [
+          "schema:PropertyValueSpecification"
+        ],
+        "schema:name": "Background Count Time",
+        "schema:valueName": "backgroundCountTime",
+        "ada:dataType": "number",
+        "schema:valueRequired": true,
+        "schema:minValue": 1,
+        "schema:description": "Gas blank measurement time before ablation in seconds.",
+        "schema:unitText": "seconds",
+        "ada:tier": "M"
+      },
+      {
+        "@type": [
+          "schema:PropertyValueSpecification"
+        ],
+        "schema:name": "Detection Limit",
+        "schema:valueName": "detectionLimit",
+        "ada:dataType": "string",
+        "schema:valueRequired": false,
+        "schema:description": "Typical detection limit at 99% confidence (3-sigma).",
+        "ada:tier": "R"
+      },
+      {
+        "@type": [
+          "schema:PropertyValueSpecification"
+        ],
+        "schema:name": "Detection Limit Unit",
+        "schema:valueName": "detectionLimitUnit",
+        "ada:dataType": "string",
+        "schema:valueRequired": false,
+        "ada:enumeration": [
+          "ppm",
+          "ppb",
+          "weight percent (%m/m)"
+        ],
+        "ada:tier": "R"
+      }
+    ],
+    "ada:defaultAnalytes": [
+      {
+        "measuredIsotope": "Si29",
+        "spectrometerDwellTime": "1e-8",
+        "analysisCountTime": 40,
+        "backgroundCountTime": 30,
+        "detectionLimit": "internal standard",
+        "detectionLimitUnit": ""
+      },
+      {
+        "measuredIsotope": "Ca43",
+        "spectrometerDwellTime": "1e-8",
+        "analysisCountTime": 40,
+        "backgroundCountTime": 30,
+        "detectionLimit": "sample individual LOD",
+        "detectionLimitUnit": "ppm"
+      },
+      {
+        "measuredIsotope": "Rb85",
+        "spectrometerDwellTime": "1e-8",
+        "analysisCountTime": 40,
+        "backgroundCountTime": 30,
+        "detectionLimit": "sample individual LOD",
+        "detectionLimitUnit": "ppm"
+      },
+      {
+        "measuredIsotope": "Sr88",
+        "spectrometerDwellTime": "1e-8",
+        "analysisCountTime": 40,
+        "backgroundCountTime": 30,
+        "detectionLimit": "sample individual LOD",
+        "detectionLimitUnit": "ppm"
+      },
+      {
+        "measuredIsotope": "Y89",
+        "spectrometerDwellTime": "1e-8",
+        "analysisCountTime": 40,
+        "backgroundCountTime": 30,
+        "detectionLimit": "sample individual LOD",
+        "detectionLimitUnit": "ppm"
+      },
+      {
+        "measuredIsotope": "Zr90",
+        "spectrometerDwellTime": "1e-8",
+        "analysisCountTime": 40,
+        "backgroundCountTime": 30,
+        "detectionLimit": "sample individual LOD",
+        "detectionLimitUnit": "ppm"
+      },
+      {
+        "measuredIsotope": "Nb93",
+        "spectrometerDwellTime": "1e-8",
+        "analysisCountTime": 40,
+        "backgroundCountTime": 30,
+        "detectionLimit": "sample individual LOD",
+        "detectionLimitUnit": "ppm"
+      },
+      {
+        "measuredIsotope": "Ba138",
+        "spectrometerDwellTime": "1e-8",
+        "analysisCountTime": 40,
+        "backgroundCountTime": 30,
+        "detectionLimit": "sample individual LOD",
+        "detectionLimitUnit": "ppm"
+      },
+      {
+        "measuredIsotope": "La139",
+        "spectrometerDwellTime": "1e-8",
+        "analysisCountTime": 40,
+        "backgroundCountTime": 30,
+        "detectionLimit": "sample individual LOD",
+        "detectionLimitUnit": "ppm"
+      },
+      {
+        "measuredIsotope": "Ce140",
+        "spectrometerDwellTime": "1e-8",
+        "analysisCountTime": 40,
+        "backgroundCountTime": 30,
+        "detectionLimit": "sample individual LOD",
+        "detectionLimitUnit": "ppm"
+      },
+      {
+        "measuredIsotope": "Nd146",
+        "spectrometerDwellTime": "1e-8",
+        "analysisCountTime": 40,
+        "backgroundCountTime": 30,
+        "detectionLimit": "sample individual LOD",
+        "detectionLimitUnit": "ppm"
+      },
+      {
+        "measuredIsotope": "Sm147",
+        "spectrometerDwellTime": "1e-8",
+        "analysisCountTime": 40,
+        "backgroundCountTime": 30,
+        "detectionLimit": "sample individual LOD",
+        "detectionLimitUnit": "ppm"
+      },
+      {
+        "measuredIsotope": "Eu153",
+        "spectrometerDwellTime": "1e-8",
+        "analysisCountTime": 40,
+        "backgroundCountTime": 30,
+        "detectionLimit": "sample individual LOD",
+        "detectionLimitUnit": "ppm"
+      },
+      {
+        "measuredIsotope": "Gd157",
+        "spectrometerDwellTime": "1e-8",
+        "analysisCountTime": 40,
+        "backgroundCountTime": 30,
+        "detectionLimit": "sample individual LOD",
+        "detectionLimitUnit": "ppm"
+      },
+      {
+        "measuredIsotope": "Dy163",
+        "spectrometerDwellTime": "1e-8",
+        "analysisCountTime": 40,
+        "backgroundCountTime": 30,
+        "detectionLimit": "sample individual LOD",
+        "detectionLimitUnit": "ppm"
+      },
+      {
+        "measuredIsotope": "Er166",
+        "spectrometerDwellTime": "1e-8",
+        "analysisCountTime": 40,
+        "backgroundCountTime": 30,
+        "detectionLimit": "sample individual LOD",
+        "detectionLimitUnit": "ppm"
+      },
+      {
+        "measuredIsotope": "Yb172",
+        "spectrometerDwellTime": "1e-8",
+        "analysisCountTime": 40,
+        "backgroundCountTime": 30,
+        "detectionLimit": "sample individual LOD",
+        "detectionLimitUnit": "ppm"
+      },
+      {
+        "measuredIsotope": "Lu175",
+        "spectrometerDwellTime": "1e-8",
+        "analysisCountTime": 40,
+        "backgroundCountTime": 30,
+        "detectionLimit": "sample individual LOD",
+        "detectionLimitUnit": "ppm"
+      },
+      {
+        "measuredIsotope": "Hf178",
+        "spectrometerDwellTime": "1e-8",
+        "analysisCountTime": 40,
+        "backgroundCountTime": 30,
+        "detectionLimit": "sample individual LOD",
+        "detectionLimitUnit": "ppm"
+      },
+      {
+        "measuredIsotope": "Th232",
+        "spectrometerDwellTime": "1e-8",
+        "analysisCountTime": 40,
+        "backgroundCountTime": 30,
+        "detectionLimit": "sample individual LOD",
+        "detectionLimitUnit": "ppm"
+      },
+      {
+        "measuredIsotope": "U238",
+        "spectrometerDwellTime": "1e-8",
+        "analysisCountTime": 40,
+        "backgroundCountTime": 30,
+        "detectionLimit": "sample individual LOD",
+        "detectionLimitUnit": "ppm"
+      }
+    ]
+  }
+}

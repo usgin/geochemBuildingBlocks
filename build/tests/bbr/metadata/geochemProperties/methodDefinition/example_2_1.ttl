@@ -1,0 +1,346 @@
+@prefix ada: <https://ada.astromat.org/metadata/> .
+@prefix bios: <https://bioschemas.org/> .
+@prefix cdi: <http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/> .
+@prefix dqv: <http://www.w3.org/ns/dqv#> .
+@prefix schema1: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://registry.onegeochemistry.org/methods/nmnh-spinel-oxybar-v1> a cdi:Activity,
+        schema1:Action,
+        ada:MethodDefinition,
+        bios:LabProtocol ;
+    schema1:actionProcess [ a schema1:HowTo ;
+            schema1:name "EPMA WDS spinel oxybarometry workflow" ;
+            schema1:step [ a cdi:Activity,
+                        schema1:Action ;
+                    schema1:description "Calibrate WDS spectrometers on primary Smithsonian standards. Verify with secondary spinel standards from Wood & Virgo (1989), Bryndzia & Wood (1990), and Ionov & Wood (1992)." ;
+                    schema1:name "Instrument calibration" ;
+                    schema1:object <file:///github/workspace/#preparedMount> ;
+                    schema1:position 2 ;
+                    bios:reagent [ a schema1:Thing ;
+                            schema1:citation "Davis et al. (2017), American Mineralogist." ;
+                            schema1:identifier [ a schema1:PropertyValue ;
+                                    schema1:propertyID "Smithsonian catalog" ;
+                                    schema1:value "NMNH 136041" ] ;
+                            schema1:name "Spinel" ;
+                            ada:reagentRole "primaryStandard" ],
+                        [ a schema1:Thing ;
+                            schema1:citation "Wood & Virgo (1989); Bryndzia & Wood (1990); Ionov & Wood (1992)." ;
+                            schema1:description "Secondary spinel standards for Fe3+/ΣFe calibration" ;
+                            schema1:name "IO-5657, PS-216, Vi314-5, IM8703, DB8803-3, BAR8601-10, MO4334-14, KLB8320" ;
+                            ada:reagentRole "secondaryStandard" ],
+                        [ a schema1:Thing ;
+                            schema1:citation "Davis et al. (2017), American Mineralogist." ;
+                            schema1:name "Wollastonite (synthetic, F.R. Boyd)" ;
+                            ada:reagentRole "primaryStandard" ],
+                        [ a schema1:Thing ;
+                            schema1:citation "Davis et al. (2017), American Mineralogist." ;
+                            schema1:identifier [ a schema1:PropertyValue ;
+                                    schema1:propertyID "Smithsonian catalog" ;
+                                    schema1:value "NMNH 114887" ] ;
+                            schema1:name "Manganite" ;
+                            ada:reagentRole "primaryStandard" ],
+                        [ a schema1:Thing ;
+                            schema1:citation "Jarosewich et al. (1980), Geostandards Newsletter, 4(1): 43–47." ;
+                            schema1:identifier [ a schema1:PropertyValue ;
+                                    schema1:propertyID "Smithsonian catalog" ;
+                                    schema1:value "NMNH 117075" ] ;
+                            schema1:name "Tiebaghi Mine chromite" ;
+                            ada:reagentRole "primaryStandard" ],
+                        [ a schema1:Thing ;
+                            schema1:citation "Jarosewich et al. (1980), Geostandards Newsletter, 4(1): 43–47." ;
+                            schema1:identifier [ a schema1:PropertyValue ;
+                                    schema1:propertyID "Smithsonian catalog" ;
+                                    schema1:value "NMNH 143965" ] ;
+                            schema1:name "Kakanui Hornblende" ;
+                            ada:reagentRole "primaryStandard" ],
+                        [ a schema1:Thing ;
+                            schema1:citation "Jarosewich et al. (1980), Geostandards Newsletter, 4(1): 43–47." ;
+                            schema1:identifier [ a schema1:PropertyValue ;
+                                    schema1:propertyID "Smithsonian catalog" ;
+                                    schema1:value "NMNH 111312/444" ] ;
+                            schema1:name "San Carlos olivine" ;
+                            ada:reagentRole "primaryStandard" ] ],
+                [ a cdi:Activity,
+                        schema1:Action ;
+                    schema1:additionalType "bios:LabProcess" ;
+                    schema1:description "Spinel-bearing peridotite samples mounted in epoxy, polished, and carbon coated." ;
+                    schema1:name "Sample preparation" ;
+                    schema1:position 1 ;
+                    schema1:result <file:///github/workspace/#preparedMount> ],
+                [ a cdi:Activity,
+                        schema1:Action ;
+                    schema1:description "Quantitative WDS analysis at 15 kV / 40 nA, focused beam. 5 spectrometers measuring SiO2, TiO2, Al2O3, Cr2O3, FeOT, MnO, MgO, CaO, NiO simultaneously." ;
+                    schema1:name "WDS data acquisition" ;
+                    schema1:position 3 ;
+                    schema1:result <file:///github/workspace/#rawAnalyses> ;
+                    ada:methodParameters [ a schema1:PropertyValueSpecification ;
+                            schema1:defaultValue 40 ;
+                            schema1:maxValue 200 ;
+                            schema1:minValue 1 ;
+                            schema1:name "Beam Current" ;
+                            schema1:readonlyValue true ;
+                            schema1:unitText "nA" ;
+                            schema1:valueName "beamCurrent" ;
+                            schema1:valueRequired true ;
+                            ada:category "Beam Conditions" ;
+                            ada:dataType "number" ;
+                            ada:fieldScope "method" ;
+                            ada:tier "M" ],
+                        [ a schema1:PropertyValueSpecification ;
+                            schema1:defaultValue "Focused beam" ;
+                            schema1:inDefinedTermSet <https://vocab.onegeochemistry.org/epma/beam-modes> ;
+                            schema1:name "Beam Diameter" ;
+                            schema1:readonlyValue true ;
+                            schema1:valueName "beamDiameter" ;
+                            schema1:valueRequired true ;
+                            ada:category "Beam Conditions" ;
+                            ada:dataType "string" ;
+                            ada:enumeration "Defocused",
+                                "Focused",
+                                "Raster" ;
+                            ada:fieldScope "method" ;
+                            ada:tier "M" ],
+                        [ a schema1:PropertyValueSpecification ;
+                            schema1:defaultValue 15 ;
+                            schema1:name "Accelerating Voltage" ;
+                            schema1:readonlyValue true ;
+                            schema1:unitText "kV" ;
+                            schema1:valueName "acceleratingVoltage" ;
+                            schema1:valueRequired true ;
+                            ada:category "Beam Conditions" ;
+                            ada:dataType "number" ;
+                            ada:fieldScope "method" ;
+                            ada:tier "M" ],
+                        [ a schema1:PropertyValueSpecification ;
+                            schema1:defaultValue "not applicable" ;
+                            schema1:name "Beam Damage Minimization" ;
+                            schema1:readonlyValue true ;
+                            schema1:valueName "beamDamageMinimization" ;
+                            schema1:valueRequired false ;
+                            ada:category "Beam Conditions" ;
+                            ada:dataType "string" ;
+                            ada:fieldScope "method" ;
+                            ada:tier "R" ],
+                        [ a schema1:PropertyValueSpecification ;
+                            schema1:defaultValue "none" ;
+                            schema1:name "Beam Raster" ;
+                            schema1:readonlyValue true ;
+                            schema1:valueName "beamRaster" ;
+                            schema1:valueRequired false ;
+                            ada:category "Beam Conditions" ;
+                            ada:dataType "string" ;
+                            ada:fieldScope "method" ;
+                            ada:tier "R" ] ],
+                [ a cdi:Activity,
+                        schema1:Action ;
+                    schema1:description "Primary and secondary standards run at start and end of session; subset run regularly during session." ;
+                    schema1:name "Quality control" ;
+                    schema1:object <file:///github/workspace/#quantifiedResults> ;
+                    schema1:position 5 ;
+                    dqv:hasQualityMeasurement [ a dqv:QualityMeasurement ;
+                            dqv:isMeasurementOf "analytical reproducibility" ;
+                            dqv:value "Davis et al. (2017) report reproducibility on spinels PS211, PS212, OC231350, KLB8304" ] ;
+                    ada:methodParameters [ a schema1:PropertyValueSpecification ;
+                            schema1:defaultValue "Primary and secondary standards at start/end; subset run regularly during session." ;
+                            schema1:name "Drift Correction" ;
+                            schema1:readonlyValue false ;
+                            schema1:valueName "driftCorrection" ;
+                            schema1:valueRequired false ;
+                            ada:category "Quality Control" ;
+                            ada:dataType "string" ;
+                            ada:fieldScope "session" ;
+                            ada:tier "R" ] ],
+                [ a cdi:Activity,
+                        schema1:Action ;
+                    schema1:description "Matrix correction using CITZAF. Fe3+/ΣFe calculated from spinel stoichiometry using flank method calibrated against secondary spinel standards with known Mössbauer Fe3+/ΣFe ratios." ;
+                    schema1:name "Data processing" ;
+                    schema1:object <file:///github/workspace/#rawAnalyses> ;
+                    schema1:position 4 ;
+                    schema1:result <file:///github/workspace/#quantifiedResults> ;
+                    ada:methodParameters [ a schema1:PropertyValueSpecification ;
+                            schema1:defaultValue "CITZAF" ;
+                            schema1:inDefinedTermSet <https://vocab.onegeochemistry.org/epma/matrix-correction-models> ;
+                            schema1:name "Matrix Correction Model" ;
+                            schema1:propertyID "https://vocab.onegeochemistry.org/epma/matrix-correction" ;
+                            schema1:readonlyValue true ;
+                            schema1:valueName "matrixCorrectionModel" ;
+                            schema1:valueRequired true ;
+                            ada:category "Data Processing" ;
+                            ada:dataType "string" ;
+                            ada:enumeration "Armstrong",
+                                "CITZAF",
+                                "Other",
+                                "PAP",
+                                "PhiRhoZ",
+                                "XPP",
+                                "ZAF" ;
+                            ada:fieldScope "method" ;
+                            ada:tier "M" ] ;
+                    bios:computationalTool [ a schema1:SoftwareApplication ;
+                            schema1:name "Probe for EPMA" ;
+                            ada:toolRole "reduction" ] ] ] ;
+    schema1:agent [ a schema1:Organization ;
+            schema1:name "Smithsonian Institution, Department of Mineral Sciences" ] ;
+    schema1:datePublished "2013-11-08" ;
+    schema1:instrument [ a schema1:Product,
+                schema1:Thing ;
+            schema1:hasPart [ a schema1:Thing ;
+                    schema1:description "5 WDS spectrometers with TAPx2, LiFx2, PETJ, LiFH." ;
+                    schema1:name "WDS Spectrometer Array" ] ;
+            schema1:manufacturer [ a schema1:Organization ;
+                    schema1:name "JEOL" ] ;
+            schema1:model [ a schema1:ProductModel ;
+                    schema1:name "JXA-8900" ] ;
+            schema1:name "JEOL JXA-8900 Superprobe; JEOL JXA-8530F Hyperprobe" ] ;
+    schema1:measurementTechnique [ a schema1:DefinedTerm ;
+            schema1:inDefinedTermSet "https://vocab.onegeochemistry.org/techniques" ;
+            schema1:name "EPMA-WDS" ] ;
+    schema1:name "Spinel oxybarometry version 1" ;
+    schema1:object [ a schema1:DefinedTerm ;
+            schema1:inDefinedTermSet "https://vocab.onegeochemistry.org/materials" ;
+            schema1:name "olivine" ],
+        [ a schema1:DefinedTerm ;
+            schema1:inDefinedTermSet "https://vocab.onegeochemistry.org/materials" ;
+            schema1:name "orthopyroxene" ],
+        [ a schema1:DefinedTerm ;
+            schema1:inDefinedTermSet "https://vocab.onegeochemistry.org/materials" ;
+            schema1:name "spinel" ] ;
+    schema1:relatedLink [ a schema1:LinkRole ;
+            schema1:linkRelationship "describedIn" ;
+            schema1:target [ a schema1:EntryPoint ;
+                    schema1:name "Davis et al. 2017" ;
+                    schema1:url "http://dx.doi.org/10.2138/am-2017-5823" ] ],
+        [ a schema1:LinkRole ;
+            schema1:linkRelationship "describedIn" ;
+            schema1:target [ a schema1:EntryPoint ;
+                    schema1:name "Birner et al. 2017" ;
+                    schema1:url "https://doi.org/10.1093/petrology/egx072" ] ] ;
+    schema1:version "1.0" ;
+    ada:analyteTemplate [ ada:analyteColumns [ a schema1:PropertyValueSpecification ;
+                    schema1:name "Analysed Oxide/Element" ;
+                    schema1:valueName "analysedOxide" ;
+                    schema1:valueRequired true ;
+                    ada:cdifPropertyPath "cdifVariableMeasured: cdi:name" ;
+                    ada:dataType "string" ;
+                    ada:tier "M" ],
+                [ a schema1:PropertyValueSpecification ;
+                    schema1:inDefinedTermSet <https://vocab.onegeochemistry.org/epma/background-methods> ;
+                    schema1:name "Background Method" ;
+                    schema1:valueName "backgroundMethod" ;
+                    schema1:valueRequired true ;
+                    ada:dataType "string" ;
+                    ada:tier "M" ],
+                [ a schema1:PropertyValueSpecification ;
+                    schema1:name "Calibration Standard ID" ;
+                    schema1:valueName "calibrationStandardID" ;
+                    schema1:valueRequired false ;
+                    ada:dataType "string" ;
+                    ada:tier "R" ],
+                [ a schema1:PropertyValueSpecification ;
+                    schema1:minValue 1 ;
+                    schema1:name "Peak Counting Time (s)" ;
+                    schema1:unitText "seconds" ;
+                    schema1:valueName "peakCountingTime" ;
+                    schema1:valueRequired true ;
+                    ada:dataType "number" ;
+                    ada:tier "M" ],
+                [ a schema1:PropertyValueSpecification ;
+                    schema1:minValue 1 ;
+                    schema1:name "Background Counting Time (s)" ;
+                    schema1:unitText "seconds" ;
+                    schema1:valueName "backgroundCountingTime" ;
+                    schema1:valueRequired true ;
+                    ada:dataType "number" ;
+                    ada:tier "M" ],
+                [ a schema1:PropertyValueSpecification ;
+                    schema1:name "Citation for Standard" ;
+                    schema1:valueName "citationForStandard" ;
+                    schema1:valueRequired false ;
+                    ada:dataType "string" ;
+                    ada:tier "R" ],
+                [ a schema1:PropertyValueSpecification ;
+                    schema1:inDefinedTermSet <https://vocab.onegeochemistry.org/epma/xray-lines> ;
+                    schema1:name "X-ray Line" ;
+                    schema1:valueName "xrayLine" ;
+                    schema1:valueRequired true ;
+                    ada:dataType "string" ;
+                    ada:enumeration "Ka",
+                        "Kb",
+                        "La",
+                        "Lb",
+                        "Ma" ;
+                    ada:tier "M" ],
+                [ a schema1:PropertyValueSpecification ;
+                    schema1:name "Calibration Standard Name" ;
+                    schema1:valueName "calibrationStandardName" ;
+                    schema1:valueRequired true ;
+                    ada:dataType "string" ;
+                    ada:tier "M" ],
+                [ a schema1:PropertyValueSpecification ;
+                    schema1:name "Spectrometer" ;
+                    schema1:valueName "spectrometer" ;
+                    schema1:valueRequired false ;
+                    ada:dataType "string" ;
+                    ada:tier "R" ],
+                [ a schema1:PropertyValueSpecification ;
+                    schema1:inDefinedTermSet <https://vocab.onegeochemistry.org/epma/diffracting-crystals> ;
+                    schema1:name "Diffracting Crystal" ;
+                    schema1:valueName "diffractingCrystal" ;
+                    schema1:valueRequired true ;
+                    ada:dataType "string" ;
+                    ada:enumeration "LIF",
+                        "LIFH",
+                        "LiF",
+                        "PET",
+                        "PETJ",
+                        "TAP" ;
+                    ada:tier "M" ],
+                [ a schema1:PropertyValueSpecification ;
+                    schema1:maxValue 200 ;
+                    schema1:minValue 1 ;
+                    schema1:name "Beam Current (nA)" ;
+                    schema1:unitText "nA" ;
+                    schema1:valueName "beamCurrent" ;
+                    schema1:valueRequired true ;
+                    ada:dataType "number" ;
+                    ada:tier "M" ] ;
+            ada:defaultAnalytes [ ],
+                [ ],
+                [ ],
+                [ ],
+                [ ],
+                [ ],
+                [ ],
+                [ ],
+                [ ] ] ;
+    ada:laboratory [ a schema1:Place ;
+            schema1:name "National Museum of Natural History, Smithsonian Institution" ] ;
+    ada:methodParameters [ a schema1:PropertyValueSpecification ;
+            schema1:defaultValue "No" ;
+            schema1:name "EDS Utilization" ;
+            schema1:readonlyValue true ;
+            schema1:valueName "edsUtilization" ;
+            schema1:valueRequired true ;
+            ada:category "Instrument & Software" ;
+            ada:dataType "string" ;
+            ada:enumeration "No",
+                "Yes" ;
+            ada:fieldScope "method" ;
+            ada:tier "M" ],
+        [ a schema1:PropertyValueSpecification ;
+            schema1:defaultValue "Yes" ;
+            schema1:name "WDS Utilization" ;
+            schema1:readonlyValue true ;
+            schema1:valueName "wdsUtilization" ;
+            schema1:valueRequired true ;
+            ada:category "Instrument & Software" ;
+            ada:dataType "string" ;
+            ada:enumeration "No",
+                "Yes" ;
+            ada:fieldScope "method" ;
+            ada:tier "M" ] ;
+    bios:computationalTool [ a schema1:SoftwareApplication ;
+            schema1:name "Probe for EPMA" ;
+            ada:toolRole "acquisition" ] .
+

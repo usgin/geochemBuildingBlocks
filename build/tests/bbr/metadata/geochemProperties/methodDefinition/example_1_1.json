@@ -1,0 +1,166 @@
+{
+  "@id": "https://registry.onegeochemistry.org/methods/nmnh-spinel-oxybar-v1",
+  "@type": [
+    "ada:MethodDefinition",
+    "schema:HowTo"
+  ],
+  "schema:name": "Spinel oxybarometry version 1",
+  "schema:version": "1.0",
+  "schema:datePublished": "2013-11-08",
+  "schema:measurementTechnique": {
+    "@type": [
+      "schema:DefinedTerm"
+    ],
+    "schema:name": "EPMA-WDS",
+    "schema:inDefinedTermSet": "https://vocab.onegeochemistry.org/techniques"
+  },
+  "schema:instrument": {
+    "@type": [
+      "schema:Product",
+      "schema:Thing"
+    ],
+    "schema:name": "JEOL JXA-8900 Superprobe",
+    "schema:manufacturer": {
+      "@type": [
+        "schema:Organization"
+      ],
+      "schema:name": "JEOL"
+    },
+    "schema:model": {
+      "@type": [
+        "schema:ProductModel"
+      ],
+      "schema:name": "JXA-8900"
+    }
+  },
+  "ada:methodParameters": [
+    {
+      "schema:name": "acceleratingVoltage",
+      "schema:alternateName": "Accelerating Voltage",
+      "ada:scope": "constant",
+      "ada:category": "Beam Conditions",
+      "ada:dataType": "number",
+      "schema:value": 15,
+      "schema:unitText": "kV",
+      "ada:tier": "M",
+      "ada:cdifPropertyPath": "cdifProvActivity: schema:additionalProperty"
+    },
+    {
+      "schema:name": "beamCurrent",
+      "schema:alternateName": "Beam Current",
+      "ada:scope": "constant",
+      "ada:category": "Beam Conditions",
+      "ada:dataType": "number",
+      "schema:value": 40,
+      "schema:unitText": "nA",
+      "ada:tier": "M",
+      "ada:cdifPropertyPath": "cdifProvActivity: schema:additionalProperty"
+    },
+    {
+      "schema:name": "matrixCorrectionModel",
+      "schema:alternateName": "X-ray Matrix Corrections",
+      "ada:scope": "constant",
+      "ada:category": "Data Processing",
+      "ada:dataType": "string",
+      "schema:value": "CITZAF",
+      "ada:tier": "M",
+      "ada:cdifPropertyPath": "cdifProvActivity: schema:actionProcess"
+    },
+    {
+      "schema:name": "analyticalSoftware",
+      "schema:alternateName": "Analytical Software",
+      "ada:scope": "default",
+      "ada:category": "Instrument & Software",
+      "ada:dataType": "string",
+      "schema:value": "Probe for EPMA",
+      "ada:tier": "M",
+      "ada:cdifPropertyPath": "cdifProvActivity: prov:used"
+    },
+    {
+      "schema:name": "samplePreparationMethod",
+      "schema:alternateName": "Sample Preparation Method",
+      "ada:scope": "optional",
+      "ada:category": "Samples",
+      "ada:dataType": "string",
+      "ada:tier": "R",
+      "ada:cdifPropertyPath": "cdifProvActivity: schema:actionProcess"
+    }
+  ],
+  "ada:analyteTemplate": {
+    "ada:analyteColumns": [
+      {
+        "schema:name": "analysedOxide",
+        "schema:alternateName": "Analysed Oxide/Element",
+        "ada:scope": "default",
+        "ada:dataType": "string",
+        "ada:tier": "M",
+        "ada:cdifPropertyPath": "cdifVariableMeasured: cdi:name"
+      },
+      {
+        "schema:name": "xrayLine",
+        "schema:alternateName": "X-ray Line",
+        "ada:scope": "default",
+        "ada:dataType": "string",
+        "ada:enumeration": [
+          "Ka",
+          "Kb",
+          "La",
+          "Lb",
+          "Ma",
+          "Mb"
+        ],
+        "ada:tier": "M",
+        "ada:cdifPropertyPath": "schema:additionalProperty"
+      },
+      {
+        "schema:name": "diffractingCrystal",
+        "schema:alternateName": "Diffracting Crystal",
+        "ada:scope": "default",
+        "ada:dataType": "string",
+        "ada:enumeration": [
+          "LIF",
+          "LIFH",
+          "PET",
+          "PETJ",
+          "TAP",
+          "RAP"
+        ],
+        "ada:tier": "M",
+        "ada:cdifPropertyPath": "schema:additionalProperty"
+      },
+      {
+        "schema:name": "peakCountingTime",
+        "schema:alternateName": "Peak Counting Time",
+        "ada:scope": "default",
+        "ada:dataType": "number",
+        "schema:unitText": "seconds",
+        "ada:tier": "M",
+        "ada:cdifPropertyPath": "schema:additionalProperty"
+      },
+      {
+        "schema:name": "calibrationStandardName",
+        "schema:alternateName": "Calibration Standard Name",
+        "ada:scope": "default",
+        "ada:dataType": "string",
+        "ada:tier": "M",
+        "ada:cdifPropertyPath": "schema:additionalProperty"
+      }
+    ],
+    "ada:defaultAnalytes": [
+      {
+        "analysedOxide": "SiO2",
+        "xrayLine": "Ka",
+        "diffractingCrystal": "TAP",
+        "peakCountingTime": 30,
+        "calibrationStandardName": "San Carlos olivine"
+      },
+      {
+        "analysedOxide": "FeOT",
+        "xrayLine": "Ka",
+        "diffractingCrystal": "LiFH",
+        "peakCountingTime": 30,
+        "calibrationStandardName": "San Carlos olivine"
+      }
+    ]
+  }
+}

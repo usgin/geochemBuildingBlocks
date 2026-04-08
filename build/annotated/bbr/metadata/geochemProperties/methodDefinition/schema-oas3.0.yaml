@@ -1,0 +1,1128 @@
+x-defs:
+  cdif.bbr.metadata.schemaorgProperties.identifier:
+    description: Properties for a schema.org identifier
+    type: object
+    properties:
+      '@type':
+        type: array
+        items:
+          type: string
+        contains:
+          enum:
+          - schema:PropertyValue
+        minItems: 1
+      schema:propertyID:
+        type: string
+        description: In this context for the schema:PropertyValue, this field is an
+          identifier for the identifier schema, e.g. DOI, ARK.  Get values from https://registry.identifiers.org/registry/
+          for interoperability
+      schema:value:
+        type: string
+        description: the identifier string. E.g. 10.5066/F7VX0DMQ
+      schema:url:
+        type: string
+        format: uri
+        description: 'web-resolveable string for the identifier; host name part is
+          location of a resolver that will return some representation for the given
+          identifier value. E.g. https://doi.org/10.5066/F7VX0DMQ '
+    allOf:
+    - required:
+      - '@type'
+    - anyOf:
+      - required:
+        - schema:value
+      - required:
+        - schema:url
+    x-jsonld-prefixes:
+      schema: http://schema.org/
+    x-schema-source: https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/identifier/schema.yaml
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  cdif.bbr.metadata.schemaorgProperties.definedTerm:
+    description: schema.org Defined Term schema
+    type: object
+    properties:
+      '@type':
+        type: array
+        items:
+          type: string
+        contains:
+          enum:
+          - schema:DefinedTerm
+        minItems: 1
+      schema:name:
+        type: string
+        description: text label for the term that is useful to human user
+      schema:identifier:
+        anyOf:
+        - type: string
+        - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.identifier
+      schema:inDefinedTermSet:
+        type: string
+        description: Name for the controlled vocabulary responsible for this keyword.
+      schema:termCode:
+        type: string
+        description: A representative code for this keyword in the controlled vocabulary.
+          Analogous to skos:Notation
+    allOf:
+    - required:
+      - '@type'
+    - anyOf:
+      - required:
+        - schema:name
+      - required:
+        - schema:identifier
+      - required:
+        - schema:termCode
+    x-jsonld-prefixes:
+      schema: http://schema.org/
+    x-schema-source: https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/definedTerm/schema.yaml
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  ada.bbr.metadata.geochemProperties.instrument:
+    title: ADA Analysis Instrument
+    description: ADA analytical instrument building block. Extends the core CDIF instrument
+      building block with NeXus NXinstrument classification via additionalType. Instruments
+      are typed as schema:Thing + schema:Product (from core) with domain-specific
+      types (e.g. nxs:BaseClass/NXinstrument, ada:AMSInstrument) in additionalType.
+    allOf:
+    - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.instrument
+    - type: object
+      properties:
+        schema:additionalType:
+          description: Domain-specific instrument type classifications. Should include
+            a NeXus base class (e.g. nxs:BaseClass/NXinstrument) and/or technique-specific
+            identifier (e.g. ada:AMSInstrument, GCMD instrument identifier).
+          type: array
+          items:
+            type: string
+          minItems: 1
+      required:
+      - schema:additionalType
+    x-jsonld-prefixes:
+      schema: http://schema.org/
+      nxs: http://purl.org/nexusformat/definitions/
+    x-schema-source: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/instrument/schema.yaml
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  ada.bbr.metadata.geochemProperties.laboratory:
+    title: ADA Analysis Laboratory
+    description: ADA laboratory or facility building block. Extends the core CDIF
+      spatialExtent (schema:Place) with NeXus NXsource classification via additionalType.
+      Inherits place name, identifier, alternateName, geo coordinates, and geosparql
+      geometry from spatialExtent.
+    allOf:
+    - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.spatialExtent
+    - type: object
+      properties:
+        schema:additionalType:
+          type: array
+          items:
+            type: string
+          contains:
+            enum:
+            - nxs:BaseClass/NXsource
+          description: Must include nxs:BaseClass/NXsource for NeXus facility classification.
+    x-jsonld-prefixes:
+      schema: http://schema.org/
+      nxs: http://purl.org/nexusformat/definitions/
+    x-schema-source: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/laboratory/schema.yaml
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  cdif.bbr.metadata.schemaorgProperties.person:
+    description: schema for cdif profile of schema.org/Person
+    type: object
+    properties:
+      '@id':
+        type: string
+      '@type':
+        type: array
+        items:
+          type: string
+        contains:
+          enum:
+          - schema:Person
+        minItems: 1
+      schema:name:
+        type: string
+        description: string label for person that is meaningful for human users, should
+          format consistently. Recommend 'Family Name, Given name' format.
+      schema:description:
+        type: string
+      schema:identifier:
+        description: identifier for person, recommend ORCID
+        anyOf:
+        - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.identifier
+        - type: string
+      schema:alternateName:
+        type: string
+        description: other labels by which the person might be known
+      schema:affiliation:
+        description: if affiliation is present, value must be a schema:Organization.
+        allOf:
+        - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.organization
+      schema:contactPoint:
+        type: object
+        description: restrict to email only. Schema.org allows telephone and postal
+          contacts as well
+        properties:
+          '@type':
+            default: schema:ContactPoint
+            type: array
+            items:
+              type: string
+            contains:
+              enum:
+              - schema:ContactPoint
+            minItems: 1
+          schema:email:
+            type: string
+        required:
+        - schema:email
+      schema:sameAs:
+        type: array
+        description: other identifiers for the person
+        items:
+          anyOf:
+          - type: string
+          - type: object
+            properties:
+              '@id':
+                type: string
+    allOf:
+    - required:
+      - '@type'
+    - anyOf:
+      - required:
+        - schema:name
+      - required:
+        - schema:identifier
+    x-jsonld-prefixes:
+      schema: http://schema.org/
+    x-schema-source: https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/person/schema.yaml
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  cdif.bbr.metadata.schemaorgProperties.labeledLink:
+    description: schema for a labeled link, a profile of schema.org/CreativeWork
+    type: object
+    properties:
+      '@type':
+        default: schema:CreativeWork
+        type: array
+        items:
+          type: string
+        contains:
+          enum:
+          - schema:CreativeWork
+        minItems: 1
+      schema:name:
+        type: string
+      schema:description:
+        type: string
+      schema:url:
+        type: string
+        format: uri
+    required:
+    - '@type'
+    - schema:url
+    x-jsonld-prefixes:
+      schema: http://schema.org/
+    x-schema-source: https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/labeledLink/schema.yaml
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  cdif.bbr.metadata.schemaorgProperties.monetaryGrant:
+    description: Funding acknowledgement properties, profile of schema.org/MonetaryGrant
+    type: object
+    properties:
+      '@id':
+        type: string
+        description: URI identifier for this funding record
+      '@type':
+        default: schema:MonetaryGrant
+        type: array
+        items:
+          type: string
+        contains:
+          enum:
+          - schema:MonetaryGrant
+        minItems: 1
+      schema:identifier:
+        description: identifier for a particular grant
+        allOf:
+        - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.monetaryGrant/$defs/Identifier
+      schema:description:
+        type: string
+        description: description of the funding or grant
+      schema:name:
+        type: string
+        description: title of the grant
+      schema:funder:
+        anyOf:
+        - type: object
+          properties:
+            '@id':
+              type: string
+              description: a identifier for an agent defined in this metadata, or
+                externally; must be dereferenceable
+          required:
+          - '@id'
+        - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.monetaryGrant/$defs/Person
+        - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.monetaryGrant/$defs/Organization
+    anyOf:
+    - required:
+      - schema:funder
+    - required:
+      - schema:identifier
+    - required:
+      - schema:name
+    $defs:
+      Person:
+        $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.person
+      Organization:
+        $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.organization
+      Identifier:
+        $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.identifier
+    x-jsonld-prefixes:
+      schema: http://schema.org/
+    x-schema-source: https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/monetaryGrant/schema.yaml
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  cdif.bbr.metadata.schemaorgProperties.instrument:
+    title: Instrument Description
+    description: Schema for describing laboratory instruments and instrument systems.
+      Supports ownership, manufacturer, model, commissioning dates, hierarchical sub-components
+      via schema:hasPart, and domain-specific typing. Instruments may be standalone
+      devices or complex systems with sub-components.
+    type: object
+    properties:
+      '@context':
+        type: object
+        description: JSON-LD context declaring namespace prefixes.
+        properties:
+          schema:
+            enum:
+            - http://schema.org/
+          dcterms:
+            enum:
+            - http://purl.org/dc/terms/
+        required:
+        - schema
+      '@id':
+        type: string
+        description: Persistent identifier URI for this instrument metadata record.
+      '@type':
+        type: array
+        items:
+          type: string
+        minItems: 2
+        description: Must include schema:Product and schema:Thing. May include additional
+          types.
+        allOf:
+        - contains:
+            enum:
+            - schema:Product
+        - contains:
+            enum:
+            - schema:Thing
+      schema:additionalType:
+        description: Domain-specific type classifications. Should include a scientific
+          instrument type URI (e.g. wd:Q3099911 for Wikidata scientific instrument).
+        type: array
+        items:
+          type: string
+        minItems: 1
+      schema:name:
+        type: string
+        minLength: 3
+        description: Human-readable name for this instrument.
+      schema:description:
+        type: string
+        description: Text description of this instrument, its purpose, and capabilities.
+      schema:alternateName:
+        description: Alternate name(s), e.g. specific make/model designation, common
+          abbreviation.
+        type: array
+        items:
+          type: string
+      schema:identifier:
+        description: Formal identifier(s) for this instrument. Use PropertyValue for
+          structured identifiers (e.g. PIDINST, serial number, inventory number).
+        type: array
+        items:
+          anyOf:
+          - type: string
+          - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.instrument/$defs/Identifier
+      schema:url:
+        type: string
+        format: uri
+        description: Landing page URL for this instrument.
+      schema:manufacturer:
+        description: Organization that manufactured this instrument.
+        allOf:
+        - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.instrument/$defs/Organization
+      schema:model:
+        type: object
+        description: Product model information for this instrument.
+        properties:
+          '@type':
+            type: array
+            items:
+              type: string
+            contains:
+              enum:
+              - schema:ProductModel
+            minItems: 1
+          schema:name:
+            type: string
+            description: Model name or number.
+          schema:identifier:
+            description: Model identifier.
+            anyOf:
+            - type: string
+            - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.instrument/$defs/Identifier
+        required:
+        - schema:name
+      schema:category:
+        description: Instrument type classification(s) from a controlled vocabulary.
+        type: array
+        items:
+          $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.instrument/$defs/DefinedTerm
+      schema:owner:
+        description: Organization that owns this instrument.
+        allOf:
+        - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.instrument/$defs/Organization
+      schema:contributor:
+        description: Agents associated with this instrument in specific roles (e.g.
+          operator, custodian, principal investigator). Use schema:owner for the owning
+          organization.
+        type: array
+        items:
+          $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.instrument/$defs/AgentInRole
+      schema:additionalProperty:
+        type: array
+        description: Instrument-specific properties (measured variables, detection
+          limits, calibration information, operating parameters, etc.).
+        items:
+          $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.instrument/$defs/AdditionalProperty
+      schema:validFrom:
+        type: string
+        description: Date the instrument was commissioned (ISO 8601).
+      schema:validThrough:
+        type: string
+        description: Date the instrument was decommissioned (ISO 8601). Absent if
+          still operational.
+      schema:hasPart:
+        type: array
+        description: Sub-components of this instrument system. Each item is either
+          an inline instrument description or an @id reference.
+        items:
+          anyOf:
+          - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.instrument/$defs/InstrumentComponent
+          - type: object
+            properties:
+              '@id':
+                type: string
+                description: Reference to a sub-component defined elsewhere.
+            required:
+            - '@id'
+      schema:relatedLink:
+        type: array
+        description: Links to related resources (manuals, datasheets, calibration
+          records, related instruments).
+        items:
+          $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.instrument/$defs/LabeledLink
+      schema:subjectOf:
+        description: Catalog record metadata-about-metadata for this instrument description.
+        type: object
+        properties:
+          '@id':
+            type: string
+          '@type':
+            type: array
+            items:
+              type: string
+          schema:dateModified:
+            type: string
+            description: Date this metadata record was last modified (ISO 8601).
+          schema:about:
+            type: object
+            properties:
+              '@id':
+                type: string
+                description: Reference back to the instrument @id.
+          dcterms:conformsTo:
+            description: Schema or profile this metadata record conforms to.
+            type: array
+            items:
+              anyOf:
+              - type: string
+              - type: object
+                properties:
+                  '@id':
+                    type: string
+    required:
+    - '@type'
+    - schema:name
+    - schema:identifier
+    $defs:
+      Identifier:
+        $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.identifier
+      Organization:
+        $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.organization
+      Person:
+        $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.person
+      DefinedTerm:
+        $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.definedTerm
+      AgentInRole:
+        $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.agentInRole
+      AdditionalProperty:
+        $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.additionalProperty
+      LabeledLink:
+        $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.labeledLink
+      InstrumentComponent:
+        type: object
+        description: A sub-component of an instrument system. Uses the same structure
+          as the parent instrument but without nesting (single level of hasPart).
+        properties:
+          '@type':
+            type: array
+            items:
+              type: string
+            minItems: 1
+            contains:
+              enum:
+              - schema:Thing
+          '@id':
+            type: string
+          schema:name:
+            type: string
+            minLength: 3
+          schema:description:
+            type: string
+          schema:alternateName:
+            type: array
+            items:
+              type: string
+          schema:identifier:
+            anyOf:
+            - type: string
+            - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.instrument/$defs/Identifier
+          schema:additionalType:
+            description: Component type classification.
+            type: array
+            items:
+              type: string
+          schema:additionalProperty:
+            type: array
+            items:
+              $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.instrument/$defs/AdditionalProperty
+          schema:manufacturer:
+            $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.instrument/$defs/Organization
+          schema:model:
+            type: object
+            properties:
+              '@type':
+                type: array
+                items:
+                  type: string
+                contains:
+                  enum:
+                  - schema:ProductModel
+                minItems: 1
+              schema:name:
+                type: string
+              schema:identifier:
+                anyOf:
+                - type: string
+                - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.instrument/$defs/Identifier
+        required:
+        - schema:name
+    x-jsonld-prefixes:
+      schema: http://schema.org/
+    x-schema-source: https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/instrument/schema.yaml
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  cdif.bbr.metadata.schemaorgProperties.spatialExtent:
+    description: 'Spatial Extent description for CDIF discovery profile.  Note required
+      prefix declaration for geoSparql ( http://www.opengis.net/ont/geosparql#) and
+      OGC simple features (sf: http://www.opengis.net/ont/sf#)'
+    type: object
+    properties:
+      '@type':
+        default: schema:Place
+        type: array
+        items:
+          type: string
+        contains:
+          enum:
+          - schema:Place
+        minItems: 1
+      schema:additionalType:
+        description: Domain-specific type classifications for this place (e.g. facility
+          type,laboratory classification, feature type).
+        type: array
+        items:
+          anyOf:
+          - type: string
+          - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.spatialExtent/$defs/DefinedTerm
+      schema:name:
+        description: A place name for the location, either as a string or a DefinedTerm
+          from a gazetteer.
+        anyOf:
+        - type: string
+        - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.spatialExtent/$defs/DefinedTerm
+      schema:identifier:
+        description: Formal identifier for this place (e.g. ROR identifier for a facility).
+        anyOf:
+        - type: string
+        - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.spatialExtent/$defs/Identifier
+      schema:alternateName:
+        description: Alternate or abbreviated name(s) for this place.
+        type: array
+        items:
+          anyOf:
+          - type: string
+          - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.spatialExtent/$defs/DefinedTerm
+      schema:geo:
+        description: Either a bounding box or a point location.
+        anyOf:
+        - type: object
+          description: A point location. Point locations are recommended for data
+            that is associated with specific sample locations, particularly if these
+            are widely spaced such that an enclosing bounding box would be a misleading
+            representation of the spatial location. Be aware that some client applications
+            might only index or display bounding box extents or a single point location.
+          properties:
+            '@type':
+              default: schema:GeoCoordinates
+              type: array
+              items:
+                type: string
+              contains:
+                enum:
+                - schema:GeoCoordinates
+              minItems: 1
+            schema:latitude:
+              type: number
+              minimum: -90
+              maximum: 90
+            schema:longitude:
+              type: number
+              minimum: -180
+              maximum: 180
+          required:
+          - '@type'
+          - schema:latitude
+          - schema:longitude
+        - type: object
+          description: A schema:GeoShape bounding box. The geometry is described with
+            a set of latitude/longitude pairs (in that order).The documentation for
+            schema:GeoShape states 'Either whitespace or commas can be used to separate
+            latitude and longitude; whitespace should be used when writing a list
+            of several such points.'
+          properties:
+            '@type':
+              default: schema:GeoShape
+              type: array
+              items:
+                type: string
+              contains:
+                enum:
+                - schema:GeoShape
+              minItems: 1
+            schema:box:
+              type: string
+              description: A GeoShape box defines an area on the surface of the earth
+                defined by point locations of the southwest corner and northeast corner
+                of the rectangle in latitude-longitude coordinates. A space should
+                be used to separate the latitude and longitude values. The two corner
+                coordinate points are separated by a space. 'East longitude' means
+                positive longitude values are east of the prime (Greenwich) meridian.
+          required:
+          - '@type'
+          - schema:box
+        - type: object
+          description: A schema:GeoShape curvilinear trace, for resource related to
+            a linear trace like a ship track or airplane flight line
+          properties:
+            '@type':
+              default: schema:GeoShape
+              type: array
+              items:
+                type: string
+              contains:
+                enum:
+                - schema:GeoShape
+              minItems: 1
+            schema:line:
+              type: string
+              description: 'A GeoShape box defines a curvilinear geometry as a string
+                of latitude-longitude coordinates. A space should be used to separate
+                the latitude and longitude values. The coordinate point pairs are
+                also separated by a space. ''East longitude'' means positive longitude
+                values are east of the prime (Greenwich) meridian. e.g. ''39.33 120.77
+                40.44 123.96 41.00 121.34'' '
+          required:
+          - '@type'
+          - schema:line
+      geosparql:hasGeometry:
+        type: object
+        description: Optional geographic extent using wkt geometry, see Ocean InfoHub
+          (https://book.oceaninfohub.org/thematics/spatial/README.html#simple-geosparql-wkt).
+          Other geometry schemes might be specified in a specific domain profile,
+          e.g. for atmospheric, subsurface data, or local coordinate systems. NOTE
+          that the location specified here should be the same as the schema.org point
+          or contained within the specified bounding box.
+        properties:
+          '@type':
+            type: array
+            items:
+              type: string
+            minItems: 1
+            description: 'MUST be sf: (<http://www.opengis.net/ont/sf#>) SimpleFeature
+              geometry type. See https://opengeospatial.github.io/ogc-geosparql/geosparql11/sf_geometries.ttl'
+          geosparql:asWKT:
+            type: object
+            properties:
+              '@type':
+                type: array
+                items:
+                  type: string
+                contains:
+                  enum:
+                  - geosparql:wktLiteral
+                minItems: 1
+              '@value':
+                type: string
+                description: a WKT geometry description string, e.g. 'POINT(-76 -18)'
+          geosparql:crs:
+            type: object
+            properties:
+              '@id':
+                type: string
+                description: identifier string for coordinate reference system, e.g.,
+                  'CRS84'
+    anyOf:
+    - required:
+      - schema:name
+    - required:
+      - schema:identifier
+    - required:
+      - schema:geo
+    - required:
+      - geosparql:hasGeometry
+    $defs:
+      DefinedTerm:
+        $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.definedTerm
+      Identifier:
+        $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.identifier
+    x-jsonld-prefixes:
+      schema: http://schema.org/
+    x-schema-source: https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/spatialExtent/schema.yaml
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  cdif.bbr.metadata.schemaorgProperties.organization:
+    type: object
+    properties:
+      '@id':
+        type: string
+      '@type':
+        default: schema:Organization
+        type: array
+        items:
+          anyOf:
+          - type: string
+            enum:
+            - schema:Organization
+            - schema:FundingAgency
+            - schema:Consortium
+            - schema:Corporation
+            - schema:EducationalOrganization
+            - schema:FundingScheme
+            - schema:GovernmentOrganization
+            - schema:NGO
+            - schema:Project
+            - schema:ResearchOrganization
+        contains:
+          enum:
+          - schema:Organization
+        minItems: 1
+      schema:additionalType:
+        type: array
+        items:
+          anyOf:
+          - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.definedTerm
+          - type: string
+      schema:name:
+        type: string
+        description: string label for organization that is meaningful for human users
+      schema:alternateName:
+        type: string
+        description: other labels by which the organization might be known
+      schema:description:
+        type: string
+      schema:identifier:
+        description: identifier for organization
+        anyOf:
+        - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.identifier
+        - type: string
+      schema:sameAs:
+        type: array
+        description: other identifiers for the organization
+        items:
+          anyOf:
+          - type: string
+          - type: object
+            properties:
+              '@id':
+                type: string
+    allOf:
+    - required:
+      - '@type'
+    - anyOf:
+      - required:
+        - schema:name
+      - required:
+        - schema:identifier
+    x-jsonld-prefixes:
+      schema: http://schema.org/
+    x-schema-source: https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/organization/schema.yaml
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  cdif.bbr.metadata.schemaorgProperties.agentInRole:
+    description: For more granularity on how a person contributed to a Dataset, use
+      schema:Role. The schema.org documentation does not state that the Role type
+      is an expected data type of author, creator and contributor, but that is addressed
+      in this blog post (http://blog.schema.org/2014/06/introducing-role.html). see
+      https://github.com/ESIPFed/science-on-schema.org/blob/develop/guides/Dataset.md#roles-of-people
+    type: object
+    properties:
+      '@type':
+        default: schema:Role
+        type: array
+        items:
+          type: string
+        contains:
+          enum:
+          - schema:Role
+        minItems: 1
+      schema:roleName:
+        anyOf:
+        - type: string
+        - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.definedTerm
+      schema:contributor:
+        anyOf:
+        - type: object
+          properties:
+            '@id':
+              type: string
+              description: IRI reference to a Person or Organization defined elsewhere
+          required:
+          - '@id'
+        - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.person
+        - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.organization
+    required:
+    - '@type'
+    - schema:roleName
+    - schema:contributor
+    x-jsonld-prefixes:
+      schema: http://schema.org/
+    x-schema-source: https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/agentInRole/schema.yaml
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  cdif.bbr.metadata.schemaorgProperties.additionalProperty:
+    type: object
+    title: additionalProperty PropertyValue
+    description: 'PropertyValue values required to define a soft-typed property with
+      a value. '
+    properties:
+      '@type':
+        type: array
+        items:
+          type: string
+        contains:
+          enum:
+          - schema:PropertyValue
+        minItems: 1
+      schema:propertyID:
+        type: array
+        items:
+          $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.additionalProperty/$defs/propertyID_item
+        minItems: 1
+        description: identifier or name for the property concept quantified by the
+          values in this variable slot. Multiple values can specify the property at
+          different levels of granularity.
+      schema:name:
+        type: string
+      schema:value:
+        anyOf:
+        - type: string
+        - type: number
+        - type: boolean
+        - type: object
+      schema:unitCode:
+        anyOf:
+        - type: string
+        - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.additionalProperty/$defs/DefinedTerm
+      schema:unitText:
+        type: string
+    required:
+    - schema:name
+    - schema:value
+    $defs:
+      DefinedTerm:
+        $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.definedTerm
+      propertyID_item:
+        anyOf:
+        - type: string
+        - type: object
+          properties:
+            '@id':
+              type: string
+        - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.additionalProperty/$defs/DefinedTerm
+    x-jsonld-prefixes:
+      schema: http://schema.org/
+      nxs: http://purl.org/nexusformat/definitions/
+    x-schema-source: https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/additionalProperty/schema.yaml
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+title: Analytical Method Definition
+description: A registered analytical method description that can be referenced by
+  metadata records. Contains constant parameters, required parameters with defaults
+  and constraints, optional extension properties, and per-analyte parameter templates.
+  Methods are typed as ada:MethodDefinition and schema:HowTo.
+type: object
+properties:
+  '@id':
+    type: string
+    description: Persistent URI for this method definition in the registry.
+  '@type':
+    type: array
+    items:
+      type: string
+    minItems: 2
+    allOf:
+    - contains:
+        enum:
+        - ada:MethodDefinition
+    - contains:
+        enum:
+        - schema:HowTo
+    description: Must include ada:MethodDefinition and schema:HowTo.
+  schema:name:
+    type: string
+    description: Short descriptive name with version (e.g. "JEOL-8530F WDS Major Element
+      Glass v2.1").
+  schema:identifier:
+    description: DOI or other persistent ID for this method definition.
+    anyOf:
+    - type: string
+    - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.identifier
+  schema:description:
+    type: string
+    description: Human-readable summary of the method, may be auto-generated from
+      constant parameters at registration time.
+  schema:version:
+    type: string
+    description: Semantic version string (e.g. "2.1.0").
+  schema:datePublished:
+    type: string
+    description: ISO 8601 date when this method definition was first registered.
+  schema:dateModified:
+    type: string
+    description: ISO 8601 date of last update to this definition.
+  schema:measurementTechnique:
+    description: The analytical technique this method implements. Must be a DefinedTerm
+      from a controlled vocabulary of techniques.
+    allOf:
+    - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.definedTerm
+  schema:instrument:
+    description: Instrument requirements/specification for this method.
+    allOf:
+    - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/ada.bbr.metadata.geochemProperties.instrument
+  ada:laboratory:
+    description: Laboratory where this method was developed. Optional; omit for methods
+      that are instrument-generic.
+    allOf:
+    - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/ada.bbr.metadata.geochemProperties.laboratory
+  ada:methodParameters:
+    type: array
+    description: All operating, processing, and quality parameters for this method.
+      Each parameter carries a scope tag (constant / default / optional) that controls
+      form rendering behaviour.
+    items:
+      $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/$defs/MethodParameter
+  ada:analyteTemplate:
+    description: Template for per-analyte (element-specific) parameters. Defines the
+      columns that appear in the element table, each with scope, datatype, and constraints.
+      Analyte rows become schema:variableMeasured entries in metadata records.
+    type: object
+    properties:
+      ada:analyteColumns:
+        type: array
+        items:
+          $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/$defs/AnalyteColumn
+      ada:defaultAnalytes:
+        type: array
+        description: Pre-populated analyte rows for this method. Each entry is an
+          object keyed by analyteColumn names.
+        items:
+          type: object
+          additionalProperties: true
+    required:
+    - ada:analyteColumns
+  schema:creator:
+    description: Person(s) who defined this method.
+    type: array
+    items:
+      anyOf:
+      - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.person
+      - type: object
+        properties:
+          '@id':
+            type: string
+  schema:relatedLink:
+    type: array
+    description: Publications, Zenodo records, or other references documenting this
+      method.
+    items:
+      $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.labeledLink
+  schema:funding:
+    type: array
+    items:
+      $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.monetaryGrant
+required:
+- '@type'
+- schema:name
+- schema:measurementTechnique
+- ada:methodParameters
+$defs:
+  MethodParameter:
+    type: object
+    description: A single parameter in the method definition. Carries metadata about
+      how the parameter behaves across method instantiations.
+    properties:
+      schema:name:
+        type: string
+        description: Machine-readable parameter name (e.g. "acceleratingVoltage").
+      schema:alternateName:
+        type: string
+        description: Human-readable display label (e.g. "Accelerating Voltage").
+      schema:description:
+        type: string
+        description: Guidance text shown to the user in the form.
+      ada:scope:
+        type: string
+        enum:
+        - constant
+        - default
+        - optional
+        description: constant = fixed for every session, shown as read-only. default
+          = required, editable, pre-filled with default value. optional = available
+          but not shown unless user adds it.
+      ada:category:
+        type: string
+        description: Grouping label for form layout (e.g. "Beam Conditions", "Data
+          Processing", "Quality Control").
+      schema:value:
+        description: The constant value (scope=constant) or the default value (scope=default).
+          Type matches ada:dataType.
+        anyOf:
+        - type: string
+        - type: number
+        - type: boolean
+      ada:dataType:
+        type: string
+        enum:
+        - string
+        - number
+        - integer
+        - boolean
+        - date
+        - uri
+        description: Expected data type for the parameter value.
+      schema:minValue:
+        type: number
+        description: Minimum allowed numeric value (scope=default only).
+      schema:maxValue:
+        type: number
+        description: Maximum allowed numeric value (scope=default only).
+      ada:enumeration:
+        type: array
+        items:
+          anyOf:
+          - type: string
+          - type: number
+        description: Allowed values list. If present, the form renders a dropdown/select
+          instead of free text.
+      schema:unitText:
+        type: string
+        description: Unit of measure label (e.g. "kV", "nA", "um").
+      schema:unitCode:
+        description: URI for unit of measure (QUDT preferred).
+        anyOf:
+        - type: string
+        - $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.definedTerm
+      ada:cdifPropertyPath:
+        type: string
+        description: 'The CDIF building block property path this parameter maps to
+          (e.g. "cdifProvActivity: schema:additionalProperty"). Used for JSON-LD serialisation.'
+      ada:tier:
+        type: string
+        enum:
+        - M
+        - R
+        - O
+        description: Mandatory / Recommended / Optional tier from the metadata profile.
+          Informs validation strictness.
+    required:
+    - schema:name
+    - ada:scope
+    - ada:dataType
+  AnalyteColumn:
+    type: object
+    description: Definition of one column in the per-analyte parameter table. Controls
+      what fields appear for each measured element/oxide. Each analyte row becomes
+      a schema:variableMeasured entry; analyte columns become schema:additionalProperty
+      within that variableMeasured entry.
+    properties:
+      schema:name:
+        type: string
+        description: Column identifier (e.g. "diffractingCrystal").
+      schema:alternateName:
+        type: string
+        description: Display label (e.g. "Diffracting Crystal").
+      schema:description:
+        type: string
+        description: Guidance text.
+      ada:scope:
+        type: string
+        enum:
+        - constant
+        - default
+        - optional
+      ada:dataType:
+        type: string
+        enum:
+        - string
+        - number
+        - integer
+        - boolean
+        - date
+        - uri
+      ada:enumeration:
+        type: array
+        items:
+          anyOf:
+          - type: string
+          - type: number
+      schema:unitText:
+        type: string
+      ada:tier:
+        type: string
+        enum:
+        - M
+        - R
+        - O
+      ada:cdifPropertyPath:
+        type: string
+        description: How this column maps into the variableMeasured JSON-LD structure
+          (e.g. "schema:additionalProperty", "schema:measurementTechnique").
+    required:
+    - schema:name
+    - ada:scope
+    - ada:dataType
+x-jsonld-prefixes:
+  schema: http://schema.org/
+  ada: https://ada.astromat.org/metadata/
+  prov: http://www.w3.org/ns/prov#
+  cdi: http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/
+x-schema-version: https://json-schema.org/draft/2020-12/schema

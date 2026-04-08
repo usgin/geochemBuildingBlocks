@@ -1,0 +1,106 @@
+@prefix ada: <https://ada.astromat.org/metadata/> .
+@prefix schema1: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://registry.onegeochemistry.org/methods/nmnh-spinel-oxybar-v1> a schema1:HowTo,
+        ada:MethodDefinition ;
+    schema1:datePublished "2013-11-08" ;
+    schema1:instrument [ a schema1:Product,
+                schema1:Thing ;
+            schema1:manufacturer [ a schema1:Organization ;
+                    schema1:name "JEOL" ] ;
+            schema1:model [ a schema1:ProductModel ;
+                    schema1:name "JXA-8900" ] ;
+            schema1:name "JEOL JXA-8900 Superprobe" ] ;
+    schema1:measurementTechnique [ a schema1:DefinedTerm ;
+            schema1:inDefinedTermSet "https://vocab.onegeochemistry.org/techniques" ;
+            schema1:name "EPMA-WDS" ] ;
+    schema1:name "Spinel oxybarometry version 1" ;
+    schema1:version "1.0" ;
+    ada:analyteTemplate [ ada:analyteColumns [ schema1:alternateName "Diffracting Crystal" ;
+                    schema1:name "diffractingCrystal" ;
+                    ada:cdifPropertyPath "schema:additionalProperty" ;
+                    ada:dataType "string" ;
+                    ada:enumeration "LIF",
+                        "LIFH",
+                        "PET",
+                        "PETJ",
+                        "RAP",
+                        "TAP" ;
+                    ada:scope "default" ;
+                    ada:tier "M" ],
+                [ schema1:alternateName "Analysed Oxide/Element" ;
+                    schema1:name "analysedOxide" ;
+                    ada:cdifPropertyPath "cdifVariableMeasured: cdi:name" ;
+                    ada:dataType "string" ;
+                    ada:scope "default" ;
+                    ada:tier "M" ],
+                [ schema1:alternateName "Calibration Standard Name" ;
+                    schema1:name "calibrationStandardName" ;
+                    ada:cdifPropertyPath "schema:additionalProperty" ;
+                    ada:dataType "string" ;
+                    ada:scope "default" ;
+                    ada:tier "M" ],
+                [ schema1:alternateName "Peak Counting Time" ;
+                    schema1:name "peakCountingTime" ;
+                    schema1:unitText "seconds" ;
+                    ada:cdifPropertyPath "schema:additionalProperty" ;
+                    ada:dataType "number" ;
+                    ada:scope "default" ;
+                    ada:tier "M" ],
+                [ schema1:alternateName "X-ray Line" ;
+                    schema1:name "xrayLine" ;
+                    ada:cdifPropertyPath "schema:additionalProperty" ;
+                    ada:dataType "string" ;
+                    ada:enumeration "Ka",
+                        "Kb",
+                        "La",
+                        "Lb",
+                        "Ma",
+                        "Mb" ;
+                    ada:scope "default" ;
+                    ada:tier "M" ] ;
+            ada:defaultAnalytes [ ],
+                [ ] ] ;
+    ada:methodParameters [ schema1:alternateName "Analytical Software" ;
+            schema1:name "analyticalSoftware" ;
+            schema1:value "Probe for EPMA" ;
+            ada:category "Instrument & Software" ;
+            ada:cdifPropertyPath "cdifProvActivity: prov:used" ;
+            ada:dataType "string" ;
+            ada:scope "default" ;
+            ada:tier "M" ],
+        [ schema1:alternateName "Sample Preparation Method" ;
+            schema1:name "samplePreparationMethod" ;
+            ada:category "Samples" ;
+            ada:cdifPropertyPath "cdifProvActivity: schema:actionProcess" ;
+            ada:dataType "string" ;
+            ada:scope "optional" ;
+            ada:tier "R" ],
+        [ schema1:alternateName "Beam Current" ;
+            schema1:name "beamCurrent" ;
+            schema1:unitText "nA" ;
+            schema1:value 40 ;
+            ada:category "Beam Conditions" ;
+            ada:cdifPropertyPath "cdifProvActivity: schema:additionalProperty" ;
+            ada:dataType "number" ;
+            ada:scope "constant" ;
+            ada:tier "M" ],
+        [ schema1:alternateName "X-ray Matrix Corrections" ;
+            schema1:name "matrixCorrectionModel" ;
+            schema1:value "CITZAF" ;
+            ada:category "Data Processing" ;
+            ada:cdifPropertyPath "cdifProvActivity: schema:actionProcess" ;
+            ada:dataType "string" ;
+            ada:scope "constant" ;
+            ada:tier "M" ],
+        [ schema1:alternateName "Accelerating Voltage" ;
+            schema1:name "acceleratingVoltage" ;
+            schema1:unitText "kV" ;
+            schema1:value 15 ;
+            ada:category "Beam Conditions" ;
+            ada:cdifPropertyPath "cdifProvActivity: schema:additionalProperty" ;
+            ada:dataType "number" ;
+            ada:scope "constant" ;
+            ada:tier "M" ] .
+

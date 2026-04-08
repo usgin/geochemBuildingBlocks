@@ -66,6 +66,12 @@ Profiles additionally compose base schemas via `allOf` references.
 | `validate_instance.py` | Profile-aware validation of metadata instances. Auto-detects profile from `dcterms:conformsTo`. Supports `--dir`, `--profile`, `--termcode-fallback`. |
 | `compare_schemas.py` | Detect drift between schema.yaml and *Schema.json (missing properties, type mismatches). |
 
+### Data collection
+
+| Tool | Purpose |
+|------|---------|
+| `download_ecl_methods.py` | Download analytical method Excel workbooks from the EarthChem Library. Reads the methods list from a Google Sheet, scrapes ECL record pages for filenames, and POSTs to `dl_multi.php` to download. Supports `--dry-run`, `--output-dir`, `--delay`. Skips already-downloaded files. |
+
 ### Build and deployment support
 
 | Tool | Purpose |
@@ -86,7 +92,21 @@ Profiles additionally compose base schemas via `allOf` references.
 ## Cross-repo relationships
 
 - **metadataBuildingBlocks** (CDIF) -- upstream source for shared CDIF schemas and canonical tool copies. Schemas imported via OGC building blocks import mechanism.
+- **CDIF profile release repos** (`cdif-core`, `discovery`, `codelist`, `dataDescription`) -- standalone repos with schemas, SHACL rules, and validated examples for each CDIF conformance class. Conformance URIs (e.g. `https://w3id.org/cdif/core/1.0`) redirect to profile BBs in metadataBuildingBlocks via w3id.org.
 - **ada_metadata_forms** (amds-ldeo) -- Django app that validates ADA metadata. Uses a standalone monolithic JSON Schema (`adaMetadata-SchemaOrgSchema-v3.json`), NOT the modular building blocks. No direct dependency on this repo's build outputs.
+- **w3id.org/cdif** -- persistent identifier redirects for CDIF building blocks and conformance URIs. Maintained in smrgeoinfo/w3id.org fork.
+
+## Planned: methodDefinition building block
+
+A new building block at `geochemProperties/methodDefinition/` will define a registry-backed analytical method definition schema. Key design points:
+
+- **Type:** `ada:MethodDefinition` + `schema:HowTo`
+- **Structure:** identity, instrument spec (via CDIF instrument BB), `ada:methodParameters` array (with `ada:scope` = constant/default/optional), `ada:analyteTemplate` (per-element column definitions + default analyte rows)
+- **Form integration:** selecting a method on Tab 3 of ada_metadata_forms pre-populates constants (read-only), defaults (editable), and analyte table. JSON-LD export references method @id in `schema:actionProcess`.
+- **Registry:** PostgreSQL `method_definitions` table with JSONB column, REST API for CRUD/filtering by technique.
+- **Full design doc:** `G:\My Drive\OneGeochemistry\MethodDefinitionDesign.md`
+
+When implementing, the schema.yaml should follow the same pattern as existing detail* blocks but with richer structure: `$defs` for `MethodParameter` and `AnalyteColumn` sub-schemas, `$ref` to CDIF instrument/person/organization/identifier blocks.
 
 ## Common tasks
 

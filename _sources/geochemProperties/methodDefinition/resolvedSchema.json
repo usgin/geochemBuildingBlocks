@@ -1,0 +1,327 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Analytical Method Definition",
+  "description": "A registered analytical method description that can be referenced by metadata records. Contains constant parameters, required parameters with defaults and constraints, optional extension properties, and per-analyte parameter templates. Methods are typed as ada:MethodDefinition and schema:HowTo.",
+  "type": "object",
+  "properties": {
+    "@id": {
+      "type": "string",
+      "description": "Persistent URI for this method definition in the registry."
+    },
+    "@type": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 2,
+      "allOf": [
+        {
+          "contains": {
+            "const": "ada:MethodDefinition"
+          }
+        },
+        {
+          "contains": {
+            "const": "schema:HowTo"
+          }
+        }
+      ],
+      "description": "Must include ada:MethodDefinition and schema:HowTo."
+    },
+    "schema:name": {
+      "type": "string",
+      "description": "Short descriptive name with version (e.g. \"JEOL-8530F WDS Major Element Glass v2.1\")."
+    },
+    "schema:identifier": {
+      "description": "DOI or other persistent ID for this method definition.",
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/identifier/schema.yaml"
+        }
+      ]
+    },
+    "schema:description": {
+      "type": "string",
+      "description": "Human-readable summary of the method, may be auto-generated from constant parameters at registration time."
+    },
+    "schema:version": {
+      "type": "string",
+      "description": "Semantic version string (e.g. \"2.1.0\")."
+    },
+    "schema:datePublished": {
+      "type": "string",
+      "description": "ISO 8601 date when this method definition was first registered."
+    },
+    "schema:dateModified": {
+      "type": "string",
+      "description": "ISO 8601 date of last update to this definition."
+    },
+    "schema:measurementTechnique": {
+      "description": "The analytical technique this method implements. Must be a DefinedTerm from a controlled vocabulary of techniques.",
+      "$ref": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/definedTerm/schema.yaml"
+    },
+    "schema:instrument": {
+      "description": "Instrument requirements/specification for this method.",
+      "$ref": "../instrument/schema.yaml"
+    },
+    "ada:laboratory": {
+      "description": "Laboratory where this method was developed. Optional; omit for methods that are instrument-generic.",
+      "$ref": "../laboratory/schema.yaml"
+    },
+    "ada:methodParameters": {
+      "type": "array",
+      "description": "All operating, processing, and quality parameters for this method. Each parameter carries a scope tag (constant / default / optional) that controls form rendering behaviour.",
+      "items": {
+        "$ref": "#/$defs/MethodParameter"
+      }
+    },
+    "ada:analyteTemplate": {
+      "description": "Template for per-analyte (element-specific) parameters. Defines the columns that appear in the element table, each with scope, datatype, and constraints. Analyte rows become schema:variableMeasured entries in metadata records.",
+      "type": "object",
+      "properties": {
+        "ada:analyteColumns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AnalyteColumn"
+          }
+        },
+        "ada:defaultAnalytes": {
+          "type": "array",
+          "description": "Pre-populated analyte rows for this method. Each entry is an object keyed by analyteColumn names.",
+          "items": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        }
+      },
+      "required": [
+        "ada:analyteColumns"
+      ]
+    },
+    "schema:creator": {
+      "description": "Person(s) who defined this method.",
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "$ref": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/person/schema.yaml"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@id": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "schema:relatedLink": {
+      "type": "array",
+      "description": "Publications, Zenodo records, or other references documenting this method.",
+      "items": {
+        "$ref": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/labeledLink/schema.yaml"
+      }
+    },
+    "schema:funding": {
+      "type": "array",
+      "items": {
+        "$ref": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/monetaryGrant/schema.yaml"
+      }
+    }
+  },
+  "required": [
+    "@type",
+    "schema:name",
+    "schema:measurementTechnique",
+    "ada:methodParameters"
+  ],
+  "$defs": {
+    "MethodParameter": {
+      "type": "object",
+      "description": "A single parameter in the method definition. Carries metadata about how the parameter behaves across method instantiations.",
+      "properties": {
+        "schema:name": {
+          "type": "string",
+          "description": "Machine-readable parameter name (e.g. \"acceleratingVoltage\")."
+        },
+        "schema:alternateName": {
+          "type": "string",
+          "description": "Human-readable display label (e.g. \"Accelerating Voltage\")."
+        },
+        "schema:description": {
+          "type": "string",
+          "description": "Guidance text shown to the user in the form."
+        },
+        "ada:scope": {
+          "type": "string",
+          "enum": [
+            "constant",
+            "default",
+            "optional"
+          ],
+          "description": "constant = fixed for every session, shown as read-only. default = required, editable, pre-filled with default value. optional = available but not shown unless user adds it."
+        },
+        "ada:category": {
+          "type": "string",
+          "description": "Grouping label for form layout (e.g. \"Beam Conditions\", \"Data Processing\", \"Quality Control\")."
+        },
+        "schema:value": {
+          "description": "The constant value (scope=constant) or the default value (scope=default). Type matches ada:dataType.",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "boolean"
+            }
+          ]
+        },
+        "ada:dataType": {
+          "type": "string",
+          "enum": [
+            "string",
+            "number",
+            "integer",
+            "boolean",
+            "date",
+            "uri"
+          ],
+          "description": "Expected data type for the parameter value."
+        },
+        "schema:minValue": {
+          "type": "number",
+          "description": "Minimum allowed numeric value (scope=default only)."
+        },
+        "schema:maxValue": {
+          "type": "number",
+          "description": "Maximum allowed numeric value (scope=default only)."
+        },
+        "ada:enumeration": {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "description": "Allowed values list. If present, the form renders a dropdown/select instead of free text."
+        },
+        "schema:unitText": {
+          "type": "string",
+          "description": "Unit of measure label (e.g. \"kV\", \"nA\", \"um\")."
+        },
+        "schema:unitCode": {
+          "description": "URI for unit of measure (QUDT preferred).",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "$ref": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/definedTerm/schema.yaml"
+            }
+          ]
+        },
+        "ada:cdifPropertyPath": {
+          "type": "string",
+          "description": "The CDIF building block property path this parameter maps to (e.g. \"cdifProvActivity: schema:additionalProperty\"). Used for JSON-LD serialisation."
+        },
+        "ada:tier": {
+          "type": "string",
+          "enum": [
+            "M",
+            "R",
+            "O"
+          ],
+          "description": "Mandatory / Recommended / Optional tier from the metadata profile. Informs validation strictness."
+        }
+      },
+      "required": [
+        "schema:name",
+        "ada:scope",
+        "ada:dataType"
+      ]
+    },
+    "AnalyteColumn": {
+      "type": "object",
+      "description": "Definition of one column in the per-analyte parameter table. Controls what fields appear for each measured element/oxide. Each analyte row becomes a schema:variableMeasured entry; analyte columns become schema:additionalProperty within that variableMeasured entry.",
+      "properties": {
+        "schema:name": {
+          "type": "string",
+          "description": "Column identifier (e.g. \"diffractingCrystal\")."
+        },
+        "schema:alternateName": {
+          "type": "string",
+          "description": "Display label (e.g. \"Diffracting Crystal\")."
+        },
+        "schema:description": {
+          "type": "string",
+          "description": "Guidance text."
+        },
+        "ada:scope": {
+          "type": "string",
+          "enum": [
+            "constant",
+            "default",
+            "optional"
+          ]
+        },
+        "ada:dataType": {
+          "type": "string",
+          "enum": [
+            "string",
+            "number",
+            "integer",
+            "boolean",
+            "date",
+            "uri"
+          ]
+        },
+        "ada:enumeration": {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          }
+        },
+        "schema:unitText": {
+          "type": "string"
+        },
+        "ada:tier": {
+          "type": "string",
+          "enum": [
+            "M",
+            "R",
+            "O"
+          ]
+        },
+        "ada:cdifPropertyPath": {
+          "type": "string",
+          "description": "How this column maps into the variableMeasured JSON-LD structure (e.g. \"schema:additionalProperty\", \"schema:measurementTechnique\")."
+        }
+      },
+      "required": [
+        "schema:name",
+        "ada:scope",
+        "ada:dataType"
+      ]
+    }
+  }
+}

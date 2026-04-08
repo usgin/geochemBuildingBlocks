@@ -1,0 +1,69 @@
+@prefix rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh:          <http://www.w3.org/ns/shacl#> .
+@prefix xsd:         <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema:      <http://schema.org/> .
+@prefix ada:         <https://ada.astromat.org/metadata/> .
+@prefix cdifd: <https://cdif.org/validation/0.1/shacl#> .
+@base <https://www.ogc.org/rules/template/> .
+
+# Validates method definition nodes typed as ada:MethodDefinition.
+cdifd:methodDefinitionShape
+    a sh:NodeShape ;
+    sh:target [
+        a sh:SPARQLTarget ;
+        sh:select """
+            PREFIX ada: <https://ada.astromat.org/metadata/>
+            SELECT ?this
+            WHERE {
+                ?this a ada:MethodDefinition .
+            }
+        """ ;
+    ] ;
+    sh:property [
+        sh:path schema:name ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:severity sh:Violation ;
+        sh:message "Method definition must have a schema:name." ;
+    ] ;
+    sh:property [
+        sh:path schema:measurementTechnique ;
+        sh:minCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message "Method definition must specify a schema:measurementTechnique." ;
+    ] ;
+    sh:property [
+        sh:path ada:methodParameters ;
+        sh:minCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message "Method definition must have at least one ada:methodParameters entry." ;
+    ] ;
+    sh:property [
+        sh:path schema:version ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:severity sh:Warning ;
+        sh:message "Method definition should specify a schema:version." ;
+    ] ;
+    sh:property [
+        sh:path schema:datePublished ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:severity sh:Warning ;
+        sh:message "Method definition should specify schema:datePublished." ;
+    ] ;
+    sh:property [
+        sh:path schema:instrument ;
+        sh:maxCount 1 ;
+        sh:severity sh:Warning ;
+        sh:message "Method definition should specify an instrument." ;
+    ] ;
+    sh:property [
+        sh:path ada:analyteTemplate ;
+        sh:maxCount 1 ;
+        sh:severity sh:Info ;
+        sh:message "Method definition may include an ada:analyteTemplate for per-analyte parameters." ;
+    ] ;
+    sh:message "Method definition nodes (ada:MethodDefinition) must have name, technique, and parameters." ;
+    .

@@ -16,6 +16,35 @@ description: >-
 type: object
 
 properties:
+  '@context':
+    type: object
+    description: >-
+      JSON-LD context declaring the namespace prefixes used in a
+      method definition. Required for the document to be a valid
+      JSON-LD instance. Bound prefixes must include schema (always),
+      cdi (DDI-CDI), and ada (ADA vocabulary). Additional prefixes
+      (bios, dqv, prov, skos) are recommended when those vocabularies
+      are used in the body of the definition.
+    properties:
+      schema:
+        const: "http://schema.org/"
+      ada:
+        const: "https://ada.astromat.org/metadata/"
+      cdi:
+        const: "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/"
+      bios:
+        const: "https://bioschemas.org/"
+      dqv:
+        const: "http://www.w3.org/ns/dqv#"
+      prov:
+        const: "http://www.w3.org/ns/prov#"
+      skos:
+        const: "http://www.w3.org/2004/02/skos/core#"
+    required:
+    - schema
+    - ada
+    - cdi
+
   '@id':
     type: string
     description: >-
@@ -203,6 +232,7 @@ properties:
       $ref: https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/monetaryGrant/schema.yaml
 
 required:
+  - '@context'
   - '@type'
   - schema:name
   - schema:measurementTechnique

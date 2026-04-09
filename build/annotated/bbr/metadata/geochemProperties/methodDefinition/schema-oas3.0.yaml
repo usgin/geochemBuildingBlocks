@@ -926,6 +926,39 @@ description: A registered analytical method definition modeled as a cdi:Activity
   activity sequence, and dqv:hasQualityMeasurement for quality metrics.
 type: object
 properties:
+  '@context':
+    type: object
+    description: JSON-LD context declaring the namespace prefixes used in a method
+      definition. Required for the document to be a valid JSON-LD instance. Bound
+      prefixes must include schema (always), cdi (DDI-CDI), and ada (ADA vocabulary).
+      Additional prefixes (bios, dqv, prov, skos) are recommended when those vocabularies
+      are used in the body of the definition.
+    properties:
+      schema:
+        enum:
+        - http://schema.org/
+      ada:
+        enum:
+        - https://ada.astromat.org/metadata/
+      cdi:
+        enum:
+        - http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/
+      bios:
+        enum:
+        - https://bioschemas.org/
+      dqv:
+        enum:
+        - http://www.w3.org/ns/dqv#
+      prov:
+        enum:
+        - http://www.w3.org/ns/prov#
+      skos:
+        enum:
+        - http://www.w3.org/2004/02/skos/core#
+    required:
+    - schema
+    - ada
+    - cdi
   '@id':
     type: string
     description: Persistent URI for this method definition in the registry.
@@ -1075,6 +1108,7 @@ properties:
     items:
       $ref: https://usgin.github.io/geochemBuildingBlocks/build/annotated/bbr/metadata/geochemProperties/methodDefinition/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.monetaryGrant
 required:
+- '@context'
 - '@type'
 - schema:name
 - schema:measurementTechnique

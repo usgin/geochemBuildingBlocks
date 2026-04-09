@@ -43,68 +43,25 @@
                             ada:toolRole "reduction" ] ],
                 [ a cdi:Activity,
                         schema1:Action ;
-                    schema1:description "Quantitative WDS analysis at 15 kV / 6 nA. Si, Al, Na acquired first to minimize beam damage with TDI correction." ;
-                    schema1:name "WDS data acquisition" ;
-                    schema1:position 3 ;
-                    schema1:result <file:///github/workspace/#rawAnalyses> ;
-                    ada:methodParameters [ a schema1:PropertyValueSpecification ;
-                            schema1:defaultValue "Si, Al, Na acquired first; 6-7 time intervals for TDI correction" ;
-                            schema1:inDefinedTermSet <https://vocab.onegeochemistry.org/epma/beam-damage-methods> ;
-                            schema1:name "Beam Damage Minimization" ;
-                            schema1:readonlyValue true ;
-                            schema1:valueName "beamDamageMinimization" ;
-                            schema1:valueRequired false ;
-                            ada:category "Beam Conditions" ;
-                            ada:dataType "string" ;
-                            ada:fieldScope "method" ;
-                            ada:tier "R" ],
-                        [ a schema1:PropertyValueSpecification ;
-                            schema1:defaultValue 10 ;
-                            schema1:maxValue 50 ;
-                            schema1:minValue 0 ;
-                            schema1:name "Beam Diameter" ;
-                            schema1:readonlyValue false ;
-                            schema1:unitText "um" ;
-                            schema1:valueName "beamDiameter" ;
-                            schema1:valueRequired true ;
-                            ada:category "Beam Conditions" ;
-                            ada:dataType "number" ;
-                            ada:fieldScope "session" ;
-                            ada:tier "M" ],
-                        [ a schema1:PropertyValueSpecification ;
-                            schema1:defaultValue 6 ;
-                            schema1:maxValue 200 ;
-                            schema1:minValue 1 ;
-                            schema1:name "Beam Current" ;
-                            schema1:readonlyValue true ;
-                            schema1:unitText "nA" ;
-                            schema1:valueName "beamCurrent" ;
-                            schema1:valueRequired true ;
-                            ada:category "Beam Conditions" ;
-                            ada:dataType "number" ;
-                            ada:fieldScope "method" ;
-                            ada:tier "M" ],
-                        [ a schema1:PropertyValueSpecification ;
-                            schema1:defaultValue 15 ;
-                            schema1:name "Accelerating Voltage" ;
-                            schema1:readonlyValue true ;
-                            schema1:unitText "kV" ;
-                            schema1:valueName "acceleratingVoltage" ;
-                            schema1:valueRequired true ;
-                            ada:category "Beam Conditions" ;
-                            ada:dataType "number" ;
-                            ada:fieldScope "method" ;
-                            ada:tier "M" ] ],
-                [ a cdi:Activity,
-                        schema1:Action ;
-                    schema1:additionalType "bios:LabProcess" ;
-                    schema1:description "Tephra glass grains mounted, polished, and carbon coated for EPMA." ;
-                    schema1:name "Sample preparation" ;
-                    schema1:position 1 ;
-                    schema1:result <file:///github/workspace/#preparedMount> ;
+                    schema1:description "Calibrate WDS spectrometers on primary standards. Verify on secondary standards at start and end of session." ;
+                    schema1:name "Instrument calibration" ;
+                    schema1:object <file:///github/workspace/#preparedMount> ;
+                    schema1:position 2 ;
                     bios:reagent [ a schema1:Thing ;
-                            schema1:name "Carbon" ;
-                            ada:reagentRole "coatingMaterial" ] ],
+                            schema1:name "USGS BHVO-2g" ;
+                            ada:reagentRole "secondaryStandard" ],
+                        [ a schema1:Thing ;
+                            schema1:name "Albite" ;
+                            ada:reagentRole "primaryStandard" ],
+                        [ a schema1:Thing ;
+                            schema1:name "USGS NKT-1g" ;
+                            ada:reagentRole "secondaryStandard" ],
+                        [ a schema1:Thing ;
+                            schema1:name "Kaersutite amphibole" ;
+                            ada:reagentRole "primaryStandard" ],
+                        [ a schema1:Thing ;
+                            schema1:name "Lipari obsidian ID3506" ;
+                            ada:reagentRole "secondaryStandard" ] ],
                 [ a cdi:Activity,
                         schema1:Action ;
                     schema1:description "Secondary standards analysed at start and end of every session. Drift correction by interpolation of primary standard calibrations." ;
@@ -126,30 +83,74 @@
                             ada:tier "R" ] ],
                 [ a cdi:Activity,
                         schema1:Action ;
-                    schema1:description "Calibrate WDS spectrometers on primary standards. Verify on secondary standards at start and end of session." ;
-                    schema1:name "Instrument calibration" ;
-                    schema1:object <file:///github/workspace/#preparedMount> ;
-                    schema1:position 2 ;
+                    schema1:additionalType "bios:LabProcess" ;
+                    schema1:description "Tephra glass grains mounted, polished, and carbon coated for EPMA." ;
+                    schema1:name "Sample preparation" ;
+                    schema1:position 1 ;
+                    schema1:result <file:///github/workspace/#preparedMount> ;
                     bios:reagent [ a schema1:Thing ;
-                            schema1:name "Albite" ;
-                            ada:reagentRole "primaryStandard" ],
-                        [ a schema1:Thing ;
-                            schema1:name "USGS NKT-1g" ;
-                            ada:reagentRole "secondaryStandard" ],
-                        [ a schema1:Thing ;
-                            schema1:name "Kaersutite amphibole" ;
-                            ada:reagentRole "primaryStandard" ],
-                        [ a schema1:Thing ;
-                            schema1:name "USGS BHVO-2g" ;
-                            ada:reagentRole "secondaryStandard" ],
-                        [ a schema1:Thing ;
-                            schema1:name "Lipari obsidian ID3506" ;
-                            ada:reagentRole "secondaryStandard" ] ] ] ;
+                            schema1:name "Carbon" ;
+                            ada:reagentRole "coatingMaterial" ] ],
+                [ a cdi:Activity,
+                        schema1:Action ;
+                    schema1:description "Quantitative WDS analysis at 15 kV / 6 nA. Si, Al, Na acquired first to minimize beam damage with TDI correction." ;
+                    schema1:name "WDS data acquisition" ;
+                    schema1:position 3 ;
+                    schema1:result <file:///github/workspace/#rawAnalyses> ;
+                    ada:methodParameters [ a schema1:PropertyValueSpecification ;
+                            schema1:defaultValue 15 ;
+                            schema1:name "Accelerating Voltage" ;
+                            schema1:readonlyValue true ;
+                            schema1:unitText "kV" ;
+                            schema1:valueName "acceleratingVoltage" ;
+                            schema1:valueRequired true ;
+                            ada:category "Beam Conditions" ;
+                            ada:dataType "number" ;
+                            ada:fieldScope "method" ;
+                            ada:tier "M" ],
+                        [ a schema1:PropertyValueSpecification ;
+                            schema1:defaultValue 6 ;
+                            schema1:maxValue 200 ;
+                            schema1:minValue 1 ;
+                            schema1:name "Beam Current" ;
+                            schema1:readonlyValue true ;
+                            schema1:unitText "nA" ;
+                            schema1:valueName "beamCurrent" ;
+                            schema1:valueRequired true ;
+                            ada:category "Beam Conditions" ;
+                            ada:dataType "number" ;
+                            ada:fieldScope "method" ;
+                            ada:tier "M" ],
+                        [ a schema1:PropertyValueSpecification ;
+                            schema1:defaultValue 10 ;
+                            schema1:maxValue 50 ;
+                            schema1:minValue 0 ;
+                            schema1:name "Beam Diameter" ;
+                            schema1:readonlyValue false ;
+                            schema1:unitText "um" ;
+                            schema1:valueName "beamDiameter" ;
+                            schema1:valueRequired true ;
+                            ada:category "Beam Conditions" ;
+                            ada:dataType "number" ;
+                            ada:fieldScope "session" ;
+                            ada:tier "M" ],
+                        [ a schema1:PropertyValueSpecification ;
+                            schema1:defaultValue "Si, Al, Na acquired first; 6-7 time intervals for TDI correction" ;
+                            schema1:inDefinedTermSet <https://vocab.onegeochemistry.org/epma/beam-damage-methods> ;
+                            schema1:name "Beam Damage Minimization" ;
+                            schema1:readonlyValue true ;
+                            schema1:valueName "beamDamageMinimization" ;
+                            schema1:valueRequired false ;
+                            ada:category "Beam Conditions" ;
+                            ada:dataType "string" ;
+                            ada:fieldScope "method" ;
+                            ada:tier "R" ] ] ] ;
     schema1:agent [ a schema1:Organization ;
             schema1:name "Concord University" ] ;
     schema1:datePublished "2011-10-20" ;
     schema1:instrument [ a schema1:Product,
                 schema1:Thing ;
+            schema1:additionalType "ada:EPMAInstrument" ;
             schema1:hasPart [ a schema1:Thing ;
                     schema1:description "4 WDS spectrometers: #1 PET/xenon, #2 RAP/P-10, #3 LIF/xenon, #4 TAP/P-10; flow detectors with polypropylene windows" ;
                     schema1:name "WDS Spectrometer Array" ] ;
@@ -167,6 +168,96 @@
             schema1:name "silicate glass" ] ;
     schema1:version "1.0.6" ;
     ada:analyteTemplate [ ada:analyteColumns [ a schema1:PropertyValueSpecification ;
+                    schema1:name "Spectrometer" ;
+                    schema1:valueName "spectrometer" ;
+                    schema1:valueRequired false ;
+                    ada:dataType "string" ;
+                    ada:tier "R" ],
+                [ a schema1:PropertyValueSpecification ;
+                    schema1:name "Detection Limit" ;
+                    schema1:valueName "detectionLimit" ;
+                    schema1:valueRequired false ;
+                    ada:dataType "number" ;
+                    ada:tier "R" ],
+                [ a schema1:PropertyValueSpecification ;
+                    schema1:name "Normalization Standards" ;
+                    schema1:valueName "normalizationStandards" ;
+                    schema1:valueRequired false ;
+                    ada:dataType "string" ;
+                    ada:tier "O" ],
+                [ a schema1:PropertyValueSpecification ;
+                    schema1:minValue 1 ;
+                    schema1:name "Background Counting Time (s)" ;
+                    schema1:unitText "seconds" ;
+                    schema1:valueName "backgroundCountingTime" ;
+                    schema1:valueRequired true ;
+                    ada:dataType "number" ;
+                    ada:tier "M" ],
+                [ a schema1:PropertyValueSpecification ;
+                    schema1:name "Detection Limit Method" ;
+                    schema1:valueName "detectionLimitMethod" ;
+                    schema1:valueRequired false ;
+                    ada:dataType "string" ;
+                    ada:tier "R" ],
+                [ a schema1:PropertyValueSpecification ;
+                    schema1:name "Sequence" ;
+                    schema1:valueName "sequence" ;
+                    schema1:valueRequired false ;
+                    ada:dataType "integer" ;
+                    ada:tier "R" ],
+                [ a schema1:PropertyValueSpecification ;
+                    schema1:name "Calibration Standard Name" ;
+                    schema1:valueName "calibrationStandardName" ;
+                    schema1:valueRequired true ;
+                    ada:dataType "string" ;
+                    ada:tier "M" ],
+                [ a schema1:PropertyValueSpecification ;
+                    schema1:maxValue 200 ;
+                    schema1:minValue 1 ;
+                    schema1:name "Beam Current (nA)" ;
+                    schema1:unitText "nA" ;
+                    schema1:valueName "beamCurrent" ;
+                    schema1:valueRequired true ;
+                    ada:dataType "number" ;
+                    ada:tier "M" ],
+                [ a schema1:PropertyValueSpecification ;
+                    schema1:name "Detection Limit Unit" ;
+                    schema1:valueName "detectionLimitUnit" ;
+                    schema1:valueRequired false ;
+                    ada:dataType "string" ;
+                    ada:tier "R" ],
+                [ a schema1:PropertyValueSpecification ;
+                    schema1:inDefinedTermSet <https://vocab.onegeochemistry.org/epma/diffracting-crystals> ;
+                    schema1:name "Diffracting Crystal" ;
+                    schema1:valueName "diffractingCrystal" ;
+                    schema1:valueRequired true ;
+                    ada:dataType "string" ;
+                    ada:enumeration "LIF",
+                        "LIFH",
+                        "PET",
+                        "PETJ",
+                        "RAP",
+                        "TAP" ;
+                    ada:tier "M" ],
+                [ a schema1:PropertyValueSpecification ;
+                    schema1:name "Normalization Method" ;
+                    schema1:valueName "normalizationMethod" ;
+                    schema1:valueRequired false ;
+                    ada:dataType "string" ;
+                    ada:tier "O" ],
+                [ a schema1:PropertyValueSpecification ;
+                    schema1:inDefinedTermSet <https://vocab.onegeochemistry.org/epma/xray-lines> ;
+                    schema1:name "X-ray Line" ;
+                    schema1:valueName "xrayLine" ;
+                    schema1:valueRequired true ;
+                    ada:dataType "string" ;
+                    ada:enumeration "Ka",
+                        "Kb",
+                        "La",
+                        "Lb",
+                        "Ma" ;
+                    ada:tier "M" ],
+                [ a schema1:PropertyValueSpecification ;
                     schema1:minValue 1 ;
                     schema1:name "Peak Counting Time (s)" ;
                     schema1:unitText "seconds" ;
@@ -174,19 +265,6 @@
                     schema1:valueRequired true ;
                     ada:dataType "number" ;
                     ada:tier "M" ],
-                [ a schema1:PropertyValueSpecification ;
-                    schema1:inDefinedTermSet <https://vocab.onegeochemistry.org/epma/background-methods> ;
-                    schema1:name "Background Method" ;
-                    schema1:valueName "backgroundMethod" ;
-                    schema1:valueRequired true ;
-                    ada:dataType "string" ;
-                    ada:tier "M" ],
-                [ a schema1:PropertyValueSpecification ;
-                    schema1:name "Spectrometer" ;
-                    schema1:valueName "spectrometer" ;
-                    schema1:valueRequired false ;
-                    ada:dataType "string" ;
-                    ada:tier "R" ],
                 [ a schema1:PropertyValueSpecification ;
                     schema1:name "WDS PHA Setting" ;
                     schema1:valueName "phaSettings" ;
@@ -207,95 +285,18 @@
                         "xenon" ;
                     ada:tier "R" ],
                 [ a schema1:PropertyValueSpecification ;
-                    schema1:name "Sequence" ;
-                    schema1:valueName "sequence" ;
-                    schema1:valueRequired false ;
-                    ada:dataType "integer" ;
-                    ada:tier "R" ],
-                [ a schema1:PropertyValueSpecification ;
-                    schema1:name "Normalization Method" ;
-                    schema1:valueName "normalizationMethod" ;
-                    schema1:valueRequired false ;
-                    ada:dataType "string" ;
-                    ada:tier "O" ],
-                [ a schema1:PropertyValueSpecification ;
-                    schema1:minValue 1 ;
-                    schema1:name "Background Counting Time (s)" ;
-                    schema1:unitText "seconds" ;
-                    schema1:valueName "backgroundCountingTime" ;
-                    schema1:valueRequired true ;
-                    ada:dataType "number" ;
-                    ada:tier "M" ],
-                [ a schema1:PropertyValueSpecification ;
-                    schema1:name "Detection Limit Unit" ;
-                    schema1:valueName "detectionLimitUnit" ;
-                    schema1:valueRequired false ;
-                    ada:dataType "string" ;
-                    ada:tier "R" ],
-                [ a schema1:PropertyValueSpecification ;
-                    schema1:inDefinedTermSet <https://vocab.onegeochemistry.org/epma/xray-lines> ;
-                    schema1:name "X-ray Line" ;
-                    schema1:valueName "xrayLine" ;
-                    schema1:valueRequired true ;
-                    ada:dataType "string" ;
-                    ada:enumeration "Ka",
-                        "Kb",
-                        "La",
-                        "Lb",
-                        "Ma" ;
-                    ada:tier "M" ],
-                [ a schema1:PropertyValueSpecification ;
-                    schema1:name "Calibration Standard Name" ;
-                    schema1:valueName "calibrationStandardName" ;
+                    schema1:inDefinedTermSet <https://vocab.onegeochemistry.org/epma/background-methods> ;
+                    schema1:name "Background Method" ;
+                    schema1:valueName "backgroundMethod" ;
                     schema1:valueRequired true ;
                     ada:dataType "string" ;
                     ada:tier "M" ],
-                [ a schema1:PropertyValueSpecification ;
-                    schema1:name "Detection Limit Method" ;
-                    schema1:valueName "detectionLimitMethod" ;
-                    schema1:valueRequired false ;
-                    ada:dataType "string" ;
-                    ada:tier "R" ],
                 [ a schema1:PropertyValueSpecification ;
                     schema1:name "Analysed Oxide/Element" ;
                     schema1:valueName "analysedOxide" ;
                     schema1:valueRequired true ;
                     ada:cdifPropertyPath "cdifVariableMeasured: cdi:name" ;
                     ada:dataType "string" ;
-                    ada:tier "M" ],
-                [ a schema1:PropertyValueSpecification ;
-                    schema1:inDefinedTermSet <https://vocab.onegeochemistry.org/epma/diffracting-crystals> ;
-                    schema1:name "Diffracting Crystal" ;
-                    schema1:valueName "diffractingCrystal" ;
-                    schema1:valueRequired true ;
-                    ada:dataType "string" ;
-                    ada:enumeration "LIF",
-                        "LIFH",
-                        "PET",
-                        "PETJ",
-                        "RAP",
-                        "TAP" ;
-                    ada:tier "M" ],
-                [ a schema1:PropertyValueSpecification ;
-                    schema1:name "Normalization Standards" ;
-                    schema1:valueName "normalizationStandards" ;
-                    schema1:valueRequired false ;
-                    ada:dataType "string" ;
-                    ada:tier "O" ],
-                [ a schema1:PropertyValueSpecification ;
-                    schema1:name "Detection Limit" ;
-                    schema1:valueName "detectionLimit" ;
-                    schema1:valueRequired false ;
-                    ada:dataType "number" ;
-                    ada:tier "R" ],
-                [ a schema1:PropertyValueSpecification ;
-                    schema1:maxValue 200 ;
-                    schema1:minValue 1 ;
-                    schema1:name "Beam Current (nA)" ;
-                    schema1:unitText "nA" ;
-                    schema1:valueName "beamCurrent" ;
-                    schema1:valueRequired true ;
-                    ada:dataType "number" ;
                     ada:tier "M" ] ;
             ada:defaultAnalytes [ ],
                 [ ] ] ;

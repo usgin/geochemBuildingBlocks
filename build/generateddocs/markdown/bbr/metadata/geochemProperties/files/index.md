@@ -16,30 +16,32 @@ Describes properties for any file in an ADA product. Includes file metadata (nam
 ## Examples
 
 ### Files Type Example
-An ADA product file with size, encoding format, and a link to its metadata sidecar.
+An ADA product file (component within an archive) with size, encoding format,
+and a link to its metadata sidecar. Files in hasPart are NOT individually
+downloadable, so @type must not include schema:DataDownload and there is
+no schema:contentUrl.
 #### json
 ```json
 {
-  "@type": ["ada:image", "schema:MediaObject", "schema:DataDownload"],
-  "schema:contentUrl": "https://example.org/data/ALH84001_BSE_001.tif",
+  "@type": ["ada:image", "schema:MediaObject"],
   "schema:name": "ALH84001_BSE_001.tif",
   "schema:encodingFormat": ["image/tiff"],
   "schema:description": "Backscattered electron image of ALH84001 thin section",
   "schema:size": {
-    "@type": "schema:QuantitativeValue",
+    "@type": ["schema:QuantitativeValue"],
     "schema:value": 4521984,
     "schema:unitText": "byte"
   },
   "schema:additionalType": ["ada:BSEImage"],
   "ada:componentType": {
-    "@type": "ada:BSEImage"
+    "@type": ["ada:BSEImage"]
   },
   "schema:relatedLink": [
     {
-      "@type": "schema:LinkRole",
+      "@type": ["schema:LinkRole"],
       "schema:linkRelationship": "metadata",
       "schema:target": {
-        "@type": "schema:EntryPoint",
+        "@type": ["schema:EntryPoint"],
         "schema:encodingFormat": "application/json",
         "schema:name": "ALH84001_BSE_001_metadata.json"
       }
@@ -61,17 +63,17 @@ An ADA product file with size, encoding format, and a link to its metadata sidec
   ],
   "@type": [
     "ada:image",
-    "schema:MediaObject",
-    "schema:DataDownload"
+    "schema:MediaObject"
   ],
-  "schema:contentUrl": "https://example.org/data/ALH84001_BSE_001.tif",
   "schema:name": "ALH84001_BSE_001.tif",
   "schema:encodingFormat": [
     "image/tiff"
   ],
   "schema:description": "Backscattered electron image of ALH84001 thin section",
   "schema:size": {
-    "@type": "schema:QuantitativeValue",
+    "@type": [
+      "schema:QuantitativeValue"
+    ],
     "schema:value": 4521984,
     "schema:unitText": "byte"
   },
@@ -79,14 +81,20 @@ An ADA product file with size, encoding format, and a link to its metadata sidec
     "ada:BSEImage"
   ],
   "ada:componentType": {
-    "@type": "ada:BSEImage"
+    "@type": [
+      "ada:BSEImage"
+    ]
   },
   "schema:relatedLink": [
     {
-      "@type": "schema:LinkRole",
+      "@type": [
+        "schema:LinkRole"
+      ],
       "schema:linkRelationship": "metadata",
       "schema:target": {
-        "@type": "schema:EntryPoint",
+        "@type": [
+          "schema:EntryPoint"
+        ],
         "schema:encodingFormat": "application/json",
         "schema:name": "ALH84001_BSE_001_metadata.json"
       }
@@ -101,11 +109,9 @@ An ADA product file with size, encoding format, and a link to its metadata sidec
 @prefix schema1: <http://schema.org/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-[] a schema1:DataDownload,
-        schema1:MediaObject,
+[] a schema1:MediaObject,
         ada:image ;
     schema1:additionalType "ada:BSEImage" ;
-    schema1:contentUrl "https://example.org/data/ALH84001_BSE_001.tif" ;
     schema1:description "Backscattered electron image of ALH84001 thin section" ;
     schema1:encodingFormat "image/tiff" ;
     schema1:name "ALH84001_BSE_001.tif" ;

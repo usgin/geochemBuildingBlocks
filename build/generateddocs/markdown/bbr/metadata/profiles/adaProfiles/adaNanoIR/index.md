@@ -275,6 +275,7 @@ Mock data for validation and testing.
       ],
       "schema:unitText": "counts",
       "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#decimal",
+      "cdi:physicalDataType": "https://www.w3.org/TR/xmlschema-2/#double",
       "cdi:role": "MeasureComponent",
       "cdi:simpleUnitOfMeasure": "counts"
     },
@@ -294,6 +295,7 @@ Mock data for validation and testing.
       ],
       "schema:unitText": "micrometer",
       "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#decimal",
+      "cdi:physicalDataType": "https://www.w3.org/TR/xmlschema-2/#float",
       "cdi:role": "DimensionComponent",
       "cdi:simpleUnitOfMeasure": "um"
     }
@@ -308,9 +310,6 @@ Mock data for validation and testing.
       "schema:contentUrl": "https://astromat.org/downloads/adananoir-example-001.zip",
       "schema:encodingFormat": [
         "application/zip"
-      ],
-      "schema:additionalType": [
-        "RO-CRATE"
       ],
       "spdx:checksum": {
         "@type": [
@@ -677,6 +676,7 @@ Mock data for validation and testing.
       ],
       "schema:unitText": "counts",
       "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#decimal",
+      "cdi:physicalDataType": "https://www.w3.org/TR/xmlschema-2/#double",
       "cdi:role": "MeasureComponent",
       "cdi:simpleUnitOfMeasure": "counts"
     },
@@ -696,6 +696,7 @@ Mock data for validation and testing.
       ],
       "schema:unitText": "micrometer",
       "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#decimal",
+      "cdi:physicalDataType": "https://www.w3.org/TR/xmlschema-2/#float",
       "cdi:role": "DimensionComponent",
       "cdi:simpleUnitOfMeasure": "um"
     }
@@ -710,9 +711,6 @@ Mock data for validation and testing.
       "schema:contentUrl": "https://astromat.org/downloads/adananoir-example-001.zip",
       "schema:encodingFormat": [
         "application/zip"
-      ],
-      "schema:additionalType": [
-        "RO-CRATE"
       ],
       "spdx:checksum": {
         "@type": [
@@ -889,7 +887,6 @@ ex:adaNanoIR-example-001 a schema1:Dataset,
     schema1:dateModified "2026-01-15" ;
     schema1:description "Example Nano-Infrared Spectroscopy (NanoIR) product metadata demonstrating all properties defined by the adaNanoIR profile. Contains mock data for testing and validation." ;
     schema1:distribution [ a schema1:DataDownload ;
-            schema1:additionalType "RO-CRATE" ;
             schema1:contentUrl "https://astromat.org/downloads/adananoir-example-001.zip" ;
             schema1:description "Archive containing NanoIR data files and supplementary materials" ;
             schema1:encodingFormat "application/zip" ;
@@ -1001,6 +998,7 @@ ex:adaNanoIR-metadata-001 a schema1:Dataset ;
 ex:adaNanoIR-var-001 a cdi:InstanceVariable,
         schema1:PropertyValue ;
     cdi:intendedDataType "https://www.w3.org/TR/xmlschema-2/#decimal" ;
+    cdi:physicalDataType "https://www.w3.org/TR/xmlschema-2/#double" ;
     cdi:role "MeasureComponent" ;
     cdi:simpleUnitOfMeasure "counts" ;
     schema1:alternateName "NanoIR primary measurement" ;
@@ -1012,6 +1010,7 @@ ex:adaNanoIR-var-001 a cdi:InstanceVariable,
 ex:adaNanoIR-var-002 a cdi:InstanceVariable,
         schema1:PropertyValue ;
     cdi:intendedDataType "https://www.w3.org/TR/xmlschema-2/#decimal" ;
+    cdi:physicalDataType "https://www.w3.org/TR/xmlschema-2/#float" ;
     cdi:role "DimensionComponent" ;
     cdi:simpleUnitOfMeasure "um" ;
     schema1:alternateName "X coordinate" ;

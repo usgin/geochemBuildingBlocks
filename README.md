@@ -1,5 +1,11 @@
 # ADA Geochemistry Building Blocks
 
+> **⚠ Superseded — development has moved to [amds-ldeo/geochemBuildingBlocks](https://github.com/amds-ldeo/geochemBuildingBlocks).**
+> This repository is archived and read-only. The active, self-contained home for the geochemistry
+> building blocks and the TAPP schema-generation pipeline is now the amds-ldeo copy; the TAPP source
+> tables live in [amds-ldeo/tapp](https://github.com/amds-ldeo/tapp). Please open issues and PRs
+> there. This repo is retained for history only.
+
 Modular metadata schema components for documenting geochemical analytical Methods and Datasets.  Built using the [OGC Building Blocks](https://opengeospatial.github.io/bblocks/) pattern.
 
 The scheme involves three components:
